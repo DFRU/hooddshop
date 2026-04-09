@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+:root {
+  --color-bg: #0A0A0A;
+  --color-surface: #141414;
+  --color-surface-2: #1E1E1E;
+  --color-border: #2A2A2A;
+  --color-border-subtle: #1A1A1A;
+  --color-text-primary: #F5F5F5;
+  --color-text-muted: #888888;
+  --color-accent: #FF4D00;
+  --color-accent-hover: #FF6B2B;
+  --color-accent-dim: #331A00;
+  --color-success: #22C55E;
+  --color-error: #EF4444;
+  --font-display: var(--font-bebas-neue);
+  --font-body: var(--font-dm-sans);
+  --container-px: 1.25rem;
+  --container-px-lg: 2rem;
+  --max-width: 1280px;
+}
+
+@theme inline {
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-text-primary);
+  --color-surface: var(--color-surface);
+  --color-surface-2: var(--color-surface-2);
+  --color-border: var(--color-border);
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-dim: var(--color-accent-dim);
+  --color-muted: var(--color-text-muted);
+  --color-success: var(--color-success);
+  --color-error: var(--color-error);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-body), sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: contain;
+}
+
+/* Display typography */
+.text-display-xl {
+  font-size: clamp(3.5rem, 12vw, 9rem);
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: 0.02em;
+  line-height: 0.88;
+}
+.text-display-lg {
+  font-size: clamp(2rem, 8vw, 5rem);
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: 0.02em;
+  line-height: 0.95;
+}
+.text-display-md {
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: 0.03em;
+}
+.text-display-sm {
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: 0.03em;
+}
+
+/* Body typography */
+.text-body-lg { font-size: 1.125rem; line-height: 1.6; }
+.text-body-md { font-size: 1rem; line-height: 1.6; }
+.text-body-sm { font-size: 0.875rem; line-height: 1.5; }
+.text-body-xs { font-size: 0.8125rem; line-height: 1.5; }
+.text-label {
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.text-label-md {
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Slide up for bottom sheet */
+@keyframes slide-up {
+  0% { transform: translateY(100%); }
+  100% { transform: translateY(0); }
+}
+
+/* Scroll snap */
+.snap-x-mandatory {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.snap-start { scroll-snap-align: start; }
+
+/* Hide scrollbar */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Touch feedback */
+.touch-active:active { opacity: 0.85; transform: scale(0.98); }
+
+/* Safe area for notched phones */
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
+
+/* Custom scrollbar (desktop) */
+@media (pointer: fine) {
+  ::-webkit-scrollbar { width: 5px; height: 0; }
+  ::-webkit-scrollbar-track { background: var(--color-bg); }
+  ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+}
+
+/* Design line gradients */
+.design-heritage { background: linear-gradient(135deg, #78350f, #b45309, #ca8a04); }
+.design-culture { background: linear-gradient(135deg, #581c87, #a21caf, #ec4899); }
+.design-street { background: linear-gradient(135deg, #18181b, #991b1b, #f97316); }
+.design-stealth { background: linear-gradient(135deg, #09090b, #27272a, #52525b); }
+.design-chrome { background: linear-gradient(135deg, #94a3b8, #e2e8f0, #ffffff); }
+.design-jersey { background: linear-gradient(135deg, #166534, #059669, #2dd4bf); }

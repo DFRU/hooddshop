@@ -1,0 +1,78 @@
+export default function HowItWorks() {
+  const steps = [
+    {
+      num: "01",
+      title: "Pick Your Nation",
+      desc: "Browse all 48 World Cup 2026 qualified nations.",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+          <line x1="4" y1="22" x2="4" y2="15" />
+        </svg>
+      ),
+    },
+    {
+      num: "02",
+      title: "Choose a Design",
+      desc: "Six lines — Heritage, Culture, Street, Stealth, Chrome, or Jersey.",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <rect x="3" y="3" width="7" height="7" rx="1" />
+          <rect x="14" y="3" width="7" height="7" rx="1" />
+          <rect x="3" y="14" width="7" height="7" rx="1" />
+          <rect x="14" y="14" width="7" height="7" rx="1" />
+        </svg>
+      ),
+    },
+    {
+      num: "03",
+      title: "Rep Your Ride",
+      desc: "Ships to your door in 5–7 business days.",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <rect x="1" y="3" width="15" height="13" />
+          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+          <circle cx="5.5" cy="18.5" r="2.5" />
+          <circle cx="18.5" cy="18.5" r="2.5" />
+        </svg>
+      ),
+    },
+  ];
+
+  return (
+    <section className="py-12 lg:py-20" style={{ borderTop: "1px solid #151515" }}>
+      <div className="max-w-[var(--max-width)] mx-auto px-[var(--container-px)] lg:px-[var(--container-px-lg)]">
+        <div className="text-center mb-8 lg:mb-14">
+          <span className="text-label" style={{ color: "var(--color-accent)" }}>How It Works</span>
+          <h2 className="text-display-lg text-white mt-1">Three Steps</h2>
+        </div>
+
+        {/* Horizontal scroll on mobile, grid on desktop */}
+        <div className="flex lg:grid lg:grid-cols-3 gap-4 overflow-x-auto scrollbar-hide snap-x-mandatory -mx-[var(--container-px)] px-[var(--container-px)] lg:mx-0 lg:px-0 pb-4 lg:pb-0">
+          {steps.map((s) => (
+            <div
+              key={s.num}
+              className="group relative p-6 lg:p-8 rounded-lg flex-shrink-0 w-[280px] lg:w-auto snap-start"
+              style={{ background: "#0E0E0E", border: "1px solid #1A1A1A" }}
+            >
+              <div
+                className="absolute top-4 right-5 text-4xl lg:text-5xl"
+                style={{ fontFamily: "var(--font-display)", color: "#131313" }}
+              >
+                {s.num}
+              </div>
+              <div
+                className="w-10 h-10 lg:w-12 lg:h-12 rounded-lg flex items-center justify-center mb-4"
+                style={{ background: "rgba(255,77,0,0.08)", border: "1px solid rgba(255,77,0,0.15)", color: "var(--color-accent)" }}
+              >
+                {s.icon}
+              </div>
+              <h3 className="text-display-sm text-white mb-2">{s.title}</h3>
+              <p className="text-body-sm leading-relaxed" style={{ color: "#888" }}>{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
