@@ -1,0 +1,416 @@
+[
+  {
+    "id": "printkk",
+    "name": "PrintKK",
+    "region": "China",
+    "country_code": "CN",
+    "coordinates": { "lat": 22.5431, "lng": 114.0579 },
+    "status": "active",
+    "quality_score": 7,
+    "reliability_score": 5,
+    "capabilities": ["sublimation", "custom_design", "elastic_edge", "shopify_auto_fulfill"],
+    "pricing": {
+      "base_unit_cost_usd": 7.31,
+      "shipping_cost_per_unit": { "US": 3.50, "CA": 4.00, "GB": 5.00, "AU": 5.50 },
+      "fixed_shipping_cost": 5.00
+    },
+    "shipping": {
+      "standard_days_min": 15,
+      "standard_days_max": 25,
+      "regions_served": ["US", "CA", "GB", "AU", "NZ", "DE", "FR", "ES", "IT", "NL", "BR", "MX"]
+    },
+    "fulfillment_model": "pod",
+    "integrations": ["shopify"],
+    "moq": 0,
+    "notes": "Primary POD supplier. Sample ordered, not yet received as of April 9."
+  },
+  {
+    "id": "haoerxin_textile",
+    "name": "Haoerxin Textile",
+    "region": "China",
+    "country_code": "CN",
+    "coordinates": { "lat": 29.9745, "lng": 120.5954 },
+    "status": "verification_pending",
+    "quality_score": 5,
+    "reliability_score": 5,
+    "capabilities": ["sublimation", "bulk_production"],
+    "pricing": {
+      "base_unit_cost_usd": 8.50,
+      "fixed_shipping_cost": 5.00
+    },
+    "shipping": {
+      "standard_days_min": 15,
+      "standard_days_max": 25,
+      "regions_served": ["US", "CA"]
+    },
+    "fulfillment_model": "bulk",
+    "integrations": [],
+    "moq": 100,
+    "notes": "Established 2011. Shaoxing, Zhejiang. Bulk-only supplier."
+  },
+  {
+    "id": "nuoxin_craft",
+    "name": "Nuoxin Craft",
+    "region": "China",
+    "country_code": "CN",
+    "coordinates": { "lat": 29.3065, "lng": 120.0689 },
+    "status": "verification_pending",
+    "quality_score": 5,
+    "reliability_score": 5,
+    "capabilities": ["custom_printing", "sublimation"],
+    "pricing": {
+      "base_unit_cost_usd": 6.50,
+      "fixed_shipping_cost": 5.00
+    },
+    "shipping": {
+      "standard_days_min": 15,
+      "standard_days_max": 25,
+      "regions_served": ["US", "CA"]
+    },
+    "fulfillment_model": "bulk",
+    "integrations": [],
+    "moq": 100,
+    "notes": "Established 2015. Yiwu, Zhejiang. 11-50 employees."
+  },
+  {
+    "id": "carbannerflags",
+    "name": "CarBannerFlags",
+    "region": "China",
+    "country_code": "CN",
+    "coordinates": { "lat": 23.1291, "lng": 113.2644 },
+    "status": "verification_pending",
+    "quality_score": 5,
+    "reliability_score": 5,
+    "capabilities": ["flag_printing", "custom_design", "elastic_edge"],
+    "pricing": {
+      "base_unit_cost_usd": 20.00,
+      "fixed_shipping_cost": 5.00
+    },
+    "shipping": {
+      "standard_days_min": 12,
+      "standard_days_max": 20,
+      "regions_served": ["US", "CA"]
+    },
+    "fulfillment_model": "bulk",
+    "integrations": [],
+    "moq": 1,
+    "notes": "Already manufactures country flag hood covers. 2-day production turnaround."
+  },
+  {
+    "id": "cusdisplay",
+    "name": "CusDisplay",
+    "region": "China",
+    "country_code": "CN",
+    "coordinates": { "lat": 23.1291, "lng": 113.2644 },
+    "status": "verification_pending",
+    "quality_score": 5,
+    "reliability_score": 5,
+    "capabilities": ["custom_printing", "sublimation", "mirror_covers"],
+    "pricing": {
+      "base_unit_cost_usd": 10.00,
+      "fixed_shipping_cost": 5.00
+    },
+    "shipping": {
+      "standard_days_min": 15,
+      "standard_days_max": 25,
+      "regions_served": ["US", "CA"]
+    },
+    "fulfillment_model": "bulk",
+    "integrations": [],
+    "moq": 1,
+    "notes": "Custom printing and mirror cover manufacturing."
+  },
+  {
+    "id": "agas_manufacturing",
+    "name": "AGAS Manufacturing",
+    "region": "USA",
+    "country_code": "US",
+    "coordinates": { "lat": 39.9526, "lng": -75.1652 },
+    "status": "verification_pending",
+    "quality_score": 6,
+    "reliability_score": 6,
+    "capabilities": ["sublimation", "screen_print", "custom_design"],
+    "pricing": {
+      "base_unit_cost_usd": 20.00,
+      "shipping_cost_per_unit": { "US": 5.00, "CA": 8.00 },
+      "fixed_shipping_cost": 7.00
+    },
+    "shipping": {
+      "standard_days_min": 3,
+      "standard_days_max": 7,
+      "regions_served": ["US", "CA"]
+    },
+    "fulfillment_model": "bulk",
+    "integrations": [],
+    "moq": 0,
+    "notes": "12,000 sqft facility in Philadelphia, PA. Wholesale-oriented with no minimum."
+  },
+  {
+    "id": "hoods_flags",
+    "name": "HOOD's Flags",
+    "region": "USA",
+    "country_code": "US",
+    "coordinates": { "lat": 39.8283, "lng": -98.5795 },
+    "status": "verification_pending",
+    "quality_score": 5,
+    "reliability_score": 5,
+    "capabilities": ["sublimation", "custom_design", "free_design_service"],
+    "pricing": {
+      "base_unit_cost_usd": 30.00,
+      "fixed_shipping_cost": 7.00
+    },
+    "shipping": {
+      "standard_days_min": 5,
+      "standard_days_max": 10,
+      "regions_served": ["US"]
+    },
+    "fulfillment_model": "pod",
+    "integrations": [],
+    "moq": 0,
+    "notes": "DIRECT COMPETITOR. Sublimation-based, offers free design service, no MOQ."
+  },
+  {
+    "id": "kc_hood_covers",
+    "name": "KC Hood Covers",
+    "region": "USA",
+    "country_code": "US",
+    "coordinates": { "lat": 39.0911, "lng": -94.4155 },
+    "status": "verification_pending",
+    "quality_score": 5,
+    "reliability_score": 5,
+    "capabilities": ["custom_orders", "sublimation"],
+    "pricing": {
+      "base_unit_cost_usd": 37.50,
+      "fixed_shipping_cost": 7.00
+    },
+    "shipping": {
+      "standard_days_min": 5,
+      "standard_days_max": 10,
+      "regions_served": ["US"]
+    },
+    "fulfillment_model": "self_fulfill",
+    "integrations": [],
+    "moq": 1,
+    "notes": "Small business in Independence, MO. Custom orders only."
+  },
+  {
+    "id": "cbs_distributors",
+    "name": "CBS Distributors",
+    "region": "USA",
+    "country_code": "US",
+    "coordinates": { "lat": 40.1993, "lng": -75.0888 },
+    "status": "verification_pending",
+    "quality_score": 5,
+    "reliability_score": 6,
+    "capabilities": ["blind_dropship", "wholesale"],
+    "pricing": {
+      "base_unit_cost_usd": 20.00,
+      "fixed_shipping_cost": 5.00
+    },
+    "shipping": {
+      "standard_days_min": 1,
+      "standard_days_max": 5,
+      "regions_served": ["US"]
+    },
+    "fulfillment_model": "dropship",
+    "integrations": [],
+    "moq": 1,
+    "notes": "Wholesale distributor in Warminster, PA. Blind dropship available. Immediate shipping from stock."
+  },
+  {
+    "id": "imprintitems",
+    "name": "ImprintItems",
+    "region": "USA",
+    "country_code": "US",
+    "coordinates": { "lat": 39.8283, "lng": -98.5795 },
+    "status": "verification_pending",
+    "quality_score": 5,
+    "reliability_score": 5,
+    "capabilities": ["stretch_polyester", "digital_print"],
+    "pricing": {
+      "base_unit_cost_usd": 25.00,
+      "fixed_shipping_cost": 7.00
+    },
+    "shipping": {
+      "standard_days_min": 5,
+      "standard_days_max": 10,
+      "regions_served": ["US"]
+    },
+    "fulfillment_model": "pod",
+    "integrations": [],
+    "moq": 1,
+    "notes": "Promotional products company specializing in stretch polyester items."
+  },
+  {
+    "id": "printglobe",
+    "name": "PrintGlobe",
+    "region": "USA",
+    "country_code": "US",
+    "coordinates": { "lat": 39.8283, "lng": -98.5795 },
+    "status": "verification_pending",
+    "quality_score": 5,
+    "reliability_score": 5,
+    "capabilities": ["custom_printing", "digital_print"],
+    "pricing": {
+      "base_unit_cost_usd": 25.00,
+      "fixed_shipping_cost": 7.00
+    },
+    "shipping": {
+      "standard_days_min": 7,
+      "standard_days_max": 10,
+      "regions_served": ["US"]
+    },
+    "fulfillment_model": "pod",
+    "integrations": [],
+    "moq": 1,
+    "notes": "Promo company. $85/hr setup fee, 7-10 day production. Offers 3 sizes."
+  },
+  {
+    "id": "car_dealer_depot",
+    "name": "Car Dealer Depot",
+    "region": "USA",
+    "country_code": "US",
+    "coordinates": { "lat": 39.8283, "lng": -98.5795 },
+    "status": "verification_pending",
+    "quality_score": 5,
+    "reliability_score": 5,
+    "capabilities": ["custom_printing", "paint_safe_material"],
+    "pricing": {
+      "base_unit_cost_usd": 25.00,
+      "fixed_shipping_cost": 7.00
+    },
+    "shipping": {
+      "standard_days_min": 5,
+      "standard_days_max": 10,
+      "regions_served": ["US"]
+    },
+    "fulfillment_model": "pod",
+    "integrations": [],
+    "moq": 1,
+    "notes": "Car-specific products. $45 setup fee. Two sizes (medium/large). Paint-safe material."
+  },
+  {
+    "id": "oracle_trading",
+    "name": "Oracle Trading",
+    "region": "Canada",
+    "country_code": "CA",
+    "coordinates": { "lat": 43.6532, "lng": -79.3832 },
+    "status": "verification_pending",
+    "quality_score": 6,
+    "reliability_score": 5,
+    "capabilities": ["flag_hood_covers", "custom_design", "elastic_edge"],
+    "pricing": {
+      "base_unit_cost_usd": 20.00,
+      "fixed_shipping_cost": 5.00
+    },
+    "shipping": {
+      "standard_days_min": 3,
+      "standard_days_max": 7,
+      "regions_served": ["CA"]
+    },
+    "fulfillment_model": "bulk",
+    "integrations": [],
+    "moq": 1,
+    "notes": "HIGH PRIORITY - Canadian supplier. Already sells country flag hood covers."
+  },
+  {
+    "id": "art_of_where",
+    "name": "Art of Where",
+    "region": "Canada",
+    "country_code": "CA",
+    "coordinates": { "lat": 45.5017, "lng": -73.5673 },
+    "status": "verification_pending",
+    "quality_score": 6,
+    "reliability_score": 6,
+    "capabilities": ["custom_fabric", "cut_and_sew", "sublimation"],
+    "pricing": {
+      "base_unit_cost_usd": 25.00,
+      "shipping_cost_per_unit": { "CA": 5.00 },
+      "fixed_shipping_cost": 8.00
+    },
+    "shipping": {
+      "standard_days_min": 2,
+      "standard_days_max": 5,
+      "regions_served": ["CA", "US"]
+    },
+    "fulfillment_model": "pod",
+    "integrations": ["etsy"],
+    "moq": 0,
+    "notes": "Montreal-based POD since 2013. In-house production. Native Etsy integration."
+  },
+  {
+    "id": "hesol_sports_covers",
+    "name": "Hesol Sports Covers",
+    "region": "UK",
+    "country_code": "GB",
+    "coordinates": { "lat": 51.5074, "lng": -0.1278 },
+    "status": "verification_pending",
+    "quality_score": 6,
+    "reliability_score": 5,
+    "capabilities": ["sports_covers", "elastic_fit", "custom_design"],
+    "pricing": {
+      "base_unit_cost_usd": 25.00,
+      "shipping_cost_per_unit": { "GB": 0.00 },
+      "fixed_shipping_cost": 10.00
+    },
+    "shipping": {
+      "standard_days_min": 3,
+      "standard_days_max": 7,
+      "regions_served": ["GB"]
+    },
+    "fulfillment_model": "bulk",
+    "integrations": [],
+    "moq": 1,
+    "notes": "UK-based sports covers specialist. 80% Dacron/20% Spandex. Premier League designs in catalog."
+  },
+  {
+    "id": "contrado",
+    "name": "Contrado",
+    "region": "UK",
+    "country_code": "GB",
+    "coordinates": { "lat": 51.5074, "lng": -0.1278 },
+    "status": "verification_pending",
+    "quality_score": 7,
+    "reliability_score": 6,
+    "capabilities": ["4_way_stretch", "custom_cut_sew", "sublimation", "110_plus_fabrics"],
+    "pricing": {
+      "base_unit_cost_usd": 30.00,
+      "shipping_cost_per_unit": { "GB": 5.00, "US": 8.00, "CA": 8.00 },
+      "fixed_shipping_cost": 10.00
+    },
+    "shipping": {
+      "standard_days_min": 5,
+      "standard_days_max": 10,
+      "regions_served": ["GB", "US", "CA", "DE", "FR", "ES", "IT", "NL", "AU"]
+    },
+    "fulfillment_model": "pod",
+    "integrations": ["shopify"],
+    "moq": 0,
+    "notes": "Premium POD based in London. 4-way stretch polyester spandex. Shopify integration."
+  },
+  {
+    "id": "merchize",
+    "name": "Merchize",
+    "region": "Vietnam",
+    "country_code": "VN",
+    "coordinates": { "lat": 10.8231, "lng": 106.6297 },
+    "status": "verification_pending",
+    "quality_score": 6,
+    "reliability_score": 5,
+    "capabilities": ["sublimation", "cut_and_sew", "uv_printing", "car_accessories"],
+    "pricing": {
+      "base_unit_cost_usd": 21.50,
+      "shipping_cost_per_unit": { "US": 6.00, "CA": 7.00 },
+      "fixed_shipping_cost": 8.00
+    },
+    "shipping": {
+      "standard_days_min": 7,
+      "standard_days_max": 15,
+      "regions_served": ["US", "CA", "GB", "AU"]
+    },
+    "fulfillment_model": "pod",
+    "integrations": ["shopify", "etsy"],
+    "moq": 0,
+    "notes": "Vietnam-based POD with 43,000 sqft in-house facility. Shopify and Etsy integration."
+  }
+]

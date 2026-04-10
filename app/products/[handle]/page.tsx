@@ -1,19 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import CartDrawer from "@/components/layout/CartDrawer";
+import FulfillmentSelector from "@/components/product/FulfillmentSelector";
+import type { FulfillmentOption } from "@/lib/suppliers/types";
 
 export default function ProductDetailPage() {
   const { addItem, isLoading } = useCart();
   const [addedFeedback, setAddedFeedback] = useState(false);
+  const [selectedFulfillment, setSelectedFulfillment] = useState<FulfillmentOption | null>(null);
 
-  // TODO: Fetch product from Shopify when credentials available
-  // For now, show placeholder
+  const handleFulfillmentSelect = useCallback((option: FulfillmentOption) => {
+    setSelectedFulfillment(option);
+  }, []);
+
+  const displayPrice = selectedFulfillment?.price_usd ?? 49.99;
 
   const handleAddToCart = async () => {
     // TODO: Use actual variant ID from Shopify
-    // await addItem(variantId);
+    // Cart attributes for fulfillment routing:
+    // if (selectedFulfillment) {
+    //   const attrs = [{
+    //     key: "_fulfillment_option",
+    //     value: JSON.stringify({
+    //       supplier_id: selectedFulfillment.supplier_id,
+    //       supplier_region: selectedFulfillment.supplier_region,
+    //       label: selectedFulfillment.label,
+    //       estimated_days: selectedFulfillment.estimated_days_display,
+    //       price: selectedFulfillment.price_usd,
+    //     }),
+    //   }];
+    //   await addItem(variantId, 1, attrs);
+    // }
     setAddedFeedback(true);
     setTimeout(() => setAddedFeedback(false), 1000);
   };
@@ -47,11 +66,13 @@ export default function ProductDetailPage() {
           <div className="py-6">
             <h1 className="text-display-lg text-white">Product Name</h1>
             <p className="text-body-lg font-semibold mt-2" style={{ color: "var(--color-accent)" }}>
-              $49.99 USD
+              ${displayPrice} USD
             </p>
             <p className="text-body-md mt-4" style={{ color: "var(--color-text-muted)" }}>
               Premium stretch-fit car hood cover with sublimation print.
             </p>
+
+            <FulfillmentSelector onSelect={handleFulfillmentSelect} />
 
             {/* Desktop add to cart */}
             <button
@@ -100,7 +121,7 @@ export default function ProductDetailPage() {
         }}
       >
         <div>
-          <p className="text-body-lg font-semibold" style={{ color: "var(--color-accent)" }}>$49.99</p>
+          <p className="text-body-lg font-semibold" style={{ color: "var(--color-accent)" }}>${displayPrice}</p>
           <p className="text-body-sm" style={{ color: "var(--color-text-muted)" }}>USD</p>
         </div>
         <button
