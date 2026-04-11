@@ -62,7 +62,8 @@ export default function ProductDetailClient({
     ? parseFloat(firstVariant.price.amount)
     : null;
 
-  const displayPrice = selectedFulfillment?.price_usd ?? shopifyPrice ?? 49.99;
+  const displayPrice = shopifyPrice ?? 49.99;
+  const currencyCode = firstVariant?.price?.currencyCode ?? "USD";
   const title = product?.title ?? `Hood Cover — ${handle}`;
   const description =
     product?.description ??
@@ -200,7 +201,7 @@ export default function ProductDetailClient({
               className="text-body-lg font-semibold mt-2"
               style={{ color: "var(--color-accent)" }}
             >
-              ${displayPrice.toFixed(2)} USD
+              ${displayPrice.toFixed(2)} {currencyCode}
             </p>
             <p
               className="text-body-md mt-4"
@@ -285,7 +286,7 @@ export default function ProductDetailClient({
             className="text-body-sm"
             style={{ color: "var(--color-text-muted)" }}
           >
-            USD
+            {currencyCode}
           </p>
         </div>
         <button
