@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { getProducts } from "@/lib/shopify";
 import ShopClient from "./ShopClient";
 
+// Force fresh build after product activation
 export const metadata = {
   title: "Shop All Covers",
   description:
