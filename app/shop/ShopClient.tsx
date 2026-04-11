@@ -115,9 +115,40 @@ export default function ShopClient({
     }
   };
 
-  const displayProducts = hasShopifyProducts ? shopifyProducts : [];
+  // ── Filter Shopify products by region + search ─────
+  const filteredShopifyProducts = hasShopifyProducts
+    ? shopifyProducts.filter((p) => {
+        // Region filter — match against product tags
+        if (region !== "All") {
+          const tags = (p.tags || []).map((t: string) => t.toLowerCase());
+          const regionLower = region.toLowerCase();
+          // Also check for "Middle East" as "middle east" in tags
+          if (!tags.some((t: string) => t === regionLower || t.includes(regionLower))) {
+            return false;
+          }
+        }
+        // Search filter — match title
+        if (search) {
+          const q = search.toLowerCase();
+          if (!p.title.toLowerCase().includes(q)) {
+            return false;
+          }
+        }
+        // Design line filter — match against product tags
+        if (designFilter !== "All") {
+          const tags = (p.tags || []).map((t: string) => t.toLowerCase());
+          const designLower = designFilter.toLowerCase();
+          if (!tags.some((t: string) => t === designLower || t.includes(designLower))) {
+            return false;
+          }
+        }
+        return true;
+      })
+    : [];
+
+  const displayProducts = hasShopifyProducts ? filteredShopifyProducts : [];
   const totalCount = hasShopifyProducts
-    ? shopifyProducts.length
+    ? filteredShopifyProducts.length
     : fallbackProducts.length;
 
   return (

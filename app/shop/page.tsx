@@ -11,7 +11,7 @@ export const metadata = {
 export default async function ShopPage() {
   // Attempt to fetch Shopify products; returns empty array if API unavailable
   const { products: shopifyProducts, pageInfo } = await getProducts({
-    first: 24,
+    first: 250,
     sortKey: "BEST_SELLING",
   });
 

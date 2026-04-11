@@ -65,7 +65,14 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3" style={{ borderTop: "1px solid #111" }}>
+        {/* Legal disclaimer */}
+        <div className="mt-8 pt-5" style={{ borderTop: "1px solid #111" }}>
+          <p className="text-xs leading-relaxed" style={{ color: "#3a3a3a" }}>
+            HOOD&apos;D is not affiliated with, endorsed by, or sponsored by FIFA, any national football federation, or any kit manufacturer. All product designs are original compositions inspired by national team color palettes. National team names and color schemes are used for descriptive purposes only.
+          </p>
+        </div>
+
+        <div className="mt-5 pt-5 flex flex-col sm:flex-row items-center justify-between gap-3" style={{ borderTop: "1px solid #111" }}>
           <span className="text-xs" style={{ color: "#444" }}>&copy; 2026 Hood&apos;d. All rights reserved.</span>
           <div className="flex gap-5">
             {["Instagram", "TikTok", "X"].map((s) => (

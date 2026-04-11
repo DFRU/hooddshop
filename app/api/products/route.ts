@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
   const sortKey = searchParams.get("sortKey") || "BEST_SELLING";
   const reverse = searchParams.get("reverse") === "true";
   const query = searchParams.get("query") || undefined;
-  const first = parseInt(searchParams.get("first") || "24", 10);
+  const first = parseInt(searchParams.get("first") || "250", 10);
 
   // Shopify expects sortKey and reverse as separate params
   // but our getProducts helper takes sortKey as a string.
