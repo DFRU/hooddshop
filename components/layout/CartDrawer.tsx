@@ -66,6 +66,14 @@ export default function CartDrawer() {
               const product = line.merchandise.product;
               const image = product.images.edges[0]?.node;
               const price = parseFloat(line.merchandise.price.amount);
+              // Parse fulfillment option from line attributes
+              const fulfillmentAttr = line.attributes?.find(
+                (a: { key: string; value: string }) => a.key === "_fulfillment_option"
+              );
+              let fulfillment: { label?: string; estimated_days_display?: string; supplier_region?: string } | null = null;
+              if (fulfillmentAttr?.value) {
+                try { fulfillment = JSON.parse(fulfillmentAttr.value); } catch {}
+              }
               return (
                 <div
                   key={line.id}
@@ -79,6 +87,12 @@ export default function CartDrawer() {
                   )}
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-white font-medium truncate">{product.title}</p>
+                    {fulfillment && (
+                      <p className="text-[11px] mt-0.5 truncate" style={{ color: "#666" }}>
+                        {fulfillment.label} · {fulfillment.estimated_days_display}
+                        {fulfillment.supplier_region ? ` · Ships from ${fulfillment.supplier_region}` : ""}
+                      </p>
+                    )}
                     <div className="flex items-center gap-3 mt-2">
                       <div className="flex items-center rounded" style={{ border: "1px solid #222" }}>
                         <button

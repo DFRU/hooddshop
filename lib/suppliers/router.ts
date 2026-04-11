@@ -1,6 +1,6 @@
 import type { CustomerLocation, FulfillmentOption, Supplier } from "./types";
 import { haversineDistance } from "./geo";
-import { getCustomerPrice } from "./pricing";
+import { getCustomerPrice, getShippingTier, getTierLabel } from "./pricing";
 import {
   BASE_SUPPLIER_ID,
   MAX_OPTIONS,
@@ -162,12 +162,8 @@ function buildOption(
   const daysMin = supplier.shipping.standard_days_min;
   const daysMax = supplier.shipping.standard_days_max;
 
-  let label: string;
-  if (daysMax <= 10) {
-    label = "Express Shipping";
-  } else {
-    label = "Standard Shipping";
-  }
+  const tier = getShippingTier(supplier);
+  const label = getTierLabel(tier);
 
   let description: string;
   if (isLocal) {

@@ -24,7 +24,7 @@ interface CartContextType {
   isLoading: boolean;
   openCart: () => void;
   closeCart: () => void;
-  addItem: (variantId: string) => Promise<void>;
+  addItem: (variantId: string, quantity?: number, attributes?: { key: string; value: string }[]) => Promise<void>;
   updateQuantity: (lineId: string, quantity: number) => Promise<void>;
   removeItem: (lineId: string) => Promise<void>;
 }
@@ -49,14 +49,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const closeCart = useCallback(() => setIsOpen(false), []);
 
   const addItem = useCallback(
-    async (variantId: string) => {
+    async (variantId: string, quantity: number = 1, attributes?: { key: string; value: string }[]) => {
       setIsLoading(true);
       try {
         let updatedCart: ShopifyCart | null;
         if (cart?.id) {
-          updatedCart = await addToCartApi(cart.id, variantId);
+          updatedCart = await addToCartApi(cart.id, variantId, quantity, attributes);
         } else {
-          updatedCart = await createCart(variantId);
+          updatedCart = await createCart(variantId, quantity, attributes);
         }
         if (updatedCart) {
           setCart(updatedCart);

@@ -12,12 +12,18 @@ export const MIN_QUALITY_SCORE = 7;
 // Maximum number of fulfillment options returned
 export const MAX_OPTIONS = 3;
 
-// Customer-facing price tiers (USD)
+// Customer-facing price tiers (CAD)
+// Aligned with competitive analysis: market sweet spot $44.99,
+// express premium for faster local/regional fulfillment
 export const PRICE_TIERS = {
-  standard: 49.99,   // China/base suppliers (shipping > 10 days)
-  express: 59.99,    // Regional/local suppliers (shipping <= 10 days)
-  premium: 69.99,    // Rush/expedited (Phase 2)
+  standard: 44.99,   // Base price — China POD (15-25 days), matches market analysis
+  express: 54.99,    // Regional suppliers (5-10 days), speed premium
+  rush: 64.99,       // Local/same-country (2-5 days), max speed premium
 } as const;
+
+// Pricing phase — controls which pricing strategy is active
+// "launch" = early-bird $39.99 | "standard" = $44.99 | "tournament" = $49.99
+export const PRICING_PHASE: "launch" | "standard" | "tournament" | "clearance" = "standard" as const;
 
 // Base supplier ID — always included in results
 export const BASE_SUPPLIER_ID = "printkk";

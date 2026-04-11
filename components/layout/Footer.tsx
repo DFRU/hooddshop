@@ -27,7 +27,7 @@ export default function Footer() {
           <div>
             <h4 className="text-label-md text-white mb-3">Shop</h4>
             <div className="space-y-2">
-              {["All Covers", "Heritage", "Culture", "Street", "Stealth", "Chrome"].map((l) => (
+              {["All Covers", "Heritage", "Culture", "Street", "Chrome", "Jersey"].map((l) => (
                 <Link key={l} href="/shop" className="block text-sm py-1 touch-active transition-colors" style={{ color: "#666" }}>
                   {l}
                 </Link>

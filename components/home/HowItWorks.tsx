@@ -14,7 +14,7 @@ export default function HowItWorks() {
     {
       num: "02",
       title: "Choose a Design",
-      desc: "Six lines — Heritage, Culture, Street, Stealth, Chrome, or Jersey.",
+      desc: "Pick your style — Heritage, Culture, Street, Chrome, Jersey, and more.",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <rect x="3" y="3" width="7" height="7" rx="1" />

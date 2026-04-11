@@ -15,6 +15,7 @@ export interface ShopifyProduct {
   handle: string;
   title: string;
   description: string;
+  descriptionHtml?: string;
   tags: string[];
   priceRange: {
     minVariantPrice: ShopifyPrice;
@@ -55,6 +56,7 @@ export interface ShopifyCart {
       node: {
         id: string;
         quantity: number;
+        attributes: { key: string; value: string }[];
         merchandise: {
           id: string;
           title: string;

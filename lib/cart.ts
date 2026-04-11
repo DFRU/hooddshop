@@ -27,13 +27,16 @@ export function clearStoredCartId(): void {
 
 export async function createCart(
   variantId: string,
-  quantity: number = 1
+  quantity: number = 1,
+  attributes?: { key: string; value: string }[]
 ): Promise<ShopifyCart | null> {
+  const line: Record<string, unknown> = { merchandiseId: variantId, quantity };
+  if (attributes?.length) line.attributes = attributes;
   const { data } = await shopifyFetch<{
     data: { cartCreate: { cart: ShopifyCart } };
   }>({
     query: CREATE_CART,
-    variables: { lines: [{ merchandiseId: variantId, quantity }] },
+    variables: { lines: [line] },
   });
   const cart = data?.cartCreate?.cart;
   if (cart) setStoredCartId(cart.id);
@@ -43,13 +46,16 @@ export async function createCart(
 export async function addToCart(
   cartId: string,
   variantId: string,
-  quantity: number = 1
+  quantity: number = 1,
+  attributes?: { key: string; value: string }[]
 ): Promise<ShopifyCart | null> {
+  const line: Record<string, unknown> = { merchandiseId: variantId, quantity };
+  if (attributes?.length) line.attributes = attributes;
   const { data } = await shopifyFetch<{
     data: { cartLinesAdd: { cart: ShopifyCart } };
   }>({
     query: ADD_TO_CART,
-    variables: { cartId, lines: [{ merchandiseId: variantId, quantity }] },
+    variables: { cartId, lines: [line] },
   });
   return data?.cartLinesAdd?.cart || null;
 }

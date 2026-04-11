@@ -27,9 +27,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: { default: "Hood'd — Your Ride. Your Flag.", template: "%s | Hood'd" },
+  title: { default: "Hood'd | Car Hood Covers — Your Ride. Your Flag.", template: "%s | Hood'd" },
   description:
-    "Premium stretch-fit car hood covers for World Cup 2026. 48 nations. 6 design lines. $49.99.",
+    "Premium stretch-fit car hood covers for World Cup 2026. 48 nations. Multiple design lines. $44.99.",
   metadataBase: new URL("https://hooddshop.com"),
   openGraph: {
     type: "website",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     url: "https://hooddshop.com",
     siteName: "Hood'd",
     title: "Hood'd — Your Ride. Your Flag.",
-    description: "Premium car hood covers for World Cup 2026. 48 nations. 6 design lines.",
+    description: "Premium car hood covers for World Cup 2026. 48 nations. Multiple design lines.",
   },
   twitter: {
     card: "summary_large_image",

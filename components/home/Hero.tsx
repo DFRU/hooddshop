@@ -39,7 +39,7 @@ export default function Hero() {
             </h1>
 
             <p className="text-body-sm lg:text-body-md max-w-md leading-relaxed" style={{ color: "#888" }}>
-              Premium stretch-fit car hood covers. 48 nations. 6 design lines each.
+              Premium stretch-fit car hood covers for World Cup 2026. 48 nations.
             </p>
 
             {/* CTAs — full width on mobile */}
@@ -49,7 +49,7 @@ export default function Hero() {
                 className="flex items-center justify-center w-full sm:w-auto px-8 text-white font-semibold text-[13px] tracking-[0.08em] uppercase rounded transition-all touch-active"
                 style={{ background: "var(--color-accent)", minHeight: "52px" }}
               >
-                Shop Now — $49.99
+                Shop Now — $44.99
               </Link>
               <Link
                 href="/nations"
@@ -64,8 +64,7 @@ export default function Hero() {
             <div className="flex gap-8 pt-2">
               {[
                 { v: "48", l: "Nations" },
-                { v: "6", l: "Designs" },
-                { v: "$49", l: "Each" },
+                { v: "$44.99", l: "From" },
               ].map((s) => (
                 <div key={s.l}>
                   <div className="text-display-sm text-white">{s.v}</div>
