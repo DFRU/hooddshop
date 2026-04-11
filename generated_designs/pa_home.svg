@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#DC143C"/>
+<circle cx="933" cy="215" r="176" fill="#FFFFFF" opacity="0.26"/>
+<circle cx="813" cy="397" r="205" fill="#000000" opacity="0.25"/>
+<ellipse cx="443" cy="833" rx="103" ry="50" fill="#FFFFFF" opacity="0.12" transform="rotate(93 443 833)"/>
+<rect x="611" y="67" width="316" height="178" fill="#df2b4f" opacity="0.10" rx="25" transform="rotate(-5 768 156)"/>
+<ellipse cx="399" cy="495" rx="136" ry="132" fill="#000000" opacity="0.17" transform="rotate(168 399 495)"/>
+<rect x="1039" y="508" width="218" height="100" fill="#bb1133" opacity="0.12" rx="8" transform="rotate(1 1148 558)"/>
+<line x1="1196" y1="718" x2="905" y2="832" stroke="#FFFFFF" stroke-width="4.2" opacity="0.28"/>
+<line x1="1171" y1="175" x2="733" y2="688" stroke="#FFFFFF" stroke-width="1.2" opacity="0.36"/>
+<line x1="57" y1="467" x2="607" y2="550" stroke="#FFFFFF" stroke-width="4.6" opacity="0.18"/>
+<line x1="635" y1="87" x2="524" y2="797" stroke="#FFFFFF" stroke-width="1.8" opacity="0.26"/>
+<defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="0.25"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="900" fill="url(#vignette)"/>
+<text x="30" y="45" text-anchor="start"
+        font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold"
+        letter-spacing="2" fill="#FFFFFF" opacity="0.25">PANAMA</text>
+<text x="1180" y="880" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold"
+        letter-spacing="3" fill="#FFFFFF" opacity="0.35">HOOD&apos;D</text>
+</svg>

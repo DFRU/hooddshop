@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#000080"/>
+<ellipse cx="1015" cy="883" rx="170" ry="86" fill="#D4AF37" opacity="0.13" transform="rotate(4 1015 883)"/>
+<ellipse cx="421" cy="614" rx="335" ry="143" fill="#FFFFFF" opacity="0.28" transform="rotate(129 421 614)"/>
+<circle cx="188" cy="-52" r="131" fill="#00006c" opacity="0.24"/>
+<circle cx="969" cy="220" r="89" fill="#00006c" opacity="0.24"/>
+<circle cx="353" cy="219" r="209" fill="#FFFFFF" opacity="0.14"/>
+<line x1="963" y1="820" x2="694" y2="294" stroke="#FFFFFF" stroke-width="3.2" opacity="0.33"/>
+<line x1="100" y1="725" x2="991" y2="739" stroke="#FFFFFF" stroke-width="3.4" opacity="0.37"/>
+<line x1="743" y1="547" x2="162" y2="297" stroke="#FFFFFF" stroke-width="4.2" opacity="0.38"/>
+<line x1="793" y1="594" x2="872" y2="747" stroke="#FFFFFF" stroke-width="2.4" opacity="0.24"/>
+<defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="0.25"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="900" fill="url(#vignette)"/>
+<text x="30" y="45" text-anchor="start"
+        font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold"
+        letter-spacing="2" fill="#FFFFFF" opacity="0.25">ECUADOR</text>
+<text x="1180" y="880" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold"
+        letter-spacing="3" fill="#FFFFFF" opacity="0.35">HOOD&apos;D</text>
+</svg>

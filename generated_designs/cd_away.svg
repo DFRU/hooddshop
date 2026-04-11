@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#FFFFFF"/>
+<polygon points="681.1,501.0 715.4,460.0 733.7,510.2" fill="#DC143C" opacity="0.36"/>
+<polygon points="582.2,329.1 514.0,472.2 424.2,341.6" fill="#DC143C" opacity="0.36"/>
+<polygon points="825.1,772.6 837.5,848.4 765.6,821.2" fill="#0052CC" opacity="0.25"/>
+<polygon points="761.9,561.7 662.4,656.7 629.9,523.0" fill="#DC143C" opacity="0.33"/>
+<polygon points="1073.0,167.4 970.6,157.1 1030.7,73.6" fill="#ffffff" opacity="0.16"/>
+<polygon points="1157.8,622.0 1199.3,665.5 1140.9,679.7" fill="#ffffff" opacity="0.29"/>
+<polygon points="1046.5,635.0 1183.6,737.8 1026.0,805.1" fill="#0052CC" opacity="0.23"/>
+<polygon points="584.1,326.3 527.6,338.6 545.2,283.5" fill="#DC143C" opacity="0.16"/>
+<polygon points="858.4,83.4 934.8,33.6 939.7,124.7" fill="#ffffff" opacity="0.35"/>
+<polygon points="209.5,854.0 259.9,804.1 277.9,872.7" fill="#0052CC" opacity="0.15"/>
+<polygon points="954.8,399.6 842.8,417.7 883.1,311.7" fill="#0052CC" opacity="0.28"/>
+<polygon points="994.4,531.9 904.4,393.0 1069.6,384.6" fill="#DC143C" opacity="0.21"/>
+<polygon points="-24.4,245.6 79.3,320.4 -37.3,372.8" fill="#0052CC" opacity="0.12"/>
+<polygon points="399.8,378.9 349.4,328.8 418.0,310.2" fill="#0052CC" opacity="0.24"/>
+<polygon points="422.4,777.5 321.3,860.7 299.8,731.6" fill="#0052CC" opacity="0.20"/>
+<polygon points="1178.4,259.3 1136.0,129.4 1269.7,157.6" fill="#DC143C" opacity="0.44"/>
+<polygon points="773.3,433.4 663.2,564.4 604.8,403.5" fill="#0052CC" opacity="0.26"/>
+<polygon points="571.8,581.2 632.8,567.8 613.9,627.3" fill="#0052CC" opacity="0.45"/>
+<polygon points="558.0,626.6 587.7,490.8 690.4,584.3" fill="#DC143C" opacity="0.41"/>
+<polygon points="626.7,172.5 490.0,69.2 647.8,2.5" fill="#0052CC" opacity="0.13"/>
+<polygon points="1173.3,888.4 1062.2,969.3 1047.7,832.7" fill="#0052CC" opacity="0.25"/>
+<defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="0.25"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="900" fill="url(#vignette)"/>
+<text x="30" y="45" text-anchor="start"
+        font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold"
+        letter-spacing="2" fill="#DC143C" opacity="0.25">DR CONGO</text>
+<text x="1180" y="880" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold"
+        letter-spacing="3" fill="#DC143C" opacity="0.35">HOOD&apos;D</text>
+</svg>

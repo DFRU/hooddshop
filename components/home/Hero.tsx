@@ -49,7 +49,7 @@ export default function Hero() {
                 className="flex items-center justify-center w-full sm:w-auto px-8 text-white font-semibold text-[13px] tracking-[0.08em] uppercase rounded transition-all touch-active"
                 style={{ background: "var(--color-accent)", minHeight: "52px" }}
               >
-                Shop Now — $44.99
+                Shop Now — $49.99
               </Link>
               <Link
                 href="/nations"
@@ -64,7 +64,7 @@ export default function Hero() {
             <div className="flex gap-8 pt-2">
               {[
                 { v: "48", l: "Nations" },
-                { v: "$44.99", l: "From" },
+                { v: "$49.99", l: "From" },
               ].map((s) => (
                 <div key={s.l}>
                   <div className="text-display-sm text-white">{s.v}</div>

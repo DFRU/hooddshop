@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#FFD700"/>
+<ellipse cx="898" cy="692" rx="311" ry="69" fill="#DC143C" opacity="0.25" transform="rotate(36 898 692)"/>
+<ellipse cx="211" cy="179" rx="148" ry="160" fill="#d8b600" opacity="0.21" transform="rotate(164 211 179)"/>
+<circle cx="222" cy="449" r="235" fill="#DC143C" opacity="0.32"/>
+<ellipse cx="1063" cy="258" rx="390" ry="65" fill="#0052CC" opacity="0.32" transform="rotate(144 1063 258)"/>
+<circle cx="492" cy="907" r="137" fill="#0052CC" opacity="0.13"/>
+<ellipse cx="425" cy="872" rx="200" ry="132" fill="#DC143C" opacity="0.14" transform="rotate(28 425 872)"/>
+<rect x="27" y="756" width="247" height="134" fill="#0052CC" opacity="0.17" rx="25" transform="rotate(29 150 822)"/>
+<line x1="515" y1="227" x2="598" y2="846" stroke="#DC143C" stroke-width="4.8" opacity="0.35"/>
+<line x1="833" y1="274" x2="852" y2="688" stroke="#DC143C" stroke-width="3.2" opacity="0.27"/>
+<line x1="919" y1="770" x2="431" y2="546" stroke="#DC143C" stroke-width="1.6" opacity="0.27"/>
+<defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="0.25"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="900" fill="url(#vignette)"/>
+<text x="30" y="45" text-anchor="start"
+        font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold"
+        letter-spacing="2" fill="#DC143C" opacity="0.25">COLOMBIA</text>
+<text x="1180" y="880" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold"
+        letter-spacing="3" fill="#DC143C" opacity="0.35">HOOD&apos;D</text>
+</svg>

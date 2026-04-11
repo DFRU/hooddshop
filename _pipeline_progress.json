@@ -1,0 +1,791 @@
+{
+  "created": [
+    {
+      "id": 10341815877947,
+      "handle": "us-home",
+      "code": "us",
+      "country": "United States",
+      "kit": "home"
+    },
+    {
+      "id": 10341816172859,
+      "handle": "us-away",
+      "code": "us",
+      "country": "United States",
+      "kit": "away"
+    },
+    {
+      "id": 10341816238395,
+      "handle": "ca-home",
+      "code": "ca",
+      "country": "Canada",
+      "kit": "home"
+    },
+    {
+      "id": 10341816336699,
+      "handle": "ca-away",
+      "code": "ca",
+      "country": "Canada",
+      "kit": "away"
+    },
+    {
+      "id": 10341816697147,
+      "handle": "mx-home",
+      "code": "mx",
+      "country": "Mexico",
+      "kit": "home"
+    },
+    {
+      "id": 10341816762683,
+      "handle": "mx-away",
+      "code": "mx",
+      "country": "Mexico",
+      "kit": "away"
+    },
+    {
+      "id": 10341816828219,
+      "handle": "pa-home",
+      "code": "pa",
+      "country": "Panama",
+      "kit": "home"
+    },
+    {
+      "id": 10341816926523,
+      "handle": "pa-away",
+      "code": "pa",
+      "country": "Panama",
+      "kit": "away"
+    },
+    {
+      "id": 10341817188667,
+      "handle": "cw-home",
+      "code": "cw",
+      "country": "Cura\u00c3\u00a7ao",
+      "kit": "home"
+    },
+    {
+      "id": 10341817286971,
+      "handle": "cw-away",
+      "code": "cw",
+      "country": "Cura\u00c3\u00a7ao",
+      "kit": "away"
+    },
+    {
+      "id": 10341817385275,
+      "handle": "ht-home",
+      "code": "ht",
+      "country": "Haiti",
+      "kit": "home"
+    },
+    {
+      "id": 10341817712955,
+      "handle": "ht-away",
+      "code": "ht",
+      "country": "Haiti",
+      "kit": "away"
+    },
+    {
+      "id": 10341817811259,
+      "handle": "jm-home",
+      "code": "jm",
+      "country": "Jamaica",
+      "kit": "home"
+    },
+    {
+      "id": 10341817909563,
+      "handle": "jm-away",
+      "code": "jm",
+      "country": "Jamaica",
+      "kit": "away"
+    },
+    {
+      "id": 10341817975099,
+      "handle": "ar-home",
+      "code": "ar",
+      "country": "Argentina",
+      "kit": "home"
+    },
+    {
+      "id": 10341818466619,
+      "handle": "ar-away",
+      "code": "ar",
+      "country": "Argentina",
+      "kit": "away"
+    },
+    {
+      "id": 10341818695995,
+      "handle": "br-home",
+      "code": "br",
+      "country": "Brazil",
+      "kit": "home"
+    },
+    {
+      "id": 10341818794299,
+      "handle": "br-away",
+      "code": "br",
+      "country": "Brazil",
+      "kit": "away"
+    },
+    {
+      "id": 10341818892603,
+      "handle": "co-home",
+      "code": "co",
+      "country": "Colombia",
+      "kit": "home"
+    },
+    {
+      "id": 10341818958139,
+      "handle": "co-away",
+      "code": "co",
+      "country": "Colombia",
+      "kit": "away"
+    },
+    {
+      "id": 10341819253051,
+      "handle": "ec-home",
+      "code": "ec",
+      "country": "Ecuador",
+      "kit": "home"
+    },
+    {
+      "id": 10341819384123,
+      "handle": "ec-away",
+      "code": "ec",
+      "country": "Ecuador",
+      "kit": "away"
+    },
+    {
+      "id": 10341819449659,
+      "handle": "py-home",
+      "code": "py",
+      "country": "Paraguay",
+      "kit": "home"
+    },
+    {
+      "id": 10341819515195,
+      "handle": "py-away",
+      "code": "py",
+      "country": "Paraguay",
+      "kit": "away"
+    },
+    {
+      "id": 10341819875643,
+      "handle": "uy-home",
+      "code": "uy",
+      "country": "Uruguay",
+      "kit": "home"
+    },
+    {
+      "id": 10341819941179,
+      "handle": "uy-away",
+      "code": "uy",
+      "country": "Uruguay",
+      "kit": "away"
+    },
+    {
+      "id": 10341820006715,
+      "handle": "gb-eng-home",
+      "code": "gb-eng",
+      "country": "England",
+      "kit": "home"
+    },
+    {
+      "id": 10341820072251,
+      "handle": "gb-eng-away",
+      "code": "gb-eng",
+      "country": "England",
+      "kit": "away"
+    },
+    {
+      "id": 10341820399931,
+      "handle": "fr-home",
+      "code": "fr",
+      "country": "France",
+      "kit": "home"
+    },
+    {
+      "id": 10341820465467,
+      "handle": "fr-away",
+      "code": "fr",
+      "country": "France",
+      "kit": "away"
+    },
+    {
+      "id": 10341854478651,
+      "handle": "de-home",
+      "code": "de",
+      "country": "Germany",
+      "kit": "home"
+    },
+    {
+      "id": 10341854576955,
+      "handle": "de-away",
+      "code": "de",
+      "country": "Germany",
+      "kit": "away"
+    },
+    {
+      "id": 10341854839099,
+      "handle": "es-home",
+      "code": "es",
+      "country": "Spain",
+      "kit": "home"
+    },
+    {
+      "id": 10341854904635,
+      "handle": "es-away",
+      "code": "es",
+      "country": "Spain",
+      "kit": "away"
+    },
+    {
+      "id": 10341855035707,
+      "handle": "pt-home",
+      "code": "pt",
+      "country": "Portugal",
+      "kit": "home"
+    },
+    {
+      "id": 10341855101243,
+      "handle": "pt-away",
+      "code": "pt",
+      "country": "Portugal",
+      "kit": "away"
+    },
+    {
+      "id": 10341855396155,
+      "handle": "nl-home",
+      "code": "nl",
+      "country": "Netherlands",
+      "kit": "home"
+    },
+    {
+      "id": 10341855494459,
+      "handle": "nl-away",
+      "code": "nl",
+      "country": "Netherlands",
+      "kit": "away"
+    },
+    {
+      "id": 10341855592763,
+      "handle": "be-home",
+      "code": "be",
+      "country": "Belgium",
+      "kit": "home"
+    },
+    {
+      "id": 10341855953211,
+      "handle": "be-away",
+      "code": "be",
+      "country": "Belgium",
+      "kit": "away"
+    },
+    {
+      "id": 10341856051515,
+      "handle": "hr-home",
+      "code": "hr",
+      "country": "Croatia",
+      "kit": "home"
+    },
+    {
+      "id": 10341856149819,
+      "handle": "hr-away",
+      "code": "hr",
+      "country": "Croatia",
+      "kit": "away"
+    },
+    {
+      "id": 10341856248123,
+      "handle": "ch-home",
+      "code": "ch",
+      "country": "Switzerland",
+      "kit": "home"
+    },
+    {
+      "id": 10341856543035,
+      "handle": "ch-away",
+      "code": "ch",
+      "country": "Switzerland",
+      "kit": "away"
+    },
+    {
+      "id": 10341856608571,
+      "handle": "at-home",
+      "code": "at",
+      "country": "Austria",
+      "kit": "home"
+    },
+    {
+      "id": 10341857001787,
+      "handle": "at-away",
+      "code": "at",
+      "country": "Austria",
+      "kit": "away"
+    },
+    {
+      "id": 10341857067323,
+      "handle": "no-home",
+      "code": "no",
+      "country": "Norway",
+      "kit": "home"
+    },
+    {
+      "id": 10341857165627,
+      "handle": "no-away",
+      "code": "no",
+      "country": "Norway",
+      "kit": "away"
+    },
+    {
+      "id": 10341857460539,
+      "handle": "gb-sct-home",
+      "code": "gb-sct",
+      "country": "Scotland",
+      "kit": "home"
+    },
+    {
+      "id": 10341857526075,
+      "handle": "gb-sct-away",
+      "code": "gb-sct",
+      "country": "Scotland",
+      "kit": "away"
+    },
+    {
+      "id": 10341857624379,
+      "handle": "se-home",
+      "code": "se",
+      "country": "Sweden",
+      "kit": "home"
+    },
+    {
+      "id": 10341857919291,
+      "handle": "se-away",
+      "code": "se",
+      "country": "Sweden",
+      "kit": "away"
+    },
+    {
+      "id": 10341857984827,
+      "handle": "tr-home",
+      "code": "tr",
+      "country": "Turkey",
+      "kit": "home"
+    },
+    {
+      "id": 10341858050363,
+      "handle": "tr-away",
+      "code": "tr",
+      "country": "Turkey",
+      "kit": "away"
+    },
+    {
+      "id": 10341858148667,
+      "handle": "ba-home",
+      "code": "ba",
+      "country": "Bosnia and Herzegovina",
+      "kit": "home"
+    },
+    {
+      "id": 10341858443579,
+      "handle": "ba-away",
+      "code": "ba",
+      "country": "Bosnia and Herzegovina",
+      "kit": "away"
+    },
+    {
+      "id": 10341858541883,
+      "handle": "cz-home",
+      "code": "cz",
+      "country": "Czechia",
+      "kit": "home"
+    },
+    {
+      "id": 10341858607419,
+      "handle": "cz-away",
+      "code": "cz",
+      "country": "Czechia",
+      "kit": "away"
+    },
+    {
+      "id": 10341858935099,
+      "handle": "dz-home",
+      "code": "dz",
+      "country": "Algeria",
+      "kit": "home"
+    },
+    {
+      "id": 10341859033403,
+      "handle": "dz-away",
+      "code": "dz",
+      "country": "Algeria",
+      "kit": "away"
+    },
+    {
+      "id": 10341859426619,
+      "handle": "cv-home",
+      "code": "cv",
+      "country": "Cape Verde",
+      "kit": "home"
+    },
+    {
+      "id": 10341859524923,
+      "handle": "cv-away",
+      "code": "cv",
+      "country": "Cape Verde",
+      "kit": "away"
+    },
+    {
+      "id": 10341859590459,
+      "handle": "cd-home",
+      "code": "cd",
+      "country": "DR Congo",
+      "kit": "home"
+    },
+    {
+      "id": 10341859688763,
+      "handle": "cd-away",
+      "code": "cd",
+      "country": "DR Congo",
+      "kit": "away"
+    },
+    {
+      "id": 10341859950907,
+      "handle": "eg-home",
+      "code": "eg",
+      "country": "Egypt",
+      "kit": "home"
+    },
+    {
+      "id": 10341860049211,
+      "handle": "eg-away",
+      "code": "eg",
+      "country": "Egypt",
+      "kit": "away"
+    },
+    {
+      "id": 10341860147515,
+      "handle": "gh-home",
+      "code": "gh",
+      "country": "Ghana",
+      "kit": "home"
+    },
+    {
+      "id": 10341860442427,
+      "handle": "gh-away",
+      "code": "gh",
+      "country": "Ghana",
+      "kit": "away"
+    },
+    {
+      "id": 10341860507963,
+      "handle": "ci-home",
+      "code": "ci",
+      "country": "Ivory Coast",
+      "kit": "home"
+    },
+    {
+      "id": 10341860606267,
+      "handle": "ci-away",
+      "code": "ci",
+      "country": "Ivory Coast",
+      "kit": "away"
+    },
+    {
+      "id": 10341860704571,
+      "handle": "ma-home",
+      "code": "ma",
+      "country": "Morocco",
+      "kit": "home"
+    },
+    {
+      "id": 10341860999483,
+      "handle": "ma-away",
+      "code": "ma",
+      "country": "Morocco",
+      "kit": "away"
+    },
+    {
+      "id": 10341861097787,
+      "handle": "sn-home",
+      "code": "sn",
+      "country": "Senegal",
+      "kit": "home"
+    },
+    {
+      "id": 10341861163323,
+      "handle": "sn-away",
+      "code": "sn",
+      "country": "Senegal",
+      "kit": "away"
+    },
+    {
+      "id": 10341861556539,
+      "handle": "za-home",
+      "code": "za",
+      "country": "South Africa",
+      "kit": "home"
+    },
+    {
+      "id": 10341883937083,
+      "handle": "za-away",
+      "code": "za",
+      "country": "South Africa",
+      "kit": "away"
+    },
+    {
+      "id": 10341884002619,
+      "handle": "tn-home",
+      "code": "tn",
+      "country": "Tunisia",
+      "kit": "home"
+    },
+    {
+      "id": 10341884035387,
+      "handle": "tn-away",
+      "code": "tn",
+      "country": "Tunisia",
+      "kit": "away"
+    },
+    {
+      "id": 10341884100923,
+      "handle": "au-home",
+      "code": "au",
+      "country": "Australia",
+      "kit": "home"
+    },
+    {
+      "id": 10341884133691,
+      "handle": "au-away",
+      "code": "au",
+      "country": "Australia",
+      "kit": "away"
+    },
+    {
+      "id": 10341884395835,
+      "handle": "ir-home",
+      "code": "ir",
+      "country": "Iran",
+      "kit": "home"
+    },
+    {
+      "id": 10341884494139,
+      "handle": "ir-away",
+      "code": "ir",
+      "country": "Iran",
+      "kit": "away"
+    },
+    {
+      "id": 10341884559675,
+      "handle": "iq-home",
+      "code": "iq",
+      "country": "Iraq",
+      "kit": "home"
+    },
+    {
+      "id": 10341884592443,
+      "handle": "iq-away",
+      "code": "iq",
+      "country": "Iraq",
+      "kit": "away"
+    },
+    {
+      "id": 10341885018427,
+      "handle": "jp-home",
+      "code": "jp",
+      "country": "Japan",
+      "kit": "home"
+    },
+    {
+      "id": 10341885051195,
+      "handle": "jp-away",
+      "code": "jp",
+      "country": "Japan",
+      "kit": "away"
+    },
+    {
+      "id": 10341885083963,
+      "handle": "jo-home",
+      "code": "jo",
+      "country": "Jordan",
+      "kit": "home"
+    },
+    {
+      "id": 10341885149499,
+      "handle": "jo-away",
+      "code": "jo",
+      "country": "Jordan",
+      "kit": "away"
+    },
+    {
+      "id": 10341885411643,
+      "handle": "kr-home",
+      "code": "kr",
+      "country": "South Korea",
+      "kit": "home"
+    },
+    {
+      "id": 10341885444411,
+      "handle": "kr-away",
+      "code": "kr",
+      "country": "South Korea",
+      "kit": "away"
+    },
+    {
+      "id": 10341885706555,
+      "handle": "qa-home",
+      "code": "qa",
+      "country": "Qatar",
+      "kit": "home"
+    },
+    {
+      "id": 10341885772091,
+      "handle": "qa-away",
+      "code": "qa",
+      "country": "Qatar",
+      "kit": "away"
+    },
+    {
+      "id": 10341885804859,
+      "handle": "sa-home",
+      "code": "sa",
+      "country": "Saudi Arabia",
+      "kit": "home"
+    },
+    {
+      "id": 10341886132539,
+      "handle": "sa-away",
+      "code": "sa",
+      "country": "Saudi Arabia",
+      "kit": "away"
+    },
+    {
+      "id": 10341886198075,
+      "handle": "uz-home",
+      "code": "uz",
+      "country": "Uzbekistan",
+      "kit": "home"
+    },
+    {
+      "id": 10341886230843,
+      "handle": "uz-away",
+      "code": "uz",
+      "country": "Uzbekistan",
+      "kit": "away"
+    },
+    {
+      "id": 10341886263611,
+      "handle": "nz-home",
+      "code": "nz",
+      "country": "New Zealand",
+      "kit": "home"
+    },
+    {
+      "id": 10341886558523,
+      "handle": "nz-away",
+      "code": "nz",
+      "country": "New Zealand",
+      "kit": "away"
+    }
+  ],
+  "failed": [],
+  "completed_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97
+  ]
+}

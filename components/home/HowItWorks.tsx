@@ -27,7 +27,7 @@ export default function HowItWorks() {
     {
       num: "03",
       title: "Rep Your Ride",
-      desc: "Ships to your door in 5–7 business days.",
+      desc: "Made to order. Ships worldwide in 15–25 business days.",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <rect x="1" y="3" width="15" height="13" />

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#87CEEB"/>
+<circle cx="589" cy="868" r="218" fill="#93d2ed" opacity="0.20"/>
+<ellipse cx="554" cy="434" rx="115" ry="190" fill="#72afc7" opacity="0.35" transform="rotate(169 554 434)"/>
+<ellipse cx="255" cy="665" rx="255" ry="172" fill="#000080" opacity="0.12" transform="rotate(80 255 665)"/>
+<circle cx="1051" cy="314" r="287" fill="#000080" opacity="0.20"/>
+<line x1="822" y1="635" x2="787" y2="654" stroke="#FFFFFF" stroke-width="1.9" opacity="0.22"/>
+<line x1="39" y1="864" x2="206" y2="752" stroke="#FFFFFF" stroke-width="1.2" opacity="0.28"/>
+<line x1="669" y1="540" x2="397" y2="244" stroke="#FFFFFF" stroke-width="3.2" opacity="0.32"/>
+<defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="0.25"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="900" fill="url(#vignette)"/>
+<text x="30" y="45" text-anchor="start"
+        font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold"
+        letter-spacing="2" fill="#FFFFFF" opacity="0.25">SWITZERLAND</text>
+<text x="1180" y="880" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold"
+        letter-spacing="3" fill="#FFFFFF" opacity="0.35">HOOD&apos;D</text>
+</svg>

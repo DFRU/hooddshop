@@ -52,9 +52,6 @@ export default function Footer() {
             <h4 className="text-label-md text-white mb-3">Info</h4>
             <div className="space-y-2">
               {[
-                { label: "Shipping", href: "#" },
-                { label: "Returns", href: "#" },
-                { label: "FAQ", href: "#" },
                 { label: "Contact", href: "mailto:contact@hooddshop.com" },
               ].map((l) => (
                 <a key={l.label} href={l.href} className="block text-sm py-1 touch-active transition-colors" style={{ color: "#666" }}>
@@ -75,11 +72,7 @@ export default function Footer() {
         <div className="mt-5 pt-5 flex flex-col sm:flex-row items-center justify-between gap-3" style={{ borderTop: "1px solid #111" }}>
           <span className="text-xs" style={{ color: "#444" }}>&copy; 2026 Hood&apos;d. All rights reserved.</span>
           <div className="flex gap-5">
-            {["Instagram", "TikTok", "X"].map((s) => (
-              <a key={s} href="#" className="text-xs touch-active py-1 transition-colors" style={{ color: "#555" }}>
-                {s}
-              </a>
-            ))}
+            <span className="text-xs" style={{ color: "#333" }}>@hooddshop</span>
           </div>
         </div>
       </div>

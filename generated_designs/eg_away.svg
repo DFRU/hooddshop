@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#F5DEB3"/>
+<polygon points="344.3,414.1 442.0,367.3 433.7,475.3" fill="#FFD700" opacity="0.42"/>
+<polygon points="362.3,119.9 513.4,169.1 395.2,275.4" fill="#000000" opacity="0.24"/>
+<polygon points="160.5,541.7 176.4,450.5 247.4,509.8" fill="#000000" opacity="0.16"/>
+<polygon points="990.5,806.4 1105.1,721.1 1121.6,863.0" fill="#f6e2be" opacity="0.37"/>
+<polygon points="1020.7,734.5 999.5,897.6 868.9,797.6" fill="#f6e2be" opacity="0.34"/>
+<polygon points="376.1,262.6 321.3,314.4 303.8,241.0" fill="#000000" opacity="0.21"/>
+<polygon points="733.3,1.8 860.0,43.1 760.8,132.2" fill="#000000" opacity="0.42"/>
+<polygon points="536.5,111.5 473.3,70.1 540.8,36.1" fill="#FFD700" opacity="0.34"/>
+<polygon points="767.4,286.3 871.5,235.0 863.9,350.8" fill="#FFD700" opacity="0.23"/>
+<polygon points="326.4,377.7 237.0,412.5 251.6,317.7" fill="#FFD700" opacity="0.34"/>
+<polygon points="502.9,831.1 374.8,764.7 496.4,686.9" fill="#000000" opacity="0.33"/>
+<polygon points="148.0,588.4 189.3,449.6 288.9,554.8" fill="#FFD700" opacity="0.27"/>
+<polygon points="1097.3,595.8 1237.4,577.1 1183.6,707.8" fill="#000000" opacity="0.38"/>
+<polygon points="949.6,143.6 933.0,223.5 872.1,169.1" fill="#f6e2be" opacity="0.25"/>
+<polygon points="734.5,445.0 657.2,540.5 613.1,425.7" fill="#000000" opacity="0.27"/>
+<polygon points="1210.7,303.6 1177.8,403.5 1107.7,325.1" fill="#f6e2be" opacity="0.20"/>
+<polygon points="284.2,49.3 362.7,41.8 330.0,113.5" fill="#FFD700" opacity="0.25"/>
+<polygon points="1194.8,243.3 1245.4,359.5 1119.4,345.3" fill="#f6e2be" opacity="0.16"/>
+<polygon points="570.3,600.8 500.0,561.9 568.9,520.5" fill="#f6e2be" opacity="0.35"/>
+<polygon points="912.6,249.3 848.5,149.8 966.7,144.1" fill="#000000" opacity="0.35"/>
+<polygon points="457.9,782.5 520.7,777.2 493.9,834.2" fill="#FFD700" opacity="0.35"/>
+<polygon points="226.3,316.3 214.4,209.4 312.9,252.5" fill="#f6e2be" opacity="0.11"/>
+<polygon points="1110.0,642.8 1120.9,484.3 1252.8,573.0" fill="#FFD700" opacity="0.38"/>
+<polygon points="1138.5,1.1 1242.5,9.9 1182.9,95.5" fill="#f6e2be" opacity="0.44"/>
+<polygon points="961.5,768.9 1099.5,799.9 1003.6,903.9" fill="#f6e2be" opacity="0.37"/>
+<polygon points="101.1,356.0 192.8,420.9 90.8,467.9" fill="#f6e2be" opacity="0.34"/>
+<polygon points="609.0,414.4 483.3,414.2 546.3,305.4" fill="#FFD700" opacity="0.42"/>
+<polygon points="392.4,759.0 538.6,670.3 542.3,841.3" fill="#000000" opacity="0.10"/>
+<polygon points="372.3,240.7 339.9,380.4 235.0,282.5" fill="#000000" opacity="0.29"/>
+<polygon points="649.3,661.0 624.4,520.8 758.3,569.4" fill="#FFD700" opacity="0.21"/>
+<defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="0.25"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="900" fill="url(#vignette)"/>
+<text x="30" y="45" text-anchor="start"
+        font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold"
+        letter-spacing="2" fill="#FFD700" opacity="0.25">EGYPT</text>
+<text x="1180" y="880" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold"
+        letter-spacing="3" fill="#FFD700" opacity="0.35">HOOD&apos;D</text>
+</svg>

@@ -1,0 +1,688 @@
+[
+  {
+    "code": "us",
+    "country": "United States",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\us_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "us",
+    "country": "United States",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\us_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "ca",
+    "country": "Canada",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\ca_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "ca",
+    "country": "Canada",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\ca_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "mx",
+    "country": "Mexico",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\mx_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "mx",
+    "country": "Mexico",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\mx_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "pa",
+    "country": "Panama",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\pa_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "pa",
+    "country": "Panama",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\pa_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "cw",
+    "country": "Cura\u00e7ao",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\cw_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "cw",
+    "country": "Cura\u00e7ao",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\cw_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "ht",
+    "country": "Haiti",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\ht_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "ht",
+    "country": "Haiti",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\ht_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "jm",
+    "country": "Jamaica",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\jm_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "jm",
+    "country": "Jamaica",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\jm_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "ar",
+    "country": "Argentina",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\ar_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "ar",
+    "country": "Argentina",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\ar_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "br",
+    "country": "Brazil",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\br_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "br",
+    "country": "Brazil",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\br_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "co",
+    "country": "Colombia",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\co_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "co",
+    "country": "Colombia",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\co_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "ec",
+    "country": "Ecuador",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\ec_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "ec",
+    "country": "Ecuador",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\ec_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "py",
+    "country": "Paraguay",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\py_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "py",
+    "country": "Paraguay",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\py_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "uy",
+    "country": "Uruguay",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\uy_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "uy",
+    "country": "Uruguay",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\uy_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "gb-eng",
+    "country": "England",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\gb-eng_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "gb-eng",
+    "country": "England",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\gb-eng_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "fr",
+    "country": "France",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\fr_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "fr",
+    "country": "France",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\fr_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "de",
+    "country": "Germany",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\de_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "de",
+    "country": "Germany",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\de_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "es",
+    "country": "Spain",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\es_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "es",
+    "country": "Spain",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\es_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "pt",
+    "country": "Portugal",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\pt_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "pt",
+    "country": "Portugal",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\pt_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "nl",
+    "country": "Netherlands",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\nl_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "nl",
+    "country": "Netherlands",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\nl_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "be",
+    "country": "Belgium",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\be_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "be",
+    "country": "Belgium",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\be_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "hr",
+    "country": "Croatia",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\hr_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "hr",
+    "country": "Croatia",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\hr_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "ch",
+    "country": "Switzerland",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\ch_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "ch",
+    "country": "Switzerland",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\ch_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "at",
+    "country": "Austria",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\at_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "at",
+    "country": "Austria",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\at_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "no",
+    "country": "Norway",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\no_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "no",
+    "country": "Norway",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\no_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "gb-sct",
+    "country": "Scotland",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\gb-sct_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "gb-sct",
+    "country": "Scotland",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\gb-sct_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "se",
+    "country": "Sweden",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\se_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "se",
+    "country": "Sweden",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\se_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "tr",
+    "country": "Turkey",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\tr_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "tr",
+    "country": "Turkey",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\tr_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "ba",
+    "country": "Bosnia and Herzegovina",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\ba_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "ba",
+    "country": "Bosnia and Herzegovina",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\ba_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "cz",
+    "country": "Czechia",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\cz_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "cz",
+    "country": "Czechia",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\cz_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "dz",
+    "country": "Algeria",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\dz_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "dz",
+    "country": "Algeria",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\dz_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "cv",
+    "country": "Cape Verde",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\cv_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "cv",
+    "country": "Cape Verde",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\cv_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "cd",
+    "country": "DR Congo",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\cd_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "cd",
+    "country": "DR Congo",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\cd_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "eg",
+    "country": "Egypt",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\eg_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "eg",
+    "country": "Egypt",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\eg_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "gh",
+    "country": "Ghana",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\gh_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "gh",
+    "country": "Ghana",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\gh_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "ci",
+    "country": "Ivory Coast",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\ci_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "ci",
+    "country": "Ivory Coast",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\ci_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "ma",
+    "country": "Morocco",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\ma_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "ma",
+    "country": "Morocco",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\ma_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "sn",
+    "country": "Senegal",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\sn_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "sn",
+    "country": "Senegal",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\sn_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "za",
+    "country": "South Africa",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\za_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "za",
+    "country": "South Africa",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\za_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "tn",
+    "country": "Tunisia",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\tn_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "tn",
+    "country": "Tunisia",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\tn_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "au",
+    "country": "Australia",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\au_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "au",
+    "country": "Australia",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\au_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "ir",
+    "country": "Iran",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\ir_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "ir",
+    "country": "Iran",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\ir_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "iq",
+    "country": "Iraq",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\iq_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "iq",
+    "country": "Iraq",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\iq_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "jp",
+    "country": "Japan",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\jp_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "jp",
+    "country": "Japan",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\jp_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "jo",
+    "country": "Jordan",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\jo_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "jo",
+    "country": "Jordan",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\jo_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "kr",
+    "country": "South Korea",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\kr_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "kr",
+    "country": "South Korea",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\kr_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "qa",
+    "country": "Qatar",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\qa_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "qa",
+    "country": "Qatar",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\qa_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "sa",
+    "country": "Saudi Arabia",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\sa_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "sa",
+    "country": "Saudi Arabia",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\sa_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "uz",
+    "country": "Uzbekistan",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\uz_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "uz",
+    "country": "Uzbekistan",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\uz_away.png",
+    "status": "ok"
+  },
+  {
+    "code": "nz",
+    "country": "New Zealand",
+    "kit": "home",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\nz_home.png",
+    "status": "ok"
+  },
+  {
+    "code": "nz",
+    "country": "New Zealand",
+    "kit": "away",
+    "png": "C:\\Users\\Maximus Node 1\\aurelian-bot\\hooddshop\\generated_designs\\nz_away.png",
+    "status": "ok"
+  }
+]

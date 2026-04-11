@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#FFD700"/>
+<circle cx="19" cy="628" r="253" fill="#d8b600" opacity="0.18"/>
+<circle cx="871" cy="534" r="125" fill="#000000" opacity="0.19"/>
+<ellipse cx="693" cy="568" rx="352" ry="74" fill="#228B22" opacity="0.21" transform="rotate(155 693 568)"/>
+<circle cx="1125" cy="625" r="103" fill="#ffdb19" opacity="0.26"/>
+<ellipse cx="923" cy="331" rx="277" ry="106" fill="#228B22" opacity="0.24" transform="rotate(169 923 331)"/>
+<line x1="1179" y1="646" x2="275" y2="811" stroke="#000000" stroke-width="3.3" opacity="0.37"/>
+<line x1="356" y1="763" x2="338" y2="817" stroke="#000000" stroke-width="3.0" opacity="0.12"/>
+<line x1="1002" y1="432" x2="1039" y2="69" stroke="#000000" stroke-width="3.8" opacity="0.40"/>
+<defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="0.25"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="900" fill="url(#vignette)"/>
+<text x="30" y="45" text-anchor="start"
+        font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold"
+        letter-spacing="2" fill="#000000" opacity="0.25">SOUTH AFRICA</text>
+<text x="1180" y="880" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold"
+        letter-spacing="3" fill="#000000" opacity="0.35">HOOD&apos;D</text>
+</svg>

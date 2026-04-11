@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#C60B1E"/>
+<rect x="1197.5" y="0" width="24.0" height="900" fill="#1F1F1F" opacity="0.30"/>
+<rect x="0" y="425.7" width="1200" height="28.0" fill="#FFC400" opacity="0.32"/>
+<rect x="0" y="459.5" width="1200" height="50.7" fill="#FFC400" opacity="0.34"/>
+<rect x="1039.8" y="0" width="35.9" height="900" fill="#1F1F1F" opacity="0.53"/>
+<rect x="506.6" y="0" width="53.2" height="900" fill="#1F1F1F" opacity="0.42"/>
+<rect x="0" y="397.6" width="1200" height="30.8" fill="#FFC400" opacity="0.23"/>
+<rect x="0" y="765" width="1200" height="4" fill="#FFC400" opacity="0.6"/>
+<defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="0.25"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="900" fill="url(#vignette)"/>
+<text x="30" y="45" text-anchor="start"
+        font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold"
+        letter-spacing="2" fill="#FFC400" opacity="0.25">SPAIN</text>
+<text x="1180" y="880" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold"
+        letter-spacing="3" fill="#FFC400" opacity="0.35">HOOD&apos;D</text>
+</svg>

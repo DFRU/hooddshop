@@ -13,7 +13,7 @@ export default function Ticker() {
   const messages = [
     "WORLD CUP 2026",
     "YOUR RIDE. YOUR FLAG.",
-    "112+ DESIGNS",
+    "48 NATIONS",
     "FREE SHIPPING $99+",
     "STRETCH-FIT",
     ...(usVisitor ? ["MADE IN THE USA"] : ["MADE TO ORDER"]),

@@ -3,7 +3,9 @@ import Image from "next/image";
 import { getProducts } from "@/lib/shopify";
 
 export default async function TrendingProducts() {
-  const { products } = await getProducts({ first: 8, sortKey: "BEST_SELLING" });
+  // Fetch popular nations by title — no sales data yet so BEST_SELLING returns arbitrary order
+  const popularQuery = "title:Brazil OR title:Argentina OR title:France OR title:England OR title:Spain OR title:Germany OR title:Mexico OR title:USA";
+  const { products } = await getProducts({ first: 8, sortKey: "TITLE", query: popularQuery });
 
   // If no Shopify products available, don't render the section
   if (products.length === 0) return null;

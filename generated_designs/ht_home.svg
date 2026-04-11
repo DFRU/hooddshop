@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#0052CC"/>
+<rect x="935" y="517" width="315" height="226" fill="#0045ad" opacity="0.15" rx="19" transform="rotate(-1 1092 630)"/>
+<ellipse cx="96" cy="514" rx="106" ry="52" fill="#FFFFFF" opacity="0.23" transform="rotate(157 96 514)"/>
+<circle cx="608" cy="101" r="89" fill="#FFFFFF" opacity="0.25"/>
+<rect x="522" y="515" width="267" height="165" fill="#FFFFFF" opacity="0.09" rx="26" transform="rotate(-1 656 597)"/>
+<ellipse cx="1054" cy="578" rx="277" ry="147" fill="#1963d1" opacity="0.18" transform="rotate(52 1054 578)"/>
+<ellipse cx="543" cy="307" rx="300" ry="185" fill="#0045ad" opacity="0.13" transform="rotate(9 543 307)"/>
+<line x1="207" y1="464" x2="986" y2="636" stroke="#DC143C" stroke-width="1.3" opacity="0.38"/>
+<line x1="580" y1="45" x2="51" y2="877" stroke="#DC143C" stroke-width="3.4" opacity="0.33"/>
+<defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="0.25"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="900" fill="url(#vignette)"/>
+<text x="30" y="45" text-anchor="start"
+        font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold"
+        letter-spacing="2" fill="#DC143C" opacity="0.25">HAITI</text>
+<text x="1180" y="880" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold"
+        letter-spacing="3" fill="#DC143C" opacity="0.35">HOOD&apos;D</text>
+</svg>

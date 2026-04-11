@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#FFD700"/>
+<circle cx="770" cy="911" r="160" fill="#000000" opacity="0.12"/>
+<circle cx="609" cy="454" r="279" fill="#ffdb19" opacity="0.13"/>
+<rect x="628" y="2" width="243" height="176" fill="#FFFFFF" opacity="0.30" rx="27" transform="rotate(13 750 90)"/>
+<line x1="506" y1="678" x2="736" y2="67" stroke="#000000" stroke-width="4.0" opacity="0.11"/>
+<line x1="696" y1="253" x2="612" y2="111" stroke="#000000" stroke-width="2.7" opacity="0.17"/>
+<line x1="123" y1="394" x2="243" y2="717" stroke="#000000" stroke-width="1.4" opacity="0.30"/>
+<line x1="493" y1="161" x2="1085" y2="453" stroke="#000000" stroke-width="2.1" opacity="0.38"/>
+<defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="0.25"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="900" fill="url(#vignette)"/>
+<text x="30" y="45" text-anchor="start"
+        font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold"
+        letter-spacing="2" fill="#000000" opacity="0.25">GHANA</text>
+<text x="1180" y="880" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold"
+        letter-spacing="3" fill="#000000" opacity="0.35">HOOD&apos;D</text>
+</svg>

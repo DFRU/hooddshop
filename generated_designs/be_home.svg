@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#C60B1E"/>
+<circle cx="817" cy="180" r="297" fill="#1F1F1F" opacity="0.20"/>
+<circle cx="-60" cy="739" r="163" fill="#FFC400" opacity="0.25"/>
+<rect x="342" y="12" width="246" height="239" fill="#1F1F1F" opacity="0.10" rx="0" transform="rotate(-12 465 131)"/>
+<rect x="569" y="735" width="117" height="295" fill="#a80919" opacity="0.26" rx="7" transform="rotate(-27 628 882)"/>
+<ellipse cx="259" cy="837" rx="191" ry="141" fill="#cb2334" opacity="0.26" transform="rotate(66 259 837)"/>
+<line x1="779" y1="471" x2="627" y2="694" stroke="#FFC400" stroke-width="2.4" opacity="0.12"/>
+<line x1="199" y1="752" x2="113" y2="97" stroke="#FFC400" stroke-width="2.2" opacity="0.37"/>
+<line x1="123" y1="30" x2="759" y2="210" stroke="#FFC400" stroke-width="1.2" opacity="0.18"/>
+<line x1="288" y1="328" x2="413" y2="27" stroke="#FFC400" stroke-width="1.9" opacity="0.25"/>
+<defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="0.25"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="900" fill="url(#vignette)"/>
+<text x="30" y="45" text-anchor="start"
+        font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold"
+        letter-spacing="2" fill="#FFC400" opacity="0.25">BELGIUM</text>
+<text x="1180" y="880" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold"
+        letter-spacing="3" fill="#FFC400" opacity="0.35">HOOD&apos;D</text>
+</svg>

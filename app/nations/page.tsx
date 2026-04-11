@@ -25,7 +25,7 @@ export default function NationsPage() {
       >
         <span className="text-label" style={{ color: "var(--color-accent)" }}>World Cup 2026</span>
         <h1 className="text-display-lg text-white mt-1">All Nations</h1>
-        <p className="text-body-sm mt-2" style={{ color: "#888" }}>48 nations · 6 designs each</p>
+        <p className="text-body-sm mt-2" style={{ color: "#888" }}>48 nations · Jersey Line</p>
       </div>
 
       {/* Sticky filters */}

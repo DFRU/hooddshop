@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#F0F8FF"/>
+<ellipse cx="980" cy="48" rx="182" ry="80" fill="#f1f8ff" opacity="0.27" transform="rotate(145 980 48)"/>
+<rect x="161" y="398" width="139" height="270" fill="#ccd2d8" opacity="0.22" rx="16" transform="rotate(13 230 533)"/>
+<circle cx="974" cy="31" r="173" fill="#f1f8ff" opacity="0.23"/>
+<rect x="819" y="201" width="229" height="213" fill="#ccd2d8" opacity="0.18" rx="5" transform="rotate(-3 933 308)"/>
+<circle cx="1200" cy="-6" r="85" fill="#ccd2d8" opacity="0.32"/>
+<ellipse cx="131" cy="11" rx="141" ry="167" fill="#f1f8ff" opacity="0.27" transform="rotate(92 131 11)"/>
+<line x1="720" y1="839" x2="452" y2="245" stroke="#FFD700" stroke-width="1.6" opacity="0.40"/>
+<line x1="757" y1="680" x2="356" y2="515" stroke="#FFD700" stroke-width="4.4" opacity="0.32"/>
+<defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="0.25"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="900" fill="url(#vignette)"/>
+<text x="30" y="45" text-anchor="start"
+        font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold"
+        letter-spacing="2" fill="#FFD700" opacity="0.25">SAUDI ARABIA</text>
+<text x="1180" y="880" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold"
+        letter-spacing="3" fill="#FFD700" opacity="0.35">HOOD&apos;D</text>
+</svg>

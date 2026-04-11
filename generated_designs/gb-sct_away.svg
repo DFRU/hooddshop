@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#DC143C"/>
+<rect x="-1800.0" y="-100" width="34.8" height="1100" fill="#0D2B5E" opacity="0.47" transform="rotate(19.1 600.0 450.0)"/>
+<rect x="-1440.0" y="-100" width="41.1" height="1100" fill="#0D2B5E" opacity="0.44" transform="rotate(19.1 600.0 450.0)"/>
+<rect x="-1080.0" y="-100" width="30.2" height="1100" fill="#0D2B5E" opacity="0.43" transform="rotate(19.1 600.0 450.0)"/>
+<rect x="-720.0" y="-100" width="32.3" height="1100" fill="#0D2B5E" opacity="0.39" transform="rotate(19.1 600.0 450.0)"/>
+<rect x="-360.0" y="-100" width="41.5" height="1100" fill="#0D2B5E" opacity="0.57" transform="rotate(19.1 600.0 450.0)"/>
+<rect x="0.0" y="-100" width="36.5" height="1100" fill="#0D2B5E" opacity="0.50" transform="rotate(19.1 600.0 450.0)"/>
+<rect x="360.0" y="-100" width="58.9" height="1100" fill="#0D2B5E" opacity="0.38" transform="rotate(19.1 600.0 450.0)"/>
+<rect x="720.0" y="-100" width="31.8" height="1100" fill="#0D2B5E" opacity="0.42" transform="rotate(19.1 600.0 450.0)"/>
+<rect x="1080.0" y="-100" width="37.1" height="1100" fill="#0D2B5E" opacity="0.35" transform="rotate(19.1 600.0 450.0)"/>
+<rect x="1440.0" y="-100" width="26.0" height="1100" fill="#0D2B5E" opacity="0.34" transform="rotate(19.1 600.0 450.0)"/>
+<rect x="1800.0" y="-100" width="58.0" height="1100" fill="#0D2B5E" opacity="0.50" transform="rotate(19.1 600.0 450.0)"/>
+<rect x="2160.0" y="-100" width="38.0" height="1100" fill="#0D2B5E" opacity="0.60" transform="rotate(19.1 600.0 450.0)"/>
+<rect x="2520.0" y="-100" width="56.3" height="1100" fill="#0D2B5E" opacity="0.77" transform="rotate(19.1 600.0 450.0)"/>
+<rect x="2880.0" y="-100" width="29.9" height="1100" fill="#0D2B5E" opacity="0.48" transform="rotate(19.1 600.0 450.0)"/>
+<rect x="3240.0" y="-100" width="25.4" height="1100" fill="#0D2B5E" opacity="0.61" transform="rotate(19.1 600.0 450.0)"/>
+<rect x="0" y="765" width="1200" height="4" fill="#FFFFFF" opacity="0.6"/>
+<defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="0.25"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="900" fill="url(#vignette)"/>
+<text x="30" y="45" text-anchor="start"
+        font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold"
+        letter-spacing="2" fill="#FFFFFF" opacity="0.25">SCOTLAND</text>
+<text x="1180" y="880" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold"
+        letter-spacing="3" fill="#FFFFFF" opacity="0.35">HOOD&apos;D</text>
+</svg>

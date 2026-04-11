@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#A21D35"/>
+<circle cx="209" cy="-5" r="216" fill="#FFFFFF" opacity="0.19"/>
+<circle cx="1286" cy="542" r="251" fill="#FFFFFF" opacity="0.16"/>
+<circle cx="954" cy="554" r="172" fill="#000000" opacity="0.19"/>
+<line x1="75" y1="488" x2="819" y2="326" stroke="#FFFFFF" stroke-width="2.8" opacity="0.20"/>
+<line x1="621" y1="714" x2="649" y2="19" stroke="#FFFFFF" stroke-width="2.0" opacity="0.14"/>
+<defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="0.25"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="900" fill="url(#vignette)"/>
+<text x="30" y="45" text-anchor="start"
+        font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold"
+        letter-spacing="2" fill="#FFFFFF" opacity="0.25">AUSTRIA</text>
+<text x="1180" y="880" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold"
+        letter-spacing="3" fill="#FFFFFF" opacity="0.35">HOOD&apos;D</text>
+</svg>

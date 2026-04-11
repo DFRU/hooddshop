@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#FFFFFF"/>
+<rect x="0" y="99.3" width="1200" height="76.9" fill="#87CEEB" opacity="0.56"/>
+<rect x="0" y="299.6" width="1200" height="79.3" fill="#87CEEB" opacity="0.63"/>
+<rect x="0" y="502.8" width="1200" height="98.1" fill="#87CEEB" opacity="0.45"/>
+<rect x="0" y="699.3" width="1200" height="80.7" fill="#87CEEB" opacity="0.85"/>
+<rect x="0" y="765" width="1200" height="4" fill="#FFD700" opacity="0.6"/>
+<defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="0.25"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="900" fill="url(#vignette)"/>
+<text x="30" y="45" text-anchor="start"
+        font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold"
+        letter-spacing="2" fill="#FFD700" opacity="0.25">ARGENTINA</text>
+<text x="1180" y="880" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold"
+        letter-spacing="3" fill="#FFD700" opacity="0.35">HOOD&apos;D</text>
+</svg>

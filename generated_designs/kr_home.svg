@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#C60C30"/>
+<rect x="0" y="75.4" width="1200" height="63.6" fill="#8B0000" opacity="0.64"/>
+<rect x="0" y="226.7" width="1200" height="39.9" fill="#8B0000" opacity="0.51"/>
+<rect x="0" y="377.5" width="1200" height="65.1" fill="#8B0000" opacity="0.86"/>
+<rect x="0" y="527.2" width="1200" height="52.9" fill="#8B0000" opacity="0.71"/>
+<rect x="0" y="675.5" width="1200" height="70.1" fill="#8B0000" opacity="0.82"/>
+<rect x="0" y="828.0" width="1200" height="74.0" fill="#8B0000" opacity="0.74"/>
+<rect x="0" y="765" width="1200" height="4" fill="#000000" opacity="0.6"/>
+<defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="0.25"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="900" fill="url(#vignette)"/>
+<text x="30" y="45" text-anchor="start"
+        font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold"
+        letter-spacing="2" fill="#000000" opacity="0.25">SOUTH KOREA</text>
+<text x="1180" y="880" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold"
+        letter-spacing="3" fill="#000000" opacity="0.35">HOOD&apos;D</text>
+</svg>

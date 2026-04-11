@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#C60B1E"/>
+<rect x="176.8" y="5.4" width="160.6" height="139.2" rx="1.7" fill="#FFFFFF" opacity="0.68"/>
+<rect x="519.5" y="5.3" width="160.9" height="139.5" rx="0.7" fill="#FFFFFF" opacity="0.83"/>
+<rect x="860.2" y="3.1" width="165.3" height="143.9" rx="2.4" fill="#FFFFFF" opacity="0.62"/>
+<rect x="1.1" y="151.1" width="169.3" height="147.9" rx="1.5" fill="#FFFFFF" opacity="0.69"/>
+<rect x="345.8" y="152.9" width="165.6" height="144.2" rx="1.4" fill="#FFFFFF" opacity="0.69"/>
+<rect x="688.1" y="152.4" width="166.7" height="145.3" rx="3.5" fill="#FFFFFF" opacity="0.64"/>
+<rect x="1029.4" y="150.9" width="169.7" height="148.3" rx="2.1" fill="#FFFFFF" opacity="0.69"/>
+<rect x="172.7" y="301.3" width="168.8" height="147.4" rx="2.4" fill="#FFFFFF" opacity="0.82"/>
+<rect x="518.1" y="303.8" width="163.8" height="142.4" rx="2.5" fill="#FFFFFF" opacity="0.77"/>
+<rect x="857.2" y="300.1" width="171.3" height="149.9" rx="1.8" fill="#FFFFFF" opacity="0.78"/>
+<rect x="2.7" y="452.7" width="166.0" height="144.5" rx="2.2" fill="#FFFFFF" opacity="0.82"/>
+<rect x="347.3" y="454.4" width="162.6" height="141.2" rx="0.3" fill="#FFFFFF" opacity="0.80"/>
+<rect x="690.7" y="455.0" width="161.5" height="140.1" rx="1.8" fill="#FFFFFF" opacity="0.60"/>
+<rect x="1030.8" y="452.2" width="167.0" height="145.6" rx="2.7" fill="#FFFFFF" opacity="0.60"/>
+<rect x="177.4" y="606.0" width="159.5" height="138.1" rx="0.4" fill="#FFFFFF" opacity="0.81"/>
+<rect x="515.2" y="600.9" width="169.7" height="148.2" rx="3.0" fill="#FFFFFF" opacity="0.54"/>
+<rect x="860.6" y="603.5" width="164.5" height="143.1" rx="2.2" fill="#FFFFFF" opacity="0.83"/>
+<rect x="4.9" y="754.9" width="161.6" height="140.2" rx="3.7" fill="#FFFFFF" opacity="0.83"/>
+<rect x="344.6" y="751.8" width="167.9" height="146.5" rx="3.0" fill="#FFFFFF" opacity="0.74"/>
+<rect x="687.5" y="751.8" width="167.8" height="146.4" rx="1.7" fill="#FFFFFF" opacity="0.66"/>
+<rect x="1034.5" y="756.0" width="159.5" height="138.1" rx="1.7" fill="#FFFFFF" opacity="0.86"/>
+<rect x="0" y="0" width="1200" height="900" fill="none" stroke="#0D2B5E" stroke-width="6" rx="8"/>
+<defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="0.25"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="900" fill="url(#vignette)"/>
+<text x="30" y="45" text-anchor="start"
+        font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold"
+        letter-spacing="2" fill="#0D2B5E" opacity="0.25">CROATIA</text>
+<text x="1180" y="880" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold"
+        letter-spacing="3" fill="#0D2B5E" opacity="0.35">HOOD&apos;D</text>
+</svg>

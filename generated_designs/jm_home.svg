@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#FFD700"/>
+<rect x="-750.0" y="-100" width="43.8" height="1100" fill="#DC143C" opacity="0.36" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="-600.0" y="-100" width="28.6" height="1100" fill="#DC143C" opacity="0.50" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="-450.0" y="-100" width="47.7" height="1100" fill="#DC143C" opacity="0.66" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="-300.0" y="-100" width="22.1" height="1100" fill="#DC143C" opacity="0.68" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="-150.0" y="-100" width="34.1" height="1100" fill="#DC143C" opacity="0.52" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="0.0" y="-100" width="22.1" height="1100" fill="#DC143C" opacity="0.36" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="150.0" y="-100" width="29.5" height="1100" fill="#DC143C" opacity="0.66" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="300.0" y="-100" width="58.4" height="1100" fill="#DC143C" opacity="0.59" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="450.0" y="-100" width="29.5" height="1100" fill="#DC143C" opacity="0.33" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="600.0" y="-100" width="35.2" height="1100" fill="#DC143C" opacity="0.78" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="750.0" y="-100" width="32.6" height="1100" fill="#DC143C" opacity="0.37" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="900.0" y="-100" width="55.3" height="1100" fill="#DC143C" opacity="0.33" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="1050.0" y="-100" width="23.4" height="1100" fill="#DC143C" opacity="0.40" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="1200.0" y="-100" width="56.3" height="1100" fill="#DC143C" opacity="0.40" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="1350.0" y="-100" width="50.7" height="1100" fill="#DC143C" opacity="0.35" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="1500.0" y="-100" width="39.5" height="1100" fill="#DC143C" opacity="0.58" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="1650.0" y="-100" width="27.6" height="1100" fill="#DC143C" opacity="0.33" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="1800.0" y="-100" width="36.1" height="1100" fill="#DC143C" opacity="0.73" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="1950.0" y="-100" width="28.2" height="1100" fill="#DC143C" opacity="0.53" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="2100.0" y="-100" width="43.2" height="1100" fill="#DC143C" opacity="0.45" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="2250.0" y="-100" width="49.7" height="1100" fill="#DC143C" opacity="0.66" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="2400.0" y="-100" width="50.8" height="1100" fill="#DC143C" opacity="0.47" transform="rotate(41.9 600.0 450.0)"/>
+<rect x="0" y="765" width="1200" height="4" fill="#000000" opacity="0.6"/>
+<defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="0.25"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="900" fill="url(#vignette)"/>
+<text x="30" y="45" text-anchor="start"
+        font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold"
+        letter-spacing="2" fill="#000000" opacity="0.25">JAMAICA</text>
+<text x="1180" y="880" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold"
+        letter-spacing="3" fill="#000000" opacity="0.35">HOOD&apos;D</text>
+</svg>

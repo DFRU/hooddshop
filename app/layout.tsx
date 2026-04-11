@@ -29,7 +29,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: { default: "Hood'd | Car Hood Covers — Your Ride. Your Flag.", template: "%s | Hood'd" },
   description:
-    "Premium stretch-fit car hood covers for World Cup 2026. 48 nations. Multiple design lines. $44.99.",
+    "Premium stretch-fit car hood covers for World Cup 2026. 48 nations. Multiple design lines. $49.99.",
   metadataBase: new URL("https://hooddshop.com"),
   openGraph: {
     type: "website",

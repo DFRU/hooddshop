@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#801C2C"/>
+<rect x="68.9" y="0" width="44.6" height="900" fill="#FFFFFF" opacity="0.41"/>
+<rect x="477.9" y="0" width="77.1" height="900" fill="#FFFFFF" opacity="0.65"/>
+<rect x="723.2" y="0" width="29.0" height="900" fill="#FFFFFF" opacity="0.41"/>
+<rect x="0" y="579.9" width="1200" height="15.2" fill="#FFD700" opacity="0.54"/>
+<rect x="850.2" y="0" width="51.5" height="900" fill="#FFFFFF" opacity="0.22"/>
+<rect x="0" y="765" width="1200" height="4" fill="#FFD700" opacity="0.6"/>
+<defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="0.25"/>
+        </radialGradient>
+    </defs>
+    <rect width="1200" height="900" fill="url(#vignette)"/>
+<text x="30" y="45" text-anchor="start"
+        font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold"
+        letter-spacing="2" fill="#FFD700" opacity="0.25">QATAR</text>
+<text x="1180" y="880" text-anchor="end"
+        font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold"
+        letter-spacing="3" fill="#FFD700" opacity="0.35">HOOD&apos;D</text>
+</svg>
