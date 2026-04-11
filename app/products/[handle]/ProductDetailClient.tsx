@@ -3,7 +3,6 @@
 import { useCallback, useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
-import CartDrawer from "@/components/layout/CartDrawer";
 import FulfillmentSelector from "@/components/product/FulfillmentSelector";
 import type { FulfillmentOption } from "@/lib/suppliers/types";
 import type { ShopifyProduct } from "@/types/shopify";
@@ -309,7 +308,6 @@ export default function ProductDetailClient({
         </button>
       </div>
 
-      <CartDrawer />
     </>
   );
 }
