@@ -45,3 +45,7 @@ next-env.d.ts
 # temp scripts
 _*.py
 _*.txt
+_*.json
+
+# generated design assets
+/generated_designs/
