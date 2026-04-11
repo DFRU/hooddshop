@@ -25,18 +25,41 @@ export function clearStoredCartId(): void {
   localStorage.removeItem(CART_STORAGE_KEY);
 }
 
+/** Read the geo_country cookie set by middleware, default to US. */
+function getBuyerCountry(): string {
+  if (typeof document === "undefined") return "US";
+  const match = document.cookie.match(/(?:^|;\s*)geo_country=([^;]*)/);
+  return match?.[1] || "US";
+}
+
+/** Detect browser language, e.g. "EN", "FR", "ES". */
+function getBuyerLanguage(): string {
+  if (typeof navigator === "undefined") return "EN";
+  const lang = navigator.language?.split("-")[0]?.toUpperCase();
+  return lang || "EN";
+}
+
 export async function createCart(
   variantId: string,
   quantity: number = 1,
   attributes?: { key: string; value: string }[]
 ): Promise<ShopifyCart | null> {
+  const country = getBuyerCountry();
+  const language = getBuyerLanguage();
+
   const line: Record<string, unknown> = { merchandiseId: variantId, quantity };
   if (attributes?.length) line.attributes = attributes;
+
   const { data } = await shopifyFetch<{
     data: { cartCreate: { cart: ShopifyCart } };
   }>({
     query: CREATE_CART,
-    variables: { lines: [line] },
+    variables: {
+      lines: [line],
+      buyerIdentity: { countryCode: country },
+      country,
+      language,
+    },
   });
   const cart = data?.cartCreate?.cart;
   if (cart) setStoredCartId(cart.id);
@@ -49,13 +72,17 @@ export async function addToCart(
   quantity: number = 1,
   attributes?: { key: string; value: string }[]
 ): Promise<ShopifyCart | null> {
+  const country = getBuyerCountry();
+  const language = getBuyerLanguage();
+
   const line: Record<string, unknown> = { merchandiseId: variantId, quantity };
   if (attributes?.length) line.attributes = attributes;
+
   const { data } = await shopifyFetch<{
     data: { cartLinesAdd: { cart: ShopifyCart } };
   }>({
     query: ADD_TO_CART,
-    variables: { cartId, lines: [line] },
+    variables: { cartId, lines: [line], country, language },
   });
   return data?.cartLinesAdd?.cart || null;
 }
@@ -65,11 +92,14 @@ export async function updateCartLine(
   lineId: string,
   quantity: number
 ): Promise<ShopifyCart | null> {
+  const country = getBuyerCountry();
+  const language = getBuyerLanguage();
+
   const { data } = await shopifyFetch<{
     data: { cartLinesUpdate: { cart: ShopifyCart } };
   }>({
     query: UPDATE_CART,
-    variables: { cartId, lines: [{ id: lineId, quantity }] },
+    variables: { cartId, lines: [{ id: lineId, quantity }], country, language },
   });
   return data?.cartLinesUpdate?.cart || null;
 }
@@ -78,11 +108,14 @@ export async function removeFromCart(
   cartId: string,
   lineIds: string[]
 ): Promise<ShopifyCart | null> {
+  const country = getBuyerCountry();
+  const language = getBuyerLanguage();
+
   const { data } = await shopifyFetch<{
     data: { cartLinesRemove: { cart: ShopifyCart } };
   }>({
     query: REMOVE_FROM_CART,
-    variables: { cartId, lineIds },
+    variables: { cartId, lineIds, country, language },
   });
   return data?.cartLinesRemove?.cart || null;
 }
@@ -90,11 +123,14 @@ export async function removeFromCart(
 export async function getCart(
   cartId: string
 ): Promise<ShopifyCart | null> {
+  const country = getBuyerCountry();
+  const language = getBuyerLanguage();
+
   const { data } = await shopifyFetch<{
     data: { cart: ShopifyCart };
   }>({
     query: GET_CART,
-    variables: { cartId },
+    variables: { cartId, country, language },
   });
   return data?.cart || null;
 }

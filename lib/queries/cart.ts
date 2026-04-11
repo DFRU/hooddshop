@@ -54,8 +54,8 @@ const CART_FRAGMENT = `
 
 export const CREATE_CART = `
   ${CART_FRAGMENT}
-  mutation CartCreate($lines: [CartLineInput!]!) {
-    cartCreate(input: { lines: $lines }) {
+  mutation CartCreate($lines: [CartLineInput!]!, $buyerIdentity: CartBuyerIdentityInput, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
+    cartCreate(input: { lines: $lines, buyerIdentity: $buyerIdentity }) {
       cart {
         ...CartFields
       }
@@ -65,7 +65,7 @@ export const CREATE_CART = `
 
 export const ADD_TO_CART = `
   ${CART_FRAGMENT}
-  mutation CartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
+  mutation CartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
     cartLinesAdd(cartId: $cartId, lines: $lines) {
       cart {
         ...CartFields
@@ -76,7 +76,7 @@ export const ADD_TO_CART = `
 
 export const UPDATE_CART = `
   ${CART_FRAGMENT}
-  mutation CartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+  mutation CartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
     cartLinesUpdate(cartId: $cartId, lines: $lines) {
       cart {
         ...CartFields
@@ -87,7 +87,7 @@ export const UPDATE_CART = `
 
 export const REMOVE_FROM_CART = `
   ${CART_FRAGMENT}
-  mutation CartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
+  mutation CartLinesRemove($cartId: ID!, $lineIds: [ID!]!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
     cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
       cart {
         ...CartFields
@@ -98,7 +98,7 @@ export const REMOVE_FROM_CART = `
 
 export const GET_CART = `
   ${CART_FRAGMENT}
-  query GetCart($cartId: ID!) {
+  query GetCart($cartId: ID!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
     cart(id: $cartId) {
       ...CartFields
     }

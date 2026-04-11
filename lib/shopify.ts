@@ -1,10 +1,23 @@
 import { GET_PRODUCT, GET_PRODUCTS } from "./queries/products";
 import type { ShopifyProduct, ProductConnection } from "@/types/shopify";
 
-const SHOPIFY_STOREFRONT_API_URL = `https://${process.env.SHOPIFY_STORE_DOMAIN || "hooddshop.myshopify.com"}/api/2024-10/graphql.json`;
-const SHOPIFY_STOREFRONT_ACCESS_TOKEN =
-  process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || "";
+// ── Env vars: check NEXT_PUBLIC_ (client) then server-only fallback ──
+const DOMAIN =
+  process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN ||
+  process.env.SHOPIFY_STORE_DOMAIN ||
+  "hoodd-shop-2.myshopify.com";
 
+const TOKEN =
+  process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN ||
+  process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN ||
+  "";
+
+const SHOPIFY_STOREFRONT_API_URL = `https://${DOMAIN}/api/2024-10/graphql.json`;
+
+/**
+ * Generic Shopify Storefront API fetch.
+ * Works both server-side (with ISR cache) and client-side (no cache header).
+ */
 export async function shopifyFetch<T>({
   query,
   variables,
@@ -12,26 +25,39 @@ export async function shopifyFetch<T>({
   query: string;
   variables?: Record<string, unknown>;
 }): Promise<T> {
-  if (!SHOPIFY_STOREFRONT_ACCESS_TOKEN) {
+  if (!TOKEN) {
     console.warn(
-      "[shopify] No SHOPIFY_STOREFRONT_ACCESS_TOKEN set — returning empty data"
+      "[shopify] No Storefront access token set — returning empty data"
     );
     return { data: {} } as T;
   }
 
+  const isServer = typeof window === "undefined";
+
   try {
-    const res = await fetch(SHOPIFY_STOREFRONT_API_URL, {
+    const fetchOptions: RequestInit = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-Shopify-Storefront-Access-Token": SHOPIFY_STOREFRONT_ACCESS_TOKEN,
+        "X-Shopify-Storefront-Access-Token": TOKEN,
       },
       body: JSON.stringify({ query, variables }),
-      next: { revalidate: 60 },
-    });
+    };
+
+    // Only use Next.js ISR cache on the server; client fetches are always fresh
+    if (isServer) {
+      (fetchOptions as Record<string, unknown>).next = { revalidate: 60 };
+    } else {
+      fetchOptions.cache = "no-store";
+    }
+
+    const res = await fetch(SHOPIFY_STOREFRONT_API_URL, fetchOptions);
 
     if (!res.ok) {
-      console.warn(`[shopify] API returned ${res.status} — returning empty data`);
+      const body = await res.text().catch(() => "");
+      console.warn(
+        `[shopify] API returned ${res.status} — ${body.slice(0, 200)}`
+      );
       return { data: {} } as T;
     }
 
@@ -45,23 +71,32 @@ export async function shopifyFetch<T>({
 // ── Product helpers ──────────────────────────────────────────────
 
 export async function getProduct(
-  handle: string
+  handle: string,
+  country?: string,
+  language?: string
 ): Promise<ShopifyProduct | null> {
   const { data } = await shopifyFetch<{
     data: { product: ShopifyProduct | null };
   }>({
     query: GET_PRODUCT,
-    variables: { handle },
+    variables: { handle, country, language },
   });
   return data?.product ?? null;
 }
 
-export async function getProducts(opts: {
-  first?: number;
-  after?: string | null;
-  sortKey?: string;
-  query?: string;
-} = {}): Promise<{ products: ShopifyProduct[]; pageInfo: { hasNextPage: boolean; endCursor: string | null } }> {
+export async function getProducts(
+  opts: {
+    first?: number;
+    after?: string | null;
+    sortKey?: string;
+    query?: string;
+    country?: string;
+    language?: string;
+  } = {}
+): Promise<{
+  products: ShopifyProduct[];
+  pageInfo: { hasNextPage: boolean; endCursor: string | null };
+}> {
   const { data } = await shopifyFetch<{
     data: { products: ProductConnection };
   }>({
@@ -71,6 +106,8 @@ export async function getProducts(opts: {
       after: opts.after ?? null,
       sortKey: opts.sortKey ?? "BEST_SELLING",
       query: opts.query ?? null,
+      country: opts.country,
+      language: opts.language,
     },
   });
 

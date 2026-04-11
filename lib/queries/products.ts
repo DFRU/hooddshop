@@ -39,7 +39,7 @@ export const PRODUCT_CARD_FRAGMENT = `
 
 export const GET_PRODUCTS = `
   ${PRODUCT_CARD_FRAGMENT}
-  query GetProducts($first: Int!, $after: String, $sortKey: ProductSortKeys, $query: String) {
+  query GetProducts($first: Int!, $after: String, $sortKey: ProductSortKeys, $query: String, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
     products(first: $first, after: $after, sortKey: $sortKey, query: $query) {
       edges {
         node {
@@ -55,7 +55,7 @@ export const GET_PRODUCTS = `
 `;
 
 export const GET_PRODUCT = `
-  query GetProduct($handle: String!) {
+  query GetProduct($handle: String!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
     product(handle: $handle) {
       id
       handle
