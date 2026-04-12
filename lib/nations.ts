@@ -24,8 +24,6 @@ export const NATIONS: Nation[] = [
   { code: "pa", name: "Panama", emoji: "\u{1F1F5}\u{1F1E6}", region: "Americas", confederation: "CONCACAF", wc2026: true },
   { code: "cw", name: "Curaçao", emoji: "\u{1F1E8}\u{1F1FC}", region: "Americas", confederation: "CONCACAF", wc2026: true },
   { code: "ht", name: "Haiti", emoji: "\u{1F1ED}\u{1F1F9}", region: "Americas", confederation: "CONCACAF", wc2026: true },
-  { code: "jm", name: "Jamaica", emoji: "\u{1F1EF}\u{1F1F2}", region: "Americas", confederation: "CONCACAF", wc2026: true },
-
   // ── CONMEBOL ───────────────────────────────────────────
   { code: "ar", name: "Argentina", emoji: "\u{1F1E6}\u{1F1F7}", region: "Americas", confederation: "CONMEBOL", wc2026: true },
   { code: "br", name: "Brazil", emoji: "\u{1F1E7}\u{1F1F7}", region: "Americas", confederation: "CONMEBOL", wc2026: true },
@@ -40,14 +38,10 @@ export const NATIONS: Nation[] = [
   { code: "de", name: "Germany", emoji: "\u{1F1E9}\u{1F1EA}", region: "Europe", confederation: "UEFA", wc2026: true },
   { code: "es", name: "Spain", emoji: "\u{1F1EA}\u{1F1F8}", region: "Europe", confederation: "UEFA", wc2026: true },
   { code: "pt", name: "Portugal", emoji: "\u{1F1F5}\u{1F1F9}", region: "Europe", confederation: "UEFA", wc2026: true },
-  { code: "it", name: "Italy", emoji: "\u{1F1EE}\u{1F1F9}", region: "Europe", confederation: "UEFA", wc2026: true },
   { code: "nl", name: "Netherlands", emoji: "\u{1F1F3}\u{1F1F1}", region: "Europe", confederation: "UEFA", wc2026: true },
   { code: "be", name: "Belgium", emoji: "\u{1F1E7}\u{1F1EA}", region: "Europe", confederation: "UEFA", wc2026: true },
   { code: "hr", name: "Croatia", emoji: "\u{1F1ED}\u{1F1F7}", region: "Europe", confederation: "UEFA", wc2026: true },
-  { code: "rs", name: "Serbia", emoji: "\u{1F1F7}\u{1F1F8}", region: "Europe", confederation: "UEFA", wc2026: true },
   { code: "ch", name: "Switzerland", emoji: "\u{1F1E8}\u{1F1ED}", region: "Europe", confederation: "UEFA", wc2026: true },
-  { code: "dk", name: "Denmark", emoji: "\u{1F1E9}\u{1F1F0}", region: "Europe", confederation: "UEFA", wc2026: true },
-  { code: "pl", name: "Poland", emoji: "\u{1F1F5}\u{1F1F1}", region: "Europe", confederation: "UEFA", wc2026: true },
   { code: "at", name: "Austria", emoji: "\u{1F1E6}\u{1F1F9}", region: "Europe", confederation: "UEFA", wc2026: true },
   { code: "no", name: "Norway", emoji: "\u{1F1F3}\u{1F1F4}", region: "Europe", confederation: "UEFA", wc2026: true },
   { code: "gb-sct", name: "Scotland", emoji: "\u{1F3F4}\u{E0067}\u{E0062}\u{E0073}\u{E0063}\u{E0074}\u{E007F}", region: "Europe", confederation: "UEFA", wc2026: true },
@@ -58,9 +52,7 @@ export const NATIONS: Nation[] = [
 
   // ── CAF ────────────────────────────────────────────────
   { code: "ma", name: "Morocco", emoji: "\u{1F1F2}\u{1F1E6}", region: "Africa", confederation: "CAF", wc2026: true },
-  { code: "ng", name: "Nigeria", emoji: "\u{1F1F3}\u{1F1EC}", region: "Africa", confederation: "CAF", wc2026: true },
   { code: "sn", name: "Senegal", emoji: "\u{1F1F8}\u{1F1F3}", region: "Africa", confederation: "CAF", wc2026: true },
-  { code: "cm", name: "Cameroon", emoji: "\u{1F1E8}\u{1F1F2}", region: "Africa", confederation: "CAF", wc2026: true },
   { code: "gh", name: "Ghana", emoji: "\u{1F1EC}\u{1F1ED}", region: "Africa", confederation: "CAF", wc2026: true },
   { code: "dz", name: "Algeria", emoji: "\u{1F1E9}\u{1F1FF}", region: "Africa", confederation: "CAF", wc2026: true },
   { code: "cv", name: "Cape Verde", emoji: "\u{1F1E8}\u{1F1FB}", region: "Africa", confederation: "CAF", wc2026: true },

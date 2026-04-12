@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getProduct } from "@/lib/shopify";
 import ProductDetailClient from "./ProductDetailClient";
+import ProductJsonLd from "@/components/product/ProductJsonLd";
 
 // ── Dynamic metadata from Shopify product data ──────────────
 interface PageProps {
@@ -41,5 +42,10 @@ export default async function ProductPage({ params }: PageProps) {
   const { handle } = await params;
   const product = await getProduct(handle);
 
-  return <ProductDetailClient product={product} handle={handle} />;
+  return (
+    <>
+      {product && <ProductJsonLd product={product} />}
+      <ProductDetailClient product={product} handle={handle} />
+    </>
+  );
 }

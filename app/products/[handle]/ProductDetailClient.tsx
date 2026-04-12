@@ -4,6 +4,8 @@ import { useCallback, useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import FulfillmentSelector from "@/components/product/FulfillmentSelector";
+import TrustBar from "@/components/product/TrustBar";
+import HoodPreview from "@/components/product/HoodPreview";
 import type { FulfillmentOption } from "@/lib/suppliers/types";
 import type { ShopifyProduct } from "@/types/shopify";
 
@@ -64,6 +66,7 @@ export default function ProductDetailClient({
   const displayPrice = shopifyPrice ?? 49.99;
   const currencyCode = firstVariant?.price?.currencyCode ?? "USD";
   const title = product?.title ?? `Hood Cover — ${handle}`;
+  const descriptionHtml = product?.descriptionHtml ?? null;
   const description =
     product?.description ??
     "Premium stretch-fit car hood cover with full-bleed sublimation print. 85-90% polyester / 10-15% spandex. Universal fit with elastic sewn-in edge.";
@@ -120,6 +123,13 @@ export default function ProductDetailClient({
 
   return (
     <>
+      {/* Hood Preview — Desktop */}
+      <div className="hidden lg:block border-t border-b" style={{ borderColor: "var(--color-border)" }}>
+        <div className="max-w-[var(--max-width)] mx-auto px-8 py-12">
+          <HoodPreview imageUrl={images[0]?.url ?? "/placeholder-hood.jpg"} productTitle={title} />
+        </div>
+      </div>
+
       <div className="lg:flex lg:gap-0 max-w-[var(--max-width)] mx-auto">
         {/* ── Image gallery with CSS scroll-snap ── */}
         <div className="lg:w-[60%]">
@@ -190,6 +200,11 @@ export default function ProductDetailClient({
               />
             ))}
           </div>
+
+          {/* Hood Preview Visualization */}
+          <div className="lg:hidden">
+            <HoodPreview imageUrl={images[0]?.url ?? "/placeholder-hood.jpg"} productTitle={title} />
+          </div>
         </div>
 
         {/* ── Product info — desktop sticky ── */}
@@ -200,14 +215,22 @@ export default function ProductDetailClient({
               className="text-body-lg font-semibold mt-2"
               style={{ color: "var(--color-accent)" }}
             >
-              ${displayPrice.toFixed(2)} {currencyCode}
+              ${displayPrice.toFixed(2)} USD
             </p>
-            <p
-              className="text-body-md mt-4"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              {description}
-            </p>
+            {descriptionHtml ? (
+              <div
+                className="text-body-md mt-4 product-description"
+                style={{ color: "var(--color-text-muted)" }}
+                dangerouslySetInnerHTML={{ __html: descriptionHtml }}
+              />
+            ) : (
+              <p
+                className="text-body-md mt-4"
+                style={{ color: "var(--color-text-muted)" }}
+              >
+                {description}
+              </p>
+            )}
 
             <FulfillmentSelector onSelect={handleFulfillmentSelect} />
 
@@ -229,6 +252,8 @@ export default function ProductDetailClient({
                 ? "Add to Cart"
                 : "Coming Soon"}
             </button>
+
+            <TrustBar />
           </div>
 
           {/* ── Accordion sections ── */}
@@ -285,7 +310,7 @@ export default function ProductDetailClient({
             className="text-body-sm"
             style={{ color: "var(--color-text-muted)" }}
           >
-            {currencyCode}
+            USD
           </p>
         </div>
         <button

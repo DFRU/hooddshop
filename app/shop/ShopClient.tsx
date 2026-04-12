@@ -115,16 +115,41 @@ export default function ShopClient({
     }
   };
 
+  // ── Map UI region names to Shopify tag values ──────
+  const REGION_TAG_MAP: Record<string, string[]> = {
+    Americas: ["north america", "south america"],
+    Europe: ["europe"],
+    Africa: ["africa"],
+    "Asia-Pacific": ["asia", "oceania"],
+    "Middle East": ["asia"],  // ME nations tagged "Asia" in Shopify
+  };
+
+  // Middle East nation names for disambiguating Asia vs Asia-Pacific
+  const MIDDLE_EAST_NATIONS = ["saudi arabia", "iran", "iraq", "jordan", "qatar"];
+
   // ── Filter Shopify products by region + search ─────
   const filteredShopifyProducts = hasShopifyProducts
     ? shopifyProducts.filter((p) => {
-        // Region filter — match against product tags
+        // Region filter — match UI region to Shopify tag values
         if (region !== "All") {
           const tags = (p.tags || []).map((t: string) => t.toLowerCase());
-          const regionLower = region.toLowerCase();
-          // Also check for "Middle East" as "middle east" in tags
-          if (!tags.some((t: string) => t === regionLower || t.includes(regionLower))) {
-            return false;
+          const mappedTags = REGION_TAG_MAP[region] || [region.toLowerCase()];
+
+          if (region === "Asia-Pacific") {
+            // Asia-Pacific = tagged "Asia" but NOT a Middle East nation, OR tagged "Oceania"
+            const isAsia = tags.includes("asia");
+            const isOceania = tags.includes("oceania");
+            const isME = tags.some((t: string) => MIDDLE_EAST_NATIONS.includes(t));
+            if (!(isOceania || (isAsia && !isME))) return false;
+          } else if (region === "Middle East") {
+            // Middle East = tagged "Asia" AND is a Middle East nation name
+            const isAsia = tags.includes("asia");
+            const isME = tags.some((t: string) => MIDDLE_EAST_NATIONS.includes(t));
+            if (!(isAsia && isME)) return false;
+          } else {
+            if (!tags.some((t: string) => mappedTags.includes(t))) {
+              return false;
+            }
           }
         }
         // Search filter — match title
@@ -243,22 +268,16 @@ export default function ShopClient({
                 {r}
               </button>
             ))}
+            {/* Design line filter — only show Jersey for now (other lines coming soon) */}
             <div
               className="w-px flex-shrink-0"
               style={{ background: "#333" }}
             />
-            {(["All", ...DESIGN_LINES] as const).map((d) => (
-              <button
-                key={d}
-                onClick={() => setDesignFilter(d as DesignLine | "All")}
-                className={`px-3.5 py-2 rounded-full text-[11px] font-medium whitespace-nowrap transition-colors touch-active ${
-                  designFilter === d ? "bg-white text-black" : "text-neutral-500"
-                }`}
-                style={designFilter !== d ? { background: "#161616" } : {}}
-              >
-                {d}
-              </button>
-            ))}
+            <button
+              className="px-3.5 py-2 rounded-full text-[11px] font-medium whitespace-nowrap bg-white text-black"
+            >
+              Jersey Line
+            </button>
           </div>
         </div>
       </div>

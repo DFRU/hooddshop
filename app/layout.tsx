@@ -4,6 +4,7 @@ import { CartProvider } from "@/context/CartContext";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import CartDrawer from "@/components/layout/CartDrawer";
+import Analytics from "@/components/layout/Analytics";
 import { ToastProvider } from "@/components/layout/Toast";
 import "./globals.css";
 
@@ -38,11 +39,17 @@ export const metadata: Metadata = {
     siteName: "Hood'd",
     title: "Hood'd — Your Ride. Your Flag.",
     description: "Premium car hood covers for World Cup 2026. 48 nations. Multiple design lines.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "HOOD'D — Premium car hood covers for World Cup 2026" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Hood'd — Your Ride. Your Flag.",
     description: "Premium car hood covers for World Cup 2026.",
+    images: ["/og.png"],
+  },
+  icons: {
+    icon: "/favicon.png",
+    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -60,6 +67,7 @@ export default function RootLayout({
         className="min-h-full flex flex-col"
         style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
       >
+        <Analytics />
         <CartProvider>
           <ToastProvider>
             <Nav />

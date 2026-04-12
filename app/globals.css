@@ -108,6 +108,13 @@ body {
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
+/* Product description HTML from Shopify */
+.product-description p { margin-bottom: 0.75em; }
+.product-description h4 { color: #fff; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; margin: 1.25em 0 0.5em; }
+.product-description ul { padding-left: 1.25em; margin-bottom: 0.75em; }
+.product-description li { margin-bottom: 0.25em; list-style-type: disc; }
+.product-description strong { color: #ccc; }
+
 /* Touch feedback */
 .touch-active:active { opacity: 0.85; transform: scale(0.98); }
 
