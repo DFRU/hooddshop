@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import FulfillmentSelector from "@/components/product/FulfillmentSelector";
 import TrustBar from "@/components/product/TrustBar";
-import HoodPreview from "@/components/product/HoodPreview";
+
 import type { FulfillmentOption } from "@/lib/suppliers/types";
 import type { ShopifyProduct } from "@/types/shopify";
 
@@ -123,13 +123,6 @@ export default function ProductDetailClient({
 
   return (
     <>
-      {/* Hood Preview — Desktop */}
-      <div className="hidden lg:block border-t border-b" style={{ borderColor: "var(--color-border)" }}>
-        <div className="max-w-[var(--max-width)] mx-auto px-8 py-4">
-          <HoodPreview imageUrl={images[0]?.url ?? "/placeholder-hood.jpg"} productTitle={title} />
-        </div>
-      </div>
-
       <div className="lg:flex lg:gap-0 max-w-[var(--max-width)] mx-auto">
         {/* ── Image gallery with CSS scroll-snap ── */}
         <div className="lg:w-[60%]">
@@ -201,10 +194,6 @@ export default function ProductDetailClient({
             ))}
           </div>
 
-          {/* Hood Preview Visualization */}
-          <div className="lg:hidden">
-            <HoodPreview imageUrl={images[0]?.url ?? "/placeholder-hood.jpg"} productTitle={title} />
-          </div>
         </div>
 
         {/* ── Product info — desktop sticky ── */}

@@ -1,8 +1,37 @@
 import Link from "next/link";
+import Image from "next/image";
 import { HOME_FEATURED_NATIONS, NATIONS } from "@/lib/nations";
-import { DESIGN_LINES, DESIGN_GRADIENTS, flagUrl } from "@/lib/design";
+import { flagUrl } from "@/lib/design";
+import { getProducts } from "@/lib/shopify";
+import type { ShopifyProduct } from "@/types/shopify";
 
-export default function Hero() {
+// Map nation codes to title keywords used in Shopify product titles
+const CODE_TO_TITLE: Record<string, string> = {
+  br: "Brazil",
+  ar: "Argentina",
+  fr: "France",
+  "gb-eng": "England",
+  es: "Spain",
+  de: "Germany",
+  mx: "Mexico",
+  us: "USA",
+};
+
+export default async function Hero() {
+  // Fetch real Shopify product images for featured nations
+  const titleQuery = HOME_FEATURED_NATIONS.map(
+    (c) => `title:${CODE_TO_TITLE[c] ?? c}`
+  ).join(" OR ");
+  const { products } = await getProducts({ first: 8, sortKey: "TITLE", query: titleQuery });
+
+  // Build a map from nation code → product (match by title keyword)
+  const productMap = new Map<string, ShopifyProduct>();
+  for (const code of HOME_FEATURED_NATIONS) {
+    const keyword = (CODE_TO_TITLE[code] ?? code).toLowerCase();
+    const match = products.find((p) => p.title.toLowerCase().includes(keyword));
+    if (match) productMap.set(code, match);
+  }
+
   return (
     <section className="relative flex items-end overflow-hidden" style={{ minHeight: "min(85vh, 700px)" }}>
       {/* Background */}
@@ -74,19 +103,22 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Desktop card stack */}
+          {/* Desktop card stack — real product images */}
           <div className="relative h-[480px] hidden lg:block">
             {HOME_FEATURED_NATIONS.slice(0, 5).map((code, i) => {
               const n = NATIONS.find((x) => x.code === code);
               if (!n) return null;
+              const product = productMap.get(code);
+              const imageUrl = product?.images?.edges?.[0]?.node?.url;
+              const productHandle = product?.handle;
               const rot = [-8, -3, 1, 5, 9][i];
               const x = [0, 30, 55, 80, 100][i];
               const y = [10, 0, 15, 5, 25][i];
-              const grad = DESIGN_GRADIENTS[DESIGN_LINES[i]];
-              return (
+
+              const card = (
                 <div
                   key={code}
-                  className={`absolute w-[260px] rounded-lg overflow-hidden shadow-2xl bg-gradient-to-br ${grad}`}
+                  className="absolute w-[260px] rounded-lg overflow-hidden shadow-2xl"
                   style={{
                     transform: `rotate(${rot}deg)`,
                     left: `${x}px`,
@@ -94,34 +126,73 @@ export default function Hero() {
                     zIndex: i,
                     aspectRatio: "3/4",
                     border: "1px solid #222",
-                    opacity: 0.75,
+                    background: "#111",
                   }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                  {imageUrl ? (
+                    <Image
+                      src={imageUrl}
+                      alt={`${n.name} hood cover`}
+                      fill
+                      className="object-cover"
+                      sizes="260px"
+                    />
+                  ) : (
+                    <img
+                      src={flagUrl(code, 320)}
+                      alt=""
+                      className="absolute inset-0 w-full h-full object-cover opacity-30"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-4">
                     <img src={flagUrl(code, 40)} className="w-7 h-auto mb-1.5 rounded shadow-md" alt="" />
                     <div className="text-display-sm text-white">{n.name}</div>
-                    <div className="text-[9px] uppercase tracking-[0.12em] text-white/40 mt-0.5">{DESIGN_LINES[i]}</div>
+                    <div className="text-[9px] uppercase tracking-[0.12em] text-white/40 mt-0.5">Hood Cover</div>
                   </div>
                 </div>
               );
+
+              return productHandle ? (
+                <Link key={code} href={`/products/${productHandle}`} className="contents">
+                  {card}
+                </Link>
+              ) : card;
             })}
           </div>
         </div>
 
-        {/* Mobile: swipeable nation cards */}
+        {/* Mobile: swipeable product cards */}
         <div className="lg:hidden mt-8 -mx-[var(--container-px)]">
           <div className="flex gap-3 overflow-x-auto scrollbar-hide snap-x-mandatory px-[var(--container-px)] pb-3">
-            {HOME_FEATURED_NATIONS.map((code, i) => {
+            {HOME_FEATURED_NATIONS.map((code) => {
               const n = NATIONS.find((x) => x.code === code);
               if (!n) return null;
-              const grad = DESIGN_GRADIENTS[DESIGN_LINES[i % 6]];
-              return (
-                <div key={code} className="flex-shrink-0 w-[140px] snap-start">
+              const product = productMap.get(code);
+              const imageUrl = product?.images?.edges?.[0]?.node?.url;
+              const productHandle = product?.handle;
+
+              const card = (
+                <div className="flex-shrink-0 w-[140px] snap-start">
                   <div
-                    className={`relative rounded-lg overflow-hidden bg-gradient-to-br ${grad}`}
-                    style={{ aspectRatio: "3/4", border: "1px solid #1E1E1E", opacity: 0.65 }}
+                    className="relative rounded-lg overflow-hidden"
+                    style={{ aspectRatio: "3/4", border: "1px solid #1E1E1E", background: "#111" }}
                   >
+                    {imageUrl ? (
+                      <Image
+                        src={imageUrl}
+                        alt={`${n.name} hood cover`}
+                        fill
+                        className="object-cover"
+                        sizes="140px"
+                      />
+                    ) : (
+                      <img
+                        src={flagUrl(code, 160)}
+                        alt=""
+                        className="absolute inset-0 w-full h-full object-cover opacity-30"
+                      />
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-3">
                       <span className="text-xl">{n.emoji}</span>
@@ -131,6 +202,14 @@ export default function Hero() {
                     </div>
                   </div>
                 </div>
+              );
+
+              return productHandle ? (
+                <Link key={code} href={`/products/${productHandle}`} className="contents">
+                  {card}
+                </Link>
+              ) : (
+                <div key={code}>{card}</div>
               );
             })}
           </div>
