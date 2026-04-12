@@ -129,3 +129,20 @@ export function getTitleKeyword(code: string): string {
   const nation = getNation(code);
   return nation?.name ?? code;
 }
+
+/**
+ * Attempt to extract a nation code from a Shopify product title.
+ * Returns the nation code or null if no match found.
+ */
+export function getNationCodeFromTitle(title: string): string | null {
+  const lower = title.toLowerCase();
+  // Check explicit title mappings first (more specific matches)
+  for (const [code, keyword] of Object.entries(CODE_TO_TITLE)) {
+    if (lower.includes(keyword.toLowerCase())) return code;
+  }
+  // Fallback: check nation names
+  for (const nation of NATIONS) {
+    if (lower.includes(nation.name.toLowerCase())) return nation.code;
+  }
+  return null;
+}

@@ -34,15 +34,23 @@ const ACCORDION_SECTIONS = [
 ];
 
 // ── Types ─────────────────────────────────────────────────────
+interface VehicleImageProp {
+  src: string;
+  alt: string;
+  vehicleName: string;
+}
+
 interface ProductDetailClientProps {
   product: ShopifyProduct | null;
   handle: string;
+  vehicleImages?: VehicleImageProp[];
 }
 
 // ── Component ─────────────────────────────────────────────────
 export default function ProductDetailClient({
   product,
   handle,
+  vehicleImages = [],
 }: ProductDetailClientProps) {
   const { addItem, isLoading } = useCart();
   const [addedFeedback, setAddedFeedback] = useState(false);
@@ -56,7 +64,29 @@ export default function ProductDetailClient({
   }, []);
 
   // ── Derived data ──────────────────────────────────────────
-  const images = product?.images?.edges?.map((e) => e.node) ?? [];
+  const shopifyImages = product?.images?.edges?.map((e) => e.node) ?? [];
+  // Merge: first Shopify image, then vehicle images, then remaining Shopify images
+  const vehicleGalleryItems = vehicleImages.map((v) => ({
+    url: v.src,
+    altText: v.alt,
+    width: 1200,
+    height: 900,
+    isVehicle: true,
+    vehicleName: v.vehicleName,
+  }));
+  const shopifyGalleryItems = shopifyImages.map((img) => ({
+    url: img.url,
+    altText: img.altText,
+    width: img.width,
+    height: img.height,
+    isVehicle: false,
+    vehicleName: undefined as string | undefined,
+  }));
+  // Insert vehicle images after the first Shopify product image
+  const images = shopifyGalleryItems.length > 0
+    ? [shopifyGalleryItems[0], ...vehicleGalleryItems, ...shopifyGalleryItems.slice(1)]
+    : [...vehicleGalleryItems, ...shopifyGalleryItems];
+
   const variants = product?.variants?.edges?.map((e) => e.node) ?? [];
   const firstVariant = variants[0] ?? null;
   const shopifyPrice = firstVariant
@@ -120,6 +150,7 @@ export default function ProductDetailClient({
 
   // ── Placeholder if no product + no Shopify ────────────────
   const hasImages = images.length > 0;
+  const hasVehicles = vehicleImages.length > 0;
 
   return (
     <>
@@ -134,7 +165,7 @@ export default function ProductDetailClient({
             >
               {images.map((img, i) => (
                 <div
-                  key={img.url}
+                  key={img.url + i}
                   data-index={i}
                   className="flex-shrink-0 w-full snap-center relative"
                   style={{ aspectRatio: "4/3" }}
@@ -147,6 +178,11 @@ export default function ProductDetailClient({
                     sizes="(max-width: 1024px) 100vw, 60vw"
                     priority={i === 0}
                   />
+                  {img.isVehicle && (
+                    <div className="absolute top-3 right-3 px-2 py-1 rounded text-[9px] uppercase tracking-widest text-white/70" style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(4px)" }}>
+                      AI Preview · {img.vehicleName}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

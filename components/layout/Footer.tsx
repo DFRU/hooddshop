@@ -71,6 +71,9 @@ export default function Footer() {
           <p className="text-xs leading-relaxed" style={{ color: "#3a3a3a" }}>
             HOOD&apos;D is not affiliated with, endorsed by, or sponsored by FIFA, any national football federation, or any kit manufacturer. All product designs are original compositions inspired by national team color palettes. National team names and color schemes are used for descriptive purposes only.
           </p>
+          <p className="text-xs leading-relaxed mt-2" style={{ color: "#3a3a3a" }}>
+            Vehicle preview images are AI-generated for illustrative purposes only and may not exactly represent the final product. Actual colors, fit, and appearance may vary.
+          </p>
         </div>
 
         <div className="mt-5 pt-5 flex flex-col sm:flex-row items-center justify-between gap-3" style={{ borderTop: "1px solid #111" }}>

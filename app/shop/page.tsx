@@ -4,9 +4,9 @@ import ShopClient from "./ShopClient";
 
 // Force fresh build after product activation
 export const metadata = {
-  title: "Shop All Covers",
+  title: "Shop Car Hood Covers — World Cup 2026",
   description:
-    "Browse all Hood'd car hood covers. 48 nations, multiple design lines. Filter by region, design, or search by nation.",
+    "Shop all Hood'd car hood covers. 48 nations, premium polyester spandex, elastic edges for universal fit. Filter by region. $49.99 each. Free shipping on $99+.",
 };
 
 export default async function ShopPage() {

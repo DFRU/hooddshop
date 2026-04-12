@@ -28,24 +28,24 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: { default: "Hood'd | Car Hood Covers — Your Ride. Your Flag.", template: "%s | Hood'd" },
+  title: { default: "Hood'd — Car Hood Covers for World Cup 2026 | Your Ride. Your Flag.", template: "%s | Hood'd" },
   description:
-    "Premium stretch-fit car hood covers for World Cup 2026. 48 nations. Multiple design lines. $49.99.",
+    "Premium stretch-fit car hood covers for World Cup 2026. 48 nations, sublimation-printed on polyester spandex. Universal fit for cars, SUVs, and trucks. $49.99. Made in the USA.",
   metadataBase: new URL("https://hooddshop.com"),
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://hooddshop.com",
     siteName: "Hood'd",
-    title: "Hood'd — Your Ride. Your Flag.",
-    description: "Premium car hood covers for World Cup 2026. 48 nations. Multiple design lines.",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "HOOD'D — Premium car hood covers for World Cup 2026" }],
+    title: "Hood'd — Car Hood Covers for World Cup 2026",
+    description: "Premium stretch-fit car hood covers for 48 World Cup 2026 nations. Universal fit for cars, SUVs, and trucks. $49.99.",
+    images: [{ url: "/vehicles/us_truck.webp", width: 1200, height: 900, alt: "USA car hood cover on Toyota Hilux — Hood'd World Cup 2026" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hood'd — Your Ride. Your Flag.",
-    description: "Premium car hood covers for World Cup 2026.",
-    images: ["/og.png"],
+    title: "Hood'd — Car Hood Covers for World Cup 2026",
+    description: "Premium stretch-fit car hood covers for 48 nations. Universal fit. $49.99.",
+    images: ["/vehicles/us_truck.webp"],
   },
   icons: {
     icon: "/favicon.png",
