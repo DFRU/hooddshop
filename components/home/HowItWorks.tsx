@@ -13,14 +13,14 @@ export default function HowItWorks() {
     },
     {
       num: "02",
-      title: "Choose a Design",
-      desc: "Pick your style — Heritage, Culture, Street, Chrome, Jersey, and more.",
+      title: "See It on Your Ride",
+      desc: "Preview your nation's cover on a real vehicle. Universal stretch fit for cars, SUVs, and trucks.",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <rect x="3" y="3" width="7" height="7" rx="1" />
-          <rect x="14" y="3" width="7" height="7" rx="1" />
-          <rect x="3" y="14" width="7" height="7" rx="1" />
-          <rect x="14" y="14" width="7" height="7" rx="1" />
+          <rect x="1" y="7" width="22" height="10" rx="2" />
+          <circle cx="6" cy="17" r="2" />
+          <circle cx="18" cy="17" r="2" />
+          <path d="M5 7l2-4h10l2 4" />
         </svg>
       ),
     },
