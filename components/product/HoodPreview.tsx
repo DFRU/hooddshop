@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef, useMemo, useId } from "react";
 import Image from "next/image";
 
 // ── Types ─────────────────────────────────────────────────────
@@ -110,8 +110,14 @@ export default function HoodPreview({ imageUrl, productTitle }: HoodPreviewProps
   const [vehicleType, setVehicleType] = useState<VehicleType>("sedan");
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
+  
+  const compId = useId().replace(/:/g, "");
 
   const vehicle = VEHICLES[vehicleType];
+  
+  const maskId = `${compId}-${vehicle.maskId}`;
+  const highlightId = `${compId}-hood-highlight`;
+  const shadowId = `${compId}-car-shadow`;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
@@ -216,13 +222,13 @@ export default function HoodPreview({ imageUrl, productTitle }: HoodPreviewProps
           >
             {/* Define clip path for hood area */}
             <defs>
-              <clipPath id={vehicle.maskId}>
+              <clipPath id={maskId}>
                 <path d={vehicle.hoodPath} />
               </clipPath>
 
               {/* Gradient for hood highlight */}
               <linearGradient
-                id="hood-highlight"
+                id={highlightId}
                 x1="0%"
                 y1="0%"
                 x2="0%"
@@ -234,7 +240,7 @@ export default function HoodPreview({ imageUrl, productTitle }: HoodPreviewProps
               </linearGradient>
 
               {/* Shadow gradient */}
-              <radialGradient id="car-shadow" cx="50%" cy="50%" r="60%">
+              <radialGradient id={shadowId} cx="50%" cy="50%" r="60%">
                 <stop offset="0%" stopColor="rgba(0,0,0,0.3)" />
                 <stop offset="100%" stopColor="rgba(0,0,0,0)" />
               </radialGradient>
@@ -246,7 +252,7 @@ export default function HoodPreview({ imageUrl, productTitle }: HoodPreviewProps
               cy="360"
               rx="160"
               ry="30"
-              fill="url(#car-shadow)"
+              fill={`url(#${shadowId})`}
               opacity="0.6"
             />
 
@@ -259,7 +265,7 @@ export default function HoodPreview({ imageUrl, productTitle }: HoodPreviewProps
             />
 
             {/* Hood area with product image */}
-            <g clipPath={`url(#${vehicle.maskId})`}>
+            <g clipPath={`url(#${maskId})`}>
               {/* Hood base color */}
               <path d={vehicle.hoodPath} fill="#0f0f0f" />
 
@@ -281,7 +287,7 @@ export default function HoodPreview({ imageUrl, productTitle }: HoodPreviewProps
               {/* Subtle highlight/reflection */}
               <path
                 d={vehicle.hoodPath}
-                fill="url(#hood-highlight)"
+                fill={`url(#${highlightId})`}
                 opacity="0.6"
               />
             </g>
