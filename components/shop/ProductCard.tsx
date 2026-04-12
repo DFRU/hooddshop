@@ -8,10 +8,11 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ nation, design }: ProductCardProps) {
+  // Link to the nation redirect page, which will forward to the Shopify product if available
   return (
     <div className="group">
       <Link
-        href={`/nations/${nation.code}?design=${design}`}
+        href={`/nations/${nation.code}`}
         className="block w-full text-left touch-active"
       >
         <div

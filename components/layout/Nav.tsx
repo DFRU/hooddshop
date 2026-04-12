@@ -15,6 +15,7 @@ export default function Nav() {
     { href: "/", label: "Home" },
     { href: "/shop", label: "Shop" },
     { href: "/nations", label: "Nations" },
+    { href: "/about", label: "About" },
   ];
 
   const isActive = (href: string) => {

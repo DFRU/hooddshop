@@ -1,33 +1,21 @@
 import Link from "next/link";
 import Image from "next/image";
-import { HOME_FEATURED_NATIONS, NATIONS } from "@/lib/nations";
+import { HOME_FEATURED_NATIONS, NATIONS, getTitleKeyword } from "@/lib/nations";
 import { flagUrl } from "@/lib/design";
 import { getProducts } from "@/lib/shopify";
 import type { ShopifyProduct } from "@/types/shopify";
 
-// Map nation codes to title keywords used in Shopify product titles
-const CODE_TO_TITLE: Record<string, string> = {
-  br: "Brazil",
-  ar: "Argentina",
-  fr: "France",
-  "gb-eng": "England",
-  es: "Spain",
-  de: "Germany",
-  mx: "Mexico",
-  us: "USA",
-};
-
 export default async function Hero() {
   // Fetch real Shopify product images for featured nations
   const titleQuery = HOME_FEATURED_NATIONS.map(
-    (c) => `title:${CODE_TO_TITLE[c] ?? c}`
+    (c) => `title:${getTitleKeyword(c)}`
   ).join(" OR ");
   const { products } = await getProducts({ first: 8, sortKey: "TITLE", query: titleQuery });
 
   // Build a map from nation code → product (match by title keyword)
   const productMap = new Map<string, ShopifyProduct>();
   for (const code of HOME_FEATURED_NATIONS) {
-    const keyword = (CODE_TO_TITLE[code] ?? code).toLowerCase();
+    const keyword = getTitleKeyword(code).toLowerCase();
     const match = products.find((p) => p.title.toLowerCase().includes(keyword));
     if (match) productMap.set(code, match);
   }

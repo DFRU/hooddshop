@@ -100,3 +100,32 @@ export function getNationsByRegion(): Record<Region, Nation[]> {
 export const HOME_FEATURED_NATIONS = [
   "br", "ar", "fr", "gb-eng", "es", "de", "mx", "us",
 ];
+
+/**
+ * Map nation codes → keywords used in Shopify product titles.
+ * Used to match nations to their Shopify products across the site.
+ * Only codes whose name differs from the Shopify title keyword need
+ * an explicit entry — everything else falls back to nation.name.
+ */
+export const CODE_TO_TITLE: Record<string, string> = {
+  us: "USA",
+  "gb-eng": "England",
+  "gb-sct": "Scotland",
+  kr: "South Korea",
+  cz: "Czechia",
+  ba: "Bosnia",
+  cd: "DR Congo",
+  ci: "Ivory Coast",
+  za: "South Africa",
+  sa: "Saudi Arabia",
+  cv: "Cape Verde",
+  cw: "Curaçao",
+  nz: "New Zealand",
+};
+
+/** Get the Shopify title search keyword for a nation code */
+export function getTitleKeyword(code: string): string {
+  if (CODE_TO_TITLE[code]) return CODE_TO_TITLE[code];
+  const nation = getNation(code);
+  return nation?.name ?? code;
+}
