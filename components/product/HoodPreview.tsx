@@ -136,7 +136,7 @@ export default function HoodPreview({ imageUrl, productTitle }: HoodPreviewProps
     <div className="w-full" style={{ paddingLeft: "var(--container-px)", paddingRight: "var(--container-px)" }}>
       {/* Heading */}
       <h2
-        className="text-display-md font-bold mb-8 mt-12"
+        className="text-display-sm font-bold mb-4 mt-6"
         style={{
           fontFamily: "var(--font-display)",
           color: "var(--color-text)",
@@ -146,7 +146,7 @@ export default function HoodPreview({ imageUrl, productTitle }: HoodPreviewProps
       </h2>
 
       {/* Vehicle Type Selector */}
-      <div className="flex gap-3 mb-8 flex-wrap">
+      <div className="flex gap-2 mb-4 flex-wrap">
         {(Object.entries(VEHICLES) as Array<[VehicleType, VehicleConfig]>).map(
           ([key, config]) => (
             <button
@@ -175,7 +175,7 @@ export default function HoodPreview({ imageUrl, productTitle }: HoodPreviewProps
         style={{
           background: "linear-gradient(180deg, rgba(26,26,26,0.8) 0%, rgba(10,10,10,1) 100%)",
           perspective: "1200px",
-          minHeight: "500px",
+          maxHeight: "380px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -317,32 +317,11 @@ export default function HoodPreview({ imageUrl, productTitle }: HoodPreviewProps
 
       {/* Hover hint */}
       <p
-        className="text-body-sm text-center mt-6"
+        className="text-body-xs text-center mt-3 mb-4"
         style={{ color: "var(--color-text-muted)" }}
       >
-        Hover over the preview to rotate the view
+        Hover to rotate the view
       </p>
-
-      {/* Product info */}
-      <div
-        className="mt-6 p-6 rounded-lg"
-        style={{
-          background: "var(--color-surface-2)",
-          border: "1px solid var(--color-border)",
-        }}
-      >
-        <h3
-          className="text-body-md font-semibold text-white mb-2"
-        >
-          {productTitle}
-        </h3>
-        <p
-          className="text-body-sm"
-          style={{ color: "var(--color-text-muted)" }}
-        >
-          Full-bleed sublimation print on premium stretch fabric. Fits most sedans, SUVs, and coupes with universal elastic edge design.
-        </p>
-      </div>
     </div>
   );
 }

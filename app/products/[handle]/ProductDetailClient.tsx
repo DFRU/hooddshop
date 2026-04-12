@@ -125,7 +125,7 @@ export default function ProductDetailClient({
     <>
       {/* Hood Preview — Desktop */}
       <div className="hidden lg:block border-t border-b" style={{ borderColor: "var(--color-border)" }}>
-        <div className="max-w-[var(--max-width)] mx-auto px-8 py-12">
+        <div className="max-w-[var(--max-width)] mx-auto px-8 py-4">
           <HoodPreview imageUrl={images[0]?.url ?? "/placeholder-hood.jpg"} productTitle={title} />
         </div>
       </div>

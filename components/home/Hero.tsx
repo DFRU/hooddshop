@@ -4,7 +4,7 @@ import { DESIGN_LINES, DESIGN_GRADIENTS, flagUrl } from "@/lib/design";
 
 export default function Hero() {
   return (
-    <section className="relative flex items-end overflow-hidden" style={{ minHeight: "85vh" }}>
+    <section className="relative flex items-end overflow-hidden" style={{ minHeight: "min(85vh, 700px)" }}>
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, #0A0A0A, #0D0B09, #0A0A0A)" }} />
