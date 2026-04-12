@@ -67,6 +67,25 @@ export default function RootLayout({
         className="min-h-full flex flex-col"
         style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Hood'd",
+              url: "https://hooddshop.com",
+              logo: "https://hooddshop.com/favicon.png",
+              description:
+                "Premium stretch-fit car hood covers for World Cup 2026. 48 nations.",
+              contactPoint: {
+                "@type": "ContactPoint",
+                email: "contact@hooddshop.com",
+                contactType: "customer service",
+              },
+            }),
+          }}
+        />
         <Analytics />
         <CartProvider>
           <ToastProvider>

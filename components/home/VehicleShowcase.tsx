@@ -56,7 +56,7 @@ export default async function VehicleShowcase() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   <div className="flex items-center gap-2">
-                    <img src={flagUrl(img.nationCode, 32)} className="w-6 h-auto rounded shadow" alt="" />
+                    <img src={flagUrl(img.nationCode, 32)} className="w-6 h-auto rounded shadow" alt={`${nation?.name} flag`} />
                     <div>
                       <div className="text-display-sm text-white">{nation.name}</div>
                       <div className="text-[9px] uppercase tracking-[0.12em] text-white/50">
@@ -98,7 +98,7 @@ export default async function VehicleShowcase() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-3">
                       <div className="flex items-center gap-2">
-                        <img src={flagUrl(img.nationCode, 32)} className="w-6 h-auto rounded shadow" alt="" />
+                        <img src={flagUrl(img.nationCode, 32)} className="w-6 h-auto rounded shadow" alt={`${nation?.name} flag`} />
                         <div>
                           <div className="text-display-sm text-white">{nation.name}</div>
                           <div className="text-[9px] uppercase tracking-[0.12em] text-white/50">

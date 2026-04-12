@@ -110,7 +110,7 @@ export default async function Hero() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <img src={flagUrl("us", 40)} className="w-8 h-auto mb-1.5 rounded shadow-md" alt="" />
+                    <img src={flagUrl("us", 40)} className="w-8 h-auto mb-1.5 rounded shadow-md" alt="United States flag" />
                     <div className="text-display-sm text-white">United States</div>
                     <div className="text-[10px] uppercase tracking-[0.12em] text-white/50 mt-0.5">
                       on {heroImage.vehicleName}
@@ -169,7 +169,7 @@ export default async function Hero() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <img src={flagUrl("us", 32)} className="w-7 h-auto mb-1 rounded shadow-md" alt="" />
+                  <img src={flagUrl("us", 32)} className="w-7 h-auto mb-1 rounded shadow-md" alt="United States flag" />
                   <div className="text-display-sm text-white">United States</div>
                   <div className="text-[9px] uppercase tracking-[0.12em] text-white/50 mt-0.5">
                     on {heroImage.vehicleName}
@@ -205,7 +205,7 @@ export default async function Hero() {
                       ) : (
                         <img
                           src={flagUrl(code, 160)}
-                          alt=""
+                          alt={`${n?.name ?? code} flag`}
                           className="absolute inset-0 w-full h-full object-cover opacity-30"
                         />
                       )}

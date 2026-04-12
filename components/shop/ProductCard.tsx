@@ -22,7 +22,7 @@ export default function ProductCard({ nation, design }: ProductCardProps) {
           <div className={`absolute inset-0 ${DESIGN_CSS_CLASS[design]} opacity-55 group-hover:opacity-80 transition-opacity duration-300`} />
           <img
             src={flagUrl(nation.code, 160)}
-            alt=""
+            alt={`${nation.name} flag`}
             className="absolute inset-0 w-full h-full object-cover opacity-15 mix-blend-overlay"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
