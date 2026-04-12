@@ -8,7 +8,8 @@ export default function ProductJsonLd({ product }: ProductJsonLdProps) {
   const image = product.images?.edges?.[0]?.node;
   const variant = product.variants?.edges?.[0]?.node;
   const price = variant?.price?.amount ?? "49.99";
-  const currency = variant?.price?.currencyCode ?? "USD";
+  // Store is CAD but we display/sell in USD equivalent
+  const currency = "USD";
 
   const jsonLd = {
     "@context": "https://schema.org",
