@@ -9,7 +9,7 @@ import { flagUrl } from "@/lib/design";
 const REGIONS: (Region | "All")[] = ["All", "Americas", "Europe", "Africa", "Asia-Pacific", "Middle East"];
 
 interface NationsClientProps {
-  nationProductMap: Record<string, { handle: string; imageUrl: string | null; vehicleImageUrl?: string | null }>;
+  nationProductMap: Record<string, { handle: string; imageUrl: string | null }>;
 }
 
 export default function NationsClient({ nationProductMap }: NationsClientProps) {
@@ -79,7 +79,6 @@ export default function NationsClient({ nationProductMap }: NationsClientProps) 
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
           {filtered.map((n) => {
             const product = nationProductMap[n.code];
-            // Link to real product page if available, otherwise to the nation redirect page
             const href = product
               ? `/products/${product.handle}`
               : `/nations/${n.code}`;
@@ -91,16 +90,8 @@ export default function NationsClient({ nationProductMap }: NationsClientProps) 
                 className="group relative overflow-hidden rounded-lg text-left touch-active"
                 style={{ aspectRatio: "1", border: "1px solid #181818", background: "#111" }}
               >
-                {/* Priority: vehicle image > product image > flag */}
-                {product?.vehicleImageUrl ? (
-                  <Image
-                    src={product.vehicleImageUrl}
-                    alt={`${n.name} car hood cover on vehicle`}
-                    fill
-                    className="object-cover opacity-70 group-hover:opacity-90 group-hover:scale-110 transition-all duration-500"
-                    sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, (max-width: 1024px) 20vw, 16vw"
-                  />
-                ) : product?.imageUrl ? (
+                {/* Product image if available, otherwise flag */}
+                {product?.imageUrl ? (
                   <Image
                     src={product.imageUrl}
                     alt={`${n.name} hood cover`}
