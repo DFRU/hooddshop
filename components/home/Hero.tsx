@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { flagUrl } from "@/lib/design";
-import { getHeroVehicleImage } from "@/lib/vehicles";
+import { getMockupImage } from "@/lib/vehicles";
 
 export default async function Hero() {
-  // Single vehicle example — US truck — so first-time visitors understand the product
-  const heroImage = getHeroVehicleImage("us");
+  // Product-first: show real Printkk mockup (Outdoor 3/4 view), not AI vehicle render
+  const heroImage = getMockupImage("us", 2) ?? getMockupImage("us", 0);
 
   return (
     <section className="relative flex items-end overflow-hidden" style={{ minHeight: "min(90vh, 780px)" }}>
@@ -96,7 +96,7 @@ export default async function Hero() {
                     <img src={flagUrl("us", 40)} className="w-8 h-auto mb-1.5 rounded shadow-md" alt="United States flag" />
                     <div className="text-display-sm text-white">United States</div>
                     <div className="text-[9px] lg:text-[10px] uppercase tracking-[0.12em] text-white/50 mt-0.5">
-                      {"vehicleName" in heroImage ? `on ${heroImage.vehicleName} · AI Preview` : "Product Mockup"}
+                      Jersey Line · Hood Cover
                     </div>
                   </div>
                 </div>

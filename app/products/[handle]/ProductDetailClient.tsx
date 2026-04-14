@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState, useRef, useEffect } from "react";
+import { useCallback, useState } from "react";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import FulfillmentSelector from "@/components/product/FulfillmentSelector";
@@ -19,7 +19,7 @@ const ACCORDION_SECTIONS = [
   {
     title: "Fit Guide",
     content:
-      "Standard size: 63\" × 47\" (160 × 120 cm). Fits most sedans, compact SUVs, and coupes. Elastic edge provides 15-25% stretch tolerance. Does not fit micro cars or hoods under 36\" wide. Universal fit — no vehicle selection required.",
+      'Standard size: 63" × 47" (160 × 120 cm). Fits most sedans, compact SUVs, and coupes. Elastic edge provides 15-25% stretch tolerance. Does not fit micro cars or hoods under 36" wide. Universal fit — no vehicle selection required.',
   },
   {
     title: "Care Instructions",
@@ -34,16 +34,16 @@ const ACCORDION_SECTIONS = [
 ];
 
 // ── Types ─────────────────────────────────────────────────────
-interface VehicleImageProp {
+interface GalleryImage {
   src: string;
   alt: string;
-  vehicleName: string;
+  label?: string;
 }
 
 interface ProductDetailClientProps {
   product: ShopifyProduct | null;
   handle: string;
-  vehicleImages?: VehicleImageProp[];
+  vehicleImages?: { src: string; alt: string; vehicleName: string }[];
 }
 
 // ── Component ─────────────────────────────────────────────────
@@ -57,7 +57,6 @@ export default function ProductDetailClient({
   const [selectedFulfillment, setSelectedFulfillment] =
     useState<FulfillmentOption | null>(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const galleryRef = useRef<HTMLDivElement>(null);
 
   const handleFulfillmentSelect = useCallback((option: FulfillmentOption) => {
     setSelectedFulfillment(option);
@@ -65,27 +64,29 @@ export default function ProductDetailClient({
 
   // ── Derived data ──────────────────────────────────────────
   const shopifyImages = product?.images?.edges?.map((e) => e.node) ?? [];
-  // Merge: first Shopify image, then vehicle images, then remaining Shopify images
-  const vehicleGalleryItems = vehicleImages.map((v) => ({
-    url: v.src,
-    altText: v.alt,
-    width: 1200,
-    height: 900,
-    isVehicle: true,
-    vehicleName: v.vehicleName,
-  }));
-  const shopifyGalleryItems = shopifyImages.map((img) => ({
-    url: img.url,
-    altText: img.altText,
-    width: img.width,
-    height: img.height,
-    isVehicle: false,
-    vehicleName: undefined as string | undefined,
-  }));
-  // Insert vehicle images after the first Shopify product image
-  const images = shopifyGalleryItems.length > 0
-    ? [shopifyGalleryItems[0], ...vehicleGalleryItems, ...shopifyGalleryItems.slice(1)]
-    : [...vehicleGalleryItems, ...shopifyGalleryItems];
+
+  // Build gallery: mockups first, then Shopify images, then vehicle renders
+  const galleryImages: GalleryImage[] = [];
+
+  // Add mockup/vehicle images (these come pre-ordered from the server: mockups first, then AI renders)
+  for (const v of vehicleImages) {
+    galleryImages.push({
+      src: v.src,
+      alt: v.alt,
+      label: v.vehicleName,
+    });
+  }
+
+  // Add any Shopify product images that aren't duplicates
+  for (const img of shopifyImages) {
+    if (!galleryImages.some((g) => g.src === img.url)) {
+      galleryImages.push({
+        src: img.url,
+        alt: img.altText ?? product?.title ?? handle,
+        label: "Product Photo",
+      });
+    }
+  }
 
   const variants = product?.variants?.edges?.map((e) => e.node) ?? [];
   const firstVariant = variants[0] ?? null;
@@ -94,36 +95,11 @@ export default function ProductDetailClient({
     : null;
 
   const displayPrice = shopifyPrice ?? 49.99;
-  const currencyCode = firstVariant?.price?.currencyCode ?? "USD";
   const title = product?.title ?? `Hood Cover — ${handle}`;
   const descriptionHtml = product?.descriptionHtml ?? null;
   const description =
     product?.description ??
     "Premium stretch-fit car hood cover with full-bleed sublimation print. 85-90% polyester / 10-15% spandex. Universal fit with elastic sewn-in edge.";
-
-  // ── Gallery scroll observer ───────────────────────────────
-  useEffect(() => {
-    const gallery = galleryRef.current;
-    if (!gallery || images.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            const idx = Number(
-              (entry.target as HTMLElement).dataset.index ?? 0
-            );
-            setActiveImageIndex(idx);
-          }
-        }
-      },
-      { root: gallery, threshold: 0.6 }
-    );
-
-    const slides = gallery.querySelectorAll("[data-index]");
-    slides.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
-  }, [images.length]);
 
   // ── Add to cart handler ───────────────────────────────────
   const handleAddToCart = async () => {
@@ -148,141 +124,119 @@ export default function ProductDetailClient({
     setTimeout(() => setAddedFeedback(false), 1000);
   };
 
-  // ── Placeholder if no product + no Shopify ────────────────
-  const hasImages = images.length > 0;
-  const hasVehicles = vehicleImages.length > 0;
+  const activeImage = galleryImages[activeImageIndex] ?? galleryImages[0];
 
   return (
     <>
-      <div className="lg:flex lg:gap-0 max-w-[var(--max-width)] mx-auto">
-        {/* ── Image gallery with CSS scroll-snap ── */}
-        <div className="lg:w-[60%]">
-          {hasImages ? (
-            <div
-              ref={galleryRef}
-              className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide"
-              style={{ WebkitOverflowScrolling: "touch" }}
-            >
-              {images.map((img, i) => (
-                <div
-                  key={img.url + i}
-                  data-index={i}
-                  className="flex-shrink-0 w-full snap-center relative"
-                  style={{ aspectRatio: "4/3" }}
-                >
-                  <Image
-                    src={img.url}
-                    alt={img.altText ?? title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 60vw"
-                    priority={i === 0}
-                  />
-                  {img.isVehicle && (
-                    <div className="absolute top-3 right-3 px-2 py-1 rounded text-[9px] uppercase tracking-widest text-white/70" style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(4px)" }}>
-                      AI Preview · {img.vehicleName}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div
-              className="relative w-full"
-              style={{
-                aspectRatio: "4/3",
-                background: "var(--color-surface-2)",
-              }}
-            >
+      <div className="max-w-[var(--max-width)] mx-auto lg:flex lg:gap-8 px-[var(--container-px)] lg:px-[var(--container-px-lg)] py-6 lg:py-10">
+        {/* ── Image gallery ── */}
+        <div className="lg:w-[58%] lg:flex-shrink-0">
+          {/* Main image */}
+          <div
+            className="relative w-full overflow-hidden rounded-lg"
+            style={{ aspectRatio: "4/3", border: "1px solid #1A1A1A", background: "var(--color-surface-2)" }}
+          >
+            {activeImage ? (
+              <Image
+                src={activeImage.src}
+                alt={activeImage.alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 58vw"
+                priority
+              />
+            ) : (
               <div className="flex items-center justify-center h-full">
-                <span
-                  className="text-label"
-                  style={{ color: "var(--color-text-muted)" }}
-                >
+                <span className="text-label" style={{ color: "var(--color-text-muted)" }}>
                   Product image available when store is live
                 </span>
               </div>
+            )}
+            {activeImage?.label && activeImage.label !== "Product Mockup" && activeImage.label !== "Product Photo" && (
+              <div
+                className="absolute top-3 right-3 px-2 py-1 rounded text-[9px] uppercase tracking-widest text-white/70"
+                style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(4px)" }}
+              >
+                AI Preview · {activeImage.label}
+              </div>
+            )}
+          </div>
+
+          {/* Thumbnail row */}
+          {galleryImages.length > 1 && (
+            <div className="flex gap-2 mt-3 overflow-x-auto scrollbar-hide pb-1">
+              {galleryImages.map((img, i) => (
+                <button
+                  key={img.src + i}
+                  onClick={() => setActiveImageIndex(i)}
+                  className="relative flex-shrink-0 w-16 h-16 lg:w-20 lg:h-20 rounded overflow-hidden transition-all"
+                  style={{
+                    border: i === activeImageIndex ? "2px solid var(--color-accent)" : "2px solid #222",
+                    opacity: i === activeImageIndex ? 1 : 0.6,
+                  }}
+                >
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    className="object-cover"
+                    sizes="80px"
+                  />
+                </button>
+              ))}
             </div>
           )}
-
-          {/* Dot indicators */}
-          <div className="flex justify-center gap-2 py-3">
-            {(hasImages ? images : [0, 1, 2]).map((_, i) => (
-              <button
-                key={i}
-                aria-label={`Go to image ${i + 1}`}
-                onClick={() => {
-                  galleryRef.current
-                    ?.querySelectorAll("[data-index]")
-                    [i]?.scrollIntoView({
-                      behavior: "smooth",
-                      inline: "center",
-                    });
-                }}
-                className="w-2 h-2 rounded-full transition-colors"
-                style={{
-                  background:
-                    i === activeImageIndex
-                      ? "var(--color-accent)"
-                      : "var(--color-border)",
-                }}
-              />
-            ))}
-          </div>
-
         </div>
 
-        {/* ── Product info — desktop sticky ── */}
-        <div className="px-[var(--container-px)] lg:px-8 lg:w-[40%] lg:sticky lg:top-[68px] lg:self-start">
-          <div className="py-6">
-            <h1 className="text-display-lg text-white">{title}</h1>
+        {/* ── Product info ── */}
+        <div className="lg:w-[42%] mt-6 lg:mt-0">
+          <h1 className="text-display-lg text-white">{title}</h1>
+          <p
+            className="text-body-lg font-semibold mt-2"
+            style={{ color: "var(--color-accent)" }}
+          >
+            ${displayPrice.toFixed(2)} USD
+          </p>
+          {descriptionHtml ? (
+            <div
+              className="text-body-md mt-4 product-description"
+              style={{ color: "var(--color-text-muted)" }}
+              dangerouslySetInnerHTML={{ __html: descriptionHtml }}
+            />
+          ) : (
             <p
-              className="text-body-lg font-semibold mt-2"
-              style={{ color: "var(--color-accent)" }}
+              className="text-body-md mt-4"
+              style={{ color: "var(--color-text-muted)" }}
             >
-              ${displayPrice.toFixed(2)} USD
+              {description}
             </p>
-            {descriptionHtml ? (
-              <div
-                className="text-body-md mt-4 product-description"
-                style={{ color: "var(--color-text-muted)" }}
-                dangerouslySetInnerHTML={{ __html: descriptionHtml }}
-              />
-            ) : (
-              <p
-                className="text-body-md mt-4"
-                style={{ color: "var(--color-text-muted)" }}
-              >
-                {description}
-              </p>
-            )}
+          )}
 
-            <FulfillmentSelector onSelect={handleFulfillmentSelect} />
+          <FulfillmentSelector onSelect={handleFulfillmentSelect} />
 
-            {/* Desktop add to cart */}
-            <button
-              onClick={handleAddToCart}
-              disabled={isLoading || !firstVariant}
-              className="hidden lg:block mt-6 w-full text-white font-semibold uppercase tracking-[0.06em] rounded-none transition-colors disabled:opacity-50"
-              style={{
-                background: addedFeedback
-                  ? "var(--color-success)"
-                  : "var(--color-accent)",
-                height: "56px",
-              }}
-            >
-              {addedFeedback
-                ? "\u2713 Added"
-                : firstVariant
-                ? "Add to Cart"
-                : "Coming Soon"}
-            </button>
+          {/* Desktop add to cart */}
+          <button
+            onClick={handleAddToCart}
+            disabled={isLoading || !firstVariant}
+            className="mt-6 w-full text-white font-semibold uppercase tracking-[0.06em] rounded transition-colors disabled:opacity-50"
+            style={{
+              background: addedFeedback
+                ? "var(--color-success)"
+                : "var(--color-accent)",
+              height: "56px",
+            }}
+          >
+            {addedFeedback
+              ? "\u2713 Added"
+              : firstVariant
+              ? "Add to Cart"
+              : "Coming Soon"}
+          </button>
 
-            <TrustBar />
-          </div>
+          <TrustBar />
 
           {/* ── Accordion sections ── */}
-          <div className="pb-24 lg:pb-8">
+          <div className="mt-4 pb-24 lg:pb-8">
             {ACCORDION_SECTIONS.map((section) => (
               <details
                 key={section.title}
@@ -341,7 +295,7 @@ export default function ProductDetailClient({
         <button
           onClick={handleAddToCart}
           disabled={isLoading || !firstVariant}
-          className="text-white font-semibold uppercase tracking-[0.06em] rounded-none px-8 transition-colors disabled:opacity-50"
+          className="text-white font-semibold uppercase tracking-[0.06em] rounded px-8 transition-colors disabled:opacity-50"
           style={{
             background: addedFeedback
               ? "var(--color-success)"
@@ -357,7 +311,6 @@ export default function ProductDetailClient({
             : "Coming Soon"}
         </button>
       </div>
-
     </>
   );
 }

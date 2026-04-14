@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { HOME_FEATURED_NATIONS, NATIONS, getTitleKeyword } from "@/lib/nations";
 import { flagUrl } from "@/lib/design";
+import { getMockupImage } from "@/lib/vehicles";
 import { getProducts } from "@/lib/shopify";
 import type { ShopifyProduct } from "@/types/shopify";
 
@@ -42,7 +43,9 @@ export default async function FeaturedNations() {
             const n = NATIONS.find((x) => x.code === code);
             if (!n) return null;
             const product = productMap.get(code);
-            const imageUrl = product?.images?.edges?.[0]?.node?.url;
+            // Prefer Printkk mockup over Shopify image (which may be vehicle render)
+            const mockup = getMockupImage(code, 0);
+            const imageUrl = mockup?.src ?? product?.images?.edges?.[0]?.node?.url;
             const href = product ? `/products/${product.handle}` : `/shop`;
 
             return (

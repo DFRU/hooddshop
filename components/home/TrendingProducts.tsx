@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getProducts } from "@/lib/shopify";
+import { getNationCodeFromTitle } from "@/lib/nations";
+import { getMockupImage } from "@/lib/vehicles";
 
 export default async function TrendingProducts() {
   // Fetch popular nations by title — no sales data yet so BEST_SELLING returns arbitrary order
@@ -31,11 +33,17 @@ export default async function TrendingProducts() {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-5">
           {products.map((product) => {
-            const image = product.images?.edges?.[0]?.node;
+            const shopifyImage = product.images?.edges?.[0]?.node;
             const price = product.priceRange?.minVariantPrice?.amount;
             const formattedPrice = price
               ? `$${parseFloat(price).toFixed(2)}`
               : "$49.99";
+
+            // Prefer Printkk mockup over Shopify image
+            const nationCode = getNationCodeFromTitle(product.title);
+            const mockup = nationCode ? getMockupImage(nationCode, 0) : null;
+            const imgSrc = mockup?.src ?? shopifyImage?.url;
+            const imgAlt = mockup?.alt ?? shopifyImage?.altText ?? product.title;
 
             return (
               <Link
@@ -51,10 +59,10 @@ export default async function TrendingProducts() {
                     background: "var(--color-surface-2)",
                   }}
                 >
-                  {image ? (
+                  {imgSrc ? (
                     <Image
-                      src={image.url}
-                      alt={image.altText ?? product.title}
+                      src={imgSrc}
+                      alt={imgAlt}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
