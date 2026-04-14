@@ -68,12 +68,12 @@ export default async function ProductPage({ params }: PageProps) {
   const vehicleImages = nationCode ? getVehicleImages(nationCode) : [];
   const mockups = nationCode ? getMockupImages(nationCode) : [];
 
-  // Build combined image list: all mockup views first (skip size_info view 1), then AI renders
+  // Build combined image list: product mockups first, then max 1 vehicle render as supporting
   const allImages = [
     ...mockups
       .filter((m) => m.view !== 1) // skip size info view
       .map((m) => ({ src: m.src, alt: m.alt, vehicleName: `Product Mockup` })),
-    ...vehicleImages.map((v) => ({ src: v.src, alt: v.alt, vehicleName: v.vehicleName })),
+    ...vehicleImages.slice(0, 1).map((v) => ({ src: v.src, alt: v.alt, vehicleName: v.vehicleName })),
   ];
 
   return (

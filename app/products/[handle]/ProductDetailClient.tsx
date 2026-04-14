@@ -128,7 +128,7 @@ export default function ProductDetailClient({
 
   return (
     <>
-      <div className="max-w-[var(--max-width)] mx-auto lg:flex lg:gap-8 px-[var(--container-px)] lg:px-[var(--container-px-lg)] py-6 lg:py-10">
+      <div className="max-w-[var(--max-width)] mx-auto lg:flex lg:gap-8 px-[var(--container-px)] lg:px-[var(--container-px-lg)] pt-20 lg:pt-24 pb-6 lg:pb-10">
         {/* ── Image gallery ── */}
         <div className="lg:w-[58%] lg:flex-shrink-0">
           {/* Main image */}
