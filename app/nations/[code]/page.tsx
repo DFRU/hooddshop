@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { getNation, getTitleKeyword } from "@/lib/nations";
 import { getProducts } from "@/lib/shopify";
 import { flagUrl } from "@/lib/design";
+import { getProductImage } from "@/lib/vehicles";
 
 interface PageProps {
   params: Promise<{ code: string }>;
@@ -77,21 +78,34 @@ export default async function NationDetailPage({ params }: PageProps) {
         </Link>
 
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-12">
-          {/* Flag / preview */}
-          <div
-            className="relative overflow-hidden rounded-lg"
-            style={{ aspectRatio: "4/3", border: "1px solid #1A1A1A", background: "#111" }}
-          >
-            <img
-              src={flagUrl(code, 640)}
-              alt={nation.name}
-              className="absolute inset-0 w-full h-full object-cover opacity-40"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-            <div className="absolute bottom-6 left-6">
-              <span className="text-6xl">{nation.emoji}</span>
-            </div>
-          </div>
+          {/* Product photo or flag fallback */}
+          {(() => {
+            const productPhoto = getProductImage(code);
+            return (
+              <div
+                className="relative overflow-hidden rounded-lg"
+                style={{ aspectRatio: "4/3", border: "1px solid #1A1A1A", background: "#111" }}
+              >
+                {productPhoto ? (
+                  <img
+                    src={productPhoto.src}
+                    alt={productPhoto.alt}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                ) : (
+                  <img
+                    src={flagUrl(code, 640)}
+                    alt={nation.name}
+                    className="absolute inset-0 w-full h-full object-cover opacity-40"
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                <div className="absolute bottom-6 left-6">
+                  <span className="text-6xl">{nation.emoji}</span>
+                </div>
+              </div>
+            );
+          })()}
 
           {/* Details */}
           <div className="space-y-5 lg:space-y-7 flex flex-col justify-center">

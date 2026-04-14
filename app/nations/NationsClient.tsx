@@ -6,6 +6,14 @@ import Image from "next/image";
 import { NATIONS, type Region } from "@/lib/nations";
 import { flagUrl } from "@/lib/design";
 
+/** Nations with real product photography available at /vehicles/{code}_product.webp */
+const PRODUCT_PHOTO_CODES = new Set([
+  "ar", "at", "au", "ba", "be", "br", "ca", "cd", "ch", "ci", "co", "cv",
+  "cw", "cz", "de", "dz", "ec", "eg", "es", "fr", "gb-eng", "gb-sct", "gh",
+  "hr", "ht", "iq", "ir", "jo", "jp", "kr", "ma", "mx", "nl", "no", "nz",
+  "pa", "pt", "py", "qa", "sa", "se", "sn", "tn", "tr", "us", "uy", "uz", "za",
+]);
+
 const REGIONS: (Region | "All")[] = ["All", "Americas", "Europe", "Africa", "Asia-Pacific", "Middle East"];
 
 interface NationsClientProps {
@@ -90,13 +98,13 @@ export default function NationsClient({ nationProductMap }: NationsClientProps) 
                 className="group relative overflow-hidden rounded-lg text-left touch-active"
                 style={{ aspectRatio: "1", border: "1px solid #181818", background: "#111" }}
               >
-                {/* Product image if available, otherwise flag */}
-                {product?.imageUrl ? (
+                {/* Product photo if available, otherwise flag */}
+                {PRODUCT_PHOTO_CODES.has(n.code) ? (
                   <Image
-                    src={product.imageUrl}
+                    src={`/vehicles/${n.code}_product.webp`}
                     alt={`${n.name} hood cover`}
                     fill
-                    className="object-cover opacity-60 group-hover:opacity-80 group-hover:scale-110 transition-all duration-500"
+                    className="object-cover group-hover:scale-110 transition-all duration-500"
                     sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, (max-width: 1024px) 20vw, 16vw"
                   />
                 ) : (
