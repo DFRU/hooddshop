@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getProducts } from "@/lib/shopify";
 import { getNationCodeFromTitle } from "@/lib/nations";
-import { getMockupImage } from "@/lib/vehicles";
+import { getMockupImage, getProductImage } from "@/lib/vehicles";
 
 export default async function TrendingProducts() {
   // Fetch popular nations by title — no sales data yet so BEST_SELLING returns arbitrary order
@@ -39,11 +39,12 @@ export default async function TrendingProducts() {
               ? `$${parseFloat(price).toFixed(2)}`
               : "$49.99";
 
-            // Prefer Printkk mockup over Shopify image
+            // Image priority: product photo > mockup > Shopify image
             const nationCode = getNationCodeFromTitle(product.title);
+            const productPhoto = nationCode ? getProductImage(nationCode) : null;
             const mockup = nationCode ? getMockupImage(nationCode, 0) : null;
-            const imgSrc = mockup?.src ?? shopifyImage?.url;
-            const imgAlt = mockup?.alt ?? shopifyImage?.altText ?? product.title;
+            const imgSrc = productPhoto?.src ?? mockup?.src ?? shopifyImage?.url;
+            const imgAlt = productPhoto?.alt ?? mockup?.alt ?? shopifyImage?.altText ?? product.title;
 
             return (
               <Link

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getProduct } from "@/lib/shopify";
 import { getNationCodeFromTitle, getNation } from "@/lib/nations";
-import { getVehicleImages, getMockupImage, getMockupImages } from "@/lib/vehicles";
+import { getVehicleImages, getMockupImage, getMockupImages, getProductImage } from "@/lib/vehicles";
 import ProductDetailClient from "./ProductDetailClient";
 import ProductJsonLd from "@/components/product/ProductJsonLd";
 
@@ -38,14 +38,17 @@ export async function generateMetadata({
     ? `Rep ${nation.name} on the road with Hood'd premium stretch-fit car hood covers. Full sublimation print, universal fit for cars, SUVs, and trucks. $49.99. Made to order for World Cup 2026.`
     : product.description || "Premium stretch-fit car hood cover with sublimation print for World Cup 2026.";
 
-  // Use mockup for OG if available, then AI render, then Shopify product image
-  const ogImage = mockupImage
-    ? { url: `https://hooddshop.com${mockupImage.src}`, width: mockupImage.width, height: mockupImage.height }
-    : vehicleImages.length > 0
-      ? { url: `https://hooddshop.com${vehicleImages[0].src}`, width: vehicleImages[0].width, height: vehicleImages[0].height }
-      : product.images?.edges?.[0]?.node
-        ? { url: product.images.edges[0].node.url, width: product.images.edges[0].node.width, height: product.images.edges[0].node.height }
-        : undefined;
+  // OG image priority: product photo > mockup > AI render > Shopify image
+  const productPhotoOG = nationCode ? getProductImage(nationCode) : null;
+  const ogImage = productPhotoOG
+    ? { url: `https://hooddshop.com${productPhotoOG.src}`, width: productPhotoOG.width, height: productPhotoOG.height }
+    : mockupImage
+      ? { url: `https://hooddshop.com${mockupImage.src}`, width: mockupImage.width, height: mockupImage.height }
+      : vehicleImages.length > 0
+        ? { url: `https://hooddshop.com${vehicleImages[0].src}`, width: vehicleImages[0].width, height: vehicleImages[0].height }
+        : product.images?.edges?.[0]?.node
+          ? { url: product.images.edges[0].node.url, width: product.images.edges[0].node.width, height: product.images.edges[0].node.height }
+          : undefined;
 
   return {
     title: seoTitle,
@@ -63,16 +66,21 @@ export default async function ProductPage({ params }: PageProps) {
   const { handle } = await params;
   const product = await getProduct(handle);
 
-  // Resolve vehicle images for this product's nation
+  // Resolve all image sources for this product's nation
   const nationCode = product ? getNationCodeFromTitle(product.title) : null;
+  const productPhoto = nationCode ? getProductImage(nationCode) : null;
   const vehicleImages = nationCode ? getVehicleImages(nationCode) : [];
   const mockups = nationCode ? getMockupImages(nationCode) : [];
 
-  // Build combined image list: product mockups first, then max 1 vehicle render as supporting
+  // Image priority: 1) Product photo (real fabric), 2) Mockups on car, 3) Max 1 AI vehicle render
   const allImages = [
+    // Real product photography first
+    ...(productPhoto ? [{ src: productPhoto.src, alt: productPhoto.alt, vehicleName: "Product Photo" }] : []),
+    // Printkk mockups (skip size info view 1)
     ...mockups
-      .filter((m) => m.view !== 1) // skip size info view
-      .map((m) => ({ src: m.src, alt: m.alt, vehicleName: `Product Mockup` })),
+      .filter((m) => m.view !== 1)
+      .map((m) => ({ src: m.src, alt: m.alt, vehicleName: "Product Mockup" })),
+    // Max 1 AI vehicle render as supporting
     ...vehicleImages.slice(0, 1).map((v) => ({ src: v.src, alt: v.alt, vehicleName: v.vehicleName })),
   ];
 

@@ -39,13 +39,13 @@ export const metadata: Metadata = {
     siteName: "Hood'd",
     title: "Hood'd — Car Hood Covers for World Cup 2026",
     description: "Premium stretch-fit car hood covers for 48 World Cup 2026 nations. Universal fit for cars, SUVs, and trucks. $49.99.",
-    images: [{ url: "/vehicles/us_mockup_2.webp", width: 1200, height: 1200, alt: "USA car hood cover — Hood'd World Cup 2026" }],
+    images: [{ url: "/vehicles/us_product.webp", width: 1200, height: 1200, alt: "USA car hood cover — Hood'd World Cup 2026" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Hood'd — Car Hood Covers for World Cup 2026",
     description: "Premium stretch-fit car hood covers for 48 nations. Universal fit. $49.99.",
-    images: ["/vehicles/us_mockup_2.webp"],
+    images: ["/vehicles/us_product.webp"],
   },
   icons: {
     icon: "/favicon.png",

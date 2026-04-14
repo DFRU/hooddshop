@@ -42,6 +42,25 @@ export interface MockupImage {
   height: number;
 }
 
+export interface ProductImage {
+  nationCode: string;
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+/**
+ * Nations with actual product photography (fabric close-up shots).
+ * Files: /public/vehicles/{code}_product.webp — 1200x900
+ */
+const PRODUCT_PHOTO_NATIONS = new Set([
+  "ar", "at", "au", "ba", "be", "br", "ca", "cd", "ch", "ci", "co", "cv",
+  "cw", "cz", "de", "dz", "ec", "eg", "es", "fr", "gb-eng", "gb-sct", "gh",
+  "hr", "ht", "iq", "ir", "jo", "jp", "kr", "ma", "mx", "nl", "no", "nz",
+  "pa", "pt", "py", "qa", "sa", "se", "sn", "tn", "tr", "us", "uy", "uz", "za",
+]);
+
 const VEHICLE_NAMES: Record<VehicleType, string> = {
   sedan: "Toyota Camry",
   suv: "Toyota RAV4",
@@ -139,6 +158,23 @@ function buildMockup(nationCode: string, nationName: string, view: MockupView = 
 }
 
 import { getNation } from "./nations";
+
+/**
+ * Get the actual product photo (fabric close-up) for a nation.
+ * These are real photography of the printed hood cover material.
+ */
+export function getProductImage(nationCode: string): ProductImage | null {
+  if (!PRODUCT_PHOTO_NATIONS.has(nationCode)) return null;
+  const nation = getNation(nationCode);
+  if (!nation) return null;
+  return {
+    nationCode,
+    src: `/vehicles/${nationCode}_product.webp`,
+    alt: `${nation.name} hood cover print detail — Hood'd World Cup 2026`,
+    width: 1200,
+    height: 900,
+  };
+}
 
 /**
  * Get a single Printkk product mockup image for a nation.

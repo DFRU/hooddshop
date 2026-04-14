@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { flagUrl } from "@/lib/design";
-import { getMockupImage } from "@/lib/vehicles";
+import { getProductImage, getMockupImage } from "@/lib/vehicles";
 
 export default async function Hero() {
-  // Product-first: show real Printkk mockup (Outdoor 3/4 view), not AI vehicle render
-  const heroImage = getMockupImage("us", 2) ?? getMockupImage("us", 0);
+  // Product-first: show real product photo, fall back to mockup
+  const heroImage = getProductImage("us") ?? getMockupImage("us", 2) ?? getMockupImage("us", 0);
 
   return (
     <section className="relative flex items-end overflow-hidden" style={{ minHeight: "min(90vh, 780px)" }}>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getNationCodeFromTitle } from "@/lib/nations";
-import { getMockupImage } from "@/lib/vehicles";
+import { getMockupImage, getProductImage } from "@/lib/vehicles";
 import type { ShopifyProduct } from "@/types/shopify";
 
 interface ShopifyProductCardProps {
@@ -15,14 +15,15 @@ export default function ShopifyProductCard({ product }: ShopifyProductCardProps)
     ? `$${parseFloat(price).toFixed(2)}`
     : "$49.99";
 
-  // Prefer Printkk mockup (view 0 = Front SUV) over Shopify image (which may be a vehicle render)
+  // Image priority: product photo > mockup > Shopify image
   const nationCode = getNationCodeFromTitle(product.title);
+  const productPhoto = nationCode ? getProductImage(nationCode) : null;
   const mockup = nationCode ? getMockupImage(nationCode, 0) : null;
-  const hoverMockup = nationCode ? getMockupImage(nationCode, 2) : null;
 
-  const primarySrc = mockup?.src ?? shopifyImage?.url;
-  const primaryAlt = mockup?.alt ?? shopifyImage?.altText ?? product.title;
-  const hoverSrc = hoverMockup?.src;
+  const primarySrc = productPhoto?.src ?? mockup?.src ?? shopifyImage?.url;
+  const primaryAlt = productPhoto?.alt ?? mockup?.alt ?? shopifyImage?.altText ?? product.title;
+  // Hover shows the mockup (product on car) if primary is the product photo
+  const hoverSrc = productPhoto && mockup ? mockup.src : undefined;
 
   return (
     <div className="group">
