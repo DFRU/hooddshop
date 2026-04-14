@@ -1,0 +1,35 @@
+{
+  "pipeline": "hoodd-design-v6",
+  "generated_at": "2026-04-14T22:38:41.897183+00:00",
+  "nations": [
+    {
+      "name": "USA",
+      "code": "us",
+      "lines": [
+        "artsy",
+        "jersey"
+      ]
+    },
+    {
+      "name": "Argentina",
+      "code": "ar",
+      "lines": [
+        "artsy",
+        "jersey"
+      ]
+    },
+    {
+      "name": "Morocco",
+      "code": "ma",
+      "lines": [
+        "artsy",
+        "jersey"
+      ]
+    }
+  ],
+  "summary": {
+    "generated": 0,
+    "skipped": 6,
+    "failed": 0
+  }
+}
