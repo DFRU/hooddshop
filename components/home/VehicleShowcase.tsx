@@ -41,7 +41,7 @@ export default async function VehicleShowcase() {
 
             return (
               <Link
-                key={`${img.nationCode}_${img.vehicleType}`}
+                key={`${img.nationCode}_${"vehicleType" in img ? img.vehicleType : "mockup"}`}
                 href={product ? `/products/${product.handle}` : "/shop"}
                 className="group relative rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-[1.02]"
                 style={{ aspectRatio: "4/3", border: "1px solid #1E1E1E", background: "#111" }}
@@ -60,7 +60,7 @@ export default async function VehicleShowcase() {
                     <div>
                       <div className="text-display-sm text-white">{nation.name}</div>
                       <div className="text-[9px] uppercase tracking-[0.12em] text-white/50">
-                        on {img.vehicleName}
+                        {"vehicleName" in img ? `on ${img.vehicleName}` : "Product Mockup"}
                       </div>
                     </div>
                   </div>
@@ -80,7 +80,7 @@ export default async function VehicleShowcase() {
 
               return (
                 <Link
-                  key={`${img.nationCode}_${img.vehicleType}`}
+                  key={`${img.nationCode}_${"vehicleType" in img ? img.vehicleType : "mockup"}`}
                   href={product ? `/products/${product.handle}` : "/shop"}
                   className="flex-shrink-0 w-[280px] snap-start"
                 >
@@ -102,7 +102,7 @@ export default async function VehicleShowcase() {
                         <div>
                           <div className="text-display-sm text-white">{nation.name}</div>
                           <div className="text-[9px] uppercase tracking-[0.12em] text-white/50">
-                            on {img.vehicleName}
+                            {"vehicleName" in img ? `on ${img.vehicleName}` : "Product Mockup"}
                           </div>
                         </div>
                       </div>

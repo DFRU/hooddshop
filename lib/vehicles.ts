@@ -1,16 +1,42 @@
 /**
- * Vehicle Image Data Layer
- * Maps nation codes to AI-generated vehicle render images.
- * Images are stored in /public/vehicles/ as WebP files.
+ * Vehicle & Mockup Image Data Layer
+ * 
+ * Two image sources:
+ * 1. AI-generated vehicle renders in /public/vehicles/{code}_{type}.webp
+ * 2. Printkk product mockups in /public/vehicles/{code}_mockup_{0-5}.webp
+ *
+ * Each nation has up to 6 mockup views:
+ *   0 = Front SUV, 1 = Size Info, 2 = Outdoor 3/4,
+ *   3 = Close-up, 4 = Side Angle, 5 = White Car
  */
 
 export type VehicleType = "sedan" | "suv" | "truck" | "hatchback" | "crossover";
+
+export type MockupView = 0 | 1 | 2 | 3 | 4 | 5;
+
+export const MOCKUP_VIEW_LABELS: Record<MockupView, string> = {
+  0: "Front SUV",
+  1: "Size Info",
+  2: "Outdoor 3/4 View",
+  3: "Close-up Detail",
+  4: "Side Angle",
+  5: "White Car",
+};
 
 export interface VehicleImage {
   nationCode: string;
   vehicleType: VehicleType;
   vehicleName: string;
-  src: string;        // path relative to /public
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+export interface MockupImage {
+  nationCode: string;
+  view: MockupView;
+  src: string;
   alt: string;
   width: number;
   height: number;
@@ -24,10 +50,6 @@ const VEHICLE_NAMES: Record<VehicleType, string> = {
   crossover: "Tesla Model Y",
 };
 
-/**
- * Raw mapping of nation code → available vehicle types.
- * Built from the 79 generated renders.
- */
 const VEHICLE_MAP: Record<string, VehicleType[]> = {
   us: ["sedan", "suv", "truck"],
   ca: ["sedan", "suv", "truck"],
@@ -78,6 +100,21 @@ const VEHICLE_MAP: Record<string, VehicleType[]> = {
   nz: ["suv"],
 };
 
+/**
+ * Nations with Printkk product mockup images available.
+ * Value is the number of views (typically 6).
+ */
+const MOCKUP_NATIONS: Record<string, number> = {
+  "ar": 6, "at": 6, "au": 6, "ba": 6, "be": 6, "br": 6,
+  "ca": 6, "cd": 6, "ch": 6, "ci": 6, "co": 6, "cv": 6,
+  "cw": 6, "cz": 6, "de": 6, "dz": 6, "ec": 6, "eg": 6,
+  "es": 6, "fr": 6, "gb-eng": 6, "gb-sct": 6, "gh": 6, "hr": 6,
+  "ht": 6, "iq": 6, "ir": 6, "jo": 6, "jp": 6, "kr": 6,
+  "ma": 6, "mx": 6, "nl": 6, "no": 6, "nz": 6, "pa": 6,
+  "pt": 6, "py": 6, "qa": 6, "sa": 6, "se": 6, "sn": 6,
+  "tn": 6, "tr": 6, "us": 6, "uy": 6, "uz": 6, "za": 6,
+};
+
 function buildImage(nationCode: string, vehicleType: VehicleType, nationName: string): VehicleImage {
   return {
     nationCode,
@@ -90,11 +127,44 @@ function buildImage(nationCode: string, vehicleType: VehicleType, nationName: st
   };
 }
 
-// Pre-import nation names to build alt text
+function buildMockup(nationCode: string, nationName: string, view: MockupView = 0): MockupImage {
+  return {
+    nationCode,
+    view,
+    src: `/vehicles/${nationCode}_mockup_${view}.webp`,
+    alt: `${nationName} car hood cover ${MOCKUP_VIEW_LABELS[view]} — Hood'd World Cup 2026`,
+    width: 1200,
+    height: 1200,
+  };
+}
+
 import { getNation } from "./nations";
 
 /**
- * Get all vehicle images for a given nation code.
+ * Get a single Printkk product mockup image for a nation.
+ * @param view - 0=front SUV, 1=size info, 2=outdoor 3/4, 3=closeup, 4=side angle, 5=white car
+ */
+export function getMockupImage(nationCode: string, view: MockupView = 0): MockupImage | null {
+  const viewCount = MOCKUP_NATIONS[nationCode];
+  if (!viewCount || view >= viewCount) return null;
+  const nation = getNation(nationCode);
+  if (!nation) return null;
+  return buildMockup(nationCode, nation.name, view);
+}
+
+/**
+ * Get all Printkk product mockup images for a nation (up to 6 views).
+ */
+export function getMockupImages(nationCode: string): MockupImage[] {
+  const viewCount = MOCKUP_NATIONS[nationCode];
+  if (!viewCount) return [];
+  const nation = getNation(nationCode);
+  if (!nation) return [];
+  return Array.from({ length: viewCount }, (_, i) => buildMockup(nationCode, nation.name, i as MockupView));
+}
+
+/**
+ * Get all AI-generated vehicle images for a given nation code.
  */
 export function getVehicleImages(nationCode: string): VehicleImage[] {
   const types = VEHICLE_MAP[nationCode];
@@ -105,10 +175,12 @@ export function getVehicleImages(nationCode: string): VehicleImage[] {
 }
 
 /**
- * Get the primary (hero) vehicle image for a nation.
- * Prefers SUV > truck > sedan > others for visual impact.
+ * Get the primary (hero) image for a nation.
+ * Prefers Printkk mockup (front SUV view) if available, falls back to AI render.
  */
-export function getHeroVehicleImage(nationCode: string): VehicleImage | null {
+export function getHeroVehicleImage(nationCode: string): MockupImage | VehicleImage | null {
+  const mockup = getMockupImage(nationCode, 0);
+  if (mockup) return mockup;
   const images = getVehicleImages(nationCode);
   if (images.length === 0) return null;
   const priority: VehicleType[] = ["suv", "truck", "sedan", "crossover", "hatchback"];
@@ -120,49 +192,37 @@ export function getHeroVehicleImage(nationCode: string): VehicleImage | null {
 }
 
 /**
- * Get a diverse set of vehicle images for the homepage showcase.
- * Returns images across different nations and vehicle types.
+ * Get a diverse set of images for the homepage showcase.
+ * Uses different mockup views per nation for visual variety.
  */
-export function getShowcaseImages(count: number = 6): VehicleImage[] {
-  const showcase: VehicleImage[] = [];
-  // Hand-picked for visual diversity: different nations, different vehicles
-  const picks: [string, VehicleType][] = [
-    ["us", "truck"],
-    ["br", "sedan"],
-    ["gb-eng", "suv"],
-    ["mx", "truck"],
-    ["de", "sedan"],
-    ["ar", "suv"],
-    ["fr", "truck"],
-    ["jp", "sedan"],
-    ["es", "suv"],
-    ["kr", "truck"],
-    ["co", "sedan"],
-    ["ma", "suv"],
+export function getShowcaseImages(count: number = 6): (MockupImage | VehicleImage)[] {
+  const showcase: (MockupImage | VehicleImage)[] = [];
+  // Different view per nation for variety: front SUV, outdoor 3/4, side angle, white car, closeup, front SUV
+  const picks: [string, MockupView][] = [
+    ["us", 0], ["br", 2], ["gb-eng", 4], ["mx", 5], ["de", 3], ["ar", 0],
+    ["fr", 2], ["jp", 4], ["es", 5], ["kr", 3], ["co", 0], ["ma", 2],
   ];
-
-  for (const [code, type] of picks) {
+  for (const [code, view] of picks) {
     if (showcase.length >= count) break;
-    const nation = getNation(code);
-    if (!nation) continue;
-    const types = VEHICLE_MAP[code];
-    if (types?.includes(type)) {
-      showcase.push(buildImage(code, type, nation.name));
+    const mockup = getMockupImage(code, view);
+    if (mockup) showcase.push(mockup);
+    else {
+      const hero = getHeroVehicleImage(code);
+      if (hero) showcase.push(hero);
     }
   }
   return showcase;
 }
 
-/**
- * Check if a nation has any vehicle images available.
- */
 export function hasVehicleImages(nationCode: string): boolean {
-  return (VEHICLE_MAP[nationCode]?.length ?? 0) > 0;
+  return nationCode in MOCKUP_NATIONS || (VEHICLE_MAP[nationCode]?.length ?? 0) > 0;
 }
 
-/**
- * Get all available nation codes with vehicle images.
- */
+export function hasMockup(nationCode: string): boolean {
+  return nationCode in MOCKUP_NATIONS;
+}
+
 export function getNationsWithVehicles(): string[] {
-  return Object.keys(VEHICLE_MAP);
+  const codes = new Set([...Object.keys(VEHICLE_MAP), ...Object.keys(MOCKUP_NATIONS)]);
+  return Array.from(codes);
 }

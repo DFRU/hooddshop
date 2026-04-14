@@ -96,7 +96,7 @@ export default async function Hero() {
                     <img src={flagUrl("us", 40)} className="w-8 h-auto mb-1.5 rounded shadow-md" alt="United States flag" />
                     <div className="text-display-sm text-white">United States</div>
                     <div className="text-[9px] lg:text-[10px] uppercase tracking-[0.12em] text-white/50 mt-0.5">
-                      on {heroImage.vehicleName} · AI Preview
+                      {"vehicleName" in heroImage ? `on ${heroImage.vehicleName} · AI Preview` : "Product Mockup"}
                     </div>
                   </div>
                 </div>
