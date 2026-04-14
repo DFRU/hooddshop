@@ -1,11 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { flagUrl } from "@/lib/design";
-import { getProductImage, getMockupImage } from "@/lib/vehicles";
+import { getVehicleImages } from "@/lib/vehicles";
 
 export default async function Hero() {
-  // Product-first: show real product photo, fall back to mockup
-  const heroImage = getProductImage("us") ?? getMockupImage("us", 2) ?? getMockupImage("us", 0);
+  // Hero: show the Argentina truck on-vehicle render — globally appealing
+  const arVehicles = getVehicleImages("ar");
+  const heroImage = arVehicles.find((v) => v.vehicleType === "truck") ?? arVehicles[0] ?? null;
 
   return (
     <section className="relative flex items-end overflow-hidden" style={{ minHeight: "min(90vh, 780px)" }}>
@@ -93,8 +94,8 @@ export default async function Hero() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
-                    <img src={flagUrl("us", 40)} className="w-8 h-auto mb-1.5 rounded shadow-md" alt="United States flag" />
-                    <div className="text-display-sm text-white">United States</div>
+                    <img src={flagUrl("ar", 40)} className="w-8 h-auto mb-1.5 rounded shadow-md" alt="Argentina flag" />
+                    <div className="text-display-sm text-white">Argentina</div>
                     <div className="text-[9px] lg:text-[10px] uppercase tracking-[0.12em] text-white/50 mt-0.5">
                       Jersey Line · Hood Cover
                     </div>

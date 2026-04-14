@@ -8,7 +8,7 @@ export default function TrustStrip() {
     { icon: "🛡️", text: "Satisfaction Guaranteed" },
     { icon: "☀️", text: "UV & Weather Resistant" },
     { icon: "🧼", text: "Machine Washable" },
-    { icon: "🇺🇸", text: "Printed in the USA" },
+    { icon: "🌍", text: "Ships Worldwide" },
   ];
 
   return (
