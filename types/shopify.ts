@@ -10,6 +10,16 @@ export interface ShopifyPrice {
   currencyCode: string;
 }
 
+export interface ShopifyVariant {
+  id: string;
+  title: string;
+  availableForSale: boolean;
+  price: ShopifyPrice;
+  selectedOptions: { name: string; value: string }[];
+  image: ShopifyImage | null;
+  sku?: string;
+}
+
 export interface ShopifyProduct {
   id: string;
   handle: string;
@@ -23,14 +33,13 @@ export interface ShopifyProduct {
   images: {
     edges: { node: ShopifyImage }[];
   };
+  options?: {
+    name: string;
+    values: string[];
+  }[];
   variants: {
     edges: {
-      node: {
-        id: string;
-        title: string;
-        availableForSale: boolean;
-        price: ShopifyPrice;
-      };
+      node: ShopifyVariant;
     }[];
   };
 }

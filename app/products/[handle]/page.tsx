@@ -8,6 +8,7 @@ import ProductJsonLd from "@/components/product/ProductJsonLd";
 // ── Dynamic metadata from Shopify product data ──────────────
 interface PageProps {
   params: Promise<{ handle: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export async function generateMetadata({
@@ -62,9 +63,19 @@ export async function generateMetadata({
 }
 
 // ── Server component — fetches product, passes to client ────
-export default async function ProductPage({ params }: PageProps) {
+export default async function ProductPage({ params, searchParams }: PageProps) {
   const { handle } = await params;
+  const resolvedSearchParams = await searchParams;
   const product = await getProduct(handle);
+
+  // Resolve initial variant from URL ?variant= param (deep-link support)
+  const variants = product?.variants?.edges?.map((e) => e.node) ?? [];
+  const variantParam = typeof resolvedSearchParams.variant === "string"
+    ? resolvedSearchParams.variant
+    : undefined;
+  const initialVariantId = variants.find((v) => v.id === variantParam)?.id
+    ?? variants[0]?.id
+    ?? undefined;
 
   // Resolve all image sources for this product's nation
   const nationCode = product ? getNationCodeFromTitle(product.title) : null;
@@ -91,6 +102,7 @@ export default async function ProductPage({ params }: PageProps) {
         product={product}
         handle={handle}
         vehicleImages={allImages}
+        initialVariantId={initialVariantId}
       />
     </>
   );

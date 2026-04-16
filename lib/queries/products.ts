@@ -21,7 +21,7 @@ export const PRODUCT_CARD_FRAGMENT = `
         }
       }
     }
-    variants(first: 1) {
+    variants(first: 5) {
       edges {
         node {
           id
@@ -30,6 +30,16 @@ export const PRODUCT_CARD_FRAGMENT = `
           price {
             amount
             currencyCode
+          }
+          selectedOptions {
+            name
+            value
+          }
+          image {
+            url
+            altText
+            width
+            height
           }
         }
       }
@@ -79,6 +89,10 @@ export const GET_PRODUCT = `
           }
         }
       }
+      options {
+        name
+        values
+      }
       variants(first: 10) {
         edges {
           node {
@@ -89,6 +103,17 @@ export const GET_PRODUCT = `
               amount
               currencyCode
             }
+            selectedOptions {
+              name
+              value
+            }
+            image {
+              url
+              altText
+              width
+              height
+            }
+            sku
           }
         }
       }

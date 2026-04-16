@@ -1,13 +1,14 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import FulfillmentSelector from "@/components/product/FulfillmentSelector";
+import VariantSelector from "@/components/product/VariantSelector";
 import TrustBar from "@/components/product/TrustBar";
 
 import type { FulfillmentOption } from "@/lib/suppliers/types";
-import type { ShopifyProduct } from "@/types/shopify";
+import type { ShopifyProduct, ShopifyVariant } from "@/types/shopify";
 
 // ── Accordion data ────────────────────────────────────────────
 const ACCORDION_SECTIONS = [
@@ -44,6 +45,8 @@ interface ProductDetailClientProps {
   product: ShopifyProduct | null;
   handle: string;
   vehicleImages?: { src: string; alt: string; vehicleName: string }[];
+  /** Shopify variant GID from ?variant= URL param, resolved server-side. */
+  initialVariantId?: string;
 }
 
 // ── Component ─────────────────────────────────────────────────
@@ -51,6 +54,7 @@ export default function ProductDetailClient({
   product,
   handle,
   vehicleImages = [],
+  initialVariantId,
 }: ProductDetailClientProps) {
   const { addItem, isLoading } = useCart();
   const [addedFeedback, setAddedFeedback] = useState(false);
@@ -58,40 +62,123 @@ export default function ProductDetailClient({
     useState<FulfillmentOption | null>(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
+  // ── Variants ──────────────────────────────────────────────
+  const variants: ShopifyVariant[] = useMemo(
+    () => product?.variants?.edges?.map((e) => e.node) ?? [],
+    [product]
+  );
+
+  const [selectedVariantId, setSelectedVariantId] = useState<string>(
+    initialVariantId ?? variants[0]?.id ?? ""
+  );
+
+  const selectedVariant = useMemo(
+    () => variants.find((v) => v.id === selectedVariantId) ?? variants[0] ?? null,
+    [variants, selectedVariantId]
+  );
+
+  // Build Design option for the variant selector
+  const designOptions = useMemo(() => {
+    // Find the "Design" option axis from the product options
+    const designOption = product?.options?.find(
+      (o) => o.name.toLowerCase() === "design"
+    );
+    if (!designOption || designOption.values.length < 2) return [];
+
+    // Map each option value to its variant
+    return designOption.values
+      .map((value) => {
+        const variant = variants.find((v) =>
+          v.selectedOptions?.some(
+            (so) => so.name.toLowerCase() === "design" && so.value === value
+          )
+        );
+        return variant ? { value, variantId: variant.id } : null;
+      })
+      .filter((o): o is { value: string; variantId: string } => o !== null);
+  }, [product?.options, variants]);
+
+  const selectedDesignValue = useMemo(() => {
+    if (!selectedVariant?.selectedOptions) return "";
+    return (
+      selectedVariant.selectedOptions.find(
+        (so) => so.name.toLowerCase() === "design"
+      )?.value ?? ""
+    );
+  }, [selectedVariant]);
+
+  // ── URL sync — update ?variant= on selection change ───────
+  useEffect(() => {
+    if (!selectedVariantId) return;
+    const url = new URL(window.location.href);
+    // Only set param if product has multiple variants (avoid polluting
+    // single-variant product URLs)
+    if (variants.length > 1) {
+      url.searchParams.set("variant", selectedVariantId);
+    } else {
+      url.searchParams.delete("variant");
+    }
+    window.history.replaceState({}, "", url.toString());
+  }, [selectedVariantId, variants.length]);
+
   const handleFulfillmentSelect = useCallback((option: FulfillmentOption) => {
     setSelectedFulfillment(option);
   }, []);
 
+  const handleVariantChange = useCallback(
+    (_value: string, variantId: string) => {
+      setSelectedVariantId(variantId);
+      // Reset gallery to first image when switching variants
+      setActiveImageIndex(0);
+      // Clear fulfillment selection — pricing may differ per variant in the future
+      setSelectedFulfillment(null);
+    },
+    []
+  );
+
   // ── Derived data ──────────────────────────────────────────
   const shopifyImages = product?.images?.edges?.map((e) => e.node) ?? [];
 
-  // Build gallery: mockups first, then Shopify images, then vehicle renders
-  const galleryImages: GalleryImage[] = [];
+  // Build gallery: variant image first (if present), then mockups, then Shopify images
+  const galleryImages: GalleryImage[] = useMemo(() => {
+    const images: GalleryImage[] = [];
 
-  // Add mockup/vehicle images (these come pre-ordered from the server: mockups first, then AI renders)
-  for (const v of vehicleImages) {
-    galleryImages.push({
-      src: v.src,
-      alt: v.alt,
-      label: v.vehicleName,
-    });
-  }
-
-  // Add any Shopify product images that aren't duplicates
-  for (const img of shopifyImages) {
-    if (!galleryImages.some((g) => g.src === img.url)) {
-      galleryImages.push({
-        src: img.url,
-        alt: img.altText ?? product?.title ?? handle,
-        label: "Product Photo",
+    // Variant-specific image from Shopify (the mockup assigned to this variant)
+    if (selectedVariant?.image) {
+      images.push({
+        src: selectedVariant.image.url,
+        alt: selectedVariant.image.altText ?? `${selectedVariant.title} design`,
+        label: selectedVariant.title,
       });
     }
-  }
 
-  const variants = product?.variants?.edges?.map((e) => e.node) ?? [];
-  const firstVariant = variants[0] ?? null;
-  const shopifyPrice = firstVariant
-    ? parseFloat(firstVariant.price.amount)
+    // Mockup/vehicle images from server (pre-ordered: mockups first, then AI renders)
+    for (const v of vehicleImages) {
+      // Skip if this URL is the same as the variant image we already added
+      if (selectedVariant?.image && v.src === selectedVariant.image.url) continue;
+      images.push({
+        src: v.src,
+        alt: v.alt,
+        label: v.vehicleName,
+      });
+    }
+
+    // Shopify product-level images (deduplicated)
+    for (const img of shopifyImages) {
+      if (!images.some((g) => g.src === img.url)) {
+        images.push({
+          src: img.url,
+          alt: img.altText ?? product?.title ?? handle,
+          label: "Product Photo",
+        });
+      }
+    }
+
+    return images;
+  }, [selectedVariant, vehicleImages, shopifyImages, product?.title, handle]);
+
+  const shopifyPrice = selectedVariant
+    ? parseFloat(selectedVariant.price.amount)
     : null;
 
   const displayPrice = shopifyPrice ?? 49.99;
@@ -101,9 +188,14 @@ export default function ProductDetailClient({
     product?.description ??
     "Premium stretch-fit car hood cover with full-bleed sublimation print. 85-90% polyester / 10-15% spandex. Universal fit with elastic sewn-in edge.";
 
+  // Effective price shown: fulfillment-adjusted if selected, else variant price
+  const effectivePrice = selectedFulfillment
+    ? selectedFulfillment.price_usd
+    : displayPrice;
+
   // ── Add to cart handler ───────────────────────────────────
   const handleAddToCart = async () => {
-    if (!firstVariant) return;
+    if (!selectedVariant) return;
 
     const attributes: { key: string; value: string }[] = [];
     if (selectedFulfillment) {
@@ -119,7 +211,7 @@ export default function ProductDetailClient({
       });
     }
 
-    await addItem(firstVariant.id, 1, attributes);
+    await addItem(selectedVariant.id, 1, attributes);
     setAddedFeedback(true);
     setTimeout(() => setAddedFeedback(false), 1000);
   };
@@ -195,7 +287,15 @@ export default function ProductDetailClient({
             className="text-body-lg font-semibold mt-2"
             style={{ color: "var(--color-accent)" }}
           >
-            ${displayPrice.toFixed(2)} USD
+            ${effectivePrice.toFixed(2)} USD
+            {selectedFulfillment && selectedFulfillment.price_usd < displayPrice && (
+              <span
+                className="ml-2 text-body-sm line-through"
+                style={{ color: "var(--color-text-muted)" }}
+              >
+                ${displayPrice.toFixed(2)}
+              </span>
+            )}
           </p>
           {descriptionHtml ? (
             <div
@@ -212,12 +312,20 @@ export default function ProductDetailClient({
             </p>
           )}
 
+          {/* ── Design variant selector (Home / Away) ── */}
+          <VariantSelector
+            label="Design"
+            options={designOptions}
+            selectedValue={selectedDesignValue}
+            onChange={handleVariantChange}
+          />
+
           <FulfillmentSelector onSelect={handleFulfillmentSelect} />
 
           {/* Desktop add to cart */}
           <button
             onClick={handleAddToCart}
-            disabled={isLoading || !firstVariant}
+            disabled={isLoading || !selectedVariant}
             className="mt-6 w-full text-white font-semibold uppercase tracking-[0.06em] rounded transition-colors disabled:opacity-50"
             style={{
               background: addedFeedback
@@ -228,7 +336,7 @@ export default function ProductDetailClient({
           >
             {addedFeedback
               ? "\u2713 Added"
-              : firstVariant
+              : selectedVariant
               ? "Add to Cart"
               : "Coming Soon"}
           </button>
@@ -283,7 +391,7 @@ export default function ProductDetailClient({
             className="text-body-lg font-semibold"
             style={{ color: "var(--color-accent)" }}
           >
-            ${displayPrice.toFixed(2)}
+            ${effectivePrice.toFixed(2)}
           </p>
           <p
             className="text-body-sm"
@@ -294,7 +402,7 @@ export default function ProductDetailClient({
         </div>
         <button
           onClick={handleAddToCart}
-          disabled={isLoading || !firstVariant}
+          disabled={isLoading || !selectedVariant}
           className="text-white font-semibold uppercase tracking-[0.06em] rounded px-8 transition-colors disabled:opacity-50"
           style={{
             background: addedFeedback
@@ -306,7 +414,7 @@ export default function ProductDetailClient({
         >
           {addedFeedback
             ? "\u2713 Added"
-            : firstVariant
+            : selectedVariant
             ? "Add to Cart"
             : "Coming Soon"}
         </button>
