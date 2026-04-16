@@ -49,3 +49,18 @@ _*.json
 
 # generated design assets
 /generated_designs/
+
+# Pipeline artifacts — never commit
+pipeline-v6/__pycache__/
+pipeline-v6/designs-v6/
+pipeline-v6/printkk-upload-ready/
+pipeline-v6/shootout-results/
+pipeline-v6/text-overlays/
+pipeline-v6/text-variants-test/
+pipeline-v6/production/
+pipeline-v6/production_v2/
+*.pyc
+
+# Generated AI outputs outside pipeline-v6 too, just in case
+production/
+production_v2/

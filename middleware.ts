@@ -1,13 +1,22 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 /**
- * Middleware that detects US visitors via Vercel's geo headers
- * and sets a cookie so client components can conditionally show
- * "Made in the USA" messaging.
+ * Sets the `geo_country` cookie from platform geo headers.
  *
- * On Vercel: x-vercel-ip-country is set automatically.
- * On Cloudflare: cf-ipcountry is set automatically.
- * Locally: defaults to no cookie (or set ?_country=US for testing).
+ * Consumer: `lib/cart.ts` `getBuyerCountry()` reads this cookie and passes
+ * the value to Shopify cart mutations as `buyerIdentity.countryCode` and
+ * the `@inContext(country: ...)` directive. This drives Shopify's localized
+ * pricing, currency, and checkout. If this middleware is removed or the
+ * cookie is missing, `getBuyerCountry()` falls back to "US" for every
+ * visitor — silently masking international currency/pricing bugs.
+ *
+ * Header sources:
+ *  - Vercel:     `x-vercel-ip-country` (set automatically on Vercel infra)
+ *  - Cloudflare: `cf-ipcountry`        (set automatically when CF is fronting)
+ *  - Local dev:  `?_country=XX` query param override
+ *
+ * Cookie is `httpOnly: false` so client code (`lib/cart.ts` regex) can read it.
+ * 24-hour TTL; not re-set on subsequent requests within that window.
  */
 export function middleware(request: NextRequest) {
   const response = NextResponse.next();
