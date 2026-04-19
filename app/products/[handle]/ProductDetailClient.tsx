@@ -288,14 +288,6 @@ export default function ProductDetailClient({
             style={{ color: "var(--color-accent)" }}
           >
             ${effectivePrice.toFixed(2)} USD
-            {selectedFulfillment && selectedFulfillment.price_usd < displayPrice && (
-              <span
-                className="ml-2 text-body-sm line-through"
-                style={{ color: "var(--color-text-muted)" }}
-              >
-                ${displayPrice.toFixed(2)}
-              </span>
-            )}
           </p>
           {descriptionHtml ? (
             <div
