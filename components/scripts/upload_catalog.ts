@@ -337,43 +337,142 @@ async function main() {
 
       if (existing) {
         console.log(`  Product exists (${existing.id}), updating...`);
+        console.log(`    Existing variants: ${existing.variants.map(sv => `${sv.id}/${JSON.stringify(sv.title)}/SKU=${sv.sku}`).join(', ')}`);
         const skuPrefix = nationCodeToSku(nation.code);
 
-        // Update variant SKUs and store Shopify IDs in assets table
-        for (const v of variantData) {
-          const expectedSku = `${skuPrefix}-${v.variant.toUpperCase()}`;
-          const matchingVariant = existing.variants.find(
-            (sv) =>
-              sv.title.toLowerCase() ===
-              (v.variant.charAt(0).toUpperCase() + v.variant.slice(1)).toLowerCase()
-          );
+        // Determine if this product needs restructuring (single-variant → two-variant)
+        const needsRestructure = existing.variants.length === 1 && variantData.length > 1;
 
-          if (matchingVariant) {
-            // Update SKU if it doesn't match the expected format
-            if (matchingVariant.sku !== expectedSku) {
-              console.log(
-                `    Updating variant ${matchingVariant.id} SKU: "${matchingVariant.sku}" → "${expectedSku}"`
+        if (needsRestructure) {
+          // Single-variant product → needs option + second variant added.
+          // Delete the old single variant and recreate with proper option structure.
+          console.log(`    ⚠ Product has 1 variant but need ${variantData.length}. Restructuring...`);
+
+          // Update the product to have the "Design" option
+          await shopifyAdminFetch(`/products/${existing.id}.json`, {
+            method: "PUT",
+            body: {
+              product: {
+                id: existing.id,
+                options: [{ name: "Design", values: variantData.map(v => v.variant.charAt(0).toUpperCase() + v.variant.slice(1)) }],
+              },
+            },
+          });
+
+          // Update existing variant to be the first variant (Home)
+          const firstVariant = existing.variants[0];
+          const firstExpectedSku = `${skuPrefix}-${variantData[0].variant.toUpperCase()}`;
+          const firstTitle = variantData[0].variant.charAt(0).toUpperCase() + variantData[0].variant.slice(1);
+          console.log(`    Updating variant ${firstVariant.id}: title="${firstTitle}", SKU="${firstExpectedSku}"`);
+          await shopifyAdminFetch(`/variants/${firstVariant.id}.json`, {
+            method: "PUT",
+            body: {
+              variant: {
+                id: firstVariant.id,
+                option1: firstTitle,
+                sku: firstExpectedSku,
+                price: (args.price / 100).toFixed(2),
+              },
+            },
+          });
+          await updateAssetShopifyIds(variantData[0].assetId, String(existing.id), String(firstVariant.id));
+
+          // Create additional variants
+          for (let i = 1; i < variantData.length; i++) {
+            const v = variantData[i];
+            const expectedSku = `${skuPrefix}-${v.variant.toUpperCase()}`;
+            const title = v.variant.charAt(0).toUpperCase() + v.variant.slice(1);
+            console.log(`    Creating new variant: title="${title}", SKU="${expectedSku}"`);
+
+            const resp = await shopifyAdminFetch<{ variant: { id: number } }>(
+              `/products/${existing.id}/variants.json`,
+              {
+                method: "POST",
+                body: {
+                  variant: {
+                    option1: title,
+                    sku: expectedSku,
+                    price: (args.price / 100).toFixed(2),
+                    inventory_management: "shopify",
+                    inventory_policy: args.drop ? "deny" : "continue",
+                  },
+                },
+              }
+            );
+            await updateAssetShopifyIds(v.assetId, String(existing.id), String(resp.variant.id));
+            console.log(`    Created variant ${resp.variant.id}`);
+          }
+        } else {
+          // Multi-variant product → match by title, then by index as fallback
+          for (let vi = 0; vi < variantData.length; vi++) {
+            const v = variantData[vi];
+            const expectedSku = `${skuPrefix}-${v.variant.toUpperCase()}`;
+            const titleTarget = v.variant.toLowerCase(); // "home" or "away"
+
+            // Strategy 1: match by title (exact, case-insensitive)
+            let matchingVariant = existing.variants.find(
+              (sv) => sv.title.toLowerCase() === titleTarget
+            );
+
+            // Strategy 2: match by index if same count
+            if (!matchingVariant && existing.variants.length === variantData.length) {
+              matchingVariant = existing.variants[vi];
+              console.log(`    (title match failed for "${titleTarget}", falling back to index ${vi}: variant ${matchingVariant.id}/${JSON.stringify(matchingVariant.title)})`);
+            }
+
+            if (matchingVariant) {
+              // Update SKU and title if needed
+              const updates: Record<string, unknown> = { id: matchingVariant.id };
+              let needsUpdate = false;
+
+              if (matchingVariant.sku !== expectedSku) {
+                updates.sku = expectedSku;
+                needsUpdate = true;
+              }
+
+              const expectedTitle = v.variant.charAt(0).toUpperCase() + v.variant.slice(1);
+              if (matchingVariant.title !== expectedTitle) {
+                updates.option1 = expectedTitle;
+                needsUpdate = true;
+              }
+
+              if (needsUpdate) {
+                console.log(
+                  `    Updating variant ${matchingVariant.id}: title=${JSON.stringify(matchingVariant.title)}→${JSON.stringify(updates.option1 || matchingVariant.title)}, SKU=${JSON.stringify(matchingVariant.sku)}→${JSON.stringify(updates.sku || matchingVariant.sku)}`
+                );
+                await shopifyAdminFetch(
+                  `/variants/${matchingVariant.id}.json`,
+                  { method: "PUT", body: { variant: updates } }
+                );
+              }
+
+              // Store Shopify IDs in assets table
+              await updateAssetShopifyIds(
+                v.assetId,
+                String(existing.id),
+                String(matchingVariant.id)
               );
-              await shopifyAdminFetch(
-                `/variants/${matchingVariant.id}.json`,
+            } else {
+              console.warn(`    ⚠ No matching variant for "${titleTarget}" (product has ${existing.variants.length} variants). Creating new variant.`);
+              const title = v.variant.charAt(0).toUpperCase() + v.variant.slice(1);
+              const resp = await shopifyAdminFetch<{ variant: { id: number } }>(
+                `/products/${existing.id}/variants.json`,
                 {
-                  method: "PUT",
+                  method: "POST",
                   body: {
                     variant: {
-                      id: matchingVariant.id,
+                      option1: title,
                       sku: expectedSku,
+                      price: (args.price / 100).toFixed(2),
+                      inventory_management: "shopify",
+                      inventory_policy: args.drop ? "deny" : "continue",
                     },
                   },
                 }
               );
+              await updateAssetShopifyIds(v.assetId, String(existing.id), String(resp.variant.id));
+              console.log(`    Created variant ${resp.variant.id}`);
             }
-
-            // Store Shopify IDs in assets table
-            await updateAssetShopifyIds(
-              v.assetId,
-              String(existing.id),
-              String(matchingVariant.id)
-            );
           }
         }
 
