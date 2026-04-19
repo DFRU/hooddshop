@@ -7,10 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "db:migrate": "tsx scripts/migrate.ts",
-    "upload:catalog": "tsx scripts/upload_catalog.ts",
-    "webhooks:register": "tsx scripts/register-webhooks.ts",
-    "admin:jobs": "tsx scripts/admin-jobs.ts"
+    "db:migrate": "tsx components/scripts/migrate.ts",
+    "upload:catalog": "tsx components/scripts/upload_catalog.ts",
+    "webhooks:register": "tsx components/scripts/register-webhooks.ts",
+    "admin:jobs": "tsx components/scripts/admin-jobs.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.0",

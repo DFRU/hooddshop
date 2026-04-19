@@ -8,7 +8,7 @@
 import * as fs from "fs";
 import * as path from "path";
 
-const envPath = path.resolve(__dirname, "..", ".env.local");
+const envPath = path.resolve(__dirname, "..", "..", ".env.local");
 
 if (fs.existsSync(envPath)) {
   const content = fs.readFileSync(envPath, "utf-8");

@@ -5,7 +5,7 @@
  * Requires DATABASE_URL in .env.local or environment.
  */
 import "./load-env";
-import { runMigrations } from "../lib/db/client";
+import { runMigrations } from "../../lib/db/client";
 
 async function main() {
   console.log("[migrate] Running database migrations...");

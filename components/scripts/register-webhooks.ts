@@ -6,7 +6,7 @@
  * Arg: --base-url <your-vercel-url> (e.g. https://hooddshop.vercel.app)
  */
 import "./load-env";
-import { registerWebhook } from "../lib/shopify-admin";
+import { registerWebhook } from "../../lib/shopify-admin";
 
 const BASE_URL = process.argv.find((a) => a.startsWith("https://"))
   || process.argv[process.argv.indexOf("--base-url") + 1]

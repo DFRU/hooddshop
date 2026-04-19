@@ -24,8 +24,8 @@ import "./load-env";
 import * as fs from "fs";
 import * as path from "path";
 import { put } from "@vercel/blob";
-import { NATIONS, type Nation } from "../lib/nations";
-import { upsertAsset, updateAssetShopifyIds } from "../lib/db/queries";
+import { NATIONS, type Nation } from "../../lib/nations";
+import { upsertAsset, updateAssetShopifyIds } from "../../lib/db/queries";
 import {
   createProduct,
   getProductByHandle,
@@ -36,7 +36,7 @@ import {
   setInventoryLevel,
   type CreateProductInput,
   type ShopifyAdminVariant,
-} from "../lib/shopify-admin";
+} from "../../lib/shopify-admin";
 
 // ─── CLI Argument Parsing ────────────────────────────────────────
 

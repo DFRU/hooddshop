@@ -12,7 +12,7 @@
  *   npm run admin:jobs -- --order <shopify_order_id>
  */
 import "./load-env";
-import { getDb } from "../lib/db/client";
+import { getDb } from "../../lib/db/client";
 
 async function main() {
   const args = process.argv.slice(2);
