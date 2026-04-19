@@ -1,35 +1,39 @@
 {
   "pipeline": "hoodd-design-v6",
-  "generated_at": "2026-04-14T22:38:41.897183+00:00",
+  "generated_at": "2026-04-15T00:04:56.932070+00:00",
   "nations": [
     {
       "name": "USA",
       "code": "us",
       "lines": [
-        "artsy",
-        "jersey"
+        "concept"
       ]
     },
     {
       "name": "Argentina",
       "code": "ar",
       "lines": [
-        "artsy",
-        "jersey"
+        "concept"
       ]
     },
     {
-      "name": "Morocco",
-      "code": "ma",
+      "name": "Brazil",
+      "code": "br",
       "lines": [
-        "artsy",
-        "jersey"
+        "concept"
+      ]
+    },
+    {
+      "name": "England",
+      "code": "gb-eng",
+      "lines": [
+        "concept"
       ]
     }
   ],
   "summary": {
-    "generated": 0,
-    "skipped": 6,
+    "generated": 4,
+    "skipped": 0,
     "failed": 0
   }
 }

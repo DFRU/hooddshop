@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
           estimated_days_min: 15,
           estimated_days_max: 25,
           estimated_days_display: "15-25 days",
-          price_usd: 49.99,
+          price_usd: 44.99,
           price_adjustment_usd: 0,
           badge: "Best Price",
           is_default: true,

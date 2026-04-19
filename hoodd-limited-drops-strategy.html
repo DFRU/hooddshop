@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hood'd — Limited Edition Drop Program</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0A0A;
+    --surface: #141414;
+    --surface-2: #1C1C1C;
+    --line: #262626;
+    --accent: #FF4D00;
+    --accent-dim: #CC3D00;
+    --text: #FFFFFF;
+    --muted: #888;
+    --muted-2: #555;
+    --green: #3DD68C;
+    --amber: #F5B041;
+    --red: #E74C3C;
+    --display: 'Bebas Neue', sans-serif;
+    --body: 'DM Sans', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  header {
+    border-bottom: 1px solid var(--line);
+    padding: 32px 24px 24px;
+    background: linear-gradient(180deg, #0A0A0A 0%, #111 100%);
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  h1 {
+    font-family: var(--display);
+    font-size: 48px;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    color: var(--text);
+  }
+  h1 .accent { color: var(--accent); }
+  .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 8px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  h2 {
+    font-family: var(--display);
+    font-size: 30px;
+    letter-spacing: 0.02em;
+    margin: 40px 0 16px;
+    color: var(--text);
+  }
+  h3 {
+    font-family: var(--display);
+    font-size: 20px;
+    letter-spacing: 0.03em;
+    margin: 24px 0 12px;
+    color: var(--text);
+  }
+  h4 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin: 20px 0 8px;
+    font-weight: 600;
+  }
+  p { margin: 0 0 12px; color: #D4D4D4; font-size: 14.5px; }
+  ul, ol { margin: 0 0 12px 22px; color: #D4D4D4; font-size: 14.5px; }
+  li { margin-bottom: 6px; }
+  code {
+    font-family: 'Courier New', monospace;
+    background: var(--surface-2);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+    color: var(--accent);
+  }
+  strong { color: var(--text); font-weight: 600; }
+  em { color: var(--muted); font-style: italic; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav.tabs {
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    z-index: 10;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  nav.tabs .container {
+    display: flex;
+    gap: 0;
+    padding: 0 24px;
+  }
+  nav.tabs button {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    padding: 18px 20px;
+    font-family: var(--body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+  }
+  nav.tabs button:hover { color: var(--text); }
+  nav.tabs button.active {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+  }
+  section.tab-panel { display: none; padding: 32px 0 80px; }
+  section.tab-panel.active { display: block; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  @media (max-width: 900px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px;
+  }
+  .card.accent { border-left: 3px solid var(--accent); }
+  .card h3 { margin-top: 0; }
+  .card h3 .tag {
+    display: inline-block;
+    font-family: var(--body);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .tag.house { background: var(--accent); color: var(--text); }
+  .tag.celeb { background: #4A90E2; color: var(--text); }
+  .tag.p0 { background: var(--red); color: var(--text); }
+  .tag.p1 { background: var(--amber); color: var(--bg); }
+  .tag.p2 { background: var(--muted-2); color: var(--text); }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 13.5px; }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th {
+    background: var(--surface);
+    color: var(--muted);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+  tr:hover td { background: var(--surface); }
+
+  .metric {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 16px;
+  }
+  .metric .label {
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .metric .value {
+    font-family: var(--display);
+    font-size: 36px;
+    color: var(--text);
+    letter-spacing: 0.01em;
+  }
+  .metric .value .unit { font-size: 16px; color: var(--muted); margin-left: 4px; }
+  .metric .note { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  .callout {
+    background: var(--surface-2);
+    border-left: 3px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 4px;
+    margin: 16px 0;
+  }
+  .callout.warn { border-left-color: var(--amber); }
+  .callout.risk { border-left-color: var(--red); }
+  .callout .head {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .callout.warn .head { color: var(--amber); }
+  .callout.risk .head { color: var(--red); }
+
+  .drop-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .drop-card.celeb { border-left-color: #4A90E2; }
+  .drop-card .meta {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .drop-card .meta span strong { color: var(--text); font-weight: 600; }
+  .drop-card .concept { font-size: 13.5px; color: #C4C4C4; }
+
+  .tier-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px;
+  }
+  .tier-card.tier-a { border-top: 3px solid var(--accent); }
+  .tier-card.tier-b { border-top: 3px solid #4A90E2; }
+  .tier-card.tier-c { border-top: 3px solid #3DD68C; }
+  .tier-card h3 { margin-top: 0; display: flex; align-items: baseline; justify-content: space-between; }
+  .tier-card h3 .cost {
+    font-family: var(--body);
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .step:last-child { border-bottom: none; }
+  .step .num {
+    font-family: var(--display);
+    font-size: 36px;
+    color: var(--accent);
+    line-height: 1;
+    min-width: 60px;
+  }
+  .step .body h3 { margin-top: 0; }
+
+  .econ-table th, .econ-table td { font-size: 13px; }
+  .econ-table tr.total td {
+    background: var(--surface-2);
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 32px 24px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .legend {
+    display: flex;
+    gap: 16px;
+    margin: 12px 0;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .legend .dot.house { background: var(--accent); }
+  .legend .dot.celeb { background: #4A90E2; }
+
+  .assumption {
+    font-size: 11.5px;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 6px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>LIMITED EDITION <span class="accent">DROP PROGRAM</span></h1>
+    <div class="subtitle">Hood'd Shop · Pre-Tournament & World Cup 2026 Drop Strategy · Built 2026-04-15</div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="container">
+    <button class="active" data-tab="overview">Overview</button>
+    <button data-tab="economics">Economics</button>
+    <button data-tab="calendar">Calendar</button>
+    <button data-tab="house">House Drops</button>
+    <button data-tab="celebrity">Celebrity Program</button>
+    <button data-tab="pipeline">Pipeline</button>
+    <button data-tab="launch">Launch Day</button>
+    <button data-tab="risks">Risks &amp; KPIs</button>
+  </div>
+</nav>
+
+<!-- OVERVIEW -->
+<section class="tab-panel active" id="overview">
+<div class="container">
+
+<h2>Strategic Framing</h2>
+<p>The limited-edition drop program exists to (1) differentiate Hood'd from Amazon generic hood covers at the $15–28 price band, (2) generate a structured content engine that fills the 13-week pre-tournament window with organic-shareable moments, and (3) build a creator-driven distribution channel that compounds before paid ads are switched on. The program runs from <strong>April 28, 2026</strong> through the <strong>World Cup Final on July 19, 2026</strong>, then sunsets.</p>
+
+<div class="grid-3" style="margin: 24px 0;">
+  <div class="metric">
+    <div class="label">Program Window</div>
+    <div class="value">12<span class="unit">weeks</span></div>
+    <div class="note">Apr 28 → Jul 19, 2026</div>
+  </div>
+  <div class="metric">
+    <div class="label">Target Drops</div>
+    <div class="value">30<span class="unit">total</span></div>
+    <div class="note">~18 house · ~12 celebrity</div>
+  </div>
+  <div class="metric">
+    <div class="label">Drop Price Range</div>
+    <div class="value">$59–$69</div>
+    <div class="note">vs standard $49.99</div>
+  </div>
+</div>
+
+<h3>Two Drop Tracks</h3>
+
+<div class="grid-2">
+  <div class="card accent">
+    <h3>House Drops <span class="tag house">HOOD'D</span></h3>
+    <p>Hood'd-originated limited editions with a distinct design language from the core line. Themed capsules (retro kits, match-moment commemoratives, underdog editions). Owned creative, owned IP, full margin. Used to establish the drop cadence and set the premium tone.</p>
+    <p><strong>Price:</strong> $59.99<br><strong>Window:</strong> 48 hours<br><strong>Cadence:</strong> ~1.5/week</p>
+  </div>
+  <div class="card" style="border-left: 3px solid #4A90E2;">
+    <h3>Celebrity Drops <span class="tag celeb">COLLAB</span></h3>
+    <p>Co-designed with influencers, athletes, or cultural figures. Creator drives audience, we execute production + fulfillment. Split rev share creates alignment. Marketing volume far exceeds house drops because the creator owns promotion.</p>
+    <p><strong>Price:</strong> $64.99–$69.99<br><strong>Window:</strong> 48–72 hours<br><strong>Creator share:</strong> $7/unit flat</p>
+  </div>
+</div>
+
+<h3>Core Principles (Non-Negotiable)</h3>
+
+<ol>
+  <li><strong>Scarcity is time-boxed, not quantity-boxed.</strong> POD means no inventory. Credibility comes from a countdown window, a dated archive, and an auto-unpublish that actually fires.</li>
+  <li><strong>Limited means visually different.</strong> Not a recolor, not a badge swap. A limited design is a new art direction. No exceptions.</li>
+  <li><strong>Never discount a limited edition.</strong> Limiteds price above the standard line. Any discounting undermines the premium positioning and trains the audience to wait.</li>
+  <li><strong>Every drop has a written IP agreement before creative starts.</strong> No exceptions. No "we'll sort it later."</li>
+  <li><strong>Every drop generates content for the library.</strong> Minimum: 1 hero photo, 1 short-form video, 1 campaign caption, 1 post-drop receipt graphic.</li>
+  <li><strong>Archive everything.</strong> Every closed drop lives on a public "Past Drops" page as proof that the windows actually close.</li>
+</ol>
+
+<div class="callout warn">
+  <div class="head">Assumption flag</div>
+  This plan assumes PrintKK's 500 prints/day capacity holds and that Vercel/Shopify infrastructure is live before the first drop (April 28). If the Vercel deploy is not confirmed working by April 22, the first drop must slip or the program cannot launch on time.
+</div>
+
+</div>
+</section>
+
+<!-- ECONOMICS -->
+<section class="tab-panel" id="economics">
+<div class="container">
+
+<h2>Unit Economics</h2>
+<p>All figures in USD unless noted. COGS is based on Dan's PrintKK quote: $7.31 CAD print + $15.96 CAD ship, converted at ~0.73 USD/CAD = <strong>$16.75 USD delivered cost</strong>. This assumes single-unit orders direct from PrintKK to the end customer (drop-ship model).</p>
+
+<h3>Per-Unit Margin by Drop Type</h3>
+
+<table class="econ-table">
+  <thead>
+    <tr>
+      <th>Line</th>
+      <th>Standard</th>
+      <th>House Drop</th>
+      <th>Celebrity Drop</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Retail price</td><td>$49.99</td><td>$59.99</td><td>$69.99</td></tr>
+    <tr><td>COGS (print + ship)</td><td>($16.75)</td><td>($16.75)</td><td>($16.75)</td></tr>
+    <tr><td>Payment processing (est. 2.9% + $0.30)</td><td>($1.75)</td><td>($2.04)</td><td>($2.33)</td></tr>
+    <tr><td>Creator rev share</td><td>—</td><td>—</td><td>($7.00)</td></tr>
+    <tr><td class="total">Contribution per unit</td><td class="total">$31.49</td><td class="total">$41.20</td><td class="total">$43.91</td></tr>
+    <tr><td>Contribution margin</td><td>63.0%</td><td>68.7%</td><td>62.7%</td></tr>
+  </tbody>
+</table>
+
+<p class="assumption">Excludes: ad spend, design time, platform fees (Shopify ~$29/mo + app fees), email/SMS platform, returns/refunds reserve, tax. Net margin post-marketing is lower.</p>
+
+<h3>Break-Even Analysis per Drop</h3>
+
+<p>Assuming $200 variable design + content cost per house drop (AI tools, stock assets, editing time) and $500 in ad/boost spend per drop:</p>
+
+<div class="grid-3">
+  <div class="metric">
+    <div class="label">House Drop B/E</div>
+    <div class="value">17<span class="unit">units</span></div>
+    <div class="note">To cover $700 variable cost</div>
+  </div>
+  <div class="metric">
+    <div class="label">Celebrity Drop B/E</div>
+    <div class="value">16<span class="unit">units</span></div>
+    <div class="note">Assumes creator paid from rev share only, no flat fee</div>
+  </div>
+  <div class="metric">
+    <div class="label">Target per Drop</div>
+    <div class="value">50<span class="unit">units</span></div>
+    <div class="note">~$3K revenue, ~$2K contribution</div>
+  </div>
+</div>
+
+<h3>Program-Level Projections (3 Scenarios)</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Scenario</th>
+      <th>Drops</th>
+      <th>Avg units/drop</th>
+      <th>Total units</th>
+      <th>Revenue</th>
+      <th>Contribution</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Conservative</strong><br><em style="color: var(--muted)">Weak creator conversion, slow start</em></td>
+      <td>22</td><td>25</td><td>550</td>
+      <td>~$35,200</td><td>~$22,800</td>
+    </tr>
+    <tr>
+      <td><strong>Base</strong><br><em style="color: var(--muted)">On-plan execution</em></td>
+      <td>30</td><td>50</td><td>1,500</td>
+      <td>~$96,000</td><td>~$62,500</td>
+    </tr>
+    <tr>
+      <td><strong>Upside</strong><br><em style="color: var(--muted)">One celebrity drop breaks ≥300 units + organic viral moment</em></td>
+      <td>30</td><td>125</td><td>3,750</td>
+      <td>~$240,000</td><td>~$155,000</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <div class="head">Interpretation</div>
+  Base case contributes ~$62K, which is material but not the whole business — the standard line does the heavier revenue lifting during the tournament. The drop program's real job is to <strong>acquire the customer cheaply</strong> through creator-driven organic reach, then the customer returns for standard line or buys a second drop. The program should be judged on CAC and LTV, not drop-level P&L alone.
+</div>
+
+<h3>What We Must Measure to Validate</h3>
+<ul>
+  <li><strong>Drop conversion rate</strong> — traffic to drop page ÷ units sold</li>
+  <li><strong>First-drop CAC</strong> — attributed spend ÷ new customers acquired through drops</li>
+  <li><strong>Second purchase rate</strong> — % of drop buyers who return for any product within 21 days</li>
+  <li><strong>Creator ROI</strong> — revenue share paid ÷ attributed revenue per creator</li>
+  <li><strong>Email capture per drop</strong> — drop-page visitors who subscribe (non-purchasers)</li>
+</ul>
+
+</div>
+</section>
+
+<!-- CALENDAR -->
+<section class="tab-panel" id="calendar">
+<div class="container">
+
+<h2>Drop Calendar · April 28 → July 19, 2026</h2>
+<div class="legend">
+  <span><span class="dot house"></span>House Drop</span>
+  <span><span class="dot celeb"></span>Celebrity Drop</span>
+</div>
+
+<h3>Phase 1 — Proof of Concept (Apr 28 → May 12)</h3>
+<p>Run the first four drops as <strong>all house</strong>. Tight loop, no external dependencies. Validate the drop page, countdown mechanic, auto-unpublish, email capture, and content workflow. Fix everything that breaks here before inviting creators in.</p>
+
+<table>
+  <thead>
+    <tr><th>Date</th><th>Type</th><th>Drop</th><th>Price</th><th>Purpose</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Tue Apr 28</td><td><span class="tag house">HOUSE</span></td><td>Argentina '86 Retro</td><td>$59.99</td><td>First drop. Highest-emotion nation. Validate flow.</td></tr>
+    <tr><td>Thu Apr 30</td><td><span class="tag house">HOUSE</span></td><td>Brazil Yellow '70</td><td>$59.99</td><td>Second-highest-emotion nation. Confirm repeat volume.</td></tr>
+    <tr><td>Tue May 5</td><td><span class="tag house">HOUSE</span></td><td>Mexico Azteca</td><td>$59.99</td><td>Test North American diaspora demand.</td></tr>
+    <tr><td>Thu May 7</td><td><span class="tag house">HOUSE</span></td><td>England '66</td><td>$59.99</td><td>Test English-speaking older demographic.</td></tr>
+  </tbody>
+</table>
+
+<h3>Phase 2 — Creator Onramp (May 12 → May 26)</h3>
+<p>First celebrity drops go live. Keep house drops running 1/week as backbone. First creators should be lower-risk Tier C micro-influencers — if they under-deliver, the damage is contained.</p>
+
+<table>
+  <thead>
+    <tr><th>Date</th><th>Type</th><th>Drop</th><th>Price</th><th>Purpose</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Tue May 12</td><td><span class="tag celeb">COLLAB</span></td><td>Creator #1 (Tier C, Auto niche)</td><td>$64.99</td><td>First collab. Auto creator for car-culture crossover.</td></tr>
+    <tr><td>Thu May 14</td><td><span class="tag house">HOUSE</span></td><td>Germany '90 Retro</td><td>$59.99</td><td>Maintain house rhythm.</td></tr>
+    <tr><td>Tue May 19</td><td><span class="tag celeb">COLLAB</span></td><td>Creator #2 (Tier C, Football niche)</td><td>$64.99</td><td>Football-culture crossover.</td></tr>
+    <tr><td>Thu May 21</td><td><span class="tag house">HOUSE</span></td><td>USA '94 Retro</td><td>$59.99</td><td>Host-nation pride, pre-tournament.</td></tr>
+    <tr><td>Tue May 26</td><td><span class="tag celeb">COLLAB</span></td><td>Creator #3 (Tier B, Latin football)</td><td>$64.99</td><td>First mid-tier creator. Diaspora reach.</td></tr>
+  </tbody>
+</table>
+
+<h3>Phase 3 — Hype Peak (Jun 1 → Jun 10)</h3>
+<p>Final two weeks before tournament kickoff. Highest ad CPMs, highest organic reach on football content. Maximize drop density.</p>
+
+<table>
+  <thead>
+    <tr><th>Date</th><th>Type</th><th>Drop</th><th>Price</th><th>Purpose</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Tue Jun 2</td><td><span class="tag celeb">COLLAB</span></td><td>Creator #4 (Tier B)</td><td>$64.99</td><td>Mid-tier collab.</td></tr>
+    <tr><td>Thu Jun 4</td><td><span class="tag house">HOUSE</span></td><td>Morocco Atlas Lions (Current)</td><td>$59.99</td><td>Ride 2022 underdog story.</td></tr>
+    <tr><td>Sat Jun 6</td><td><span class="tag celeb">COLLAB</span></td><td>Creator #5 (Tier B)</td><td>$64.99</td><td>Weekend drop for higher consumer attention.</td></tr>
+    <tr><td>Tue Jun 9</td><td><span class="tag house">HOUSE</span></td><td>Portugal Blackout</td><td>$59.99</td><td>Kickoff-eve hype.</td></tr>
+  </tbody>
+</table>
+
+<h3>Phase 4 — Tournament Moment Drops (Jun 11 → Jul 19)</h3>
+<p>During the tournament, drops pivot from themed to <strong>match-moment</strong>. When a team wins big, has a breakout player, or scores an iconic goal, a commemorative drop launches within 24–48 hours. This requires a templated production workflow (see Pipeline tab).</p>
+
+<table>
+  <thead>
+    <tr><th>Window</th><th>Drop Trigger</th><th>Volume Target</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Group Stage (Jun 11–27)</td><td>Match-moment drops for dominant performances, upsets, standout players</td><td>6–8 drops</td></tr>
+    <tr><td>Round of 16 (Jun 28–Jul 3)</td><td>"Advancing" commemoratives for each winning nation</td><td>4–6 drops</td></tr>
+    <tr><td>Quarter-Finals (Jul 4–7)</td><td>Elite 8 editions</td><td>3–4 drops</td></tr>
+    <tr><td>Semi-Finals (Jul 14–15)</td><td>Final Four editions</td><td>2 drops</td></tr>
+    <tr><td>Final (Jul 19)</td><td>Champion commemorative — launches within hours of final whistle</td><td>1 blockbuster</td></tr>
+  </tbody>
+</table>
+
+<div class="callout warn">
+  <div class="head">Operational warning</div>
+  Match-moment drops require pre-designed templates for every realistic scenario (all 16 round-of-16 teams, all quarterfinalists, etc.) so production is fill-in-the-blank on match day — not create-from-scratch. See Launch Day tab for the template system.
+</div>
+
+</div>
+</section>
+
+<!-- HOUSE DROPS -->
+<section class="tab-panel" id="house">
+<div class="container">
+
+<h2>Hood'd House Drop Concepts</h2>
+<p>These are Hood'd-originated designs. Each has a clear design language separate from the core line. Art direction should feel like a limited-edition apparel collab, not a product variant.</p>
+
+<h3>Concept Library — First 10 House Drops</h3>
+
+<div class="drop-card">
+  <div class="meta">
+    <span>#01 · <strong>Argentina '86 Retro</strong></span>
+    <span>Drop: <strong>Apr 28</strong></span>
+    <span>Price: <strong>$59.99</strong></span>
+  </div>
+  <div class="concept"><strong>Design direction:</strong> Pale blue + white gradient faded like a worn jersey. Hand-drawn #10 silhouette on the hood crest (no likeness — numeric callback only). Micro-pattern of the '86 tournament badge. Back tag: "Mano de Dios, hood of steel."</div>
+</div>
+
+<div class="drop-card">
+  <div class="meta">
+    <span>#02 · <strong>Brazil Yellow '70</strong></span>
+    <span>Drop: <strong>Apr 30</strong></span>
+    <span>Price: <strong>$59.99</strong></span>
+  </div>
+  <div class="concept"><strong>Design direction:</strong> Canary yellow with vintage green accents. Subtle samba-stripe pattern across the hood peak. Brazil '70 tournament-era typography ("Seleção 70"). Feels like a vintage Panini sticker come to life.</div>
+</div>
+
+<div class="drop-card">
+  <div class="meta">
+    <span>#03 · <strong>Mexico Azteca</strong></span>
+    <span>Drop: <strong>May 5</strong></span>
+    <span>Price: <strong>$59.99</strong></span>
+  </div>
+  <div class="concept"><strong>Design direction:</strong> Aztec-glyph motif in green/white/red. Bold centered sun-stone icon. Border pattern inspired by Estadio Azteca's architecture. Bilingual back tag (EN/ES). Targets strong Mexican diaspora demand in US/Canada.</div>
+</div>
+
+<div class="drop-card">
+  <div class="meta">
+    <span>#04 · <strong>England '66</strong></span>
+    <span>Drop: <strong>May 7</strong></span>
+    <span>Price: <strong>$59.99</strong></span>
+  </div>
+  <div class="concept"><strong>Design direction:</strong> Heritage red, white, and royal blue. Union cross on one side, subtle rose motif on the other. Wembley arch silhouette as a design frame. Type set in a 1960s serif. Aspirational nostalgia play.</div>
+</div>
+
+<div class="drop-card">
+  <div class="meta">
+    <span>#05 · <strong>Germany '90 Retro</strong></span>
+    <span>Drop: <strong>May 14</strong></span>
+    <span>Price: <strong>$59.99</strong></span>
+  </div>
+  <div class="concept"><strong>Design direction:</strong> The iconic black-red-gold diagonal bar treatment from the 1990 kit. Clean, architectural, no flourishes. "DEUTSCHLAND 90" deboss-style graphic on the front hood. Pure kit-nostalgia play.</div>
+</div>
+
+<div class="drop-card">
+  <div class="meta">
+    <span>#06 · <strong>USA '94 Retro</strong></span>
+    <span>Drop: <strong>May 21</strong></span>
+    <span>Price: <strong>$59.99</strong></span>
+  </div>
+  <div class="concept"><strong>Design direction:</strong> The denim-on-stars controversial 1994 kit aesthetic, reinterpreted. Faded indigo base, scattered white stars, red piping. Self-aware nostalgia — lean into the meme status of the '94 kit, don't apologize for it.</div>
+</div>
+
+<div class="drop-card">
+  <div class="meta">
+    <span>#07 · <strong>Morocco Atlas Lions</strong></span>
+    <span>Drop: <strong>Jun 4</strong></span>
+    <span>Price: <strong>$59.99</strong></span>
+  </div>
+  <div class="concept"><strong>Design direction:</strong> Deep red base, geometric zellige-tile pattern across the hood crest. Lion silhouette mid-roar. Gold accent line around the perimeter. Rides the 2022 Cinderella-story energy and projects it forward.</div>
+</div>
+
+<div class="drop-card">
+  <div class="meta">
+    <span>#08 · <strong>Portugal Blackout</strong></span>
+    <span>Drop: <strong>Jun 9</strong></span>
+    <span>Price: <strong>$59.99</strong></span>
+  </div>
+  <div class="concept"><strong>Design direction:</strong> Matte black primary, tonal quina cross in deep green. Minimalist, aggressive, zero flag-typical red. Anti-nostalgia — a premium streetwear read of a football nation. Targets the design-forward buyer.</div>
+</div>
+
+<div class="drop-card">
+  <div class="meta">
+    <span>#09 · <strong>Colombia Carnival</strong></span>
+    <span>Drop: <strong>Jun 16 (during group stage)</strong></span>
+    <span>Price: <strong>$59.99</strong></span>
+  </div>
+  <div class="concept"><strong>Design direction:</strong> Saturated yellow-blue-red with a Barranquilla Carnival palette. Hand-illustrated tropical flora around the edges. Loud, joyful, celebratory. Counter-programs the more austere European drops.</div>
+</div>
+
+<div class="drop-card">
+  <div class="meta">
+    <span>#10 · <strong>France Bleu Noir</strong></span>
+    <span>Drop: <strong>Jun 23</strong></span>
+    <span>Price: <strong>$59.99</strong></span>
+  </div>
+  <div class="concept"><strong>Design direction:</strong> Deep navy base with tonal coq gaulois feather pattern. Gold star detail. Minimal text. Quiet luxury direction. Parisian atelier energy, not stadium-shop energy.</div>
+</div>
+
+<h3>Post-Tournament Trigger Concepts (Reserved)</h3>
+<p>Pre-designed and held in reserve for tournament moments:</p>
+<ul>
+  <li><strong>"Champions 2026"</strong> — generic template in each finalist's palette, unlocked on final whistle</li>
+  <li><strong>"Dark Horse"</strong> — auto-generated for whichever nation over-performs group stage</li>
+  <li><strong>"Last Dance"</strong> — for a marquee player's final World Cup, if the narrative emerges</li>
+  <li><strong>"Robbed"</strong> — for an exit that becomes a cultural moment. Risky — use judgment.</li>
+</ul>
+
+<div class="callout risk">
+  <div class="head">Legal guardrail</div>
+  Never use a player's name, image, likeness, or signature in a design. No licensed crests, no team-association logos, no copyrighted kit reproductions. Use tournament-era aesthetics, color palettes, typographic callbacks, and numeric references only. All designs must pass a legal review (see <code>legal:review-contract</code> / <code>legal:compliance-check</code> skills) before production.
+</div>
+
+</div>
+</section>
+
+<!-- CELEBRITY -->
+<section class="tab-panel" id="celebrity">
+<div class="container">
+
+<h2>Celebrity / Creator Collab Program</h2>
+<p>The creator program exists to import trust, distribution, and authenticity that Hood'd can't manufacture in-house. The economic model splits the premium above the standard line: creator gets $7/unit, Hood'd captures the design-driven pricing lift plus new-customer acquisition.</p>
+
+<h3>Three Tier Framework</h3>
+
+<div class="grid-3">
+  <div class="tier-card tier-a">
+    <h3>Tier A <span class="cost">Aspirational</span></h3>
+    <p><strong>Audience:</strong> 1M+ followers, cultural figures, current or recent players, major YouTubers.</p>
+    <p><strong>Reality check:</strong> At Hood'd's current stage, Tier A is unlikely to engage on a revenue-share model. Their endorsement rates are $25K–$500K+ per post minimum.</p>
+    <p><strong>Strategy:</strong> Plant seeds now (gift product, tag, congratulate publicly), do not send formal outreach until we have $100K+ in monthly revenue and a proven drop track record. Revisit July.</p>
+    <p><strong>Examples:</strong> Retired-but-active-on-social ex-players, major football YouTube channels, mainstream lifestyle creators.</p>
+  </div>
+
+  <div class="tier-card tier-b">
+    <h3>Tier B <span class="cost">Primary focus</span></h3>
+    <p><strong>Audience:</strong> 100K–1M followers in football culture, car culture, diaspora communities, regional football scenes.</p>
+    <p><strong>Deal structure:</strong> Co-design + $7/unit rev share + free units for their team. No upfront fee unless proven track record.</p>
+    <p><strong>Realistic target:</strong> 6–10 collabs across the program. At 75 units avg per drop, creator earns $525/drop.</p>
+    <p><strong>Archetypes to recruit:</strong> Mid-tier football YouTubers/TikTokers, ex-professional players now creators, regional football TikTokers (Mexican, Argentine, Brazilian, Moroccan, Nigerian diaspora), car/automotive creators with football crossover.</p>
+  </div>
+
+  <div class="tier-card tier-c">
+    <h3>Tier C <span class="cost">Volume seeding</span></h3>
+    <p><strong>Audience:</strong> 10K–100K engaged followers, niche authority.</p>
+    <p><strong>Deal structure:</strong> Free product seeding + discount code with attribution tracking + $5/unit rev share on code usage. Co-design only for top performers.</p>
+    <p><strong>Realistic target:</strong> 20–30 creators across the program for seeding. 3–5 get promoted to a formal co-design drop.</p>
+    <p><strong>Archetypes:</strong> Amateur football creators, weekend-car enthusiasts, niche nation-focused accounts, college football supporters, local supporter groups.</p>
+  </div>
+</div>
+
+<h3>Target Profile Filter (Before Outreach)</h3>
+<p>Before sending any outreach, every candidate must pass these five filters:</p>
+<ol>
+  <li><strong>Vehicle fit.</strong> Do they drive? Is a car visible in recent content? (No car = no credibility with product.)</li>
+  <li><strong>Engagement rate.</strong> Likes + comments + shares on recent 10 posts ÷ follower count. Target ≥3%. A 500K account at 0.5% engagement is a worse partner than a 50K account at 6%.</li>
+  <li><strong>Nation/cultural alignment.</strong> Do they rep a nation authentically? Or would the collab look forced?</li>
+  <li><strong>Taste.</strong> Does their grid, any merch they've released, and their aesthetic suggest they can co-design something we'd actually be proud to ship?</li>
+  <li><strong>Audience geography.</strong> At least 40% of their audience in US/Canada (Hood'd's serviceable market). A 2M follower Mexican creator with 5% US audience underperforms a 200K Mexican-American creator with 80% US audience.</li>
+</ol>
+
+<h3>Recruitment Pipeline</h3>
+<p>Target pipeline funnel:</p>
+<ul>
+  <li>100 creators identified and profiled</li>
+  <li>50 outreach sent</li>
+  <li>20 responses</li>
+  <li>12 contracts signed</li>
+  <li>10 collabs shipped</li>
+</ul>
+<p class="assumption">These ratios assume cold outreach. A creator referral from an existing collab should convert at 3–5× this rate.</p>
+
+<h3>Revenue Share — Creator Examples</h3>
+
+<table>
+  <thead>
+    <tr><th>Drop Result</th><th>Units Sold</th><th>Creator Payout ($7/unit)</th><th>Hood'd Contribution</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Floor</td><td>20</td><td>$140</td><td>~$740</td></tr>
+    <tr><td>Target</td><td>75</td><td>$525</td><td>~$2,775</td></tr>
+    <tr><td>Strong</td><td>200</td><td>$1,400</td><td>~$7,400</td></tr>
+    <tr><td>Viral</td><td>500</td><td>$3,500</td><td>~$18,500</td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <div class="head">Creator-side pitch</div>
+  "Zero upfront cost to you, 48-hour drop window, we handle production and shipping. Your cut on a typical drop is $500+, on a viral drop is $3K+. Your audience gets a limited design only you could have made. You keep all content rights. We keep the design IP. One-page agreement, no ongoing obligation."
+</div>
+
+</div>
+</section>
+
+<!-- PIPELINE -->
+<section class="tab-panel" id="pipeline">
+<div class="container">
+
+<h2>End-to-End Operating Pipeline</h2>
+<p>Every drop follows this 17-day workflow. Day 0 is first contact, Day 17 is settlement. Shorter cycles are possible for match-moment drops (see Launch Day tab).</p>
+
+<div class="step">
+  <div class="num">1</div>
+  <div class="body">
+    <h3>Identification &amp; Screening <span style="color: var(--muted); font-size: 13px; font-family: var(--body); font-weight: 400;">· Days 0–3</span></h3>
+    <p>Creator is identified (inbound, referral, or cold research) and profiled against the five-filter checklist. If they pass, a brief is sent: Hood'd story, collab concept, target nation/theme, deal structure, timeline.</p>
+    <p><strong>Output:</strong> Creator file in Airtable/Notion CRM with profile, filter scores, and outreach status.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="num">2</div>
+  <div class="body">
+    <h3>Contracting <span style="color: var(--muted); font-size: 13px; font-family: var(--body); font-weight: 400;">· Days 3–5</span></h3>
+    <p>1-page collab agreement executed via e-sign. Covers: IP ownership (Hood'd), revenue share ($7/unit), minimum deliverables (3 posts: teaser, launch, recap), timeline, drop window, content usage rights for Hood'd, kill clause if creator goes silent.</p>
+    <p><strong>Output:</strong> Signed agreement filed in <code>collabs/[drop-slug]/agreement.pdf</code>.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="num">3</div>
+  <div class="body">
+    <h3>Design Kickoff <span style="color: var(--muted); font-size: 13px; font-family: var(--body); font-weight: 400;">· Days 5–7</span></h3>
+    <p>30-min async DM exchange or short call. Creator describes vision: colors, symbols, mood, references. Hood'd captures into a structured brief. Agreed: 3 rounds max, 14-day design window, then collab ends.</p>
+    <p><strong>Output:</strong> Design brief doc.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="num">4</div>
+  <div class="body">
+    <h3>Design Iteration <span style="color: var(--muted); font-size: 13px; font-family: var(--body); font-weight: 400;">· Days 7–12</span></h3>
+    <p>Round 1 (Day 7): three directions generated (AI tools + Hood'd design language). Creator picks or combines.<br>
+    Round 2 (Day 9): refined single direction, creator notes.<br>
+    Round 3 (Day 11): final. Creator approves in writing (signed approval doc or email reply).</p>
+    <p><strong>Output:</strong> Print-ready files sent to PrintKK; approval archived.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="num">5</div>
+  <div class="body">
+    <h3>Pre-Launch Content &amp; Setup <span style="color: var(--muted); font-size: 13px; font-family: var(--body); font-weight: 400;">· Days 12–16</span></h3>
+    <p>Creator films teaser + launch content (30–60 sec each). Hood'd builds the drop product page, configures countdown timer and auto-unpublish, builds the email + push campaign, and sets up attribution tracking.</p>
+    <p><strong>Output:</strong> Drop page staged, content scheduled, email drafted, creator content reviewed and approved.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="num">6</div>
+  <div class="body">
+    <h3>Launch &amp; Drop Window <span style="color: var(--muted); font-size: 13px; font-family: var(--body); font-weight: 400;">· Days 16–18 (48-hour window)</span></h3>
+    <p>Drop goes live at a pre-committed time (Tuesday/Thursday 10am ET is the default). Creator posts on schedule. Hood'd amplifies through owned channels and runs a boosted post with a small budget ($100–250). Mid-drop check-in at 24hr mark. See Launch Day tab for the full hour-by-hour runbook.</p>
+    <p><strong>Output:</strong> Drop closes. Variant auto-unpublishes. Landing page converts to "Sold Out" or "Archive" state.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="num">7</div>
+  <div class="body">
+    <h3>Post-Drop Settlement &amp; Retro <span style="color: var(--muted); font-size: 13px; font-family: var(--body); font-weight: 400;">· Days 18–22</span></h3>
+    <p>Hood'd reports to creator: units sold, revenue, their cut, timeline for payout. Payment within 14 days. Internal retro: what converted, what didn't, what to change on the next drop. Content archive — all assets logged to content library for ongoing remarketing. Creator drop added to public "Past Drops" page.</p>
+    <p><strong>Output:</strong> Settlement statement, retro notes in CRM, content library updated, archive page live.</p>
+  </div>
+</div>
+
+<h3>Required Tooling</h3>
+
+<table>
+  <thead>
+    <tr><th>Function</th><th>Tool</th><th>Cost</th><th>Alternative</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Creator CRM</td><td>Airtable or Notion</td><td>Free tier</td><td>Google Sheets</td></tr>
+    <tr><td>Design iteration</td><td>Figma (free)</td><td>Free</td><td>Google Slides</td></tr>
+    <tr><td>E-signature</td><td>Dropbox Sign (free 3/mo) or DocuSign</td><td>Free to $15/mo</td><td>Signed PDF via email</td></tr>
+    <tr><td>Countdown timer</td><td>Essential Countdown Timer (Shopify app)</td><td>~$5–10/mo</td><td>Custom Next.js component</td></tr>
+    <tr><td>Auto-unpublish</td><td>Shopify Flow (free on Shopify)</td><td>Free</td><td>Custom cron job</td></tr>
+    <tr><td>Attribution / code tracking</td><td>Shopify discount codes + UTMs</td><td>Free</td><td>Third-party attribution (Rockerbox, etc.) — overkill at this stage</td></tr>
+    <tr><td>Email for creators</td><td>Klaviyo or similar</td><td>Free to 500 contacts</td><td>Gmail templates</td></tr>
+    <tr><td>Content vault</td><td>Google Drive folder per collab</td><td>Free</td><td>Dropbox</td></tr>
+  </tbody>
+</table>
+
+<h3>CRM Schema (Airtable / Notion)</h3>
+
+<p>One base, five linked tables:</p>
+<ul>
+  <li><strong>Creators</strong> — name, handle, followers, engagement rate, audience geo, nation fit, taste score, filter pass/fail, status (researching, outreach sent, responded, contracted, shipped, archived)</li>
+  <li><strong>Drops</strong> — slug, type (house/collab), creator link, concept, design status, print file link, launch date, window close, units sold, revenue, contribution</li>
+  <li><strong>Agreements</strong> — creator link, drop link, signed date, PDF link, revenue share, deliverables committed, deliverables met</li>
+  <li><strong>Content</strong> — drop link, asset type (teaser/launch/recap/UGC), channel, approved, posted, performance metrics</li>
+  <li><strong>Settlements</strong> — creator link, drop link, units, creator payout owed, paid date, payment method</li>
+</ul>
+
+</div>
+</section>
+
+<!-- LAUNCH DAY -->
+<section class="tab-panel" id="launch">
+<div class="container">
+
+<h2>Launch Day Runbook (Per Drop)</h2>
+<p>Every drop runs on the same template. The only variable is the drop itself. Standard drop window = 48 hours. Start time = Tuesday or Thursday 10:00am ET (maximizes US East + West availability and gives the drop a full workday of attention).</p>
+
+<h3>T-7 Days to T-0 Checklist</h3>
+
+<table>
+  <thead><tr><th>Time</th><th>Action</th><th>Owner</th></tr></thead>
+  <tbody>
+    <tr><td>T-7d</td><td>Product page staged on Shopify, variant created, inventory rules set</td><td>Web</td></tr>
+    <tr><td>T-7d</td><td>Drop page live with countdown (password-protected if not public yet)</td><td>Web</td></tr>
+    <tr><td>T-5d</td><td>Email #1 (teaser) scheduled for T-3d send</td><td>Marketing</td></tr>
+    <tr><td>T-5d</td><td>Creator content reviewed and approved (if collab)</td><td>Marketing + Creator</td></tr>
+    <tr><td>T-3d</td><td>Email #1 sends. Creator posts teaser. Organic social posts drop.</td><td>Marketing</td></tr>
+    <tr><td>T-2d</td><td>Paid ad creative approved and queued in Meta/TikTok ads managers</td><td>Marketing</td></tr>
+    <tr><td>T-1d</td><td>Email #2 (24hr warning) scheduled</td><td>Marketing</td></tr>
+    <tr><td>T-1d</td><td>Shopify Flow verified for auto-unpublish at T+48hr</td><td>Web</td></tr>
+    <tr><td>T-1d</td><td>Final checklist run: payment works, cart flow works, inventory holds</td><td>Web</td></tr>
+    <tr><td>T-12hr</td><td>Creator posts "tomorrow" Story</td><td>Creator</td></tr>
+    <tr><td>T-0</td><td><strong>Drop goes live 10:00am ET</strong></td><td>Web + Marketing</td></tr>
+  </tbody>
+</table>
+
+<h3>T-0 to T+48hr Runbook</h3>
+
+<table>
+  <thead><tr><th>Time</th><th>Action</th></tr></thead>
+  <tbody>
+    <tr><td>T+0:00</td><td>Drop live. Launch email sends. Creator posts launch content. Owned social posts go live simultaneously. Paid ads activate.</td></tr>
+    <tr><td>T+0:30</td><td>First traffic check: page loading cleanly, checkout working, first orders placed</td></tr>
+    <tr><td>T+2:00</td><td>Social engagement check: replies, DMs, comments needing response</td></tr>
+    <tr><td>T+6:00</td><td>First numbers check: units, conversion rate, ad CAC if measurable</td></tr>
+    <tr><td>T+12:00</td><td>Status post: "X sold in 12 hours, XXhrs left" if performing well. Creator Story.</td></tr>
+    <tr><td>T+24:00</td><td>Email #2 sends (24hr warning). Creator reposts with "last 24 hours". Mid-drop check-in with creator.</td></tr>
+    <tr><td>T+36:00</td><td>"Almost gone" social push. Urgency mode.</td></tr>
+    <tr><td>T+47:30</td><td>"Last 30 minutes" push — email, social, SMS if available.</td></tr>
+    <tr><td>T+48:00</td><td><strong>Drop closes. Variant auto-unpublishes. Page converts to "Sold Out" / archive state.</strong></td></tr>
+    <tr><td>T+48:30</td><td>Creator posts "that's a wrap" thank-you content. Hood'd posts sold-count card.</td></tr>
+    <tr><td>T+72:00</td><td>Archive page updated. Next drop teaser hints begin.</td></tr>
+  </tbody>
+</table>
+
+<h3>Match-Moment Drop Template System</h3>
+
+<p>During the tournament, drops are match-driven not calendar-driven. The window to capitalize on a moment is ~36 hours from match end. To hit that window, every realistic trigger must have a pre-designed template ready before kickoff.</p>
+
+<p>Pre-designed template set (48 nations × 1 base template = 48 files):</p>
+<ul>
+  <li><strong>"Group Stage Win"</strong> — each nation's standard flag + "GROUP STAGE 2026" overlay</li>
+  <li><strong>"Round of 16 Advance"</strong> — each possible advancer, unlocked when they win their group-stage last match</li>
+  <li><strong>"Upset"</strong> — generic underdog template adaptable to any nation color palette</li>
+  <li><strong>"Final Four"</strong> — pre-designed for each semifinalist slot</li>
+  <li><strong>"Finalist"</strong> — pre-designed for each finalist slot</li>
+  <li><strong>"Champion 2026"</strong> — pre-designed for each likely champion + generic fallback</li>
+</ul>
+
+<p>Workflow on match day:</p>
+<ol>
+  <li>Match ends. Decision made within 30 min: does this warrant a drop?</li>
+  <li>If yes: pull template, customize (swap nation asset, update date, finalize copy) — 2hr work</li>
+  <li>Upload to PrintKK as new variant — 30 min</li>
+  <li>Launch drop page with 36-hour window — 1hr</li>
+  <li>Email + social within 6 hours of match end</li>
+</ol>
+
+<div class="callout warn">
+  <div class="head">Required staffing for match-moment drops</div>
+  Match-moment drops require someone on-call for every match day. This is currently a one-person operation (Dan). Either automate heavily with templates, or accept only 1–2 match-moment drops per round rather than trying to drop after every match.
+</div>
+
+</div>
+</section>
+
+<!-- RISKS & KPIs -->
+<section class="tab-panel" id="risks">
+<div class="container">
+
+<h2>Risk Register</h2>
+
+<table>
+  <thead><tr><th>Risk</th><th>Severity</th><th>Mitigation</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>PrintKK capacity cap breached.</strong> 500 prints/day is the ceiling. A viral drop of 1000 units creates a 2-day production backlog.</td>
+      <td><span class="tag p0">P0</span></td>
+      <td>Pre-qualify the 17-supplier backup list. Have one secondary supplier spun up and tested before first drop.</td>
+    </tr>
+    <tr>
+      <td><strong>Creator goes silent mid-design.</strong> 14-day window elapses with no delivery.</td>
+      <td><span class="tag p1">P1</span></td>
+      <td>Kill clause in agreement. Internal design backup plan — Hood'd finishes the design in-house, creator forfeits rev share if they don't post.</td>
+    </tr>
+    <tr>
+      <td><strong>Trademark / likeness infringement.</strong> A design unintentionally copies a protected element (licensed kit, player likeness).</td>
+      <td><span class="tag p0">P0</span></td>
+      <td>Legal review step gated before every drop. Design playbook explicitly bans likeness, team crests, licensed kit reproductions.</td>
+    </tr>
+    <tr>
+      <td><strong>Drop converts poorly (≤20 units).</strong> Launch underperforms break-even.</td>
+      <td><span class="tag p1">P1</span></td>
+      <td>After the first 4 house drops, set a minimum benchmark (e.g., 30 units). Pause the program to debug if 3 consecutive drops miss.</td>
+    </tr>
+    <tr>
+      <td><strong>Auto-unpublish fails.</strong> Drop remains buyable past the window, breaking the scarcity credibility.</td>
+      <td><span class="tag p1">P1</span></td>
+      <td>Verify Shopify Flow (or custom cron) in staging before Drop #1. Manual monitoring for the first 4 drops regardless.</td>
+    </tr>
+    <tr>
+      <td><strong>Customer complaints: sizing / fit.</strong> Still an open issue from the Toyota Corolla (too big) / Dodge Ram (doesn't fit) sample.</td>
+      <td><span class="tag p0">P0</span></td>
+      <td>Two-size rollout (Car/Small SUV + Truck/Large SUV) must ship before first drop. Drop page must show size options clearly.</td>
+    </tr>
+    <tr>
+      <td><strong>Creator discloses drop contents before launch.</strong> Someone leaks the design or the drop date.</td>
+      <td><span class="tag p2">P2</span></td>
+      <td>Agreement includes confidentiality until launch clause. No print files shared with creator — only mockups.</td>
+    </tr>
+    <tr>
+      <td><strong>Refund/exchange volume on limited editions.</strong> Customers change mind on a premium purchase.</td>
+      <td><span class="tag p2">P2</span></td>
+      <td>Clear "no returns on limited drops" policy in cart and on product page. Legal review of this policy for US/CA consumer law compliance.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Success Metrics &amp; Reporting</h2>
+
+<h3>Per-Drop Scorecard (reported within 72hrs of close)</h3>
+<table>
+  <thead><tr><th>Metric</th><th>Definition</th><th>Benchmark</th></tr></thead>
+  <tbody>
+    <tr><td>Units sold</td><td>Total completed orders in window</td><td>Floor 20 · Target 50 · Strong 100+</td></tr>
+    <tr><td>Drop-page conversion</td><td>Units ÷ unique page visitors</td><td>≥3% house · ≥5% creator</td></tr>
+    <tr><td>Sell-through pace</td><td>% sold in first 12hrs vs final 12hrs</td><td>Front-loaded is healthier</td></tr>
+    <tr><td>New customer %</td><td>First-time buyers ÷ total buyers</td><td>≥50% for creator drops, ≥30% for house</td></tr>
+    <tr><td>Email captures</td><td>Non-purchaser emails captured on drop page</td><td>≥10% of non-converting traffic</td></tr>
+    <tr><td>Cost per acquisition</td><td>Paid spend ÷ new customers</td><td>≤$20</td></tr>
+    <tr><td>Content volume</td><td>Pieces of content produced &amp; archived</td><td>≥6 per drop</td></tr>
+  </tbody>
+</table>
+
+<h3>Program-Level Dashboard (reported weekly)</h3>
+<ul>
+  <li>Cumulative drops shipped vs plan</li>
+  <li>Cumulative units sold, revenue, contribution</li>
+  <li>Creator pipeline funnel health (identified → outreach → signed → shipped)</li>
+  <li>Drop-to-drop unit trend (accelerating? plateauing? decaying?)</li>
+  <li>Second-purchase rate of drop buyers (LTV proxy)</li>
+  <li>Email list growth attributable to drop pages</li>
+</ul>
+
+<h2>What This Plan Does Not Include (Open Decisions)</h2>
+
+<ol>
+  <li><strong>Creator payment mechanism.</strong> PayPal, Stripe Connect, wire, check — no decision made. Recommend Stripe Connect for US/CA creators.</li>
+  <li><strong>International creators.</strong> Currency, tax forms (W-8BEN), compliance not addressed. If the first creator is non-US, this needs resolution first.</li>
+  <li><strong>Drop page countdown implementation.</strong> Shopify app vs custom Next.js component — web Cowork needs to choose.</li>
+  <li><strong>SMS vs email for drop notifications.</strong> SMS outperforms email on drops but requires TCPA-compliant opt-in. Email only for v1.</li>
+  <li><strong>Ads budget per drop.</strong> Proposed $500/drop but not committed against a total marketing budget.</li>
+  <li><strong>Who writes the drop copy.</strong> Claude generates first drafts, but a human (Dan or a contractor) must review and approve every piece of public copy.</li>
+</ol>
+
+<div class="callout">
+  <div class="head">Immediate decisions needed from Dan to move forward</div>
+  <ol>
+    <li>Approve the Phase 1 drop calendar (4 house drops, Apr 28 through May 7)</li>
+    <li>Approve house drop concept list (10 drops detailed in the House Drops tab)</li>
+    <li>Approve the $7/unit creator revenue share structure</li>
+    <li>Greenlight starting on the Collab Agreement template (separate file) and outreach templates</li>
+    <li>Decide: AI-generated designs (Midjourney ~$30/mo, Sora/other as available) vs contract human designer (~$200–400/design)</li>
+    <li>Confirm web Cowork starts work on drop page spec immediately (separate file: <code>DROPS-WEB-SPEC.md</code>)</li>
+  </ol>
+</div>
+
+</div>
+</section>
+
+<footer>
+  Hood'd Shop · Limited Edition Drop Program · Internal Strategy Document · v1 · 2026-04-15
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('nav.tabs button');
+  const panels = document.querySelectorAll('section.tab-panel');
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      tabs.forEach(b => b.classList.toggle('active', b === btn));
+      panels.forEach(p => p.classList.toggle('active', p.id === target));
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    });
+  });
+</script>
+
+</body>
+</html>

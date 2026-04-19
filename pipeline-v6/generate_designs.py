@@ -49,10 +49,10 @@ PREVIEW_HEIGHT = 960
 PRINTKK_WIDTH = 9448
 PRINTKK_HEIGHT = 7086
 
-ALL_LINES = ["artsy", "concept", "flag_flow", "cultural", "jersey", "retro"]
+ALL_LINES = ["concept", "flag_flow", "cultural", "jersey", "retro"]
 
-# Tier 1 gets all 6 lines, Tier 2 gets 3
-TIER_2_LINES = ["artsy", "flag_flow", "jersey"]
+# Tier 1 gets all 5 lines, Tier 2 gets 3
+TIER_2_LINES = ["concept", "flag_flow", "jersey"]
 
 # ---------------------------------------------------------------------------
 # Color helpers
@@ -110,75 +110,79 @@ def colors_to_natural(hex_colors):
 # ---------------------------------------------------------------------------
 
 PROMPTS = {
-    "artsy": (
-        "Psychedelic maximalist abstract art filling the ENTIRE frame edge to edge "
-        "with absolutely no background visible. Dense swirling ribbons of vibrant paint in "
-        "{colors} flowing in dramatic spirals, S-curves, and turbulent vortexes. "
-        "Colors layer and interweave with visible depth and glossy sheen. Fine geometric "
-        "line patterns and hatching nested within flowing forms. Extreme saturation, "
-        "high contrast, bold and overwhelming. Large-format fine art print viewed from "
-        "inches away. No objects, no symbols, no figures, no text, no logos. "
-        "Pure abstract color field energy. Every square inch filled solid."
-    ),
     "concept": (
-        "Bold automotive-inspired graphic art, flat 2D composition filling the ENTIRE "
-        "frame edge to edge. Dynamic diagonal speed stripes and angular shapes in "
-        "{colors} with metallic chrome highlights and reflections. Racing-inspired "
-        "design with aggressive forward-slanting geometry, carbon fiber texture accents, "
-        "and polished metallic sheen on color surfaces. High contrast between dark "
-        "areas and vivid color bands. Professional motorsport livery aesthetic — sleek, "
-        "powerful, premium. Studio-lit appearance with specular highlights. "
-        "No car, no vehicle, no 3D object — flat graphic art only. Every pixel covered."
+        "Flat 2D graphic design for a premium sublimation fabric print. 4:3 landscape "
+        "aspect ratio filling EVERY PIXEL of the frame edge to edge with zero margins. "
+        "Motorsport racing livery aesthetic inspired by Formula 1 car wraps — unwrapped "
+        "and laid completely flat as a 2D pattern. Aggressive diagonal speed stripes, "
+        "angular chevron cutaways, and sharp geometric panels in {colors}. Metallic "
+        "chrome silver accent lines with studio-lit reflective sheen. Carbon fiber "
+        "textured panels interspersed between bold color bands. Intense directional flow "
+        "sweeping from lower-left to upper-right creating a sense of velocity and forward "
+        "motion. High contrast between dark and vivid color zones. "
+        "This is NOT a car — it is a FLAT surface design for fabric printing. Think of "
+        "an F1 livery peeled off the car body and pressed completely flat. "
+        "Aggressive, premium, unmistakably {nation}'s national colors. Sharp vector-like "
+        "edges, dramatic color blocking, professional graphic design quality."
     ),
     "flag_flow": (
-        "National flag of {nation} reimagined as dramatic flowing liquid paint art, "
-        "filling the ENTIRE frame edge to edge. The flag's distinctive pattern — "
-        "{flag_pattern} — is clearly recognizable but transformed into thick glossy "
-        "flowing ribbons of paint in motion. Colors in {colors} swirl and blend at "
-        "their boundaries with visible paint texture, depth, and metallic sheen. "
-        "The composition maintains the flag's essential visual structure while adding "
-        "dramatic S-curves, turbulent flows, and painterly energy. Bold, saturated, "
-        "every square inch covered. No car, no vehicle — flat art viewed straight on. "
-        "No text, no emblems, no logos."
+        "Flat 2D artwork for premium sublimation fabric print. 4:3 landscape filling "
+        "EVERY PIXEL edge to edge. {nation}'s national flag ({flag_pattern}) reimagined "
+        "as dramatic flowing liquid paint art — thick glossy ribbons of {colors} in "
+        "motion, swirling and blending at boundaries with visible wet paint texture, "
+        "depth, and metallic iridescent sheen. The flag structure is CLEARLY RECOGNIZABLE "
+        "— someone should instantly know which nation this is. But the treatment "
+        "transforms it from a static flag into dynamic premium artwork with flowing "
+        "curves, paint viscosity, and luminous color transitions. Fine art meets "
+        "street art energy. "
+        "FLAT artwork only — no car, no vehicle, no 3D objects. Every square inch filled."
     ),
     "cultural": (
-        "Epic panoramic illustration in {colors}, filling the ENTIRE frame edge to "
-        "edge with no background gaps. A dramatic center focal point radiates outward "
-        "with flowing color ribbons and bold cultural imagery. Integrated into the "
-        "swirling composition: {cultural_motifs}. Dense layered composition with "
-        "Art Nouveau flowing organic lines meeting bold graphic shapes. Every element "
-        "flows into the next — no isolated floating objects. Rich texture, metallic "
-        "highlights, visible brushwork energy. Viewed straight-on as flat art. "
-        "No car, no vehicle, no 3D rendering. No text, no words, no logos."
+        "Flat 2D panoramic illustration for premium sublimation fabric print. 4:3 "
+        "landscape filling EVERY PIXEL edge to edge. Celebrates {nation} through bold "
+        "graphic design — {cultural_motifs} rendered as clean silhouettes and graphic "
+        "shapes integrated into flowing ribbons of {colors}. Style blends Art Nouveau "
+        "organic curves with modern editorial illustration — clean shapes, strong "
+        "outlines, layered depth with cutout effects. Every element connects to the "
+        "next in a cohesive flowing composition. Premium quality, rich detail, balanced "
+        "layout. The kind of illustration that would be on the cover of a $50 coffee "
+        "table book about {nation}. "
+        "FLAT artwork only — no car, no vehicle, no 3D rendering, no perspective."
     ),
     "jersey": (
-        "Abstract geometric athletic textile pattern filling the ENTIRE frame edge "
-        "to edge. Inspired by {nation}'s football identity: {jersey_pattern}. "
-        "Bold angular shapes, diagonal speed lines, and tessellated geometric forms "
-        "in {colors}. Fabric-like texture with sublimation print quality — smooth "
-        "gradients meeting sharp geometric boundaries. Professional sportswear design "
-        "aesthetic with dynamic asymmetric composition. High contrast, clean edges, "
-        "modern athletic energy. No jersey shape, no clothing silhouette, no text, "
-        "no numbers, no logos, no crests — pure pattern art filling every pixel."
+        "Flat 2D textile pattern design for premium sublimation fabric print. 4:3 "
+        "landscape filling EVERY PIXEL edge to edge. Inspired by {nation}'s iconic "
+        "football kit: {jersey_pattern}. Bold asymmetric geometric panels — diagonal "
+        "slashes, angular cutaway shapes, dynamic blocks in {colors}. The precision and "
+        "intentionality of a $300 limited-edition sportswear collaboration. Crisp sharp "
+        "edges between color zones, subtle gradient transitions within panels, "
+        "micro-texture details like woven fabric grain or perforated mesh accents. "
+        "High contrast, athletic energy, modern and clean. "
+        "FLAT surface pattern — no jersey shape, no clothing, no car, no 3D objects."
     ),
     "retro": (
-        "Tribute artwork celebrating {nation}'s {retro_era} football era. "
-        "Vintage-inspired design in {retro_colors_natural} filling the ENTIRE frame "
-        "edge to edge. {retro_desc}. Retro graphic style with grain texture, "
-        "halftone dot patterns, screen-print layers. Bold typography-free composition "
-        "using era-appropriate design language — chunky geometric shapes, vintage "
-        "color palettes, nostalgic warmth. Professional poster art quality. "
-        "No text, no numbers, no logos, no faces, no photographs. "
-        "Pure retro graphic art. Every square inch filled."
+        "Flat 2D vintage-inspired graphic design for premium sublimation fabric print. "
+        "4:3 landscape filling EVERY PIXEL edge to edge. Tribute to {nation}'s "
+        "{retro_era} football era in {retro_colors_natural}. {retro_desc}. "
+        "Retro graphic techniques — halftone dot gradients, screen-print color layers, "
+        "worn texture overlays, risograph printing aesthetic. Chunky geometric shapes, "
+        "warm nostalgic palette, intentional grain. Feels like discovering a premium "
+        "vintage poster from the era — collectible quality, not kitschy. "
+        "Structured composition with clear visual weight and balanced color distribution. "
+        "FLAT artwork only — no car, no vehicle, no 3D objects, no photographs, no faces."
     ),
 }
 
 # Base negative prompt applied to ALL generations
 NEGATIVE_SUFFIX = (
+    "CRITICAL: This must be a completely FLAT 2D design — no car, no vehicle, no "
+    "automobile, no hood, no bumper, no wheel, no 3D object, no 3D render, no "
+    "perspective view, no vanishing point, no background, no horizon line, no floor, "
+    "no shadow on ground, no studio environment. The image is a flat rectangular "
+    "graphic filling every pixel like a printed poster or fabric swatch. "
     "No text, no words, no letters, no numbers, no logos, no watermarks, "
-    "no signatures, no faces, no people, no hands, no cars, no vehicles, "
-    "no 3D objects, no photographs, no frames, no borders, no white margins, "
-    "no empty space, no background showing through."
+    "no signatures, no faces, no people, no hands, no frames, no borders, "
+    "no white margins, no empty space."
 )
 
 # Nation-specific things to NEVER generate

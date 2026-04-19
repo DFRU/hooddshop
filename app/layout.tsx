@@ -30,7 +30,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: { default: "Hood'd — Car Hood Covers for World Cup 2026 | Your Ride. Your Flag.", template: "%s | Hood'd" },
   description:
-    "Premium stretch-fit car hood covers for World Cup 2026. 48 nations, sublimation-printed on polyester spandex. Universal fit for cars, SUVs, and trucks. $49.99. Made in the USA.",
+    "Premium stretch-fit car hood covers for World Cup 2026. 48 nations, sublimation-printed on polyester spandex. Universal fit for cars, SUVs, and trucks. $49.99. Made to order.",
   metadataBase: new URL("https://hooddshop.com"),
   openGraph: {
     type: "website",

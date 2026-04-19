@@ -109,8 +109,9 @@ export default function FulfillmentSelector({ onSelect }: FulfillmentSelectorPro
     );
   }
 
-  const flag = COUNTRY_FLAG[countryCode] || "\u{1F30D}";
-  const countryName = COUNTRY_NAME[countryCode] || countryCode;
+  const normalizedCode = countryCode.toUpperCase();
+  const flag = COUNTRY_FLAG[normalizedCode] || "\u{1F30D}";
+  const countryName = COUNTRY_NAME[normalizedCode] || normalizedCode;
 
   return (
     <div className="mt-4 mb-2">
@@ -214,7 +215,7 @@ export default function FulfillmentSelector({ onSelect }: FulfillmentSelectorPro
                   className="text-body-sm font-semibold"
                   style={{ color: "var(--color-accent)" }}
                 >
-                  ${option.price_usd}
+                  ${option.price_usd.toFixed(2)}
                 </span>
               </div>
               <p

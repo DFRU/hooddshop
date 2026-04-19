@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hood'd Social Media Strategy — World Cup 2026</title>
+<style>
+  :root { --bg:#0a0a0a; --s:#111; --s2:#1a1a1a; --b:#222; --t:#e5e5e5; --m:#888; --a:#c8102e; --g:#22c55e; --y:#eab308; --r:#ef4444; --bl:#3b82f6; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--t);line-height:1.6;font-size:14px}
+  .c{max-width:1200px;margin:0 auto;padding:24px}
+  h1{font-size:28px;font-weight:800;letter-spacing:.03em;border-bottom:2px solid var(--a);padding-bottom:12px;margin-bottom:24px}
+  h1 span{color:var(--a)}
+  h2{font-size:20px;font-weight:700;margin:32px 0 16px;padding:8px 0;border-bottom:1px solid var(--b)}
+  h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:var(--a)}
+  .card{background:var(--s);border:1px solid var(--b);border-radius:8px;padding:20px;margin-bottom:16px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+  @media(max-width:800px){.grid2,.grid3{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+  th{text-align:left;padding:8px 10px;color:var(--m);font-weight:500;border-bottom:1px solid var(--b);text-transform:uppercase;font-size:11px;letter-spacing:.06em}
+  td{padding:8px 10px;border-bottom:1px solid var(--s2);vertical-align:top}
+  .tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600}
+  .tg{background:rgba(34,197,94,.15);color:var(--g)}.ty{background:rgba(234,179,8,.15);color:var(--y)}.tr{background:rgba(239,68,68,.15);color:var(--r)}.tb{background:rgba(59,130,246,.15);color:var(--bl)}.ta{background:rgba(200,16,46,.15);color:var(--a)}
+  .note{background:rgba(59,130,246,.08);border-left:3px solid var(--bl);padding:12px 16px;border-radius:0 6px 6px 0;margin:12px 0;font-size:13px}
+  .warn{background:rgba(234,179,8,.08);border-left:3px solid var(--y);padding:12px 16px;border-radius:0 6px 6px 0;margin:12px 0;font-size:13px}
+  .script{background:var(--s2);border:1px solid var(--b);border-radius:6px;padding:16px;margin:8px 0;font-size:13px;white-space:pre-wrap;font-family:monospace;line-height:1.7}
+  .phase{padding:16px;border-radius:8px;border:1px solid var(--b);margin-bottom:16px}
+  .pillars{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+  .pillar{flex:1;min-width:180px;padding:16px;border-radius:8px;background:var(--s);border:1px solid var(--b);text-align:center}
+  .pillar .emoji{font-size:32px;margin-bottom:8px}
+  .pillar .name{font-weight:700;font-size:14px;margin-bottom:4px}
+  .pillar .desc{font-size:12px;color:var(--m)}
+  .cal-week{margin-bottom:20px}
+  .cal-week h4{font-size:13px;font-weight:700;color:var(--a);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--b)}
+  ul{padding-left:20px;margin:8px 0}
+  li{margin:4px 0}
+  .tabs{display:flex;gap:4px;margin-bottom:20px;flex-wrap:wrap}
+  .tab{padding:8px 16px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;border:1px solid var(--b);background:var(--s);color:var(--m);transition:all .2s}
+  .tab:hover{color:var(--t);border-color:#444}
+  .tab.active{background:var(--a);color:white;border-color:var(--a)}
+  .panel{display:none}.panel.active{display:block}
+  .metric{text-align:center;padding:12px}
+  .metric .num{font-size:28px;font-weight:800}
+  .metric .lab{font-size:11px;color:var(--m);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+</style>
+</head>
+<body>
+<div class="c">
+
+<h1><span>HOOD'D</span> Social Media Strategy & Content Calendar</h1>
+<div style="font-size:13px;color:var(--m);margin:-16px 0 24px">April 15 - July 19, 2026 | TikTok + Instagram + Facebook | Budget: ~$5K total</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="show('strategy')">Strategy</div>
+  <div class="tab" onclick="show('calendar')">Content Calendar</div>
+  <div class="tab" onclick="show('scripts')">Content Scripts</div>
+  <div class="tab" onclick="show('influencers')">Influencer Plan</div>
+  <div class="tab" onclick="show('paid')">Paid Ads</div>
+  <div class="tab" onclick="show('matchday')">Match-Day Playbook</div>
+</div>
+
+<!-- STRATEGY -->
+<div class="panel active" id="strategy">
+
+<h2>Platform Strategy</h2>
+<div class="grid3">
+  <div class="card">
+    <h3>TikTok (PRIMARY)</h3>
+    <div class="grid2" style="margin:12px 0">
+      <div class="metric"><div class="num" style="color:var(--a)">5-7</div><div class="lab">Posts/Week</div></div>
+      <div class="metric"><div class="num" style="color:var(--a)">15-30s</div><div class="lab">Ideal Length</div></div>
+    </div>
+    <p style="font-size:13px;color:var(--m)">TikTok is FIFA's official preferred platform for WC2026. This is where we go hardest. Short, punchy, product-forward content. AI-generated product videos + real reaction content once samples arrive.</p>
+    <div style="margin-top:12px;font-size:12px">
+      <strong>Best times:</strong> Tue/Thu 11AM-1PM & 7-9PM EST<br>
+      <strong>Content mix:</strong> 40% product showcase, 30% nation hype, 20% UGC/reactions, 10% behind-the-scenes
+    </div>
+  </div>
+  <div class="card">
+    <h3>Instagram (SECONDARY)</h3>
+    <div class="grid2" style="margin:12px 0">
+      <div class="metric"><div class="num" style="color:var(--y)">4-5</div><div class="lab">Reels/Week</div></div>
+      <div class="metric"><div class="num" style="color:var(--y)">15-30s</div><div class="lab">Ideal Length</div></div>
+    </div>
+    <p style="font-size:13px;color:var(--m)">Cross-post TikTok content as Reels. Add Stories for daily engagement (polls, quizzes, countdowns). Use product tags and shoppable features once Shopify is connected.</p>
+    <div style="margin-top:12px;font-size:12px">
+      <strong>Best times:</strong> Tue/Thu 11AM-1PM, Wed 8PM EST<br>
+      <strong>Content mix:</strong> Reels (repurposed TikToks) + Stories (daily) + occasional carousel posts
+    </div>
+  </div>
+  <div class="card">
+    <h3>Facebook (SUPPORTING)</h3>
+    <div class="grid2" style="margin:12px 0">
+      <div class="metric"><div class="num" style="color:var(--bl)">3</div><div class="lab">Posts/Week</div></div>
+      <div class="metric"><div class="num" style="color:var(--bl)">Any</div><div class="lab">Format</div></div>
+    </div>
+    <p style="font-size:13px;color:var(--m)">Complete the page setup. Cross-post best-performing Reels. Primary value: Facebook Ads Manager (runs both FB + IG ads). Also useful for soccer community groups and marketplace.</p>
+    <div style="margin-top:12px;font-size:12px">
+      <strong>Best times:</strong> Wed 11AM, Fri 10-11AM EST<br>
+      <strong>Content mix:</strong> Cross-posted Reels + community engagement + event-driven posts
+    </div>
+  </div>
+</div>
+
+<h2>Content Pillars</h2>
+<div class="pillars">
+  <div class="pillar" style="border-top:3px solid var(--a)">
+    <div class="emoji">&#127942;</div>
+    <div class="name">Nation Pride</div>
+    <div class="desc">Showcase each nation's cover. "Which nation are you repping?" Tap into diaspora pride and loyalty.</div>
+  </div>
+  <div class="pillar" style="border-top:3px solid var(--bl)">
+    <div class="emoji">&#128663;</div>
+    <div class="name">Car Culture</div>
+    <div class="desc">Covers on real vehicles. Pull-on reveals. Parking lot flex. Tailgate scenes. Car meet content.</div>
+  </div>
+  <div class="pillar" style="border-top:3px solid var(--y)">
+    <div class="emoji">&#9917;</div>
+    <div class="name">Tournament Hype</div>
+    <div class="desc">Countdown posts. Match previews. Group draw reactions. Who's going to win it all?</div>
+  </div>
+  <div class="pillar" style="border-top:3px solid var(--g)">
+    <div class="emoji">&#128293;</div>
+    <div class="name">Urgency/FOMO</div>
+    <div class="desc">Limited time. Countdown to kickoff. "Your ride isn't ready." Flash discounts on match days.</div>
+  </div>
+  <div class="pillar" style="border-top:3px solid #a855f7">
+    <div class="emoji">&#128248;</div>
+    <div class="name">Social Proof</div>
+    <div class="desc">Customer photos. Unboxing videos. Real-world fit shots. Reviews and reactions.</div>
+  </div>
+</div>
+
+<h2>Hashtag Strategy</h2>
+<div class="grid2">
+  <div class="card">
+    <h3>Primary Branded Hashtags (use on every post)</h3>
+    <table>
+      <tr><td><strong>#HooddShop</strong></td><td>Brand name</td></tr>
+      <tr><td><strong>#YourRideYourFlag</strong></td><td>Brand tagline — make this THE phrase</td></tr>
+      <tr><td><strong>#HooddWorldCup</strong></td><td>Campaign-specific</td></tr>
+      <tr><td><strong>#HoodCover</strong></td><td>Product category</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h3>Trending/Discovery Hashtags (rotate per post)</h3>
+    <table>
+      <tr><td>#WorldCup2026</td><td>#FIFA2026</td></tr>
+      <tr><td>#WC2026</td><td>#Copa2026</td></tr>
+      <tr><td>#CarCulture</td><td>#CarAccessories</td></tr>
+      <tr><td>#RepYourNation</td><td>#SoccerTikTok</td></tr>
+      <tr><td>#FutbolTikTok</td><td>#FootballTikTok</td></tr>
+      <tr><td>#[NationName]Football</td><td>#[NationName]Soccer</td></tr>
+    </table>
+    <div style="font-size:11px;color:var(--m);margin-top:8px">Use 3-5 hashtags per TikTok (less is more). 5-10 per Instagram post. Always include at least one branded + one discovery tag.</div>
+  </div>
+</div>
+
+<h2>Spanish-Language Content</h2>
+<div class="warn">Hispanic/Latino fans are the #1 World Cup audience in the US. Mexico, Colombia, Argentina, and other Latin American diaspora communities represent potentially 40%+ of your total addressable market. You need Spanish-language content.</div>
+<div class="card">
+  <table>
+    <tr><td><strong>Approach:</strong></td><td>Create bilingual captions (English first, Spanish below) OR alternate between English and Spanish posts. For TikTok, use Spanish text overlays on nation-specific content for LATAM nations.</td></tr>
+    <tr><td><strong>Key phrases:</strong></td><td>"Tu carro. Tu bandera." (Your car. Your flag.) / "Representa tu nacion en la calle" (Rep your nation on the road) / "La Copa del Mundo llega. Tu carro esta listo?" (The World Cup is coming. Is your car ready?)</td></tr>
+    <tr><td><strong>Priority nations:</strong></td><td>Mexico, Colombia, Argentina, Brazil (Portuguese), Ecuador, Peru, Chile, Costa Rica</td></tr>
+  </table>
+</div>
+
+<h2>Account Setup Checklist</h2>
+<div class="grid3">
+  <div class="card">
+    <h3>TikTok</h3>
+    <ul>
+      <li>Switch to Business Account</li>
+      <li>Username: @hooddshop</li>
+      <li>Bio: "Your Ride. Your Flag. Premium car hood covers for World Cup 2026. 48 nations. $49.99. Link below."</li>
+      <li>Link: hooddshop.com/shop</li>
+      <li>Profile pic: Hood'd "H" logo on accent red</li>
+      <li>Enable TikTok Shop when ready</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Instagram</h3>
+    <ul>
+      <li>Switch to Business/Creator Account</li>
+      <li>Username: @hooddshop</li>
+      <li>Bio: "Your Ride. Your Flag. Car hood covers for WC 2026. 48 nations. Made to order. $49.99"</li>
+      <li>Link: Linktree or direct to hooddshop.com</li>
+      <li>Highlight covers: Shop | Nations | Fit Guide | Reviews</li>
+      <li>Enable Instagram Shopping when Shopify connected</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Facebook</h3>
+    <ul>
+      <li>Complete Page setup (About, contact, hours)</li>
+      <li>Add Shop tab linked to hooddshop.com</li>
+      <li>Set up Facebook Pixel on site</li>
+      <li>Join World Cup fan groups (for organic engagement, NOT spam)</li>
+      <li>Enable Messenger for customer inquiries</li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<!-- CONTENT CALENDAR -->
+<div class="panel" id="calendar">
+<h2>13-Week Content Calendar: April 15 - July 19, 2026</h2>
+<p style="font-size:13px;color:var(--m);margin-bottom:16px">Each week lists 5-7 content pieces. Cross-post TikToks to Instagram Reels. Best-performers go to Facebook. Adjust based on what gets traction.</p>
+
+<div class="phase" style="border-left:3px solid var(--bl)">
+<h3>PHASE 1: BUILD HYPE (Apr 15 - May 15) — 4 weeks</h3>
+<p style="font-size:12px;color:var(--m);margin-bottom:12px">Goal: Establish brand presence, build anticipation, start growing followers. All AI-generated content + mockup images until real samples arrive for photo/video.</p>
+
+<div class="cal-week">
+<h4>Week 1: Apr 15-21 — Launch Week</h4>
+<table>
+<thead><tr><th>Day</th><th>Platform</th><th>Content</th><th>Pillar</th><th>Format</th></tr></thead>
+<tbody>
+<tr><td>Tue</td><td>TT + IG</td><td>"Your ride isn't ready for the World Cup... yet." — Teaser video: slow reveal of hood cover on car</td><td><span class="tag ta">Nation Pride</span></td><td>15s video</td></tr>
+<tr><td>Wed</td><td>TT + IG</td><td>Countdown: "57 days until kickoff. 48 nations. Which one are you?" — Rapid carousel of all nation designs</td><td><span class="tag ty">Urgency</span></td><td>20s video</td></tr>
+<tr><td>Thu</td><td>TT + IG</td><td>"$49.99 to make your car the loudest thing in the parking lot" — Product features highlight</td><td><span class="tag tb">Car Culture</span></td><td>25s video</td></tr>
+<tr><td>Fri</td><td>IG Story</td><td>Poll: "Which group do you think is the Group of Death?" + nation covers for those teams</td><td><span class="tag ty">Hype</span></td><td>Story poll</td></tr>
+<tr><td>Sat</td><td>TT + IG</td><td>"POV: You pull up to the tailgate and your hood says everything" — cinematic AI car reveal</td><td><span class="tag tb">Car Culture</span></td><td>20s video</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="cal-week">
+<h4>Week 2: Apr 22-28 — Nation Spotlights Begin</h4>
+<table>
+<thead><tr><th>Day</th><th>Platform</th><th>Content</th><th>Pillar</th><th>Format</th></tr></thead>
+<tbody>
+<tr><td>Mon</td><td>TT</td><td>USA spotlight: "Host nation. Home advantage. Hood'd." — USA cover on multiple vehicle types</td><td><span class="tag ta">Nation Pride</span></td><td>20s video</td></tr>
+<tr><td>Tue</td><td>TT + IG</td><td>Mexico spotlight: "El anfitrion. Tu carro. Tu bandera." — Mexico cover + Spanish captions</td><td><span class="tag ta">Nation Pride</span></td><td>20s video</td></tr>
+<tr><td>Wed</td><td>IG Story</td><td>"This or That?" — USA vs. Mexico cover side by side. Tap to vote.</td><td><span class="tag ty">Hype</span></td><td>Story poll</td></tr>
+<tr><td>Thu</td><td>TT + IG</td><td>Brazil spotlight: "5x world champions. 1 car hood cover to prove it."</td><td><span class="tag ta">Nation Pride</span></td><td>20s video</td></tr>
+<tr><td>Fri</td><td>TT</td><td>"Name a country and I'll show you the hood cover" — trending format</td><td><span class="tag ta">Nation Pride</span></td><td>30s video</td></tr>
+<tr><td>Sun</td><td>FB + IG</td><td>Carousel: "All 48 nations. One mission." — Grid of all designs</td><td><span class="tag ta">Nation Pride</span></td><td>Carousel</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="cal-week">
+<h4>Week 3: Apr 29 - May 5 — Product Education</h4>
+<table>
+<thead><tr><th>Day</th><th>Platform</th><th>Content</th><th>Pillar</th><th>Format</th></tr></thead>
+<tbody>
+<tr><td>Tue</td><td>TT + IG</td><td>"How it works: Pull it on. Rep your nation. That's it." — Installation demo (AI or real sample)</td><td><span class="tag tb">Car Culture</span></td><td>20s video</td></tr>
+<tr><td>Wed</td><td>TT</td><td>Argentina spotlight: "Messi's last World Cup? Hood your car for the GOAT."</td><td><span class="tag ta">Nation Pride</span></td><td>15s video</td></tr>
+<tr><td>Thu</td><td>TT + IG</td><td>"Fits cars, SUVs, and trucks. Universal stretch. No clips." — Fit demo on different vehicle types</td><td><span class="tag tb">Car Culture</span></td><td>25s video</td></tr>
+<tr><td>Fri</td><td>IG Story</td><td>"Which continent has the best football?" — Americas / Europe / Africa / Asia poll</td><td><span class="tag ty">Hype</span></td><td>Story poll</td></tr>
+<tr><td>Sat</td><td>TT</td><td>Colombia spotlight: "Valderrama energy. Parking lot legend." — Colombian cover on SUV</td><td><span class="tag ta">Nation Pride</span></td><td>20s video</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="cal-week">
+<h4>Week 4: May 6-12 — Social Proof Push (samples should be arriving)</h4>
+<table>
+<thead><tr><th>Day</th><th>Platform</th><th>Content</th><th>Pillar</th><th>Format</th></tr></thead>
+<tbody>
+<tr><td>Mon</td><td>TT + IG</td><td>REAL UNBOXING: "It's here. First look at the Hood'd cover IRL." — Genuine unboxing video</td><td><span class="tag tg">Social Proof</span></td><td>30s video</td></tr>
+<tr><td>Tue</td><td>TT</td><td>"Putting it on my car for the first time" — Real installation on your Toyota Corolla</td><td><span class="tag tg">Social Proof</span></td><td>25s video</td></tr>
+<tr><td>Wed</td><td>IG Story</td><td>Real product close-up shots. Print quality. Elastic edge. Stretch test.</td><td><span class="tag tg">Social Proof</span></td><td>Multi-story</td></tr>
+<tr><td>Thu</td><td>TT + IG</td><td>"My neighbor asked me what that was on my car. I said 'My nation.'" — Reaction/storytelling</td><td><span class="tag tg">Social Proof</span></td><td>20s video</td></tr>
+<tr><td>Fri</td><td>TT</td><td>England spotlight: "It's coming home... to your hood." — England cover showcase</td><td><span class="tag ta">Nation Pride</span></td><td>15s video</td></tr>
+<tr><td>Sun</td><td>All</td><td>"30 DAYS UNTIL KICKOFF" — Major countdown milestone post</td><td><span class="tag ty">Urgency</span></td><td>15s video</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="phase" style="border-left:3px solid var(--y)">
+<h3>PHASE 2: DRIVE SALES (May 13 - Jun 10) — 4 weeks</h3>
+<p style="font-size:12px;color:var(--m);margin-bottom:12px">Goal: Convert followers to buyers. Paid ads begin. Influencer content drops. Urgency messaging intensifies. Every post should have a CTA.</p>
+
+<div class="cal-week">
+<h4>Week 5: May 13-19 — Paid Ads Launch</h4>
+<table>
+<thead><tr><th>Day</th><th>Platform</th><th>Content</th><th>Pillar</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Mon</td><td>TT + IG</td><td>"28 days. Is your car ready?" — Countdown with product CTA</td><td><span class="tag ty">Urgency</span></td><td>Begin paid boost on top performers from Phase 1</td></tr>
+<tr><td>Tue</td><td>TT</td><td>"Day in my life prepping for the World Cup" — casual vlog style, product woven in</td><td><span class="tag tg">Social Proof</span></td><td></td></tr>
+<tr><td>Wed</td><td>TT + IG</td><td>Germany spotlight: "4 stars. One hood."</td><td><span class="tag ta">Nation Pride</span></td><td></td></tr>
+<tr><td>Thu</td><td>TT + IG</td><td>"Every time I park, someone asks about my hood." — Story format</td><td><span class="tag tg">Social Proof</span></td><td>Best-performing organic format, boost with $20-50</td></tr>
+<tr><td>Fri</td><td>TT</td><td>"Reply to this with your nation and I'll show the cover" — Engagement bait</td><td><span class="tag ta">Nation Pride</span></td><td>High comment engagement = algorithm boost</td></tr>
+<tr><td>Sat</td><td>All</td><td>DEAL: "Early bird special: Order before June 1 and get free expedited shipping"</td><td><span class="tag ty">Urgency</span></td><td>If you can offer this — great conversion driver</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="cal-week">
+<h4>Week 6-7: May 20 - Jun 1 — Influencer Wave + Nation Blitz</h4>
+<table>
+<thead><tr><th>Day</th><th>Platform</th><th>Content</th><th>Pillar</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Daily</td><td>TT + IG</td><td>1 nation spotlight per day — cycle through top 20 nations with covers on vehicles</td><td><span class="tag ta">Nation Pride</span></td><td>Use trending audio. Tag nation-specific hashtags.</td></tr>
+<tr><td>2x/week</td><td>TT</td><td>Influencer content reposts (with permission) — "Look what @creator did with their Hood'd"</td><td><span class="tag tg">Social Proof</span></td><td>Stitch/duet influencer content</td></tr>
+<tr><td>2x/week</td><td>IG Story</td><td>Countdown sticker + "Order now, get it before kickoff" + link to shop</td><td><span class="tag ty">Urgency</span></td><td></td></tr>
+<tr><td>Weekly</td><td>All</td><td>"X DAYS LEFT" milestone posts (21, 14, 7 days)</td><td><span class="tag ty">Urgency</span></td><td>These perform well as the date approaches</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="cal-week">
+<h4>Week 8: Jun 2-10 — Final Pre-Kickoff Push</h4>
+<table>
+<thead><tr><th>Day</th><th>Platform</th><th>Content</th><th>Pillar</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Daily</td><td>TT + IG</td><td>"X DAYS" countdown — increasingly urgent. "Last chance to order and get it by kickoff"</td><td><span class="tag tr">Urgency MAX</span></td><td>Max ad spend this week</td></tr>
+<tr><td>Tue</td><td>TT</td><td>"Imagine pulling up to the watch party without repping your nation" — FOMO play</td><td><span class="tag ty">Urgency</span></td><td></td></tr>
+<tr><td>Thu</td><td>TT + IG</td><td>"Last call for guaranteed delivery before June 11" — Final shipping deadline post</td><td><span class="tag tr">Urgency MAX</span></td><td>CRITICAL: Calculate actual cutoff date based on PrintKK turnaround + shipping time</td></tr>
+<tr><td>Sat</td><td>All</td><td>"The World Cup starts TOMORROW. If your car isn't hooded, you're not ready."</td><td><span class="tag tr">Urgency MAX</span></td><td></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="phase" style="border-left:3px solid var(--a)">
+<h3>PHASE 3: PEAK RIDE (Jun 11 - Jul 19) — 5.5 weeks</h3>
+<p style="font-size:12px;color:var(--m);margin-bottom:12px">Goal: Ride the wave. Real-time reactive content. Match-day posts. Fan photo reposts. Maximum posting frequency. See Match-Day Playbook tab for detailed per-match strategy.</p>
+
+<div class="cal-week">
+<h4>Daily During Tournament</h4>
+<table>
+<thead><tr><th>Time</th><th>Content Type</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Morning</td><td>Match preview: "Today's matches: [flags]. Which nation is going through?"</td><td>Post 2-3 hours before first match of the day</td></tr>
+<tr><td>During match</td><td>IG Stories: live reactions, polls, predictions</td><td>Low-effort, high-engagement</td></tr>
+<tr><td>Post-match</td><td>"[Nation] WINS! Rep the champions. Link in bio." — Flash content within 30 min of result</td><td>THIS is where you get viral moments. Speed matters.</td></tr>
+<tr><td>Evening</td><td>1 TikTok: nation spotlight for tomorrow's matches OR customer photo repost</td><td>Plan ahead: have drafts ready for each nation's potential win</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="cal-week">
+<h4>Special Tournament Content</h4>
+<table>
+<tr><td><span class="tag ta">Group Stage</span></td><td>"Group of Death update: [Country] survives! Hood their car." — Post after every group match day</td></tr>
+<tr><td><span class="tag ty">Upsets</span></td><td>"Nobody saw THAT coming. [Underdog] just shocked the world." — Capitalize on underdog victories FAST</td></tr>
+<tr><td><span class="tag tg">Eliminations</span></td><td>"[Country] is OUT. But the hood stays on." — Sympathetic post for eliminated nations</td></tr>
+<tr><td><span class="tag tb">Knockouts</span></td><td>"Round of 16 is SET. These 16 nations are still alive." — Carousel of remaining nation covers</td></tr>
+<tr><td><span class="tag ta">Semifinals+</span></td><td>"4 nations left. Pick your champion." — High engagement poll + cover showcase</td></tr>
+<tr><td><span class="tag tr">Flash Sales</span></td><td>"[Country] just won! 15% off their cover for the next 24 hours. Code: [NATION]WIN"</td></tr>
+</table>
+</div>
+</div>
+
+<div class="phase" style="border-left:3px solid var(--g)">
+<h3>PHASE 4: CAPTURE (Jul 20+) — Post-Tournament</h3>
+<p style="font-size:12px;color:var(--m)">Goal: Collect customer content, build email list for future events, clearance on remaining demand.</p>
+<table>
+<tr><td>Day 1 post-final</td><td>"[Champion] takes it all. What a ride." — Celebration post</td></tr>
+<tr><td>Week 1</td><td>"Best fan photos from the tournament" — UGC compilation reel</td></tr>
+<tr><td>Week 2</td><td>"Thank you to every fan who hooded up" — Gratitude post</td></tr>
+<tr><td>Ongoing</td><td>"The World Cup is over but the pride stays on." — Evergreen positioning</td></tr>
+<tr><td>Ongoing</td><td>Evaluate Club World Cup, Euro 2028, Copa America as next product windows</td></tr>
+</table>
+</div>
+</div>
+
+<!-- CONTENT SCRIPTS -->
+<div class="panel" id="scripts">
+<h2>Content Templates & Video Scripts</h2>
+<p style="font-size:13px;color:var(--m);margin-bottom:16px">Copy-paste these as starting points. Adapt the nation, vehicle, and hook for each post. All scripts are designed for 15-30 second vertical video.</p>
+
+<h3>Script 1: The Reveal (Best for AI-generated videos)</h3>
+<div class="script">HOOK (0-3s): [Black screen. Text: "Your ride isn't ready."]
+BUILD (3-10s): [Slow camera pan toward car in parking lot/driveway. Car is plain.]
+REVEAL (10-18s): [Cut to: same car, now with Hood'd cover. Full glory. Multiple angles.]
+CTA (18-22s): [Text overlay: "48 nations. $49.99. hooddshop.com" + voiceover "Your ride. Your flag."]
+
+CAPTION: Your ride isn't ready for the World Cup... yet. 48 nations. $49.99. Link in bio.
+#YourRideYourFlag #HooddShop #WorldCup2026</div>
+
+<h3>Script 2: Nation Spotlight (Repeat for each nation)</h3>
+<div class="script">HOOK (0-3s): [Nation flag emoji fills screen. Trending audio drops.]
+SHOWCASE (3-15s): [Hood'd cover for that nation on 2-3 vehicle types. Quick cuts. Dramatic angles.]
+TEXT OVERLAY: "[Nation Name] fans. This one's for you."
+CTA (15-20s): "Link in bio. $49.99."
+
+CAPTION: [Nation] fans, your car needs this. World Cup 2026 is [X] days away.
+#[Nation]Football #WorldCup2026 #HooddShop #YourRideYourFlag
+
+SPANISH VARIANT (for LATAM nations):
+"Fans de [Pais], esto es para ustedes. Tu carro. Tu bandera."</div>
+
+<h3>Script 3: The Parking Lot Flex</h3>
+<div class="script">HOOK (0-3s): [Walking through parking lot. Casual. Phone camera.]
+BUILD (3-8s): [Camera pans across boring cars. Text: "Normal day in the parking lot..."]
+REVEAL (8-15s): [Camera finds YOUR car with Hood'd cover. Stop. Zoom in. Text: "...except for this one."]
+REACT (15-20s): [Big reaction. "WHOSE CAR IS THAT?!" or just a satisfied nod.]
+CTA (20-25s): [Text: "hooddshop.com | 48 nations | $49.99"]
+
+CAPTION: That one car in the parking lot that's ready for the World Cup.
+#HooddShop #CarCulture #WorldCup2026 #YourRideYourFlag</div>
+
+<h3>Script 4: Installation / How It Works</h3>
+<div class="script">HOOK (0-3s): [Text: "How to rep your nation in 10 seconds"]
+DEMO (3-15s): [Unfold cover. Hold it up. Stretch it over hood. Smooth out edges. Done.]
+RESULT (15-20s): [Step back. Full reveal. Multiple angles of the finished look.]
+CTA (20-25s): "No clips. No magnets. Just pull it on. hooddshop.com"
+
+CAPTION: Took 10 seconds to make my car World Cup ready. No tools needed.
+#HooddShop #WorldCup2026 #CarAccessories #HoodCover</div>
+
+<h3>Script 5: FOMO / Countdown</h3>
+<div class="script">HOOK (0-3s): [Giant text: "[X] DAYS" with alarm sound effect]
+BUILD (3-10s): [Quick montage: World Cup stadium footage (royalty-free), fans cheering, flags waving]
+PIVOT (10-15s): [Cut to: boring car with no cover. Text: "Don't be this person."]
+REVEAL (15-20s): [Cut to: car with Hood'd cover. Text: "Be THIS person."]
+CTA (20-25s): "hooddshop.com. $49.99. Before it's too late."
+
+CAPTION: [X] days until the World Cup starts. Is your car ready?
+#WorldCup2026 #HooddShop #YourRideYourFlag #Countdown</div>
+
+<h3>Script 6: Dual Heritage / Two Nations</h3>
+<div class="script">HOOK (0-3s): [Text: "When you're from two countries and both made the World Cup"]
+BUILD (3-12s): [Show person torn between two covers. Dramatic music. Hold one up, then the other.]
+RESOLVE (12-18s): [Show both covers on two different cars. Or: "Why not both?"]
+CTA (18-22s): "48 nations. $49.99 each. hooddshop.com"
+
+CAPTION: POV: Both your countries made the World Cup and you can't pick just one.
+#DualHeritage #WorldCup2026 #HooddShop #YourRideYourFlag</div>
+
+<h3>Script 7: Post-Match Reactive (pre-build for top nations)</h3>
+<div class="script">HOOK (0-3s): [Text: "[NATION] WINS!" + celebration audio]
+BUILD (3-10s): [Cover for that nation on vehicle. Celebration vibes. Fire emoji overlay.]
+CTA (10-15s): "Rep the winners. hooddshop.com. Code [NATION]WIN for 15% off — 24 hours only."
+
+CAPTION: [Nation] just did THAT. Rep the winners on your ride. 24-hour flash sale.
+#[Nation]Wins #WorldCup2026 #HooddShop
+
+PRE-BUILD: Have this template ready for ALL 48 nations. Just swap nation name + cover image + audio.
+Publish within 30 MINUTES of match result for maximum viral potential.</div>
+
+<div class="note"><strong>AI Video Production Tip:</strong> For the AI-generated showcase videos, create a consistent visual template: dark background, car rotating or revealed with dramatic lighting, nation colors as accent lighting, text overlay with clean typography matching your brand (Bebas Neue for headlines). Keep the same visual language across all 48 nations for brand consistency. Batch-produce these so you have a library ready to post.</div>
+</div>
+
+<!-- INFLUENCER PLAN -->
+<div class="panel" id="influencers">
+<h2>Influencer & Creator Partnership Plan</h2>
+
+<div class="grid3">
+  <div class="card" style="border-top:3px solid var(--g)">
+    <h3 style="color:var(--g)">Tier 1: Product Seeding (Free Product Only)</h3>
+    <div class="metric"><div class="num" style="color:var(--g)">20-30</div><div class="lab">Creators</div></div>
+    <table>
+      <tr><td><strong>Who:</strong></td><td>Car culture TikTokers, local soccer fans, car detailers, auto lifestyle accounts with 5K-50K followers</td></tr>
+      <tr><td><strong>Deal:</strong></td><td>Free cover (their nation choice) in exchange for 1 honest video</td></tr>
+      <tr><td><strong>Cost:</strong></td><td>~$17/unit x 25 = ~$425</td></tr>
+      <tr><td><strong>Expected:</strong></td><td>15-20 posts (not all will follow through)</td></tr>
+      <tr><td><strong>Outreach:</strong></td><td>DM: "Hey! We make premium car hood covers for the World Cup — 48 nations. Want us to send you one for free? Just post an honest video of the install."</td></tr>
+    </table>
+  </div>
+  <div class="card" style="border-top:3px solid var(--y)">
+    <h3 style="color:var(--y)">Tier 2: Paid Micro-Influencers</h3>
+    <div class="metric"><div class="num" style="color:var(--y)">5-10</div><div class="lab">Creators</div></div>
+    <table>
+      <tr><td><strong>Who:</strong></td><td>Soccer/football content creators, sports lifestyle accounts, diaspora community pages with 50K-300K followers</td></tr>
+      <tr><td><strong>Deal:</strong></td><td>Free product + $100-300 flat fee + unique discount code (10-15% commission per sale)</td></tr>
+      <tr><td><strong>Cost:</strong></td><td>~$1,500 (fees) + product</td></tr>
+      <tr><td><strong>Expected:</strong></td><td>5-10 high-quality posts with trackable sales</td></tr>
+      <tr><td><strong>Outreach:</strong></td><td>Email pitch (see template below)</td></tr>
+    </table>
+  </div>
+  <div class="card" style="border-top:3px solid var(--a)">
+    <h3 style="color:var(--a)">Tier 3: Strategic Partnerships</h3>
+    <div class="metric"><div class="num" style="color:var(--a)">2-3</div><div class="lab">Targets</div></div>
+    <table>
+      <tr><td><strong>Who:</strong></td><td>Retired soccer players, popular soccer commentators/podcasters, notable car culture figures with 100K+ followers</td></tr>
+      <tr><td><strong>Deal:</strong></td><td>Free product + generous affiliate commission (20-25%) OR small equity (2-5%) for ongoing promotion</td></tr>
+      <tr><td><strong>Cost:</strong></td><td>Equity or revenue share only</td></tr>
+      <tr><td><strong>Expected:</strong></td><td>Major credibility boost + audience access</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>Influencer Outreach Email Template (Tier 2)</h3>
+<div class="script">Subject: Free Hood'd cover + collab for World Cup 2026?
+
+Hey [Name],
+
+I'm Dan, founder of Hood'd (hooddshop.com). We make premium car hood covers for the 48 World Cup 2026 nations — full sublimation print, stretch-fit, $49.99.
+
+I've been following your content and think your audience would love this. Here's what I'm thinking:
+
+- I send you a free cover (pick your nation)
+- You post 1 video showing the install + your honest take
+- I set you up with a unique discount code — you earn [15%] on every sale
+
+The World Cup starts June 11 and demand is building fast. Would love to get you hooded up before kickoff.
+
+Down? Just reply with your nation and shipping address.
+
+Your ride. Your flag.
+Dan
+hooddshop.com
+@hooddshop</div>
+
+<h3>Where to Find Creators</h3>
+<div class="card">
+<table>
+<tr><td><strong>TikTok search:</strong></td><td>Search #CarTikTok, #SoccerTikTok, #FutbolTikTok, #CarCulture, #WorldCup2026 — look at who's posting and who gets engagement</td></tr>
+<tr><td><strong>Instagram Explore:</strong></td><td>Search car culture, soccer lifestyle, nation-specific content (e.g., #MexicanInUSA, #ColombianAmerican)</td></tr>
+<tr><td><strong>Modash.io:</strong></td><td>Free tier lets you search influencers by niche + follower count + engagement rate</td></tr>
+<tr><td><strong>Local soccer communities:</strong></td><td>Facebook groups for local soccer leagues, Hispanic community groups, car clubs in host cities</td></tr>
+<tr><td><strong>Diaspora community accounts:</strong></td><td>Accounts like @mexicansinusa, @colombiansinamerica — these have highly engaged, targeted audiences</td></tr>
+</table>
+</div>
+
+<h3>Influencer Timeline</h3>
+<table>
+<tr><td><span class="tag tb">Week 1-2 (Now)</span></td><td>Build target list of 50 creators across all tiers. Start DM outreach for Tier 1.</td></tr>
+<tr><td><span class="tag ty">Week 3-4 (May)</span></td><td>Ship free product to Tier 1. Begin email outreach for Tier 2. Negotiate Tier 3.</td></tr>
+<tr><td><span class="tag ta">Week 5-6 (Late May)</span></td><td>First influencer posts should start dropping. Repost, stitch, duet their content.</td></tr>
+<tr><td><span class="tag tr">Week 7+ (June)</span></td><td>Influencer content peaks. Boost best-performing influencer posts with paid spend.</td></tr>
+</table>
+</div>
+
+<!-- PAID ADS -->
+<div class="panel" id="paid">
+<h2>Paid Advertising Plan — $2,000 Budget</h2>
+<p style="font-size:13px;color:var(--m);margin-bottom:16px">Allocating $2K of the $5K total budget to paid. Start small, test, scale what works. Never spend big before you know what converts.</p>
+
+<div class="grid2">
+  <div class="card">
+    <h3>Budget Split</h3>
+    <table>
+      <tr><td><strong>Meta (Instagram + Facebook)</strong></td><td style="text-align:right">$1,200 (60%)</td></tr>
+      <tr><td><strong>TikTok Ads</strong></td><td style="text-align:right">$600 (30%)</td></tr>
+      <tr><td><strong>Testing Reserve</strong></td><td style="text-align:right">$200 (10%)</td></tr>
+      <tr><td style="font-weight:700;border-top:2px solid var(--b)">Total</td><td style="text-align:right;font-weight:700;border-top:2px solid var(--b)">$2,000</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h3>Timeline</h3>
+    <table>
+      <tr><td><span class="tag tb">May 13-25</span></td><td>Testing phase: $300. Run 4-6 ad variations. Test audiences, creatives, hooks.</td></tr>
+      <tr><td><span class="tag ty">May 26 - Jun 10</span></td><td>Scale phase: $700. Double down on winning ads. Increase budgets on best performers.</td></tr>
+      <tr><td><span class="tag tr">Jun 11 - Jul 19</span></td><td>Peak phase: $1,000. Max spend on proven winners. Add match-day flash sale ads.</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>Targeting Strategy</h3>
+<div class="card">
+<table>
+<thead><tr><th>Audience</th><th>Platform</th><th>Targeting Details</th><th>Priority</th></tr></thead>
+<tbody>
+<tr><td><strong>Soccer/Football Fans</strong></td><td>Meta + TikTok</td><td>Interest: Soccer, FIFA, World Cup, Football (Soccer). Ages 21-45.</td><td><span class="tag ta">HIGH</span></td></tr>
+<tr><td><strong>Host City Residents</strong></td><td>Meta</td><td>Location: 16 host city metros (LA, Miami, Houston, Dallas, NYC, etc.). Interest: Soccer OR Cars.</td><td><span class="tag ta">HIGH</span></td></tr>
+<tr><td><strong>Diaspora Communities</strong></td><td>Meta</td><td>Hispanic/Latino affinity + Interest in [specific national team]. Spanish-language ad variant.</td><td><span class="tag ta">HIGH</span></td></tr>
+<tr><td><strong>Car Enthusiasts</strong></td><td>TikTok</td><td>Interest: Cars, Car Accessories, Auto Culture. Crossover with sports interest.</td><td><span class="tag ty">MED</span></td></tr>
+<tr><td><strong>Retargeting</strong></td><td>Meta</td><td>Site visitors who didn't purchase. Cart abandoners. Engaged social followers.</td><td><span class="tag ta">HIGH</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Ad Creative Framework</h3>
+<div class="card">
+<p style="font-size:13px;margin-bottom:12px">Every ad needs: (1) a strong hook in the first 3 seconds, (2) product shown in context (on a car), (3) clear price ($49.99), (4) urgency element (countdown/limited time), (5) clear CTA (Shop Now).</p>
+<table>
+<thead><tr><th>Creative Type</th><th>Description</th><th>Expected Performance</th></tr></thead>
+<tbody>
+<tr><td><strong>UGC-Style</strong></td><td>Person talking to camera: "I just found the coolest World Cup accessory..." Feels organic, not like an ad.</td><td>Highest CTR. Best for TikTok.</td></tr>
+<tr><td><strong>Product Showcase</strong></td><td>AI-generated car with cover. Multiple angles. Text overlays with features. Clean, premium feel.</td><td>Good for Meta. Drives awareness.</td></tr>
+<tr><td><strong>Nation-Specific</strong></td><td>Targeted ad per nation. "[Mexico] fans — your car needs this." Shown only to that diaspora audience.</td><td>Highest conversion. Worth the creative effort for top 10 nations.</td></tr>
+<tr><td><strong>Countdown/Urgency</strong></td><td>"X days until kickoff. Order now to get it in time." Direct response.</td><td>Best for retargeting warm audiences.</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="warn"><strong>Prerequisites before spending money on ads:</strong><br>1. Checkout MUST be live and tested.<br>2. Meta Pixel and TikTok Pixel MUST be installed on hooddshop.com.<br>3. At least 5-10 organic posts should be live on each platform first (ads from empty accounts look scammy).<br>4. Product page must have real product photos (not just AI images).</div>
+</div>
+
+<!-- MATCH-DAY PLAYBOOK -->
+<div class="panel" id="matchday">
+<h2>Match-Day Content Playbook</h2>
+<p style="font-size:13px;color:var(--m);margin-bottom:16px">During the tournament (Jun 11 - Jul 19), you need to be reactive and fast. This is a one-person operation, so here's how to make it manageable.</p>
+
+<h3>Pre-Build Your Arsenal</h3>
+<div class="card">
+<p style="font-size:13px;margin-bottom:12px">Before June 11, create a folder with these ready-to-post assets for EACH of the 48 nations:</p>
+<table>
+<tr><td>1.</td><td><strong>Win post template:</strong> "[Nation] WINS! Rep the champions." + cover image + discount code</td></tr>
+<tr><td>2.</td><td><strong>Loss/elimination post:</strong> "[Nation] is out. But the pride stays on." + cover image</td></tr>
+<tr><td>3.</td><td><strong>Hype post:</strong> "[Nation] plays TODAY. Is your car ready?" + cover image</td></tr>
+<tr><td>4.</td><td><strong>Discount code:</strong> Pre-create unique codes per nation (e.g., USAWIN, MEXWIN, BRAWIN)</td></tr>
+</table>
+<p style="font-size:13px;margin-top:12px">With 48 nations x 4 templates = 192 pre-built posts. Sounds like a lot, but the template is the same — you're just swapping nation name + cover image. Batch this in one day.</p>
+</div>
+
+<h3>Daily Match-Day Schedule</h3>
+<div class="card">
+<table>
+<thead><tr><th>Time</th><th>Action</th><th>Platform</th><th>Time Needed</th></tr></thead>
+<tbody>
+<tr><td><strong>Morning (8-9 AM)</strong></td><td>Post match preview for today's games. "Today: [Flag] vs [Flag]. Who's taking it?"</td><td>TT + IG Story</td><td>15 min</td></tr>
+<tr><td><strong>Pre-Match (1hr before)</strong></td><td>Hype post for the match about to start. Pull from pre-built folder.</td><td>IG Story</td><td>5 min</td></tr>
+<tr><td><strong>During Match</strong></td><td>IG Story polls: "Who's winning this?" Live engagement.</td><td>IG Story</td><td>5 min</td></tr>
+<tr><td><strong>Post-Match (within 30 min)</strong></td><td>Winner celebration post + flash sale code. Pull from pre-built folder. Customize with score.</td><td>TT + IG + FB</td><td>15 min</td></tr>
+<tr><td><strong>Evening</strong></td><td>Day recap: "Today's results. Tomorrow's matches. Your hood awaits."</td><td>TT + IG</td><td>20 min</td></tr>
+</tbody>
+</table>
+<p style="font-size:13px;margin-top:12px"><strong>Total daily time commitment: ~1 hour.</strong> This is manageable for a solo operation IF you pre-build the templates.</p>
+</div>
+
+<h3>Viral Moment Triggers (Drop everything and post)</h3>
+<div class="card">
+<table>
+<tr><td><span class="tag tr">MAJOR UPSET</span></td><td>Underdog beats a favorite. Post IMMEDIATELY: "[Underdog] just SHOCKED the world! Rep the giant killers." This is your highest-probability viral moment.</td></tr>
+<tr><td><span class="tag ta">HOST NATION WIN</span></td><td>USA, Mexico, or Canada wins. Post within 15 minutes. These get massive domestic engagement.</td></tr>
+<tr><td><span class="tag ty">DRAMATIC FINISH</span></td><td>Last-minute goal, penalty shootout, red card chaos. React with energy: "DID THAT JUST HAPPEN?!"</td></tr>
+<tr><td><span class="tag tg">MEME MOMENT</span></td><td>Something weird happens (fan runs on field, player does something funny). Jump on it with a Hood'd twist if possible.</td></tr>
+</table>
+</div>
+
+<h3>Key Matches to Watch (Highest Content Value)</h3>
+<div class="card">
+<table>
+<thead><tr><th>Date</th><th>Match</th><th>Why It Matters for Hood'd</th></tr></thead>
+<tbody>
+<tr><td>Jun 11</td><td>Mexico vs South Africa (opener)</td><td>FIRST MATCH. Maximum hype. Mexico diaspora is massive. Be ready.</td></tr>
+<tr><td>Jun 12</td><td>USA group match (TBD opponent)</td><td>Host nation. Biggest US audience. All eyes on this one.</td></tr>
+<tr><td>~Jun 13</td><td>Argentina group match</td><td>Messi's last WC. Emotional + massive global interest.</td></tr>
+<tr><td>~Jun 14</td><td>Brazil group match</td><td>Brazil diaspora in US is large. Always a content magnet.</td></tr>
+<tr><td>~Jun 15</td><td>England group match</td><td>English-speaking market. Good for engagement.</td></tr>
+<tr><td>Late June</td><td>USA vs Mexico (if drawn)</td><td>RIVALRY MATCH. Content gold. Dual-heritage tension. Post for BOTH sides.</td></tr>
+<tr><td>Round of 16+</td><td>Any match involving USA, Mexico, Canada</td><td>Host nations advancing = peak domestic interest</td></tr>
+<tr><td>Jul 19</td><td>FINAL</td><td>Ultimate moment. Champion cover = biggest sales push of the tournament.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

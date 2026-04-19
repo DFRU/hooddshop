@@ -1,5 +1,4 @@
 import Link from "next/link";
-import MadeInUSA from "@/components/ui/MadeInUSA";
 
 export default function CtaBanner() {
   return (
@@ -11,9 +10,6 @@ export default function CtaBanner() {
         <p className="text-body-sm lg:text-body-md mt-4 max-w-md mx-auto" style={{ color: "#888" }}>
           World Cup 2026 is coming. Make sure your ride is ready.
         </p>
-        <div className="mt-4 flex justify-center">
-          <MadeInUSA />
-        </div>
         <Link
           href="/shop"
           className="inline-flex items-center justify-center mt-6 w-full sm:w-auto px-10 text-white font-semibold text-[13px] tracking-[0.08em] uppercase rounded transition-all touch-active"

@@ -8,7 +8,7 @@ This document captures the complete project state so a new Cowork session on a d
 
 **hooddshop.com** — World Cup 2026 car hood cover e-commerce site. Customers pick their nation, see the product on various vehicles, and buy a stretch-fit car hood cover ($49.99) fulfilled via Printkk print-on-demand.
 
-48 nations. One SKU per nation. All products live on Shopify. The storefront is a custom Next.js app (not Shopify's theme engine).
+48 nations. Two variants per nation (Home/Away) = 96 total SKUs. All products live on Shopify. The storefront is a custom Next.js app (not Shopify's theme engine). See `TWO-SIZE-VARIANT-SPEC.md`.
 
 ---
 
@@ -19,7 +19,7 @@ This document captures the complete project state so a new Cowork session on a d
 - **GitHub:** `https://github.com/DFRU/hooddshop.git`
 - **Branch:** `main` (latest commit: `f2b441b`)
 - **Stack:** Next.js 16 (App Router), React 19, Tailwind 4, TypeScript 5
-- **Hosting:** Needs Vercel link (no `.vercel` directory exists yet — see section 10)
+- **Hosting:** Vercel (deployed with all env vars)
 
 Key directories:
 
@@ -92,13 +92,7 @@ The Next.js app uses the **Storefront** token (read-only, public). The pipeline 
 | CDN base | `https://cdn.printkk.com/imgs/CNYE1T74/design/20260413` |
 | Product code | `5K14TS` |
 
-**Critical auth note:** Printkk's API does NOT use standard `Authorization: Bearer`. It uses:
-- `Pixel-Auth: bearer <JWT>` (custom header)
-- `Authorization: Basic <base64>` (in addition)
-- `User-Type: pkk`
-- `Tenant-Id: CNYE1T74`
-
-The JWT expires. To get a fresh one, log in at `dashboard.printkk.com` and intercept the `Pixel-Auth` header from any XHR request (the dashboard is a Vue 3 SPA using Vuex).
+**Auth note:** Printkk uses standard API key/secret authentication (NOT the JWT interception method previously documented). The API key and secret are stored in `.env.local` as Printkk env vars.
 
 ### Printkk API endpoints
 
@@ -253,13 +247,13 @@ The pipeline's `config.json` has absolute Windows paths. On GEEKOM, update these
 
 ## 8. Known Issues & Gotchas
 
-1. **Printkk JWT expiry:** The API JWT from `Pixel-Auth` header expires. Must log in to dashboard and re-capture to use the API directly. The downloaded `printkk_mockups.json` has all CDN hashes though, so downloads work without auth (CDN URLs are public).
+1. **Printkk auth:** Uses standard API key/secret (stored in `.env.local`). The downloaded `printkk_mockups.json` has all CDN hashes — CDN URLs are public and don't require auth.
 
 2. **Shopify Admin rate limits:** ~2 requests/second for image operations. The 0.6s sleep in `update_shopify.py` handles this, but bulk operations on all 48 products take ~4 minutes.
 
 3. **Legacy single mockup files:** `{code}_mockup.webp` (no view number) still exist in `public/vehicles/`. Not referenced by current code. Safe to delete but haven't been cleaned up yet.
 
-4. **No Vercel deployment configured:** The repo pushes to GitHub but there's no Vercel project linked. The last deploy was triggered by `git push` — if Vercel is connected on the GitHub side (via Vercel dashboard, not CLI), it auto-deploys. Otherwise manual `vercel --prod` is needed.
+4. **Vercel deployment:** Now configured and deployed with all 12 env vars. Auto-deploys on `git push` to `main`.
 
 5. **TypeScript union discrimination:** Hero.tsx and VehicleShowcase.tsx use `"vehicleName" in img` to tell MockupImage from VehicleImage. If either type changes, this pattern must be preserved.
 
@@ -282,15 +276,19 @@ The pipeline's `config.json` has absolute Windows paths. On GEEKOM, update these
 
 ## 10. Pending / Next Steps
 
-1. **Vercel deployment:** Either link via `vercel link` + `vercel --prod` on GEEKOM, or verify it's connected through the Vercel dashboard (GitHub integration).
+1. ~~**Vercel deployment:**~~ DONE — deployed with all 12 env vars.
 
 2. **Clean up legacy mockup files:** Delete the 48 `{code}_mockup.webp` files (no view number) that are no longer referenced.
 
-3. **Domain setup:** Verify `hooddshop.com` DNS points to Vercel (or wherever hosted).
+3. **Domain setup:** Verify `hooddshop.com` DNS points to Vercel.
 
 4. **SEO verification:** Run Lighthouse, check OG images render correctly on social share.
 
-5. **Printkk fulfillment integration:** Currently products exist on both Shopify and Printkk but the order routing (Shopify order → Printkk fulfillment) may need configuration in the Printkk dashboard.
+5. **Upload pipeline B2:** Printkk file delivery method remains open. See `UPLOAD-PIPELINE-SPEC.md` (v0.3).
+
+6. **Shopify webhooks:** Registered via Admin UI (`orders/paid`, `orders/cancelled`). Signing secret set. The shpat_ token lacks order scopes so webhook registration is manual, not API-driven.
+
+7. **Database:** Neon Postgres provisioned with tables: `assets`, `print_jobs`, `webhook_events`. Migrations complete.
 
 ---
 

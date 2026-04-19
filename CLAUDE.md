@@ -23,24 +23,34 @@ hooddshop.com — Custom sublimation-printed stretch polyester-spandex car hood 
   - `components/product/FulfillmentSelector.tsx` — Customer-facing UI (already wired into PDP)
 - Nation catalog: lib/nations.ts + NationCard + NationFilterSheet
 
-## What Is NOT Done (Key Gaps)
-1. **Shopify API not connected** — `SHOPIFY_STORE_DOMAIN` and `SHOPIFY_STOREFRONT_ACCESS_TOKEN` env vars not set. All product data is placeholder.
-2. **Product detail page** uses hardcoded placeholder — needs real Shopify product data via `getProduct(handle)` query
-3. **Cart add-to-cart** is stubbed — the `_fulfillment_option` cart attribute is commented out in `app/products/[handle]/page.tsx` (lines 22-34)
-4. **Shop page** needs real Shopify collection/product data
-5. **No build tested** — run `npm run build` to verify no type errors
+## What Is Done (Previously Gaps — Now Resolved)
+- **Shopify API connected** — all env vars set in `.env.local` and on Vercel (12 total). Store domain: `hoodd-shop-2.myshopify.com`.
+- **Products uploaded** — 48 nations × 2 variants (Home/Away) = 96 assets via catalog upload pipeline. See `TWO-SIZE-VARIANT-SPEC.md`.
+- **Database provisioned** — Neon Postgres with tables: `assets`, `print_jobs`, `webhook_events`. Migrations run.
+- **Shopify webhooks registered** — `orders/paid` and `orders/cancelled` via Shopify Admin UI (shpat_ token lacks order scopes, so registration is manual). Signing secret set in `SHOPIFY_WEBHOOK_SECRET`.
+- **Vercel deployed** — redeployed with all env vars.
+
+## What Is NOT Done (Remaining Gaps)
+1. **Cart add-to-cart** may still be stubbed — the `_fulfillment_option` cart attribute was commented out in `app/products/[handle]/page.tsx`
+2. **Upload pipeline B2 (Printkk file delivery)** — remains open. See `UPLOAD-PIPELINE-SPEC.md` (v0.3).
 
 ## Key Files
 - `SUPPLIER-ENGINE-BUILD-SPEC.md` — Full supplier engine specification (already implemented)
+- `TWO-SIZE-VARIANT-SPEC.md` — Two-variant (Home/Away) product spec
+- `UPLOAD-PIPELINE-SPEC.md` (v0.3) — Catalog upload pipeline spec (B2 still open)
+- `BRAND-VOICE-GUIDE.md` — Brand voice guide
+- `LEGAL-PAGES-COPY.md` — Legal pages copy
 - `../world-cup-hoods/suppliers-repository.json` — Extended supplier data (17 suppliers)
 - `../world-cup-hoods/product-specs.md` — Product specifications
 - `../world-cup-hoods/print-specs.md` — Print file specifications per supplier
 
-## Env Vars Required
+## Env Vars (All Set — 12 total in .env.local and Vercel)
 ```env
-SHOPIFY_STORE_DOMAIN=hooddshop.myshopify.com
-SHOPIFY_STOREFRONT_ACCESS_TOKEN=<needs to be generated in Shopify Admin>
-SUPPLIER_ADMIN_TOKEN=<any secure random string>
+SHOPIFY_STORE_DOMAIN=hoodd-shop-2.myshopify.com
+SHOPIFY_STOREFRONT_ACCESS_TOKEN=<set>
+SUPPLIER_ADMIN_TOKEN=<set>
+SHOPIFY_WEBHOOK_SECRET=<set — admin UI signing key>
+# Plus 8 more (database, Printkk, etc.) — see .env.local
 ```
 
 ## Brand Design System
