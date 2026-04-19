@@ -18,6 +18,7 @@ import {
   markWebhookProcessed,
   insertPrintJob,
   cancelJobsForOrder,
+  getAssetByNationAndVariant,
 } from "@/lib/db/queries";
 import { ulid } from "@/lib/ulid";
 
@@ -147,13 +148,36 @@ async function handleOrderPaid(order: ShopifyOrder) {
   let skipped = 0;
 
   for (const item of order.line_items) {
-    // Resolve asset_id from SKU. SKU format: "{CODE}-HOME" or "{CODE}-AWAY"
-    // The actual asset_id mapping happens via Shopify metafields, but at webhook
-    // time we need to look up the variant. For Phase 1A, we use the SKU directly
-    // and resolve the asset in the worker (which has time to query Shopify).
-    //
-    // Store SKU as asset_id placeholder; worker resolves to actual asset_id.
-    const assetId = item.sku || `unknown_${item.variant_id}`;
+    // Resolve asset_id from SKU. SKU format: "{CODE}-{VARIANT}" e.g. "CA-HOME"
+    // Parse the SKU into nation_code and variant_name, then look up the asset
+    // in the assets table.
+    let assetId: string | null = null;
+
+    if (item.sku) {
+      const skuParts = item.sku.split("-");
+      // SKU may have multi-part codes like "GB-ENG-HOME", so variant is last part
+      const variantName = skuParts.pop()?.toLowerCase(); // "home" or "away"
+      const nationCode = skuParts.join("-").toUpperCase(); // "CA" or "GB-ENG"
+
+      if (variantName && nationCode) {
+        const asset = await getAssetByNationAndVariant(nationCode, variantName);
+        if (asset) {
+          assetId = asset.id;
+        } else {
+          console.warn(
+            `[webhook] No asset found for nation=${nationCode} variant=${variantName} (SKU=${item.sku})`
+          );
+        }
+      }
+    }
+
+    if (!assetId) {
+      console.error(
+        `[webhook] Cannot resolve asset_id for SKU=${item.sku}, variant_id=${item.variant_id}. Skipping line item.`
+      );
+      skipped++;
+      continue;
+    }
 
     const inserted = await insertPrintJob({
       id: ulid(),

@@ -34,6 +34,7 @@ import {
   setVariantMetafields,
   getLocations,
   setInventoryLevel,
+  shopifyAdminFetch,
   type CreateProductInput,
   type ShopifyAdminVariant,
 } from "../../lib/shopify-admin";
@@ -336,8 +337,46 @@ async function main() {
 
       if (existing) {
         console.log(`  Product exists (${existing.id}), updating...`);
-        // TODO: add variant update logic for existing products
-        // For Phase 1A, skip update of existing products
+        const skuPrefix = nationCodeToSku(nation.code);
+
+        // Update variant SKUs and store Shopify IDs in assets table
+        for (const v of variantData) {
+          const expectedSku = `${skuPrefix}-${v.variant.toUpperCase()}`;
+          const matchingVariant = existing.variants.find(
+            (sv) =>
+              sv.title.toLowerCase() ===
+              (v.variant.charAt(0).toUpperCase() + v.variant.slice(1)).toLowerCase()
+          );
+
+          if (matchingVariant) {
+            // Update SKU if it doesn't match the expected format
+            if (matchingVariant.sku !== expectedSku) {
+              console.log(
+                `    Updating variant ${matchingVariant.id} SKU: "${matchingVariant.sku}" → "${expectedSku}"`
+              );
+              await shopifyAdminFetch(
+                `/variants/${matchingVariant.id}.json`,
+                {
+                  method: "PUT",
+                  body: {
+                    variant: {
+                      id: matchingVariant.id,
+                      sku: expectedSku,
+                    },
+                  },
+                }
+              );
+            }
+
+            // Store Shopify IDs in assets table
+            await updateAssetShopifyIds(
+              v.assetId,
+              String(existing.id),
+              String(matchingVariant.id)
+            );
+          }
+        }
+
         updated++;
         continue;
       }

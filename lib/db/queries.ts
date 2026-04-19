@@ -350,3 +350,24 @@ export async function updateAssetShopifyIds(
     WHERE id = ${assetId}
   `;
 }
+
+/**
+ * Look up the most recent (non-retired) asset by nation_code and variant_name.
+ * Used by the webhook handler to resolve a Shopify SKU like "CA-HOME" →
+ * asset row with id "ca_home_vv2".
+ */
+export async function getAssetByNationAndVariant(
+  nationCode: string,
+  variantName: string
+): Promise<AssetRow | null> {
+  const sql = getDb();
+  const rows = await sql`
+    SELECT * FROM assets
+    WHERE nation_code = ${nationCode}
+      AND variant_name = ${variantName}
+      AND retired_at IS NULL
+    ORDER BY created_at DESC
+    LIMIT 1
+  `;
+  return (rows[0] as unknown as AssetRow) ?? null;
+}
