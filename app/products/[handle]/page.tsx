@@ -79,20 +79,17 @@ export default async function ProductPage({ params, searchParams }: PageProps) {
 
   // Resolve all image sources for this product's nation
   const nationCode = product ? getNationCodeFromTitle(product.title) : null;
-  const productPhoto = nationCode ? getProductImage(nationCode) : null;
   const vehicleImages = nationCode ? getVehicleImages(nationCode) : [];
   const mockups = nationCode ? getMockupImages(nationCode) : [];
 
-  // Image priority: 1) Product photo (real fabric), 2) Mockups on car, 3) Max 1 AI vehicle render
-  const allImages = [
-    // Real product photography first
-    ...(productPhoto ? [{ src: productPhoto.src, alt: productPhoto.alt, vehicleName: "Product Photo" }] : []),
+  // "See it on your ride" showcase: mockups on car + AI vehicle renders (separate from main gallery)
+  const showcaseImages = [
     // Printkk mockups (skip size info view 1)
     ...mockups
       .filter((m) => m.view !== 1)
-      .map((m) => ({ src: m.src, alt: m.alt, vehicleName: "Product Mockup" })),
-    // Max 1 AI vehicle render as supporting
-    ...vehicleImages.slice(0, 1).map((v) => ({ src: v.src, alt: v.alt, vehicleName: v.vehicleName })),
+      .map((m) => ({ src: m.src, alt: m.alt, label: "Product Mockup" })),
+    // AI vehicle renders
+    ...vehicleImages.slice(0, 2).map((v) => ({ src: v.src, alt: v.alt, label: v.vehicleName })),
   ];
 
   return (
@@ -101,7 +98,7 @@ export default async function ProductPage({ params, searchParams }: PageProps) {
       <ProductDetailClient
         product={product}
         handle={handle}
-        vehicleImages={allImages}
+        showcaseImages={showcaseImages}
         initialVariantId={initialVariantId}
       />
     </>

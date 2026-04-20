@@ -2,11 +2,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { flagUrl } from "@/lib/design";
 import { getVehicleImages } from "@/lib/vehicles";
+import { getProducts } from "@/lib/shopify";
 
 export default async function Hero() {
   // Hero: show the Argentina truck on-vehicle render — globally appealing
   const arVehicles = getVehicleImages("ar");
   const heroImage = arVehicles.find((v) => v.vehicleType === "truck") ?? arVehicles[0] ?? null;
+
+  // Fetch actual min price from Shopify (localized by Shopify Markets)
+  const { products } = await getProducts({ first: 1, sortKey: "PRICE" });
+  const minPrice = products[0]?.priceRange?.minVariantPrice;
+  const priceDisplay = minPrice
+    ? `$${parseFloat(minPrice.amount).toFixed(2)} ${minPrice.currencyCode}`
+    : "$49.99";
 
   return (
     <section className="relative flex items-end overflow-hidden" style={{ minHeight: "min(90vh, 780px)" }}>
@@ -54,7 +62,7 @@ export default async function Hero() {
                 className="flex items-center justify-center w-full sm:w-auto px-8 text-white font-semibold text-[13px] tracking-[0.08em] uppercase rounded transition-all touch-active"
                 style={{ background: "var(--color-accent)", minHeight: "52px" }}
               >
-                Shop Now — $49.99
+                Shop Now — From {priceDisplay}
               </Link>
               <Link
                 href="/nations"
@@ -69,7 +77,7 @@ export default async function Hero() {
             <div className="flex gap-8 pt-2">
               {[
                 { v: "48", l: "Nations" },
-                { v: "$49.99", l: "From" },
+                { v: priceDisplay, l: "From" },
               ].map((s) => (
                 <div key={s.l}>
                   <div className="text-display-sm text-white">{s.v}</div>

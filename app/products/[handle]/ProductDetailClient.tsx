@@ -41,10 +41,17 @@ interface GalleryImage {
   label?: string;
 }
 
+interface ShowcaseImage {
+  src: string;
+  alt: string;
+  label: string;
+}
+
 interface ProductDetailClientProps {
   product: ShopifyProduct | null;
   handle: string;
-  vehicleImages?: { src: string; alt: string; vehicleName: string }[];
+  /** Mockup/vehicle images for "See it on your ride" section */
+  showcaseImages?: ShowcaseImage[];
   /** Shopify variant GID from ?variant= URL param, resolved server-side. */
   initialVariantId?: string;
 }
@@ -53,11 +60,12 @@ interface ProductDetailClientProps {
 export default function ProductDetailClient({
   product,
   handle,
-  vehicleImages = [],
+  showcaseImages = [],
   initialVariantId,
 }: ProductDetailClientProps) {
   const { addItem, isLoading } = useCart();
   const [addedFeedback, setAddedFeedback] = useState(false);
+  const [copiedLink, setCopiedLink] = useState(false);
   const [selectedFulfillment, setSelectedFulfillment] =
     useState<FulfillmentOption | null>(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -137,13 +145,14 @@ export default function ProductDetailClient({
   );
 
   // ── Derived data ──────────────────────────────────────────
-  const shopifyImages = product?.images?.edges?.map((e) => e.node) ?? [];
+  const allShopifyImages = product?.images?.edges?.map((e) => e.node) ?? [];
 
-  // Build gallery: variant image first (if present), then mockups, then Shopify images
+  // Build gallery: ONLY design images (variant images from Shopify)
+  // Mockup/vehicle images go in the separate showcase section below
   const galleryImages: GalleryImage[] = useMemo(() => {
     const images: GalleryImage[] = [];
 
-    // Variant-specific image from Shopify (the mockup assigned to this variant)
+    // Selected variant's image first (the active design)
     if (selectedVariant?.image) {
       images.push({
         src: selectedVariant.image.url,
@@ -152,30 +161,31 @@ export default function ProductDetailClient({
       });
     }
 
-    // Mockup/vehicle images from server (pre-ordered: mockups first, then AI renders)
-    for (const v of vehicleImages) {
-      // Skip if this URL is the same as the variant image we already added
-      if (selectedVariant?.image && v.src === selectedVariant.image.url) continue;
+    // Add other variant images so the user can see all available designs
+    for (const variant of variants) {
+      if (variant.id === selectedVariant?.id) continue; // already added
+      if (!variant.image) continue;
+      // Deduplicate by URL
+      if (images.some((g) => g.src === variant.image!.url)) continue;
       images.push({
-        src: v.src,
-        alt: v.alt,
-        label: v.vehicleName,
+        src: variant.image.url,
+        alt: variant.image.altText ?? `${variant.title} design`,
+        label: variant.title,
       });
     }
 
-    // Shopify product-level images (deduplicated)
-    for (const img of shopifyImages) {
-      if (!images.some((g) => g.src === img.url)) {
+    // If no variant images yet (e.g. images not uploaded), fall back to product-level Shopify images
+    if (images.length === 0) {
+      for (const img of allShopifyImages) {
         images.push({
           src: img.url,
           alt: img.altText ?? product?.title ?? handle,
-          label: "Product Photo",
         });
       }
     }
 
     return images;
-  }, [selectedVariant, vehicleImages, shopifyImages, product?.title, handle]);
+  }, [selectedVariant, variants, allShopifyImages, product?.title, handle]);
 
   const shopifyPrice = selectedVariant
     ? parseFloat(selectedVariant.price.amount)
@@ -244,12 +254,12 @@ export default function ProductDetailClient({
                 </span>
               </div>
             )}
-            {activeImage?.label && activeImage.label !== "Product Mockup" && activeImage.label !== "Product Photo" && (
+            {activeImage?.label && (
               <div
                 className="absolute top-3 right-3 px-2 py-1 rounded text-[9px] uppercase tracking-widest text-white/70"
                 style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(4px)" }}
               >
-                AI Preview · {activeImage.label}
+                {activeImage.label}
               </div>
             )}
           </div>
@@ -333,6 +343,50 @@ export default function ProductDetailClient({
               : "Coming Soon"}
           </button>
 
+          {/* Share / copy link */}
+          <button
+            onClick={async () => {
+              const url = window.location.href;
+              // Try native share on mobile, fall back to clipboard
+              if (navigator.share) {
+                try {
+                  await navigator.share({ title, url });
+                  return;
+                } catch {
+                  // User cancelled or share failed — fall through to clipboard
+                }
+              }
+              await navigator.clipboard.writeText(url);
+              setCopiedLink(true);
+              setTimeout(() => setCopiedLink(false), 2000);
+            }}
+            className="mt-3 w-full flex items-center justify-center gap-2 text-[13px] font-semibold uppercase tracking-[0.06em] rounded transition-colors"
+            style={{
+              height: "48px",
+              border: "1px solid var(--color-border)",
+              color: copiedLink ? "var(--color-success)" : "var(--color-text-muted)",
+              background: "transparent",
+            }}
+          >
+            {copiedLink ? (
+              <>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Link Copied
+              </>
+            ) : (
+              <>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                  <polyline points="16 6 12 2 8 6" />
+                  <line x1="12" y1="2" x2="12" y2="15" />
+                </svg>
+                Share
+              </>
+            )}
+          </button>
+
           <TrustBar />
 
           {/* ── Accordion sections ── */}
@@ -367,6 +421,61 @@ export default function ProductDetailClient({
           </div>
         </div>
       </div>
+
+      {/* ── "See it on your ride" showcase ── */}
+      {showcaseImages.length > 0 && (
+        <div className="max-w-[var(--max-width)] mx-auto px-[var(--container-px)] lg:px-[var(--container-px-lg)] pb-10 lg:pb-16">
+          <div style={{ borderTop: "1px solid #1A1A1A" }} className="pt-8 lg:pt-12">
+            <div className="flex items-end justify-between mb-5 lg:mb-8">
+              <div>
+                <span
+                  className="text-label"
+                  style={{ color: "var(--color-accent)" }}
+                >
+                  Preview
+                </span>
+                <h2 className="text-display-sm text-white mt-1">
+                  See It on Your Ride
+                </h2>
+              </div>
+              <p className="text-body-sm hidden sm:block" style={{ color: "#555" }}>
+                AI-generated previews · Actual print may vary
+              </p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-4">
+              {showcaseImages.map((img, i) => (
+                <div
+                  key={img.src + i}
+                  className="relative overflow-hidden rounded-lg"
+                  style={{
+                    aspectRatio: "4/3",
+                    border: "1px solid #1A1A1A",
+                    background: "var(--color-surface-2)",
+                  }}
+                >
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div
+                    className="absolute bottom-2 left-2 px-2 py-0.5 rounded text-[9px] uppercase tracking-widest text-white/60"
+                    style={{ background: "rgba(0,0,0,0.5)" }}
+                  >
+                    {img.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="text-body-sm mt-3 sm:hidden" style={{ color: "#555" }}>
+              AI-generated previews · Actual print may vary
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* ── Mobile sticky bottom CTA ── */}
       <div

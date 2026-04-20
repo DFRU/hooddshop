@@ -1,8 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getProducts } from "@/lib/shopify";
-import { getNationCodeFromTitle } from "@/lib/nations";
-import { getMockupImage, getProductImage } from "@/lib/vehicles";
 
 export default async function TrendingProducts() {
   // Fetch popular nations by title — no sales data yet so BEST_SELLING returns arbitrary order
@@ -33,18 +31,33 @@ export default async function TrendingProducts() {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-5">
           {products.map((product) => {
-            const shopifyImage = product.images?.edges?.[0]?.node;
-            const price = product.priceRange?.minVariantPrice?.amount;
-            const formattedPrice = price
-              ? `$${parseFloat(price).toFixed(2)}`
-              : "$49.99";
+            const priceData = product.priceRange?.minVariantPrice;
+            const formattedPrice = priceData
+              ? `$${parseFloat(priceData.amount).toFixed(2)} ${priceData.currencyCode}`
+              : "";
 
-            // Image priority: product photo > mockup > Shopify image
-            const nationCode = getNationCodeFromTitle(product.title);
-            const productPhoto = nationCode ? getProductImage(nationCode) : null;
-            const mockup = nationCode ? getMockupImage(nationCode, 0) : null;
-            const imgSrc = productPhoto?.src ?? mockup?.src ?? shopifyImage?.url;
-            const imgAlt = productPhoto?.alt ?? mockup?.alt ?? shopifyImage?.altText ?? product.title;
+            // Use variant images: Home as primary, Away on hover
+            const variants = product.variants?.edges?.map((e) => e.node) ?? [];
+            const homeVariant = variants.find(
+              (v) => v.selectedOptions?.some((o) => o.name.toLowerCase() === "design" && o.value.toLowerCase() === "home")
+            );
+            const awayVariant = variants.find(
+              (v) => v.selectedOptions?.some((o) => o.name.toLowerCase() === "design" && o.value.toLowerCase() === "away")
+            );
+            const shopifyImage = product.images?.edges?.[0]?.node;
+            const imgSrc = homeVariant?.image?.url ?? shopifyImage?.url;
+            const imgAlt = homeVariant?.image?.altText ?? shopifyImage?.altText ?? product.title;
+            const hoverSrc = awayVariant?.image?.url && awayVariant.image.url !== imgSrc
+              ? awayVariant.image.url
+              : undefined;
+
+            const designCount = variants.filter((v) => v.image).length;
+
+            // Clean title: "HOOD'D | Brazil — Jersey Line" → "Brazil"
+            const displayTitle = product.title
+              .replace(/^HOOD'D\s*\|\s*/i, "")
+              .replace(/\s*—\s*Jersey Line$/i, "")
+              .trim() || product.title;
 
             return (
               <Link
@@ -61,29 +74,48 @@ export default async function TrendingProducts() {
                   }}
                 >
                   {imgSrc ? (
-                    <Image
-                      src={imgSrc}
-                      alt={imgAlt}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    />
+                    <>
+                      <Image
+                        src={imgSrc}
+                        alt={imgAlt}
+                        fill
+                        className={`object-cover transition-all duration-300 ${hoverSrc ? "group-hover:opacity-0" : "group-hover:scale-105"}`}
+                        sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      />
+                      {hoverSrc && (
+                        <Image
+                          src={hoverSrc}
+                          alt={`${displayTitle} Away design`}
+                          fill
+                          className="object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                          sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                        />
+                      )}
+                    </>
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center">
                       <span
                         className="text-[11px] uppercase tracking-wider"
                         style={{ color: "var(--color-text-muted)" }}
                       >
-                        {product.title}
+                        {displayTitle}
                       </span>
                     </div>
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                  {designCount >= 2 && (
+                    <div
+                      className="absolute top-2 left-2 px-2 py-0.5 rounded text-[9px] uppercase tracking-widest font-semibold"
+                      style={{ background: "rgba(255,77,0,0.85)", color: "#fff" }}
+                    >
+                      {designCount} Designs
+                    </div>
+                  )}
                 </div>
                 <div className="mt-2.5 flex items-start justify-between gap-2">
                   <div className="min-w-0">
                     <div className="text-white text-[13px] font-medium truncate">
-                      {product.title}
+                      {displayTitle}
                     </div>
                     <div className="text-[11px] mt-0.5" style={{ color: "#555" }}>
                       Hood Cover

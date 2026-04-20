@@ -55,13 +55,18 @@ export default function Footer() {
           <div>
             <h4 className="text-label-md text-white mb-3">Info</h4>
             <div className="space-y-2">
-              {[
-                { label: "Contact", href: "mailto:contact@hooddshop.com" },
-              ].map((l) => (
-                <a key={l.label} href={l.href} className="block text-sm py-1 touch-active transition-colors" style={{ color: "#666" }}>
-                  {l.label}
-                </a>
-              ))}
+              <a href="mailto:contact@hooddshop.com" className="block text-sm py-1 touch-active transition-colors" style={{ color: "#666" }}>
+                Contact
+              </a>
+              <Link href="/privacy" className="block text-sm py-1 touch-active transition-colors" style={{ color: "#666" }}>
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="block text-sm py-1 touch-active transition-colors" style={{ color: "#666" }}>
+                Terms of Service
+              </Link>
+              <Link href="/returns" className="block text-sm py-1 touch-active transition-colors" style={{ color: "#666" }}>
+                Return Policy
+              </Link>
             </div>
           </div>
         </div>
