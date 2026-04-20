@@ -147,41 +147,51 @@ export default function ProductDetailClient({
   // ── Derived data ──────────────────────────────────────────
   const allShopifyImages = product?.images?.edges?.map((e) => e.node) ?? [];
 
-  // Build gallery: ONLY design images (variant images from Shopify)
+  // Build gallery: product-level design images from Shopify + variant images
   // Mockup/vehicle images go in the separate showcase section below
   const galleryImages: GalleryImage[] = useMemo(() => {
     const images: GalleryImage[] = [];
+    const seenUrls = new Set<string>();
 
-    // Selected variant's image first (the active design)
-    if (selectedVariant?.image) {
+    // Helper to extract the design label from our alt text convention:
+    // "{Nation} {Design Label} — Hood'd"
+    const extractLabel = (altText: string | null | undefined): string | undefined => {
+      if (!altText) return undefined;
+      const match = altText.match(/^.+?\s+(Original Design|Jersey Inspired Full Name|Jersey Inspired Abbreviated|Home Jersey Design|Away Jersey Design|Flag Inspired Design)\s+—/);
+      return match ? match[1] : undefined;
+    };
+
+    // 1. Product-level Shopify images first (the uploaded jersey designs, in position order)
+    for (const img of allShopifyImages) {
+      if (seenUrls.has(img.url)) continue;
+      seenUrls.add(img.url);
       images.push({
+        src: img.url,
+        alt: img.altText ?? product?.title ?? handle,
+        label: extractLabel(img.altText),
+      });
+    }
+
+    // 2. Add variant images if they aren't already in the list (dedup by URL)
+    if (selectedVariant?.image && !seenUrls.has(selectedVariant.image.url)) {
+      seenUrls.add(selectedVariant.image.url);
+      images.unshift({
         src: selectedVariant.image.url,
         alt: selectedVariant.image.altText ?? `${selectedVariant.title} design`,
         label: selectedVariant.title,
       });
     }
 
-    // Add other variant images so the user can see all available designs
     for (const variant of variants) {
-      if (variant.id === selectedVariant?.id) continue; // already added
+      if (variant.id === selectedVariant?.id) continue;
       if (!variant.image) continue;
-      // Deduplicate by URL
-      if (images.some((g) => g.src === variant.image!.url)) continue;
+      if (seenUrls.has(variant.image.url)) continue;
+      seenUrls.add(variant.image.url);
       images.push({
         src: variant.image.url,
         alt: variant.image.altText ?? `${variant.title} design`,
         label: variant.title,
       });
-    }
-
-    // If no variant images yet (e.g. images not uploaded), fall back to product-level Shopify images
-    if (images.length === 0) {
-      for (const img of allShopifyImages) {
-        images.push({
-          src: img.url,
-          alt: img.altText ?? product?.title ?? handle,
-        });
-      }
     }
 
     return images;

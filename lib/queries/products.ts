@@ -79,7 +79,7 @@ export const GET_PRODUCT = `
           currencyCode
         }
       }
-      images(first: 10) {
+      images(first: 20) {
         edges {
           node {
             url
