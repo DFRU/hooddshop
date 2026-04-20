@@ -5,7 +5,10 @@ import TrustStrip from "@/components/home/TrustStrip";
 import FeaturedNations from "@/components/home/CollectionRow";
 import TrendingProducts from "@/components/home/TrendingProducts";
 import HowItWorks from "@/components/home/HowItWorks";
+import ConceptShowcase from "@/components/home/ConceptShowcase";
+import WeeklyDraw from "@/components/home/WeeklyDraw";
 import CtaBanner from "@/components/home/CtaBanner";
+import MailingListCTA from "@/components/home/MailingListCTA";
 
 /* ── Skeleton loaders ─────────────────────────────────────── */
 function HeroSkeleton() {
@@ -50,18 +53,40 @@ function SectionSkeleton() {
 export default function Home() {
   return (
     <>
+      {/* 1. Ticker — top banner */}
       <Ticker />
+
+      {/* 2. Hero — World Cup countdown + Argentina truck + Shop Now CTA */}
       <Suspense fallback={<HeroSkeleton />}>
         <Hero />
       </Suspense>
+
+      {/* 3. "New Designs Coming Soon" — concept car showcase */}
+      <ConceptShowcase />
+
+      {/* 4. Mailing list CTA — prizes, discounts, drops, freebies */}
+      <MailingListCTA />
+
+      {/* 5. Trust signals */}
       <TrustStrip />
-      <Suspense fallback={<SectionSkeleton />}>
-        <FeaturedNations />
-      </Suspense>
+
+      {/* 6. Most popular products */}
       <Suspense fallback={<SectionSkeleton />}>
         <TrendingProducts />
       </Suspense>
+
+      {/* 7. Featured nations row */}
+      <Suspense fallback={<SectionSkeleton />}>
+        <FeaturedNations />
+      </Suspense>
+
+      {/* 8. How it works */}
       <HowItWorks />
+
+      {/* 9. Weekly draw */}
+      <WeeklyDraw />
+
+      {/* 10. Final CTA */}
       <CtaBanner />
     </>
   );

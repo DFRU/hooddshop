@@ -3,6 +3,7 @@ import Image from "next/image";
 import { flagUrl } from "@/lib/design";
 import { getVehicleImages } from "@/lib/vehicles";
 import { getProducts } from "@/lib/shopify";
+import WorldCupCountdown from "./WorldCupCountdown";
 
 export default async function Hero() {
   // Hero: show the Argentina truck on-vehicle render — globally appealing
@@ -37,13 +38,16 @@ export default async function Hero() {
       <div className="relative w-full max-w-[var(--max-width)] mx-auto px-[var(--container-px)] lg:px-[var(--container-px-lg)] pb-10 pt-16 lg:pt-20">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-end">
           <div className="space-y-6">
-            {/* Badge */}
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full"
-              style={{ background: "rgba(255,77,0,0.1)", border: "1px solid rgba(255,77,0,0.2)" }}
-            >
-              <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: "var(--color-accent)" }} />
-              <span className="text-label" style={{ color: "var(--color-accent)" }}>World Cup 2026</span>
+            {/* Countdown badge */}
+            <div className="space-y-3">
+              <div
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full"
+                style={{ background: "rgba(255,77,0,0.1)", border: "1px solid rgba(255,77,0,0.2)" }}
+              >
+                <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: "var(--color-accent)" }} />
+                <span className="text-label" style={{ color: "var(--color-accent)" }}>World Cup 2026 Kickoff</span>
+              </div>
+              <WorldCupCountdown />
             </div>
 
             <h1 className="text-display-xl text-white">

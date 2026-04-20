@@ -2,9 +2,22 @@ import Link from "next/link";
 import Image from "next/image";
 import { getProducts } from "@/lib/shopify";
 
+// Top 8 nations by expected demand (host nations + global fan bases)
+// Use the exact nation.name values that appear in Shopify product titles
+const POPULAR_NAMES = [
+  "United States",
+  "Mexico",
+  "Brazil",
+  "Argentina",
+  "France",
+  "England",
+  "Spain",
+  "Germany",
+];
+
 export default async function TrendingProducts() {
-  // Fetch popular nations by title — no sales data yet so BEST_SELLING returns arbitrary order
-  const popularQuery = "title:Brazil OR title:Argentina OR title:France OR title:England OR title:Spain OR title:Germany OR title:Mexico OR title:USA";
+  // Query by the exact names used in Shopify product titles
+  const popularQuery = POPULAR_NAMES.map((n) => `title:${n}`).join(" OR ");
   const { products } = await getProducts({ first: 8, sortKey: "TITLE", query: popularQuery });
 
   // If no Shopify products available, don't render the section

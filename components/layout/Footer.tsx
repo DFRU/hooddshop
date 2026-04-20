@@ -1,4 +1,5 @@
 import Link from "next/link";
+import EmailCapture from "@/components/home/EmailCapture";
 
 export default function Footer() {
   return (
@@ -69,6 +70,16 @@ export default function Footer() {
               </Link>
             </div>
           </div>
+        </div>
+
+        {/* Newsletter signup */}
+        <div className="mt-10 pt-8" style={{ borderTop: "1px solid #111" }}>
+          <EmailCapture
+            headline="STAY IN THE LOOP"
+            description="New designs, limited drops, flash sales, and weekly giveaways."
+            source="footer"
+            buttonText="Subscribe"
+          />
         </div>
 
         {/* Legal disclaimer */}

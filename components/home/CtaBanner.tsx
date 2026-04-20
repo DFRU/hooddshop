@@ -10,13 +10,22 @@ export default function CtaBanner() {
         <p className="text-body-sm lg:text-body-md mt-4 max-w-md mx-auto" style={{ color: "#888" }}>
           World Cup 2026 is coming. Make sure your ride is ready.
         </p>
-        <Link
-          href="/shop"
-          className="inline-flex items-center justify-center mt-6 w-full sm:w-auto px-10 text-white font-semibold text-[13px] tracking-[0.08em] uppercase rounded transition-all touch-active"
-          style={{ background: "var(--color-accent)", minHeight: "52px" }}
-        >
-          Shop All Covers
-        </Link>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mt-6">
+          <Link
+            href="/shop"
+            className="inline-flex items-center justify-center w-full sm:w-auto px-10 text-white font-semibold text-[13px] tracking-[0.08em] uppercase rounded transition-all touch-active"
+            style={{ background: "var(--color-accent)", minHeight: "52px" }}
+          >
+            Shop All Covers
+          </Link>
+          <Link
+            href="/nations"
+            className="inline-flex items-center justify-center w-full sm:w-auto px-10 text-white font-semibold text-[13px] tracking-[0.08em] uppercase rounded transition-colors touch-active"
+            style={{ border: "1px solid #333", minHeight: "52px" }}
+          >
+            Find Your Nation
+          </Link>
+        </div>
       </div>
     </section>
   );
