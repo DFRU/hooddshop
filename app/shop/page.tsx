@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { getProducts } from "@/lib/shopify";
 import ShopClient from "./ShopClient";
 
@@ -17,11 +16,9 @@ export default async function ShopPage() {
   });
 
   return (
-    <Suspense>
-      <ShopClient
-        initialShopifyProducts={shopifyProducts}
-        initialPageInfo={pageInfo}
-      />
-    </Suspense>
+    <ShopClient
+      initialShopifyProducts={shopifyProducts}
+      initialPageInfo={pageInfo}
+    />
   );
 }

@@ -74,7 +74,7 @@ Rep {Nation Name} on the road with Hood'd premium stretch-fit car hood covers. F
 
 <p><strong>What you get:</strong></p>
 <ul>
-  <li>Stretch polyester-spandex with sewn-in elastic edges — pulls on in seconds, no clips or magnets</li>
+  <li>Stretch polyester-spandex with elastic bands and built-in clips — secures and stretches over the hood for a snug fit</li>
   <li>Universal fit for sedans, SUVs, and trucks</li>
   <li>Full-sublimation print — edge to edge, no white borders</li>
   <li>Made to order, ships within 5–10 business days</li>
@@ -143,7 +143,7 @@ Product facts (include in every description):
 - Full-sublimation print, edge to edge
 - Made to order, ships 5–10 business days
 - Machine washable
-- No clips, no magnets — pull on and go
+- Elastic bands with clips — stretch and secure over any hood
 
 Format: HTML. One opening paragraph (2-3 sentences, nation-specific), one bullet list (product specs), one closing line.
 

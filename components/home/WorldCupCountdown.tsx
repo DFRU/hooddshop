@@ -21,9 +21,12 @@ function calcDiff(now: Date) {
 }
 
 export default function WorldCupCountdown() {
-  const [diff, setDiff] = useState(() => calcDiff(new Date()));
+  const [diff, setDiff] = useState({ days: 0, hours: 0, mins: 0, secs: 0 });
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setDiff(calcDiff(new Date()));
+    setMounted(true);
     const id = setInterval(() => setDiff(calcDiff(new Date())), 1000);
     return () => clearInterval(id);
   }, []);
@@ -42,9 +45,13 @@ export default function WorldCupCountdown() {
           <div className="text-center">
             <div
               className="text-display-sm text-white tabular-nums px-2.5 py-1.5 rounded-md"
-              style={{ background: "rgba(255,255,255,0.05)", minWidth: "44px" }}
+              style={{
+                background: "rgba(255,255,255,0.05)",
+                minWidth: "44px",
+                opacity: mounted ? 1 : 0.3,
+              }}
             >
-              {String(b.val).padStart(2, "0")}
+              {mounted ? String(b.val).padStart(2, "0") : "--"}
             </div>
             <div className="text-[9px] uppercase tracking-[0.1em] mt-1" style={{ color: "#555" }}>
               {b.label}

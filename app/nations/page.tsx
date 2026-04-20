@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import type { Metadata } from "next";
 import { getProducts } from "@/lib/shopify";
 import { getTitleKeyword, NATIONS } from "@/lib/nations";
@@ -33,9 +32,5 @@ export default async function NationsPage() {
     }
   }
 
-  return (
-    <Suspense>
-      <NationsClient nationProductMap={nationProductMap} />
-    </Suspense>
-  );
+  return <NationsClient nationProductMap={nationProductMap} />;
 }

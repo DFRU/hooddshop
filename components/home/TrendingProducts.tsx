@@ -3,9 +3,10 @@ import Image from "next/image";
 import { getProducts } from "@/lib/shopify";
 
 // Top 8 nations by expected demand (host nations + global fan bases)
-// Use the exact nation.name values that appear in Shopify product titles
+// Must match the EXACT keywords in Shopify product titles:
+//   "HOOD'D | USA — Jersey Line", "HOOD'D | Brazil — Jersey Line", etc.
 const POPULAR_NAMES = [
-  "United States",
+  "USA",
   "Mexico",
   "Brazil",
   "Argentina",

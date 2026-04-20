@@ -21,8 +21,8 @@ export default function AboutPage() {
             Hood&apos;d makes premium stretch-fit car hood covers with full-bleed
             sublimation prints. Each cover is made to order using durable
             polyester spandex with elastic sewn-in edges for a universal fit
-            on cars, SUVs, and trucks. No clips. No magnets. Just pull it on
-            and go.
+            on cars, SUVs, and trucks. Elastic bands with built-in clips
+            stretch and secure the cover over the hood for a snug, clean fit.
           </p>
           <p className="text-body-md mt-4 leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
             48 nations. One mission — let the world see who you ride for.
