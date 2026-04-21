@@ -45,7 +45,7 @@ export default function Footer() {
             <h4 className="text-label-md text-white mb-3">Nations</h4>
             <div className="space-y-2">
               {["Americas", "Europe", "Africa", "Asia-Pacific", "Middle East"].map((l) => (
-                <Link key={l} href="/nations" className="block text-sm py-1 touch-active transition-colors" style={{ color: "#666" }}>
+                <Link key={l} href={`/shop?region=${encodeURIComponent(l)}`} className="block text-sm py-1 touch-active transition-colors" style={{ color: "#666" }}>
                   {l}
                 </Link>
               ))}

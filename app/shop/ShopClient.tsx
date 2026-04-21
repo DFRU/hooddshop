@@ -35,6 +35,7 @@ export default function ShopClient({
 }: ShopClientProps) {
   const searchParams = useSearchParams();
   const initialDesign = searchParams.get("design") || "All";
+  const initialRegion = searchParams.get("region") || "All";
 
   const hasShopifyProducts = initialShopifyProducts.length > 0;
 
@@ -47,7 +48,9 @@ export default function ShopClient({
   const [sortKey, setSortKey] = useState("BEST_SELLING");
 
   // ── Fallback filter state (NATIONS × DESIGN_LINES) ────
-  const [region, setRegion] = useState<Region | "All">("All");
+  const [region, setRegion] = useState<Region | "All">(
+    REGIONS.includes(initialRegion as Region | "All") ? (initialRegion as Region | "All") : "All"
+  );
   const [search, setSearch] = useState("");
   const [designFilter, setDesignFilter] = useState<DesignLine | "All">(
     DESIGN_LINES.includes(initialDesign as DesignLine)
