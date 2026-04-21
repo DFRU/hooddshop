@@ -20,8 +20,4 @@ export default async function ShopPage() {
 
   return (
     <ShopClient
-      initialShopifyProducts={shopifyProducts}
-      initialPageInfo={pageInfo}
-    />
-  );
-}
+     
