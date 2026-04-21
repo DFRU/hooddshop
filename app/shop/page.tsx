@@ -1,7 +1,10 @@
+import { Suspense } from "react";
 import { getProducts } from "@/lib/shopify";
 import ShopClient from "./ShopClient";
 
-// Force fresh build after product activation
+// useSearchParams() in ShopClient requires dynamic rendering
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Shop Car Hood Covers — World Cup 2026",
   description:
