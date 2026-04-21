@@ -49,8 +49,10 @@ interface ShowcaseImage {
 interface ProductDetailClientProps {
   product: ShopifyProduct | null;
   handle: string;
-  /** Mockup/vehicle images for "See it on your ride" section */
+  /** Mockup/vehicle images for "See it on your ride" section (default set) */
   showcaseImages?: ShowcaseImage[];
+  /** Per-design showcase sets keyed by design label. "_default" = fallback. */
+  showcaseMap?: Record<string, ShowcaseImage[]>;
   /** Shopify variant GID from ?variant= URL param, resolved server-side. */
   initialVariantId?: string;
 }
@@ -60,6 +62,7 @@ export default function ProductDetailClient({
   product,
   handle,
   showcaseImages = [],
+  showcaseMap = {},
   initialVariantId,
 }: ProductDetailClientProps) {
   const { addItem, isLoading } = useCart();
@@ -186,6 +189,16 @@ export default function ProductDetailClient({
 
   const activeImage = galleryImages[activeImageIndex] ?? galleryImages[0];
 
+  // Resolve showcase images for the currently active design
+  // If per-design mockups exist for this label, use them; otherwise fall back to _default
+  const activeShowcaseImages = useMemo(() => {
+    const label = activeImage?.label;
+    if (label && showcaseMap[label]) {
+      return showcaseMap[label];
+    }
+    return showcaseMap._default ?? showcaseImages;
+  }, [activeImage?.label, showcaseMap, showcaseImages]);
+
   return (
     <>
       <div className="max-w-[var(--max-width)] mx-auto lg:flex lg:gap-8 px-[var(--container-px)] lg:px-[var(--container-px-lg)] pt-20 lg:pt-24 pb-6 lg:pb-10">
@@ -259,7 +272,7 @@ export default function ProductDetailClient({
           </p>
 
           {/* ── "See on Vehicles" preview button ── */}
-          {showcaseImages.length > 0 && (
+          {activeShowcaseImages.length > 0 && (
             <button
               onClick={() => {
                 document.getElementById("showcase-section")?.scrollIntoView({ behavior: "smooth" });
@@ -276,8 +289,8 @@ export default function ProductDetailClient({
                 style={{ width: "56px", height: "42px" }}
               >
                 <Image
-                  src={showcaseImages[0].src}
-                  alt={showcaseImages[0].alt}
+                  src={activeShowcaseImages[0].src}
+                  alt={activeShowcaseImages[0].alt}
                   fill
                   className="object-cover"
                   sizes="56px"
@@ -288,7 +301,7 @@ export default function ProductDetailClient({
                   See on Vehicles
                 </span>
                 <span className="block text-[10px] text-white/40 mt-0.5">
-                  {showcaseImages.length} preview{showcaseImages.length > 1 ? "s" : ""}
+                  {activeShowcaseImages.length} preview{activeShowcaseImages.length > 1 ? "s" : ""}
                 </span>
               </div>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white/30 flex-shrink-0">
@@ -413,7 +426,7 @@ export default function ProductDetailClient({
       </div>
 
       {/* ── "See it on your ride" showcase ── */}
-      {showcaseImages.length > 0 && (
+      {activeShowcaseImages.length > 0 && (
         <div id="showcase-section" className="max-w-[var(--max-width)] mx-auto px-[var(--container-px)] lg:px-[var(--container-px-lg)] pb-10 lg:pb-16">
           <div style={{ borderTop: "1px solid #1A1A1A" }} className="pt-8 lg:pt-12">
             <div className="flex items-end justify-between mb-5 lg:mb-8">
@@ -433,7 +446,7 @@ export default function ProductDetailClient({
               </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-4">
-              {showcaseImages.map((img, i) => (
+              {activeShowcaseImages.map((img, i) => (
                 <div
                   key={img.src + i}
                   className="relative overflow-hidden rounded-lg"
