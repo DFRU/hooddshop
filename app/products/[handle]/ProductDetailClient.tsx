@@ -309,6 +309,46 @@ export default function ProductDetailClient({
           >
             ${effectivePrice.toFixed(2)} USD
           </p>
+
+          {/* ── "See on Vehicles" preview button ── */}
+          {showcaseImages.length > 0 && (
+            <button
+              onClick={() => {
+                document.getElementById("showcase-section")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="mt-3 flex items-center gap-3 w-full rounded-lg overflow-hidden transition-all hover:opacity-90"
+              style={{
+                border: "1px solid #1A1A1A",
+                background: "var(--color-surface-2)",
+                padding: "6px 12px 6px 6px",
+              }}
+            >
+              <div
+                className="relative flex-shrink-0 rounded overflow-hidden"
+                style={{ width: "56px", height: "42px" }}
+              >
+                <Image
+                  src={showcaseImages[0].src}
+                  alt={showcaseImages[0].alt}
+                  fill
+                  className="object-cover"
+                  sizes="56px"
+                />
+              </div>
+              <div className="flex-1 text-left">
+                <span className="text-[11px] font-semibold uppercase tracking-widest text-white/80">
+                  See on Vehicles
+                </span>
+                <span className="block text-[10px] text-white/40 mt-0.5">
+                  {showcaseImages.length} preview{showcaseImages.length > 1 ? "s" : ""}
+                </span>
+              </div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white/30 flex-shrink-0">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+          )}
+
           {descriptionHtml ? (
             <div
               className="text-body-md mt-4 product-description"
@@ -434,7 +474,7 @@ export default function ProductDetailClient({
 
       {/* ── "See it on your ride" showcase ── */}
       {showcaseImages.length > 0 && (
-        <div className="max-w-[var(--max-width)] mx-auto px-[var(--container-px)] lg:px-[var(--container-px-lg)] pb-10 lg:pb-16">
+        <div id="showcase-section" className="max-w-[var(--max-width)] mx-auto px-[var(--container-px)] lg:px-[var(--container-px-lg)] pb-10 lg:pb-16">
           <div style={{ borderTop: "1px solid #1A1A1A" }} className="pt-8 lg:pt-12">
             <div className="flex items-end justify-between mb-5 lg:mb-8">
               <div>
