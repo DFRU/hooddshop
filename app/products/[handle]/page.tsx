@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
 import { getProduct } from "@/lib/shopify";
 import { getNationCodeFromTitle, getNation } from "@/lib/nations";
-import { getVehicleImages, getMockupImage, getMockupImages, getProductImage } from "@/lib/vehicles";
+import {
+  getVehicleImages,
+  getMockupImage,
+  getMockupImages,
+  getMockupImagesForDesign,
+  getProductImage,
+  hasDesignMockup,
+  DESIGN_TYPE_SLUGS,
+} from "@/lib/vehicles";
 import ProductDetailClient from "./ProductDetailClient";
 import ProductJsonLd from "@/components/product/ProductJsonLd";
 
@@ -82,15 +90,32 @@ export default async function ProductPage({ params, searchParams }: PageProps) {
   const vehicleImages = nationCode ? getVehicleImages(nationCode) : [];
   const mockups = nationCode ? getMockupImages(nationCode) : [];
 
-  // "See it on your ride" showcase: mockups on car + AI vehicle renders (separate from main gallery)
-  const showcaseImages = [
-    // Printkk mockups (skip size info view 1)
-    ...mockups
-      .filter((m) => m.view !== 1)
+  // "See it on your ride" showcase: build per-design map + default fallback
+  // Key "_default" = original mockups (always available)
+  // Keys like "home", "away", "flag" etc = per-design mockups (when generated)
+  const buildShowcaseSet = (mockupList: typeof mockups) => [
+    ...mockupList
+      .filter((m) => m.view !== 1) // skip size info
       .map((m) => ({ src: m.src, alt: m.alt, label: "Product Mockup" })),
-    // AI vehicle renders
     ...vehicleImages.slice(0, 2).map((v) => ({ src: v.src, alt: v.alt, label: v.vehicleName })),
   ];
+
+  const showcaseMap: Record<string, { src: string; alt: string; label: string }[]> = {
+    _default: buildShowcaseSet(mockups),
+  };
+
+  // Add per-design showcase sets for designs that have their own mockups
+  if (nationCode) {
+    for (const [label, slug] of Object.entries(DESIGN_TYPE_SLUGS)) {
+      if (hasDesignMockup(nationCode, slug)) {
+        const designMockups = getMockupImagesForDesign(nationCode, slug);
+        showcaseMap[label] = buildShowcaseSet(designMockups);
+      }
+    }
+  }
+
+  // Flat fallback for backward compatibility (used by "See on Vehicles" button preview)
+  const showcaseImages = showcaseMap._default;
 
   return (
     <>
@@ -99,6 +124,7 @@ export default async function ProductPage({ params, searchParams }: PageProps) {
         product={product}
         handle={handle}
         showcaseImages={showcaseImages}
+        showcaseMap={showcaseMap}
         initialVariantId={initialVariantId}
       />
     </>

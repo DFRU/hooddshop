@@ -146,11 +146,16 @@ function buildImage(nationCode: string, vehicleType: VehicleType, nationName: st
   };
 }
 
-function buildMockup(nationCode: string, nationName: string, view: MockupView = 0): MockupImage {
+function buildMockup(nationCode: string, nationName: string, view: MockupView = 0, designType?: string): MockupImage {
+  // Per-design mockups use: {code}_{designType}_mockup_{view}.webp
+  // Original/fallback uses:  {code}_mockup_{view}.webp
+  const filename = designType
+    ? `/vehicles/${nationCode}_${designType}_mockup_${view}.webp`
+    : `/vehicles/${nationCode}_mockup_${view}.webp`;
   return {
     nationCode,
     view,
-    src: `/vehicles/${nationCode}_mockup_${view}.webp`,
+    src: filename,
     alt: `${nationName} car hood cover ${MOCKUP_VIEW_LABELS[view]} — Hood'd World Cup 2026`,
     width: 1200,
     height: 1200,
@@ -248,6 +253,50 @@ export function getShowcaseImages(count: number = 6): (MockupImage | VehicleImag
     }
   }
   return showcase;
+}
+
+/**
+ * Design type keys used in per-design mockup filenames.
+ * Maps from Shopify alt-text labels to filesystem slug.
+ */
+export const DESIGN_TYPE_SLUGS: Record<string, string> = {
+  "Original Design": "original",
+  "Jersey Inspired Full Name": "full",
+  "Jersey Inspired Abbreviated": "abbrev",
+  "Home Jersey Design": "home",
+  "Away Jersey Design": "away",
+  "Flag Inspired Design": "flag",
+};
+
+/**
+ * Get all Printkk mockup images for a specific design type.
+ * Falls back to default (original) mockups if per-design files don't exist.
+ * @param nationCode - two-letter country code
+ * @param designType - filesystem slug: "original"|"full"|"abbrev"|"home"|"away"|"flag"
+ */
+export function getMockupImagesForDesign(nationCode: string, designType?: string): MockupImage[] {
+  const viewCount = MOCKUP_NATIONS[nationCode];
+  if (!viewCount) return [];
+  const nation = getNation(nationCode);
+  if (!nation) return [];
+  return Array.from({ length: viewCount }, (_, i) =>
+    buildMockup(nationCode, nation.name, i as MockupView, designType)
+  );
+}
+
+/**
+ * Check if per-design mockups exist for a nation + design type.
+ * This is determined by checking the DESIGN_MOCKUP_NATIONS registry.
+ * When empty, the frontend will fall back to default mockups.
+ */
+const DESIGN_MOCKUP_NATIONS: Record<string, Set<string>> = {
+  // Populated as PrintKK mockups are generated per design.
+  // Format: "nationCode": Set(["home", "away", "full", "abbrev", "flag"])
+  // Once PrintKK Phase 2 pipeline runs, this will be auto-populated.
+};
+
+export function hasDesignMockup(nationCode: string, designType: string): boolean {
+  return DESIGN_MOCKUP_NATIONS[nationCode]?.has(designType) ?? false;
 }
 
 export function hasVehicleImages(nationCode: string): boolean {
