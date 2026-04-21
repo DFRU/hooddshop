@@ -1,10 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import FulfillmentSelector from "@/components/product/FulfillmentSelector";
-import VariantSelector from "@/components/product/VariantSelector";
 import TrustBar from "@/components/product/TrustBar";
 
 import type { FulfillmentOption } from "@/lib/suppliers/types";
@@ -76,73 +75,22 @@ export default function ProductDetailClient({
     [product]
   );
 
-  const [selectedVariantId, setSelectedVariantId] = useState<string>(
-    initialVariantId ?? variants[0]?.id ?? ""
-  );
+  // Always use first variant (Home) for cart/SKU — no user toggle
+  const selectedVariantId = initialVariantId ?? variants[0]?.id ?? "";
 
   const selectedVariant = useMemo(
     () => variants.find((v) => v.id === selectedVariantId) ?? variants[0] ?? null,
     [variants, selectedVariantId]
   );
 
-  // Build Design option for the variant selector
-  const designOptions = useMemo(() => {
-    // Find the "Design" option axis from the product options
-    const designOption = product?.options?.find(
-      (o) => o.name.toLowerCase() === "design"
-    );
-    if (!designOption || designOption.values.length < 2) return [];
+  // Variant selector removed — all designs shown in gallery thumbnails.
+  // Default to first variant (Home) for cart/SKU purposes.
 
-    // Map each option value to its variant
-    return designOption.values
-      .map((value) => {
-        const variant = variants.find((v) =>
-          v.selectedOptions?.some(
-            (so) => so.name.toLowerCase() === "design" && so.value === value
-          )
-        );
-        return variant ? { value, variantId: variant.id } : null;
-      })
-      .filter((o): o is { value: string; variantId: string } => o !== null);
-  }, [product?.options, variants]);
-
-  const selectedDesignValue = useMemo(() => {
-    if (!selectedVariant?.selectedOptions) return "";
-    return (
-      selectedVariant.selectedOptions.find(
-        (so) => so.name.toLowerCase() === "design"
-      )?.value ?? ""
-    );
-  }, [selectedVariant]);
-
-  // ── URL sync — update ?variant= on selection change ───────
-  useEffect(() => {
-    if (!selectedVariantId) return;
-    const url = new URL(window.location.href);
-    // Only set param if product has multiple variants (avoid polluting
-    // single-variant product URLs)
-    if (variants.length > 1) {
-      url.searchParams.set("variant", selectedVariantId);
-    } else {
-      url.searchParams.delete("variant");
-    }
-    window.history.replaceState({}, "", url.toString());
-  }, [selectedVariantId, variants.length]);
+  // Variant is fixed to first (Home) — no URL sync needed.
 
   const handleFulfillmentSelect = useCallback((option: FulfillmentOption) => {
     setSelectedFulfillment(option);
   }, []);
-
-  const handleVariantChange = useCallback(
-    (_value: string, variantId: string) => {
-      setSelectedVariantId(variantId);
-      // Reset gallery to first image when switching variants
-      setActiveImageIndex(0);
-      // Clear fulfillment selection — pricing may differ per variant in the future
-      setSelectedFulfillment(null);
-    },
-    []
-  );
 
   // ── Derived data ──────────────────────────────────────────
   const allShopifyImages = product?.images?.edges?.map((e) => e.node) ?? [];
@@ -363,14 +311,6 @@ export default function ProductDetailClient({
               {description}
             </p>
           )}
-
-          {/* ── Design variant selector (Home / Away) ── */}
-          <VariantSelector
-            label="Design"
-            options={designOptions}
-            selectedValue={selectedDesignValue}
-            onChange={handleVariantChange}
-          />
 
           <FulfillmentSelector onSelect={handleFulfillmentSelect} />
 
