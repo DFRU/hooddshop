@@ -194,14 +194,18 @@ export function getMockupImage(nationCode: string, view: MockupView = 0): Mockup
 }
 
 /**
- * Get all Printkk product mockup images for a nation (up to 6 views).
+ * Get all Printkk product mockup images for a nation.
+ * Excludes views 4 (side angle) and 5 (white car) which render incorrectly.
  */
+const VALID_MOCKUP_VIEWS: MockupView[] = [0, 2, 3]; // front SUV, outdoor 3/4, close-up
 export function getMockupImages(nationCode: string): MockupImage[] {
   const viewCount = MOCKUP_NATIONS[nationCode];
   if (!viewCount) return [];
   const nation = getNation(nationCode);
   if (!nation) return [];
-  return Array.from({ length: viewCount }, (_, i) => buildMockup(nationCode, nation.name, i as MockupView));
+  return VALID_MOCKUP_VIEWS
+    .filter((v) => v < viewCount)
+    .map((v) => buildMockup(nationCode, nation.name, v));
 }
 
 /**
@@ -238,10 +242,10 @@ export function getHeroVehicleImage(nationCode: string): MockupImage | VehicleIm
  */
 export function getShowcaseImages(count: number = 6): (MockupImage | VehicleImage)[] {
   const showcase: (MockupImage | VehicleImage)[] = [];
-  // Different view per nation for variety: front SUV, outdoor 3/4, side angle, white car, closeup, front SUV
+  // Different view per nation for variety: front SUV, outdoor 3/4, closeup (skip views 4+5 — render incorrectly)
   const picks: [string, MockupView][] = [
-    ["us", 0], ["br", 2], ["gb-eng", 4], ["mx", 5], ["de", 3], ["ar", 0],
-    ["fr", 2], ["jp", 4], ["es", 5], ["kr", 3], ["co", 0], ["ma", 2],
+    ["us", 0], ["br", 2], ["gb-eng", 3], ["mx", 0], ["de", 3], ["ar", 0],
+    ["fr", 2], ["jp", 0], ["es", 3], ["kr", 2], ["co", 0], ["ma", 2],
   ];
   for (const [code, view] of picks) {
     if (showcase.length >= count) break;
