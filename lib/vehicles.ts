@@ -293,7 +293,7 @@ export function getMockupImagesForDesign(
 ): MockupImage[] {
   if (!hasDesignMockup(nationCode, designSlug)) return [];
 
-  const views: MockupView[] = [0, 2, 3];
+  const views: MockupView[] = [0, 1, 2, 3];
   return views.map((view) => ({
     nationCode,
     view,

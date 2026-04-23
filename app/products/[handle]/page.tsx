@@ -95,7 +95,7 @@ export default async function ProductPage({ params, searchParams }: PageProps) {
   // Keys like "home", "away", "flag" etc = per-design mockups (when generated)
   const buildShowcaseSet = (mockupList: typeof mockups) => [
     ...mockupList
-      .filter((m) => m.view !== 1 && m.view !== 4 && m.view !== 5) // skip size info, side angle, white car (render incorrectly)
+      .filter((m) => m.view !== 4 && m.view !== 5) // skip views 4 and 5 (render incorrectly)
       .map((m) => ({ src: m.src, alt: m.alt, label: "Product Mockup" })),
     ...vehicleImages.slice(0, 2).map((v) => ({ src: v.src, alt: v.alt, label: v.vehicleName })),
   ];
