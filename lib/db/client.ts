@@ -102,5 +102,63 @@ export async function runMigrations() {
     )
   `;
 
+  // -- Subscribers (email capture) --
+  await sql`
+    CREATE TABLE IF NOT EXISTS subscribers (
+      id              SERIAL PRIMARY KEY,
+      email           TEXT NOT NULL UNIQUE,
+      source          TEXT NOT NULL DEFAULT 'unknown',
+      subscribed_at   TIMESTAMPTZ NOT NULL DEFAULT now(),
+      unsubscribed_at TIMESTAMPTZ
+    )
+  `;
+
+  await sql`CREATE INDEX IF NOT EXISTS idx_subscribers_active ON subscribers(id) WHERE unsubscribed_at IS NULL`;
+
+  // -- Weekly draws --
+  await sql`
+    CREATE TABLE IF NOT EXISTS draws (
+      id              SERIAL PRIMARY KEY,
+      period_start    TIMESTAMPTZ NOT NULL,
+      period_end      TIMESTAMPTZ NOT NULL,
+      status          TEXT NOT NULL DEFAULT 'open',
+      winner_id       INT REFERENCES subscribers(id),
+      prize           TEXT NOT NULL DEFAULT 'Free hood cover (any nation)',
+      drawn_at        TIMESTAMPTZ,
+      notified_at     TIMESTAMPTZ,
+      created_at      TIMESTAMPTZ NOT NULL DEFAULT now()
+    )
+  `;
+
+  await sql`CREATE INDEX IF NOT EXISTS idx_draws_status ON draws(status) WHERE status = 'open'`;
+
+  await sql`
+    CREATE TABLE IF NOT EXISTS draw_entries (
+      id              SERIAL PRIMARY KEY,
+      draw_id         INT NOT NULL REFERENCES draws(id),
+      subscriber_id   INT NOT NULL REFERENCES subscribers(id),
+      entry_source    TEXT NOT NULL DEFAULT 'subscribe',
+      created_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
+      UNIQUE(draw_id, subscriber_id)
+    )
+  `;
+
+  await sql`CREATE INDEX IF NOT EXISTS idx_draw_entries_draw ON draw_entries(draw_id)`;
+
+  // -- Email broadcasts --
+  await sql`
+    CREATE TABLE IF NOT EXISTS broadcasts (
+      id              SERIAL PRIMARY KEY,
+      subject         TEXT NOT NULL,
+      body_html       TEXT NOT NULL,
+      body_text       TEXT,
+      type            TEXT NOT NULL DEFAULT 'general',
+      sent_count      INT NOT NULL DEFAULT 0,
+      status          TEXT NOT NULL DEFAULT 'draft',
+      sent_at         TIMESTAMPTZ,
+      created_at      TIMESTAMPTZ NOT NULL DEFAULT now()
+    )
+  `;
+
   console.log("[db] Migrations complete");
 }

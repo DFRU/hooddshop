@@ -513,3 +513,16 @@ export default function ProductDetailClient({
               ? "var(--color-success)"
               : "var(--color-accent)",
             height: "52px",
+            width: "60%",
+          }}
+        >
+          {addedFeedback
+            ? "\u2713 Added"
+            : selectedVariant
+            ? "Add to Cart"
+            : "Coming Soon"}
+        </button>
+      </div>
+    </>
+  );
+}

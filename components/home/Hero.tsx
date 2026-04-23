@@ -100,7 +100,7 @@ export default async function Hero() {
                     src={heroImage.src}
                     alt={heroImage.alt}
                     fill
-                    className="object-cover"
+                    className="object-cover object-[center_35%]"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     priority
                   />
@@ -121,3 +121,4 @@ export default async function Hero() {
     </section>
   );
 }
+  

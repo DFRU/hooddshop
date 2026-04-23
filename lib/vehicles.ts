@@ -263,4 +263,47 @@ export function getShowcaseImages(count: number = 6): (MockupImage | VehicleImag
  * Design type keys used in per-design mockup filenames.
  * Maps from Shopify alt-text labels to filesystem slug.
  */
-export const DESIGN_TYPE_SLUGS: Record<string,
+export const DESIGN_TYPE_SLUGS: Record<string, string> = {
+  "Original Design": "original",
+  "Home Jersey Design": "home",
+  "Away Jersey Design": "away",
+  "Jersey Inspired Full Name": "full",
+  "Jersey Inspired Abbreviated": "abbrev",
+  "Flag Inspired Design": "flag",
+};
+
+/**
+ * Check if per-design mockup files exist for a given nation + design slug.
+ * Per-design mockups follow the pattern: {code}_{slug}_mockup_{view}.webp
+ * Returns false until those assets are generated.
+ */
+export function hasDesignMockup(_nationCode: string, _designSlug: string): boolean {
+  // Per-design mockups not yet generated — always false for now.
+  // When generated, check: fs.existsSync(`public/vehicles/${nationCode}_${designSlug}_mockup_0.webp`)
+  return false;
+}
+
+/**
+ * Get mockup images for a specific design variant of a nation.
+ * Returns empty array until per-design mockup assets are generated.
+ */
+export function getMockupImagesForDesign(
+  nationCode: string,
+  designSlug: string
+): MockupImage[] {
+  if (!hasDesignMockup(nationCode, designSlug)) return [];
+
+  const views: MockupView[] = [0, 2, 3];
+  return views
+    .map((view) => {
+      const src = `/vehicles/${nationCode}_${designSlug}_mockup_${view}.webp`;
+      return {
+        nationCode,
+        view,
+        src,
+        alt: `${nationCode.toUpperCase()} ${designSlug} design mockup - ${MOCKUP_VIEW_LABELS[view]}`,
+        width: 1200,
+        height: 900,
+      };
+    });
+}
