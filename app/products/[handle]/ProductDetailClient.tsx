@@ -89,13 +89,15 @@ export default function ProductDetailClient({
   );
 
   // Map between gallery image labels and variant option values
+  // Alt text labels on Shopify images → Shopify variant option value
   const labelToVariantOption: Record<string, string> = {
-    "Original Design": "Home",
+    "Original Design": "Jersey",           // The original jersey-inspired design
     "Home Jersey Design": "Home",
     "Away Jersey Design": "Away",
     "Flag Inspired Design": "Flag",
     "Jersey Inspired Full Name": "Full",
     "Jersey Inspired Abbreviated": "Abbrev",
+    // Direct matches (variant title used as label)
     "Jersey": "Jersey",
     "Home": "Home",
     "Away": "Away",
@@ -104,13 +106,14 @@ export default function ProductDetailClient({
     "Abbrev": "Abbrev",
   };
 
+  // Reverse: variant option value → which gallery labels to look for
   const variantOptionToLabel: Record<string, string[]> = {
-    "Home": ["Original Design", "Home Jersey Design", "Home"],
+    "Home": ["Home Jersey Design", "Home"],
     "Away": ["Away Jersey Design", "Away"],
     "Flag": ["Flag Inspired Design", "Flag"],
     "Full": ["Jersey Inspired Full Name", "Full"],
     "Abbrev": ["Jersey Inspired Abbreviated", "Abbrev"],
-    "Jersey": ["Jersey"],
+    "Jersey": ["Original Design", "Jersey"],
   };
 
   // When variant changes, sync gallery to show matching design image
