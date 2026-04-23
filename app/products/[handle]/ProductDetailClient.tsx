@@ -88,6 +88,47 @@ export default function ProductDetailClient({
     [variants, selectedVariantId]
   );
 
+  // Map between gallery image labels and variant option values
+  const labelToVariantOption: Record<string, string> = {
+    "Original Design": "Home",
+    "Home Jersey Design": "Home",
+    "Away Jersey Design": "Away",
+    "Flag Inspired Design": "Flag",
+    "Jersey Inspired Full Name": "Full",
+    "Jersey Inspired Abbreviated": "Abbrev",
+    "Jersey": "Jersey",
+    "Home": "Home",
+    "Away": "Away",
+    "Flag": "Flag",
+    "Full": "Full",
+    "Abbrev": "Abbrev",
+  };
+
+  const variantOptionToLabel: Record<string, string[]> = {
+    "Home": ["Original Design", "Home Jersey Design", "Home"],
+    "Away": ["Away Jersey Design", "Away"],
+    "Flag": ["Flag Inspired Design", "Flag"],
+    "Full": ["Jersey Inspired Full Name", "Full"],
+    "Abbrev": ["Jersey Inspired Abbreviated", "Abbrev"],
+    "Jersey": ["Jersey"],
+  };
+
+  // When variant changes, scroll gallery to matching image
+  const handleVariantSelect = useCallback((variantId: string) => {
+    setSelectedVariantId(variantId);
+    const variant = variants.find((v) => v.id === variantId);
+    if (!variant) return;
+    const optionValue = variant.selectedOptions?.find((o) => o.name === "Design")?.value ?? variant.title;
+    const matchLabels = variantOptionToLabel[optionValue] ?? [optionValue];
+    // Find the gallery image index that matches this variant
+    const idx = galleryImages.findIndex((img) =>
+      img.label && matchLabels.includes(img.label)
+    );
+    if (idx >= 0) {
+      setActiveImageIndex(idx);
+    }
+  }, [variants, galleryImages]);
+
   const handleFulfillmentSelect = useCallback((option: FulfillmentOption) => {
     setSelectedFulfillment(option);
   }, []);
@@ -238,7 +279,20 @@ export default function ProductDetailClient({
               {galleryImages.map((img, i) => (
                 <button
                   key={img.src + i}
-                  onClick={() => setActiveImageIndex(i)}
+                  onClick={() => {
+                    setActiveImageIndex(i);
+                    // Also select the matching variant when thumbnail is clicked
+                    const label = galleryImages[i]?.label;
+                    if (label) {
+                      const optionValue = labelToVariantOption[label];
+                      if (optionValue) {
+                        const matchVariant = variants.find((v) =>
+                          v.selectedOptions?.some((o) => o.name === "Design" && o.value === optionValue)
+                        );
+                        if (matchVariant) setSelectedVariantId(matchVariant.id);
+                      }
+                    }
+                  }}
                   className="relative flex-shrink-0 w-16 h-16 lg:w-20 lg:h-20 rounded overflow-hidden transition-all"
                   style={{
                     border: i === activeImageIndex ? "2px solid var(--color-accent)" : "2px solid #222",
@@ -281,7 +335,7 @@ export default function ProductDetailClient({
                   return (
                     <button
                       key={v.id}
-                      onClick={() => setSelectedVariantId(v.id)}
+                      onClick={() => handleVariantSelect(v.id)}
                       className="px-3 py-2 rounded text-[12px] font-medium transition-all"
                       style={{
                         background: isActive ? "var(--color-accent)" : "var(--color-surface-2)",
