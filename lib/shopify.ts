@@ -89,6 +89,7 @@ export async function getProducts(
     first?: number;
     after?: string | null;
     sortKey?: string;
+    reverse?: boolean;
     query?: string;
     country?: string;
     language?: string;
@@ -105,6 +106,7 @@ export async function getProducts(
       first: opts.first ?? 24,
       after: opts.after ?? null,
       sortKey: opts.sortKey ?? "BEST_SELLING",
+      reverse: opts.reverse ?? false,
       query: opts.query ?? null,
       country: opts.country,
       language: opts.language,

@@ -11,15 +11,11 @@ export async function GET(request: NextRequest) {
   const query = searchParams.get("query") || undefined;
   const first = parseInt(searchParams.get("first") || "250", 10);
 
-  // Shopify expects sortKey and reverse as separate params
-  // but our getProducts helper takes sortKey as a string.
-  // For PRICE sort with reverse, pass PRICE as sortKey.
-  const shopifySortKey = reverse ? sortKey : sortKey;
-
   const result = await getProducts({
     first,
     after,
-    sortKey: shopifySortKey,
+    sortKey,
+    reverse,
     query,
   });
 

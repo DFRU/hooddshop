@@ -1,9 +1,61 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { useCart } from "@/context/CartContext";
 
 export default function CartDrawer() {
   const { cart, isOpen, closeCart, updateQuantity, removeItem, isLoading } = useCart();
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+
+  // Escape key handler + focus management
+  useEffect(() => {
+    if (!isOpen) return;
+
+    // Store the element that had focus before opening
+    previousFocusRef.current = document.activeElement as HTMLElement;
+
+    // Focus the drawer
+    requestAnimationFrame(() => {
+      drawerRef.current?.focus();
+    });
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        closeCart();
+        return;
+      }
+
+      // Focus trap: Tab cycles within the drawer
+      if (e.key === "Tab" && drawerRef.current) {
+        const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    // Prevent body scroll while drawer is open
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+      // Restore focus to the element that opened the drawer
+      previousFocusRef.current?.focus();
+    };
+  }, [isOpen, closeCart]);
 
   if (!isOpen) return null;
 
@@ -16,7 +68,12 @@ export default function CartDrawer() {
 
       {/* Bottom sheet (mobile) / Side drawer (desktop) */}
       <div
-        className="fixed z-[160] flex flex-col safe-bottom
+        ref={drawerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Shopping cart"
+        tabIndex={-1}
+        className="fixed z-[160] flex flex-col safe-bottom outline-none
           bottom-0 left-0 right-0 rounded-t-2xl
           lg:top-0 lg:bottom-0 lg:left-auto lg:right-0 lg:w-[400px] lg:h-full lg:rounded-none"
         style={{
@@ -81,8 +138,8 @@ export default function CartDrawer() {
                   style={{ background: "#111", border: "1px solid #1A1A1A" }}
                 >
                   {image && (
-                    <div className="w-16 h-14 lg:w-20 lg:h-16 rounded overflow-hidden flex-shrink-0" style={{ background: "var(--color-surface-2)" }}>
-                      <img src={image.url} alt={image.altText || product.title} className="w-full h-full object-cover" />
+                    <div className="relative w-16 h-14 lg:w-20 lg:h-16 rounded overflow-hidden flex-shrink-0" style={{ background: "var(--color-surface-2)" }}>
+                      <img src={image.url} alt={image.altText || product.title} className="w-full h-full object-cover" loading="lazy" />
                     </div>
                   )}
                   <div className="flex-1 min-w-0">
@@ -98,14 +155,16 @@ export default function CartDrawer() {
                         <button
                           onClick={() => updateQuantity(line.id, Math.max(0, line.quantity - 1))}
                           disabled={isLoading}
+                          aria-label={`Decrease quantity of ${product.title}`}
                           className="w-9 h-9 flex items-center justify-center text-neutral-400 hover:text-white text-base touch-active"
                         >
                           −
                         </button>
-                        <span className="px-1.5 text-white text-sm min-w-[20px] text-center">{line.quantity}</span>
+                        <span className="px-1.5 text-white text-sm min-w-[20px] text-center" aria-label={`Quantity: ${line.quantity}`}>{line.quantity}</span>
                         <button
                           onClick={() => updateQuantity(line.id, line.quantity + 1)}
                           disabled={isLoading}
+                          aria-label={`Increase quantity of ${product.title}`}
                           className="w-9 h-9 flex items-center justify-center text-neutral-400 hover:text-white text-base touch-active"
                         >
                           +
@@ -117,6 +176,7 @@ export default function CartDrawer() {
                   <button
                     onClick={() => removeItem(line.id)}
                     disabled={isLoading}
+                    aria-label={`Remove ${product.title} from cart`}
                     className="p-2 text-neutral-700 hover:text-red-500 transition-colors self-start touch-active"
                   >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
