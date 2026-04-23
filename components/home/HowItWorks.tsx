@@ -72,4 +72,13 @@ export default function HowItWorks() {
                 style={{ background: "rgba(255,77,0,0.08)", border: "1px solid rgba(255,77,0,0.15)", color: "var(--color-accent)" }}
               >
                 {s.icon}
-         
+                       </div>
+              <h3 className="text-display-sm text-white mb-2">{s.title}</h3>
+              <p className="text-body-sm" style={{ color: "#888" }}>{s.desc}</p>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

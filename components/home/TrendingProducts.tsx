@@ -122,7 +122,7 @@ export default async function TrendingProducts() {
                       className="absolute top-2 left-2 px-2 py-0.5 rounded text-[9px] uppercase tracking-widest font-semibold"
                       style={{ background: "rgba(255,77,0,0.85)", color: "#fff" }}
                     >
-                      {designCount} Designs
+                      More Designs!
                     </div>
                   )}
                 </div>

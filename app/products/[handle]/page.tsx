@@ -101,4 +101,30 @@ export default async function ProductPage({ params, searchParams }: PageProps) {
   ];
 
   const showcaseMap: Record<string, { src: string; alt: string; label: string }[]> = {
-  
+    _default: buildShowcaseSet(mockups),
+  };
+
+  if (nationCode) {
+    for (const [label, slug] of Object.entries(DESIGN_TYPE_SLUGS)) {
+      if (hasDesignMockup(nationCode, slug)) {
+        const designMockups = getMockupImagesForDesign(nationCode, slug);
+        showcaseMap[label] = buildShowcaseSet(designMockups);
+      }
+    }
+  }
+
+  const showcaseImages = showcaseMap._default;
+
+  return (
+    <>
+      {product && <ProductJsonLd product={product} />}
+      <ProductDetailClient
+        product={product}
+        handle={handle}
+        showcaseImages={showcaseImages}
+        showcaseMap={showcaseMap}
+        initialVariantId={initialVariantId}
+      />
+    </>
+  );
+}

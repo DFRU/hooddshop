@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { getProducts } from "@/lib/shopify";
 import ShopClient from "./ShopClient";
 
@@ -12,7 +11,6 @@ export const metadata = {
 };
 
 export default async function ShopPage() {
-  // Attempt to fetch Shopify products; returns empty array if API unavailable
   const { products: shopifyProducts, pageInfo } = await getProducts({
     first: 250,
     sortKey: "BEST_SELLING",
@@ -20,4 +18,8 @@ export default async function ShopPage() {
 
   return (
     <ShopClient
-     
+      initialShopifyProducts={shopifyProducts}
+      initialPageInfo={pageInfo}
+    />
+  );
+}
