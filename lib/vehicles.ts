@@ -264,7 +264,7 @@ export function getShowcaseImages(count: number = 6): (MockupImage | VehicleImag
  * Maps from Shopify alt-text labels to filesystem slug.
  */
 export const DESIGN_TYPE_SLUGS: Record<string, string> = {
-  "Original Design": "original",
+  "Original Design": "jersey",
   "Home Jersey Design": "home",
   "Away Jersey Design": "away",
   "Jersey Inspired Full Name": "full",
@@ -274,18 +274,18 @@ export const DESIGN_TYPE_SLUGS: Record<string, string> = {
 
 /**
  * Check if per-design mockup files exist for a given nation + design slug.
- * Per-design mockups follow the pattern: {code}_{slug}_mockup_{view}.webp
- * Returns false until those assets are generated.
+ * Per-design mockups follow the pattern: {code}_{slug}_mockup_{0-5}.webp
  */
-export function hasDesignMockup(_nationCode: string, _designSlug: string): boolean {
-  // Per-design mockups not yet generated — always false for now.
-  // When generated, check: fs.existsSync(`public/vehicles/${nationCode}_${designSlug}_mockup_0.webp`)
-  return false;
+export function hasDesignMockup(nationCode: string, designSlug: string): boolean {
+  const fs = require("fs");
+  const path = require("path");
+  const filePath = path.join(process.cwd(), "public", "vehicles", `${nationCode}_${designSlug}_mockup_0.webp`);
+  return fs.existsSync(filePath);
 }
 
 /**
  * Get mockup images for a specific design variant of a nation.
- * Returns empty array until per-design mockup assets are generated.
+ * Returns views 0, 2, 3 (skips 1=size info, 4=side angle, 5=white car per existing convention).
  */
 export function getMockupImagesForDesign(
   nationCode: string,
@@ -294,16 +294,12 @@ export function getMockupImagesForDesign(
   if (!hasDesignMockup(nationCode, designSlug)) return [];
 
   const views: MockupView[] = [0, 2, 3];
-  return views
-    .map((view) => {
-      const src = `/vehicles/${nationCode}_${designSlug}_mockup_${view}.webp`;
-      return {
-        nationCode,
-        view,
-        src,
-        alt: `${nationCode.toUpperCase()} ${designSlug} design mockup - ${MOCKUP_VIEW_LABELS[view]}`,
-        width: 1200,
-        height: 900,
-      };
-    });
+  return views.map((view) => ({
+    nationCode,
+    view,
+    src: `/vehicles/${nationCode}_${designSlug}_mockup_${view}.webp`,
+    alt: `${nationCode.toUpperCase()} ${designSlug} design mockup - ${MOCKUP_VIEW_LABELS[view]}`,
+    width: 1200,
+    height: 1200,
+  }));
 }
