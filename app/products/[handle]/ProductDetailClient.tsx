@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import FulfillmentSelector from "@/components/product/FulfillmentSelector";
@@ -113,21 +113,19 @@ export default function ProductDetailClient({
     "Jersey": ["Jersey"],
   };
 
-  // When variant changes, scroll gallery to matching image
-  const handleVariantSelect = useCallback((variantId: string) => {
-    setSelectedVariantId(variantId);
-    const variant = variants.find((v) => v.id === variantId);
+  // When variant changes, sync gallery to show matching design image
+  useEffect(() => {
+    const variant = variants.find((v) => v.id === selectedVariantId);
     if (!variant) return;
     const optionValue = variant.selectedOptions?.find((o) => o.name === "Design")?.value ?? variant.title;
     const matchLabels = variantOptionToLabel[optionValue] ?? [optionValue];
-    // Find the gallery image index that matches this variant
     const idx = galleryImages.findIndex((img) =>
       img.label && matchLabels.includes(img.label)
     );
-    if (idx >= 0) {
+    if (idx >= 0 && idx !== activeImageIndex) {
       setActiveImageIndex(idx);
     }
-  }, [variants, galleryImages]);
+  }, [selectedVariantId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleFulfillmentSelect = useCallback((option: FulfillmentOption) => {
     setSelectedFulfillment(option);
@@ -335,7 +333,7 @@ export default function ProductDetailClient({
                   return (
                     <button
                       key={v.id}
-                      onClick={() => handleVariantSelect(v.id)}
+                      onClick={() => setSelectedVariantId(v.id)}
                       className="px-3 py-2 rounded text-[12px] font-medium transition-all"
                       style={{
                         background: isActive ? "var(--color-accent)" : "var(--color-surface-2)",
