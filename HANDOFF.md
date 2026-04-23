@@ -1,4 +1,4 @@
-# Hood'd Project Handoff — Session State as of 2026-04-14
+# Hood'd Project Handoff — Session State as of 2026-04-23
 
 This document captures the complete project state so a new Cowork session on a different machine can resume without loss of context. Written by the Cowork session on the "Maximus Node 1" machine.
 
@@ -17,7 +17,7 @@ This document captures the complete project state so a new Cowork session on a d
 ### hooddshop (Next.js storefront)
 
 - **GitHub:** `https://github.com/DFRU/hooddshop.git`
-- **Branch:** `main` (latest commit: `f2b441b`)
+- **Branch:** `main` (latest merged: `582fe79`; pending PRs: `chore/f-01-remove-made-in-usa` @ `6f8e7e4`, `feat/two-variant-selector` @ `df7cc9b`, `feat/email-draw-system` @ `156d272`)
 - **Stack:** Next.js 16 (App Router), React 19, Tailwind 4, TypeScript 5
 - **Hosting:** Vercel (deployed with all env vars)
 
@@ -26,23 +26,34 @@ Key directories:
 ```
 hooddshop/
   app/
-    products/[handle]/page.tsx      — Product detail (server component)
-    products/[handle]/ProductDetailClient.tsx — Client gallery + add-to-cart
+    products/[handle]/page.tsx      — Product detail (server component, reads ?variant= param)
+    products/[handle]/ProductDetailClient.tsx — Client gallery + add-to-cart (multi-variant aware)
     shop/page.tsx                   — All-products grid
     nations/page.tsx                — Nation picker by region
-    page.tsx                        — Homepage
+    official-rules/page.tsx         — Weekly draw sweepstakes legal rules
+    privacy/page.tsx, terms/page.tsx, returns/page.tsx — Legal pages
+    page.tsx                        — Homepage (Ticker, Hero, ConceptShowcase, MailingListCTA, TrustStrip, TrendingProducts, FeaturedNations, HowItWorks, WeeklyDraw, CtaBanner)
+    api/subscribe/route.ts          — Email capture POST endpoint (Neon DB)
+    api/unsubscribe/route.ts        — One-click unsubscribe GET endpoint
+    api/admin/draw/route.ts         — Weekly draw admin (create/enter-all/run)
+    api/admin/broadcast/route.ts    — Email broadcast admin (send to all subscribers)
   components/
-    home/Hero.tsx                   — Single US hero image
-    home/VehicleShowcase.tsx        — 6-card showcase grid (diverse mockup views)
+    home/Hero.tsx                   — Homepage hero with countdown
+    home/EmailCapture.tsx           — Reusable email capture form
+    home/WeeklyDraw.tsx             — Draw section with countdown + email entry
+    home/MailingListCTA.tsx         — Mid-page mailing list CTA
     product/ProductJsonLd.tsx       — Structured data
+    product/VariantSelector.tsx     — Design variant segmented control (a11y radiogroup)
   lib/
     nations.ts                      — 48 nation definitions, code/name mapping
-    vehicles.ts                     — Vehicle & mockup image data layer
+    vehicles.ts                     — Vehicle & mockup image data layer + DESIGN_TYPE_SLUGS
     shopify.ts                      — Storefront GraphQL API client
     design.ts                       — Flag URLs, design tokens
-    queries/products.ts             — GraphQL query strings
+    queries/products.ts             — GraphQL query strings (variants fetch selectedOptions + image)
+    db/client.ts                    — Neon Postgres client + migrations (assets, print_jobs, webhook_events, subscribers, draws, draw_entries, broadcasts)
+    email/send.ts                   — Resend email integration (gated on RESEND_API_KEY)
   types/
-    shopify.ts                      — Shopify type definitions
+    shopify.ts                      — Shopify type definitions (includes ShopifyVariant with selectedOptions, image, sku)
   public/
     vehicles/                       — 336 WebP images (48 old single + 288 numbered mockups)
 ```
@@ -261,46 +272,16 @@ The pipeline's `config.json` has absolute Windows paths. On GEEKOM, update these
 
 ---
 
-## 9. What's Been Completed (Phase 4)
+## 9. What's Been Completed
 
+### Phase 4 (Pipeline & Images)
 1. Captured all 48 nation designs from Printkk API (6 mockup views each = 288 total)
 2. Downloaded all 288 mockup images from Printkk CDN
 3. Converted to WebP, copied to `public/vehicles/`
 4. Updated `vehicles.ts` with `MockupView` type, `getMockupImages()`, diverse showcase
 5. Updated product page to show 5 mockup views + AI renders in gallery
 6. Pushed all 288 images to Shopify (6 per product, all 48 products verified)
-7. TypeScript compiles clean (zero errors)
-8. Committed and pushed to GitHub: `f2b441b`
 
----
-
-## 10. Pending / Next Steps
-
-1. ~~**Vercel deployment:**~~ DONE — deployed with all 12 env vars.
-
-2. **Clean up legacy mockup files:** Delete the 48 `{code}_mockup.webp` files (no view number) that are no longer referenced.
-
-3. **Domain setup:** Verify `hooddshop.com` DNS points to Vercel.
-
-4. **SEO verification:** Run Lighthouse, check OG images render correctly on social share.
-
-5. **Upload pipeline B2:** Printkk file delivery method remains open. See `UPLOAD-PIPELINE-SPEC.md` (v0.3).
-
-6. **Shopify webhooks:** Registered via Admin UI (`orders/paid`, `orders/cancelled`). Signing secret set. The shpat_ token lacks order scopes so webhook registration is manual, not API-driven.
-
-7. **Database:** Neon Postgres provisioned with tables: `assets`, `print_jobs`, `webhook_events`. Migrations complete.
-
----
-
-## 11. GEEKOM Migration Checklist
-
-- [ ] Clone `https://github.com/DFRU/hooddshop.git` → verify commit `f2b441b`
-- [ ] Copy `hoodd-pipeline-v2/` folder (or re-clone if in a separate repo)
-- [ ] Create `hooddshop/.env.local` with Storefront tokens (see section 3)
-- [ ] Create or copy master `.env` with Admin token (see section 3)
-- [ ] Update `hoodd-pipeline-v2/config.json` paths for GEEKOM directory structure
-- [ ] `npm install` in hooddshop directory
-- [ ] `npx tsc --noEmit` — should be zero errors
-- [ ] `npm run dev` — verify site loads at localhost:3000
-- [ ] Point new Cowork session at this repo, have it read `HANDOFF.md` for full context
-- [ ] Install Python dependencies for pipeline: `pip install Pillow requests` (at minimum)
+### Phase 5 (Web Cowork Session — 2026-04-15 to 2026-04-23)
+1. Full site audit (`AUDIT-2026-04-15.md`) — 28 findings ranked P0-P3
+2. F-01 (P0): Deleted `MadeInUSA.tsx` + `lib/geo.ts` (hard-rule violation). Rewrote `middleware.ts` JSDoc to document its actual role (feed

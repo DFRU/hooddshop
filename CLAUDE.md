@@ -23,38 +23,27 @@ hooddshop.com — Custom sublimation-printed stretch polyester-spandex car hood 
   - `components/product/FulfillmentSelector.tsx` — Customer-facing UI (already wired into PDP)
 - Nation catalog: lib/nations.ts + NationCard + NationFilterSheet
 
-## What Is Done (Previously Gaps — Now Resolved)
-- **Shopify API connected** — all env vars set in `.env.local` and on Vercel (12 total). Store domain: `hoodd-shop-2.myshopify.com`.
-- **Products uploaded** — 48 nations × 2 variants (Home/Away) = 96 assets via catalog upload pipeline. See `TWO-SIZE-VARIANT-SPEC.md`.
-- **Database provisioned** — Neon Postgres with tables: `assets`, `print_jobs`, `webhook_events`. Migrations run.
-- **Shopify webhooks registered** — `orders/paid` and `orders/cancelled` via Shopify Admin UI (shpat_ token lacks order scopes, so registration is manual). Signing secret set in `SHOPIFY_WEBHOOK_SECRET`.
+## What Is Done
+- **Shopify API connected** — all env vars set in `.env.local` and on Vercel (12+ total). Store domain: `hoodd-shop-2.myshopify.com`.
+- **Products uploaded** — 48 nations, assets via catalog upload pipeline. See `TWO-SIZE-VARIANT-SPEC.md`.
+- **Database provisioned** — Neon Postgres with tables: `assets`, `print_jobs`, `webhook_events`, `subscribers`, `draws`, `draw_entries`, `broadcasts`.
+- **Shopify webhooks registered** — `orders/paid` and `orders/cancelled` via Shopify Admin UI.
 - **Vercel deployed** — redeployed with all env vars.
+- **PDP wired** — `getProduct(handle)` fetches real Shopify data. `_fulfillment_option` cart attribute fully implemented.
+- **MadeInUSA cleanup** — `MadeInUSA.tsx` and `lib/geo.ts` deleted. `middleware.ts` JSDoc corrected. Zero "Made in USA" strings in source (excluding audit/prompt docs).
+- **Two-variant PDP** — `ShopifyVariant` type, GraphQL queries fetch `selectedOptions` + `image`, `VariantSelector.tsx`, `?variant=` deep-linking. Gallery shows all designs as thumbnails.
+- **Email capture** — `EmailCapture.tsx` component, `POST /api/subscribe`, Neon `subscribers` table, welcome email via Resend (gated on API key).
+- **Weekly draw** — `WeeklyDraw.tsx` countdown, admin draw API (create/enter-all/run), winner + runner-up emails, official rules page.
+- **Broadcast system** — `POST /api/admin/broadcast`, dry-run mode, rate-limited sending.
+- **Legal pages** — `/privacy`, `/terms`, `/returns`, `/official-rules`.
 
 ## What Is NOT Done (Remaining Gaps)
-1. **Cart add-to-cart** may still be stubbed — the `_fulfillment_option` cart attribute was commented out in `app/products/[handle]/page.tsx`
-2. **Upload pipeline B2 (Printkk file delivery)** — remains open. See `UPLOAD-PIPELINE-SPEC.md` (v0.3).
+1. **Upload pipeline B2 (Printkk file delivery)** — remains open. See `UPLOAD-PIPELINE-SPEC.md` (v0.3).
+2. **Shopify two-variant migration** — Admin API script to add Home/Away variants to 48 products. Blocked on Away asset generation.
+3. **Resend setup** — `RESEND_API_KEY` not yet configured. Emails log to console until set.
+4. **Security headers** — CSP, HSTS, etc. not in `next.config.ts`. Needs CEO review.
+5. **P1 sweep** — CartDrawer a11y, dead `reverse` param, a11y labels. Spec pending.
 
 ## Key Files
 - `SUPPLIER-ENGINE-BUILD-SPEC.md` — Full supplier engine specification (already implemented)
-- `TWO-SIZE-VARIANT-SPEC.md` — Two-variant (Home/Away) product spec
-- `UPLOAD-PIPELINE-SPEC.md` (v0.3) — Catalog upload pipeline spec (B2 still open)
-- `BRAND-VOICE-GUIDE.md` — Brand voice guide
-- `LEGAL-PAGES-COPY.md` — Legal pages copy
-- `../world-cup-hoods/suppliers-repository.json` — Extended supplier data (17 suppliers)
-- `../world-cup-hoods/product-specs.md` — Product specifications
-- `../world-cup-hoods/print-specs.md` — Print file specifications per supplier
-
-## Env Vars (All Set — 12 total in .env.local and Vercel)
-```env
-SHOPIFY_STORE_DOMAIN=hoodd-shop-2.myshopify.com
-SHOPIFY_STOREFRONT_ACCESS_TOKEN=<set>
-SUPPLIER_ADMIN_TOKEN=<set>
-SHOPIFY_WEBHOOK_SECRET=<set — admin UI signing key>
-# Plus 8 more (database, Printkk, etc.) — see .env.local
-```
-
-## Brand Design System
-- Dark theme: bg `#0A0A0A`, surface `#141414`, accent `#FF4D00`
-- Fonts: Bebas Neue (display), DM Sans (body)
-- Mobile-first. All touch targets >= 44px. Use `100svh` not `100vh`.
-- See `hooddshop-build-spec.md` in Downloads folder for full design spec.
+- `TWO-SIZE-V

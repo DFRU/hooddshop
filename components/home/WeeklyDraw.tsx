@@ -74,6 +74,9 @@ export default function WeeklyDraw() {
               <p className="text-body-sm mt-3 max-w-sm" style={{ color: "#888" }}>
                 Every week we give away a free hood cover to one lucky subscriber.
                 Enter your email for a chance to win. Runners-up get exclusive discount codes.
+                {" "}
+                <a href="/official-rules" className="underline" style={{ color: "#666" }}>Official rules</a>.
+                {" "}No purchase necessary.
               </p>
 
               {/* Countdown */}
