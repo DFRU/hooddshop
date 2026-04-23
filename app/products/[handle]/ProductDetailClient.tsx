@@ -78,18 +78,15 @@ export default function ProductDetailClient({
     [product]
   );
 
-  // Always use first variant (Home) for cart/SKU — no user toggle
-  const selectedVariantId = initialVariantId ?? variants[0]?.id ?? "";
+  // Selected variant — user can choose which design to purchase
+  const [selectedVariantId, setSelectedVariantId] = useState(
+    initialVariantId ?? variants[0]?.id ?? ""
+  );
 
   const selectedVariant = useMemo(
     () => variants.find((v) => v.id === selectedVariantId) ?? variants[0] ?? null,
     [variants, selectedVariantId]
   );
-
-  // Variant selector removed — all designs shown in gallery thumbnails.
-  // Default to first variant (Home) for cart/SKU purposes.
-
-  // Variant is fixed to first (Home) — no URL sync needed.
 
   const handleFulfillmentSelect = useCallback((option: FulfillmentOption) => {
     setSelectedFulfillment(option);
@@ -270,6 +267,35 @@ export default function ProductDetailClient({
           >
             ${effectivePrice.toFixed(2)} USD
           </p>
+
+          {/* ── Design variant selector ── */}
+          {variants.length > 1 && (
+            <div className="mt-4">
+              <label className="text-[11px] uppercase tracking-widest font-semibold text-white/60 mb-2 block">
+                Design: {selectedVariant?.selectedOptions?.find((o) => o.name === "Design")?.value ?? selectedVariant?.title ?? ""}
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {variants.map((v) => {
+                  const designName = v.selectedOptions?.find((o) => o.name === "Design")?.value ?? v.title;
+                  const isActive = v.id === selectedVariantId;
+                  return (
+                    <button
+                      key={v.id}
+                      onClick={() => setSelectedVariantId(v.id)}
+                      className="px-3 py-2 rounded text-[12px] font-medium transition-all"
+                      style={{
+                        background: isActive ? "var(--color-accent)" : "var(--color-surface-2)",
+                        color: isActive ? "#fff" : "rgba(255,255,255,0.7)",
+                        border: isActive ? "1px solid var(--color-accent)" : "1px solid #333",
+                      }}
+                    >
+                      {designName}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           {/* ── "See on Vehicles" preview button ── */}
           {activeShowcaseImages.length > 0 && (
