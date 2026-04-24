@@ -322,23 +322,29 @@ export default function ProductDetailClient({
                   setCopiedLink(true);
                   setTimeout(() => setCopiedLink(false), 2000);
                 }}
-                className="flex-shrink-0 w-16 h-16 lg:w-20 lg:h-20 rounded flex items-center justify-center transition-all"
+                className="flex-shrink-0 w-32 lg:w-40 h-16 lg:h-20 rounded flex items-center justify-center gap-2 cursor-pointer transition-all hover:opacity-80 active:scale-95"
                 style={{
-                  border: copiedLink ? "2px solid var(--color-success)" : "2px solid #222",
-                  background: copiedLink ? "rgba(34,197,94,0.1)" : "rgba(255,77,0,0.06)",
+                  border: copiedLink ? "2px solid var(--color-success)" : "2px solid var(--color-accent)",
+                  background: copiedLink ? "rgba(34,197,94,0.1)" : "rgba(255,77,0,0.08)",
                 }}
                 aria-label="Share this design"
               >
                 {copiedLink ? (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2.5">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
+                  <>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2.5">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    <span className="text-[11px] font-semibold uppercase tracking-widest" style={{ color: "var(--color-success)" }}>Copied!</span>
+                  </>
                 ) : (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2">
-                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-                    <polyline points="16 6 12 2 8 6" />
-                    <line x1="12" y1="2" x2="12" y2="15" />
-                  </svg>
+                  <>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2">
+                      <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                      <polyline points="16 6 12 2 8 6" />
+                      <line x1="12" y1="2" x2="12" y2="15" />
+                    </svg>
+                    <span className="text-[11px] font-semibold uppercase tracking-widest" style={{ color: "var(--color-accent)" }}>Share</span>
+                  </>
                 )}
               </button>
             </div>
