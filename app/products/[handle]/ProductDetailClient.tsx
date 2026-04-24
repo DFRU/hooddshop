@@ -499,46 +499,44 @@ export default function ProductDetailClient({
               : "Coming Soon"}
           </button>
 
-          {/* Share / copy link */}
+          {/* Share — prominent inline button */}
           <button
             onClick={async () => {
               const url = window.location.href;
-              // Try native share on mobile, fall back to clipboard
               if (navigator.share) {
                 try {
                   await navigator.share({ title, url });
                   return;
-                } catch {
-                  // User cancelled or share failed — fall through to clipboard
-                }
+                } catch { /* cancelled */ }
               }
               await navigator.clipboard.writeText(url);
               setCopiedLink(true);
               setTimeout(() => setCopiedLink(false), 2000);
             }}
-            className="mt-3 w-full flex items-center justify-center gap-2 text-[13px] font-semibold uppercase tracking-[0.06em] rounded transition-colors"
+            className="mt-3 w-full flex items-center justify-center gap-2 font-semibold uppercase tracking-[0.06em] rounded transition-all"
             style={{
-              height: "48px",
-              border: "1px solid var(--color-border)",
-              color: copiedLink ? "var(--color-success)" : "var(--color-text-muted)",
-              background: "transparent",
+              height: "52px",
+              fontSize: "14px",
+              border: copiedLink ? "2px solid var(--color-success)" : "2px solid var(--color-accent)",
+              color: copiedLink ? "var(--color-success)" : "var(--color-accent)",
+              background: copiedLink ? "rgba(34,197,94,0.08)" : "rgba(255,77,0,0.06)",
             }}
           >
             {copiedLink ? (
               <>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
-                Link Copied
+                Link Copied!
               </>
             ) : (
               <>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
                   <polyline points="16 6 12 2 8 6" />
                   <line x1="12" y1="2" x2="12" y2="15" />
                 </svg>
-                Share
+                Share This Design
               </>
             )}
           </button>
@@ -577,6 +575,44 @@ export default function ProductDetailClient({
           </div>
         </div>
       </div>
+
+      {/* ── Floating share button (always visible) ── */}
+      <button
+        onClick={async () => {
+          const url = window.location.href;
+          if (navigator.share) {
+            try {
+              await navigator.share({ title, url });
+              return;
+            } catch { /* cancelled */ }
+          }
+          await navigator.clipboard.writeText(url);
+          setCopiedLink(true);
+          setTimeout(() => setCopiedLink(false), 2000);
+        }}
+        className="fixed z-40 flex items-center justify-center rounded-full shadow-lg transition-all hover:scale-105 active:scale-95"
+        style={{
+          right: "16px",
+          bottom: "100px",
+          width: "52px",
+          height: "52px",
+          background: copiedLink ? "var(--color-success)" : "var(--color-accent)",
+          color: "#fff",
+        }}
+        aria-label="Share this design"
+      >
+        {copiedLink ? (
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        ) : (
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+            <polyline points="16 6 12 2 8 6" />
+            <line x1="12" y1="2" x2="12" y2="15" />
+          </svg>
+        )}
+      </button>
 
       {/* ── Mobile sticky bottom CTA ── */}
       <div
