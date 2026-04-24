@@ -285,7 +285,6 @@ export default function ProductDetailClient({
                   key={img.src + i}
                   onClick={() => {
                     setActiveImageIndex(i);
-                    // Also select the matching variant when thumbnail is clicked
                     const label = galleryImages[i]?.label;
                     if (label) {
                       const optionValue = labelToVariantOption[label];
@@ -312,6 +311,36 @@ export default function ProductDetailClient({
                   />
                 </button>
               ))}
+              {/* Share button at end of gallery bar */}
+              <button
+                onClick={async () => {
+                  const url = window.location.href;
+                  if (navigator.share) {
+                    try { await navigator.share({ title, url }); return; } catch { /* cancelled */ }
+                  }
+                  await navigator.clipboard.writeText(url);
+                  setCopiedLink(true);
+                  setTimeout(() => setCopiedLink(false), 2000);
+                }}
+                className="flex-shrink-0 w-16 h-16 lg:w-20 lg:h-20 rounded flex items-center justify-center transition-all"
+                style={{
+                  border: copiedLink ? "2px solid var(--color-success)" : "2px solid #222",
+                  background: copiedLink ? "rgba(34,197,94,0.1)" : "rgba(255,77,0,0.06)",
+                }}
+                aria-label="Share this design"
+              >
+                {copiedLink ? (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2.5">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                ) : (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2">
+                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                    <polyline points="16 6 12 2 8 6" />
+                    <line x1="12" y1="2" x2="12" y2="15" />
+                  </svg>
+                )}
+              </button>
             </div>
           )}
 
