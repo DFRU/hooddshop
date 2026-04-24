@@ -312,6 +312,51 @@ export default function ProductDetailClient({
               ))}
             </div>
           )}
+
+          {/* ── Vehicle mockup showcase (below gallery/thumbnail row) ── */}
+          {activeShowcaseImages.length > 0 && (
+            <div id="showcase-section" className="mt-4">
+              <div className="flex items-end justify-between mb-2">
+                <span className="text-[11px] font-semibold uppercase tracking-widest text-white/60">
+                  See It on Your Ride
+                </span>
+                <span className="text-[10px] text-white/30">
+                  {activeShowcaseImages.length} preview{activeShowcaseImages.length > 1 ? "s" : ""}
+                </span>
+              </div>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+                {activeShowcaseImages.map((img, i) => (
+                  <div
+                    key={img.src + i}
+                    className="relative overflow-hidden rounded-lg"
+                    style={{
+                      aspectRatio: "4/3",
+                      border: "1px solid #1A1A1A",
+                      background: "var(--color-surface-2)",
+                    }}
+                  >
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 45vw, 14vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div
+                      className="absolute bottom-1.5 left-1.5 px-1.5 py-0.5 rounded text-[8px] uppercase tracking-widest text-white/60"
+                      style={{ background: "rgba(0,0,0,0.5)" }}
+                    >
+                      {img.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="text-[10px] mt-2" style={{ color: "#444" }}>
+                AI-generated previews · Actual print may vary
+              </p>
+            </div>
+          )}
         </div>
 
         {/* ── Product info ── */}
@@ -350,51 +395,6 @@ export default function ProductDetailClient({
                   );
                 })}
               </div>
-            </div>
-          )}
-
-          {/* ── Vehicle mockup showcase (inline, below variant selector) ── */}
-          {activeShowcaseImages.length > 0 && (
-            <div id="showcase-section" className="mt-5">
-              <div className="flex items-end justify-between mb-3">
-                <span className="text-[11px] font-semibold uppercase tracking-widest text-white/60">
-                  See It on Your Ride
-                </span>
-                <span className="text-[10px] text-white/30">
-                  {activeShowcaseImages.length} preview{activeShowcaseImages.length > 1 ? "s" : ""}
-                </span>
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                {activeShowcaseImages.map((img, i) => (
-                  <div
-                    key={img.src + i}
-                    className="relative overflow-hidden rounded-lg"
-                    style={{
-                      aspectRatio: "4/3",
-                      border: "1px solid #1A1A1A",
-                      background: "var(--color-surface-2)",
-                    }}
-                  >
-                    <Image
-                      src={img.src}
-                      alt={img.alt}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 45vw, 20vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    <div
-                      className="absolute bottom-1.5 left-1.5 px-1.5 py-0.5 rounded text-[8px] uppercase tracking-widest text-white/60"
-                      style={{ background: "rgba(0,0,0,0.5)" }}
-                    >
-                      {img.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <p className="text-[10px] mt-2" style={{ color: "#444" }}>
-                AI-generated previews · Actual print may vary
-              </p>
             </div>
           )}
 
