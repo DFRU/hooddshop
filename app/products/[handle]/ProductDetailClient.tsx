@@ -407,6 +407,47 @@ export default function ProductDetailClient({
             </p>
           )}
 
+          {/* Size info */}
+          <div
+            className="mt-5 rounded-lg p-4"
+            style={{ background: "var(--color-surface-2)", border: "1px solid #1A1A1A" }}
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white/60">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <path d="M3 9h18M9 3v18" />
+              </svg>
+              <span className="text-[12px] font-semibold uppercase tracking-widest text-white">
+                Size &amp; Fit
+              </span>
+            </div>
+            <div className="space-y-2 text-[12px]" style={{ color: "var(--color-text-muted)" }}>
+              <div className="flex items-start gap-2">
+                <span
+                  className="flex-shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase"
+                  style={{ background: "var(--color-accent)", color: "#fff" }}
+                >
+                  Standard
+                </span>
+                <span>
+                  63&quot; &times; 47&quot; (160 &times; 120 cm) &mdash; fits most sedans, compact SUVs, and coupes
+                </span>
+              </div>
+              <div className="flex items-start gap-2">
+                <span
+                  className="flex-shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase"
+                  style={{ background: "#333", color: "#888" }}
+                >
+                  XL
+                </span>
+                <span>
+                  68&quot; &times; 55&quot; (172 &times; 140 cm) &mdash; for trucks, full-size SUVs, and larger sedans.{" "}
+                  <span style={{ color: "var(--color-accent)" }}>Coming late April 2026.</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
           <FulfillmentSelector onSelect={handleFulfillmentSelect} />
 
           {/* Safety acknowledgment checkbox */}
