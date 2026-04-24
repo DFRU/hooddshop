@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     "Hood'd terms of service for hooddshop.com purchases and site usage.",
 };
 
-const LAST_UPDATED = "April 15, 2026";
+const LAST_UPDATED = "April 23, 2026";
 
 export default function TermsPage() {
   return (
@@ -117,6 +117,63 @@ export default function TermsPage() {
 
           <section>
             <h2 className="text-display-sm text-white mb-3">
+              Product Safety &amp; Assumption of Risk
+            </h2>
+            <p>
+              Hood&apos;d car hood covers are decorative accessories designed for
+              stationary display, low-speed local driving, and event use.
+              By purchasing and using a Hood&apos;d product, you acknowledge
+              and agree to the following:
+            </p>
+            <ul className="list-disc pl-6 mt-3 space-y-2">
+              <li>
+                Hood covers should be securely fastened using the included
+                elastic straps and hooks before driving. You are solely
+                responsible for ensuring proper installation on your vehicle.
+              </li>
+              <li>
+                Driving at highway speeds (above 60 mph / 100 km/h) with a hood
+                cover installed may cause the cover to shift, lift, or detach.
+                Hood&apos;d is not liable for any damage, injury, or loss
+                resulting from use at high speeds.
+              </li>
+              <li>
+                Adverse weather conditions (heavy rain, snow, ice, strong winds)
+                may affect the cover&apos;s fit and visibility. Remove the cover
+                in severe weather conditions before driving.
+              </li>
+              <li>
+                Do not install or remove the cover while the engine is hot or the
+                vehicle is in operation. Allow the hood to cool before handling.
+              </li>
+              <li>
+                Hood covers may temporarily affect hood ventilation. Monitor your
+                vehicle&apos;s temperature gauge during use and remove the cover
+                if the engine temperature rises abnormally.
+              </li>
+              <li>
+                Hood&apos;d products are not safety equipment and are not designed
+                to protect your vehicle or its occupants in any way. They are
+                purely decorative and promotional accessories.
+              </li>
+              <li>
+                You assume all risk associated with the installation, use, and
+                removal of Hood&apos;d products. By placing an order, you release
+                Hood&apos;d, its owners, employees, and agents from any and all
+                claims, damages, losses, and liabilities arising from the use of
+                our products.
+              </li>
+            </ul>
+            <p className="mt-3">
+              You are responsible for complying with all local traffic and vehicle
+              modification laws in your jurisdiction. Some regions may restrict or
+              prohibit the use of aftermarket hood accessories while driving.
+              Check your local regulations before use.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-display-sm text-white mb-3">
               Limitation of Liability
             </h2>
             <p>
@@ -124,7 +181,10 @@ export default function TermsPage() {
               liability for any claim arising from your use of the site or
               purchase of products is limited to the amount you paid for the
               specific product at issue. We are not liable for indirect,
-              incidental, consequential, or punitive damages.
+              incidental, consequential, or punitive damages, including but not
+              limited to vehicle damage, personal injury, property damage,
+              traffic violations, or any other loss arising from the
+              installation, use, or removal of our products.
             </p>
           </section>
 

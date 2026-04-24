@@ -68,6 +68,7 @@ export default function ProductDetailClient({
   const { addItem, isLoading } = useCart();
   const [addedFeedback, setAddedFeedback] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
+  const [safetyAcknowledged, setSafetyAcknowledged] = useState(false);
   const [selectedFulfillment, setSelectedFulfillment] =
     useState<FulfillmentOption | null>(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -408,20 +409,44 @@ export default function ProductDetailClient({
 
           <FulfillmentSelector onSelect={handleFulfillmentSelect} />
 
+          {/* Safety acknowledgment checkbox */}
+          <label className="mt-6 flex items-start gap-3 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={safetyAcknowledged}
+              onChange={(e) => setSafetyAcknowledged(e.target.checked)}
+              className="mt-1 flex-shrink-0 w-4 h-4 rounded accent-[var(--color-accent)]"
+            />
+            <span className="text-[11px] leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
+              I acknowledge that car hood covers are decorative accessories.
+              I accept responsibility for proper installation and safe use,
+              including risks associated with driving at high speeds or in
+              adverse weather. I have read the{" "}
+              <a href="/terms" target="_blank" className="underline" style={{ color: "var(--color-accent)" }}>
+                Terms of Service
+              </a>{" "}
+              including the Product Safety &amp; Assumption of Risk section.
+            </span>
+          </label>
+
           {/* Desktop add to cart */}
           <button
             onClick={handleAddToCart}
-            disabled={isLoading || !selectedVariant}
-            className="mt-6 w-full text-white font-semibold uppercase tracking-[0.06em] rounded transition-colors disabled:opacity-50"
+            disabled={isLoading || !selectedVariant || !safetyAcknowledged}
+            className="mt-3 w-full text-white font-semibold uppercase tracking-[0.06em] rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             style={{
               background: addedFeedback
                 ? "var(--color-success)"
-                : "var(--color-accent)",
+                : safetyAcknowledged
+                ? "var(--color-accent)"
+                : "#333",
               height: "56px",
             }}
           >
             {addedFeedback
               ? "\u2713 Added"
+              : !safetyAcknowledged
+              ? "Accept Terms to Continue"
               : selectedVariant
               ? "Add to Cart"
               : "Coming Soon"}
@@ -587,18 +612,22 @@ export default function ProductDetailClient({
         </div>
         <button
           onClick={handleAddToCart}
-          disabled={isLoading || !selectedVariant}
-          className="text-white font-semibold uppercase tracking-[0.06em] rounded px-8 transition-colors disabled:opacity-50"
+          disabled={isLoading || !selectedVariant || !safetyAcknowledged}
+          className="text-white font-semibold uppercase tracking-[0.06em] rounded px-8 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           style={{
             background: addedFeedback
               ? "var(--color-success)"
-              : "var(--color-accent)",
+              : safetyAcknowledged
+              ? "var(--color-accent)"
+              : "#333",
             height: "52px",
             width: "60%",
           }}
         >
           {addedFeedback
             ? "\u2713 Added"
+            : !safetyAcknowledged
+            ? "Accept Terms"
             : selectedVariant
             ? "Add to Cart"
             : "Coming Soon"}
