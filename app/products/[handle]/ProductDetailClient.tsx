@@ -72,6 +72,7 @@ export default function ProductDetailClient({
   const [selectedFulfillment, setSelectedFulfillment] =
     useState<FulfillmentOption | null>(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
 
   // ── Variants ──────────────────────────────────────────────
   const variants: ShopifyVariant[] = useMemo(
@@ -245,8 +246,9 @@ export default function ProductDetailClient({
         {/* ── Image gallery ── */}
         <div className="lg:w-[58%] lg:flex-shrink-0">
           {/* Main image */}
-          <div
-            className="relative w-full overflow-hidden rounded-lg"
+          <button
+            onClick={() => activeImage && setLightboxSrc(activeImage.src)}
+            className="relative w-full overflow-hidden rounded-lg cursor-zoom-in"
             style={{ aspectRatio: "4/3", border: "1px solid #1A1A1A", background: "var(--color-surface-2)" }}
           >
             {activeImage ? (
@@ -273,7 +275,7 @@ export default function ProductDetailClient({
                 {activeImage.label}
               </div>
             )}
-          </div>
+          </button>
 
           {/* Thumbnail row */}
           {galleryImages.length > 1 && (
@@ -326,9 +328,10 @@ export default function ProductDetailClient({
               </div>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
                 {activeShowcaseImages.map((img, i) => (
-                  <div
+                  <button
                     key={img.src + i}
-                    className="relative overflow-hidden rounded-lg"
+                    onClick={() => setLightboxSrc(img.src)}
+                    className="relative overflow-hidden rounded-lg cursor-zoom-in group"
                     style={{
                       aspectRatio: "4/3",
                       border: "1px solid #1A1A1A",
@@ -339,7 +342,7 @@ export default function ProductDetailClient({
                       src={img.src}
                       alt={img.alt}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform group-hover:scale-105"
                       sizes="(max-width: 1024px) 45vw, 14vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -349,7 +352,16 @@ export default function ProductDetailClient({
                     >
                       {img.label}
                     </div>
-                  </div>
+                    {/* Zoom hint */}
+                    <div className="absolute top-1.5 right-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        <line x1="11" y1="8" x2="11" y2="14" />
+                        <line x1="8" y1="11" x2="14" y2="11" />
+                      </svg>
+                    </div>
+                  </button>
                 ))}
               </div>
               <p className="text-[10px] mt-2" style={{ color: "#444" }}>
@@ -575,6 +587,53 @@ export default function ProductDetailClient({
           </div>
         </div>
       </div>
+
+      {/* ── Image lightbox ── */}
+      {lightboxSrc && (
+        <div
+          className="fixed inset-0 z-[200] flex items-center justify-center"
+          style={{ background: "rgba(0,0,0,0.92)" }}
+          onClick={() => setLightboxSrc(null)}
+          onKeyDown={(e) => { if (e.key === "Escape") setLightboxSrc(null); }}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Enlarged image"
+          tabIndex={-1}
+          ref={(el) => el?.focus()}
+        >
+          {/* Close button */}
+          <button
+            onClick={() => setLightboxSrc(null)}
+            className="absolute top-4 right-4 z-10 p-2 rounded-full transition-colors hover:bg-white/10"
+            aria-label="Close enlarged image"
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+
+          {/* Tap anywhere text (mobile hint) */}
+          <p className="absolute bottom-6 left-0 right-0 text-center text-[11px] text-white/40 lg:hidden">
+            Tap anywhere to close
+          </p>
+
+          {/* Image */}
+          <div
+            className="relative w-[90vw] h-[70vh] lg:w-[70vw] lg:h-[80vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Image
+              src={lightboxSrc}
+              alt="Enlarged product view"
+              fill
+              className="object-contain"
+              sizes="90vw"
+              priority
+            />
+          </div>
+        </div>
+      )}
 
       {/* ── Floating share button (always visible) ── */}
       <button
