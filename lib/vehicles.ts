@@ -195,7 +195,7 @@ export function getMockupImage(nationCode: string, view: MockupView = 0): Mockup
  * Get all Printkk product mockup images for a nation.
  * Views 0-3 only (views 4+5 removed from project — rendered incorrectly).
  */
-const VALID_MOCKUP_VIEWS: MockupView[] = [0, 1, 2, 3];
+const VALID_MOCKUP_VIEWS: MockupView[] = [0, 2, 3, 1];
 export function getMockupImages(nationCode: string): MockupImage[] {
   const viewCount = MOCKUP_NATIONS[nationCode];
   if (!viewCount) return [];
@@ -291,7 +291,7 @@ export function getMockupImagesForDesign(
 ): MockupImage[] {
   if (!hasDesignMockup(nationCode, designSlug)) return [];
 
-  const views: MockupView[] = [0, 1, 2, 3];
+  const views: MockupView[] = [0, 2, 3, 1];
   return views.map((view) => ({
     nationCode,
     view,
