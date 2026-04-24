@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
+import GoogleTranslate from "./GoogleTranslate";
 
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -68,6 +69,10 @@ export default function Nav() {
         </div>
 
         <div className="flex items-center gap-1">
+          {/* Language selector */}
+          <div className="hidden md:block">
+            <GoogleTranslate />
+          </div>
           {/* Cart — large touch target */}
           <button
             onClick={openCart}

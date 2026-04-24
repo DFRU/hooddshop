@@ -1,5 +1,6 @@
 import Link from "next/link";
 import EmailCapture from "@/components/home/EmailCapture";
+import GoogleTranslate from "./GoogleTranslate";
 
 export default function Footer() {
   return (
@@ -94,7 +95,8 @@ export default function Footer() {
 
         <div className="mt-5 pt-5 flex flex-col sm:flex-row items-center justify-between gap-3" style={{ borderTop: "1px solid #111" }}>
           <span className="text-xs" style={{ color: "#444" }}>&copy; 2026 Hood&apos;d. All rights reserved.</span>
-          <div className="flex gap-5">
+          <div className="flex items-center gap-5">
+            <GoogleTranslate />
             <span className="text-xs" style={{ color: "#333" }}>@hooddshop</span>
           </div>
         </div>
