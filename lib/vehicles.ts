@@ -197,7 +197,7 @@ export function getMockupImage(nationCode: string, view: MockupView = 0): Mockup
  * Get all Printkk product mockup images for a nation.
  * Excludes views 4 (side angle) and 5 (white car) which render incorrectly.
  */
-const VALID_MOCKUP_VIEWS: MockupView[] = [0, 2, 3]; // front SUV, outdoor 3/4, close-up
+const VALID_MOCKUP_VIEWS: MockupView[] = [0, 1, 2, 3]; // front SUV, size info, outdoor 3/4, close-up (skip 4, 5)
 export function getMockupImages(nationCode: string): MockupImage[] {
   const viewCount = MOCKUP_NATIONS[nationCode];
   if (!viewCount) return [];
