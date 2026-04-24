@@ -619,10 +619,7 @@ export default function ProductDetailClient({
           </p>
 
           {/* Image */}
-          <div
-            className="relative w-[90vw] h-[70vh] lg:w-[70vw] lg:h-[80vh]"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="relative w-[90vw] h-[70vh] lg:w-[70vw] lg:h-[80vh]">
             <Image
               src={lightboxSrc}
               alt="Enlarged product view"

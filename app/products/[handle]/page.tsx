@@ -93,12 +93,8 @@ export default async function ProductPage({ params, searchParams }: PageProps) {
   // "See it on your ride" showcase: build per-design map + default fallback
   // Key "_default" = original mockups (always available)
   // Keys like "home", "away", "flag" etc = per-design mockups (when generated)
-  const buildShowcaseSet = (mockupList: typeof mockups) => [
-    ...mockupList
-      // Views 0-3 only (4+5 removed from project)
-      .map((m) => ({ src: m.src, alt: m.alt, label: "Product Mockup" })),
-    ...vehicleImages.slice(0, 2).map((v) => ({ src: v.src, alt: v.alt, label: v.vehicleName })),
-  ];
+  const buildShowcaseSet = (mockupList: typeof mockups) =>
+    mockupList.map((m) => ({ src: m.src, alt: m.alt, label: "Product Mockup" }));
 
   const showcaseMap: Record<string, { src: string; alt: string; label: string }[]> = {
     _default: buildShowcaseSet(mockups),
