@@ -36,25 +36,14 @@ export default async function Hero() {
       </div>
 
       <div className="relative w-full max-w-[var(--max-width)] mx-auto px-[var(--container-px)] lg:px-[var(--container-px-lg)] pb-8 pt-4 lg:pt-6">
-        {/* Countdown + heading row — compact, side by side on desktop */}
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 mb-5 lg:mb-6">
-          <div className="flex items-center gap-4">
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full flex-shrink-0"
-              style={{ background: "rgba(255,77,0,0.1)", border: "1px solid rgba(255,77,0,0.2)" }}
-            >
-              <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: "var(--color-accent)" }} />
-              <span className="text-label" style={{ color: "var(--color-accent)" }}>World Cup 2026</span>
-            </div>
-            <h1 className="text-display-lg lg:text-display-xl text-white leading-none">
-              YOUR RIDE. <span style={{ color: "var(--color-accent)" }}>YOUR FLAG.</span>
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-10">
+          {/* ── Left column: heading + description + CTAs ── */}
+          <div className="flex flex-col justify-center space-y-5">
+            <h1 className="text-display-xl text-white leading-[0.95]">
+              YOUR RIDE.<br />
+              <span style={{ color: "var(--color-accent)" }}>YOUR FLAG.</span>
             </h1>
-          </div>
-          <WorldCupCountdown />
-        </div>
 
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-center">
-          <div className="space-y-4">
             <p className="text-body-sm lg:text-body-md max-w-md leading-relaxed" style={{ color: "#888" }}>
               Premium stretch-fit car hood covers for World Cup 2026. 48 nations. Universal fit for cars, SUVs, and trucks.
             </p>
@@ -89,9 +78,20 @@ export default async function Hero() {
             </div>
           </div>
 
-          {/* Single vehicle example image */}
-          {heroImage && (
-            <div className="relative">
+          {/* ── Right column: badge + countdown on top, hero image below ── */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between gap-3">
+              <div
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full flex-shrink-0"
+                style={{ background: "rgba(255,77,0,0.1)", border: "1px solid rgba(255,77,0,0.2)" }}
+              >
+                <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: "var(--color-accent)" }} />
+                <span className="text-label" style={{ color: "var(--color-accent)" }}>World Cup 2026</span>
+              </div>
+              <WorldCupCountdown />
+            </div>
+
+            {heroImage && (
               <Link href="/shop">
                 <div className="relative rounded-lg overflow-hidden shadow-2xl" style={{ aspectRatio: "4/3", border: "1px solid #222" }}>
                   <Image
@@ -112,8 +112,8 @@ export default async function Hero() {
                   </div>
                 </div>
               </Link>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </section>
