@@ -12,15 +12,13 @@
 
 export type VehicleType = "sedan" | "suv" | "truck" | "hatchback" | "crossover";
 
-export type MockupView = 0 | 1 | 2 | 3 | 4 | 5;
+export type MockupView = 0 | 1 | 2 | 3;
 
 export const MOCKUP_VIEW_LABELS: Record<MockupView, string> = {
   0: "Front SUV",
   1: "Size Info",
   2: "Outdoor 3/4 View",
   3: "Close-up Detail",
-  4: "Side Angle",
-  5: "White Car",
 };
 
 export interface VehicleImage {
@@ -124,14 +122,14 @@ const VEHICLE_MAP: Record<string, VehicleType[]> = {
  * Value is the number of views (typically 6).
  */
 const MOCKUP_NATIONS: Record<string, number> = {
-  "ar": 6, "at": 6, "au": 6, "ba": 6, "be": 6, "br": 6,
-  "ca": 6, "cd": 6, "ch": 6, "ci": 6, "co": 6, "cv": 6,
-  "cw": 6, "cz": 6, "de": 6, "dz": 6, "ec": 6, "eg": 6,
-  "es": 6, "fr": 6, "gb-eng": 6, "gb-sct": 6, "gh": 6, "hr": 6,
-  "ht": 6, "iq": 6, "ir": 6, "jo": 6, "jp": 6, "kr": 6,
-  "ma": 6, "mx": 6, "nl": 6, "no": 6, "nz": 6, "pa": 6,
-  "pt": 6, "py": 6, "qa": 6, "sa": 6, "se": 6, "sn": 6,
-  "tn": 6, "tr": 6, "us": 6, "uy": 6, "uz": 6, "za": 6,
+  "ar": 4, "at": 4, "au": 4, "ba": 4, "be": 4, "br": 4,
+  "ca": 4, "cd": 4, "ch": 4, "ci": 4, "co": 4, "cv": 4,
+  "cw": 4, "cz": 4, "de": 4, "dz": 4, "ec": 4, "eg": 4,
+  "es": 4, "fr": 4, "gb-eng": 4, "gb-sct": 4, "gh": 4, "hr": 4,
+  "ht": 4, "iq": 4, "ir": 4, "jo": 4, "jp": 4, "kr": 4,
+  "ma": 4, "mx": 4, "nl": 4, "no": 4, "nz": 4, "pa": 4,
+  "pt": 4, "py": 4, "qa": 4, "sa": 4, "se": 4, "sn": 4,
+  "tn": 4, "tr": 4, "us": 4, "uy": 4, "uz": 4, "za": 4,
 };
 
 function buildImage(nationCode: string, vehicleType: VehicleType, nationName: string): VehicleImage {
@@ -183,7 +181,7 @@ export function getProductImage(nationCode: string): ProductImage | null {
 
 /**
  * Get a single Printkk product mockup image for a nation.
- * @param view - 0=front SUV, 1=size info, 2=outdoor 3/4, 3=closeup, 4=side angle, 5=white car
+ * @param view - 0=front SUV, 1=size info, 2=outdoor 3/4, 3=closeup
  */
 export function getMockupImage(nationCode: string, view: MockupView = 0): MockupImage | null {
   const viewCount = MOCKUP_NATIONS[nationCode];
@@ -195,9 +193,9 @@ export function getMockupImage(nationCode: string, view: MockupView = 0): Mockup
 
 /**
  * Get all Printkk product mockup images for a nation.
- * Excludes views 4 (side angle) and 5 (white car) which render incorrectly.
+ * Views 0-3 only (views 4+5 removed from project — rendered incorrectly).
  */
-const VALID_MOCKUP_VIEWS: MockupView[] = [0, 1, 2, 3]; // front SUV, size info, outdoor 3/4, close-up (skip 4, 5)
+const VALID_MOCKUP_VIEWS: MockupView[] = [0, 1, 2, 3];
 export function getMockupImages(nationCode: string): MockupImage[] {
   const viewCount = MOCKUP_NATIONS[nationCode];
   if (!viewCount) return [];
@@ -242,7 +240,7 @@ export function getHeroVehicleImage(nationCode: string): MockupImage | VehicleIm
  */
 export function getShowcaseImages(count: number = 6): (MockupImage | VehicleImage)[] {
   const showcase: (MockupImage | VehicleImage)[] = [];
-  // Different view per nation for variety: front SUV, outdoor 3/4, closeup (skip views 4+5 — render incorrectly)
+  // Different view per nation for variety: front SUV, outdoor 3/4, closeup
   const picks: [string, MockupView][] = [
     ["us", 0], ["br", 2], ["gb-eng", 3], ["mx", 0], ["de", 3], ["ar", 0],
     ["fr", 2], ["jp", 0], ["es", 3], ["kr", 2], ["co", 0], ["ma", 2],
@@ -285,7 +283,7 @@ export function hasDesignMockup(nationCode: string, designSlug: string): boolean
 
 /**
  * Get mockup images for a specific design variant of a nation.
- * Returns views 0, 2, 3 (skips 1=size info, 4=side angle, 5=white car per existing convention).
+ * Returns views 0, 1, 2, 3.
  */
 export function getMockupImagesForDesign(
   nationCode: string,

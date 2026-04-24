@@ -138,13 +138,11 @@ Path: `/public/vehicles/{code}_{vehicleType}.webp` (e.g., `us_suv.webp`)
 Path: `/public/vehicles/{code}_mockup_{0-5}.webp` (e.g., `us_mockup_0.webp`)
 - Downloaded from Printkk CDN, converted to WebP
 - 1200×1200 WebP
-- 6 views per nation:
+- 4 views per nation (views 4+5 removed — rendered incorrectly):
   - `0` = Front SUV
-  - `1` = Size Info (excluded from product gallery)
+  - `1` = Size Info
   - `2` = Outdoor 3/4 view
   - `3` = Close-up detail
-  - `4` = Side angle
-  - `5` = White car
 
 There are also legacy single-mockup files (`{code}_mockup.webp`) from before the 6-view expansion. These are not referenced by current code but still exist in the repo. Safe to delete in a cleanup pass.
 
