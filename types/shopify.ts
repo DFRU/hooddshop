@@ -69,6 +69,7 @@ export interface ShopifyCart {
         merchandise: {
           id: string;
           title: string;
+          image: ShopifyImage | null;
           product: {
             handle: string;
             title: string;

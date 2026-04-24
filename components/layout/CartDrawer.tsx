@@ -121,7 +121,8 @@ export default function CartDrawer() {
           ) : (
             lines.map(({ node: line }) => {
               const product = line.merchandise.product;
-              const image = product.images.edges[0]?.node;
+              // Prefer variant-specific image (matches selected design), fall back to product image
+              const image = line.merchandise.image ?? product.images.edges[0]?.node;
               const price = parseFloat(line.merchandise.price.amount);
               // Parse fulfillment option from line attributes
               const fulfillmentAttr = line.attributes?.find(
