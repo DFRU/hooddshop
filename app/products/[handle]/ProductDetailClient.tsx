@@ -353,43 +353,49 @@ export default function ProductDetailClient({
             </div>
           )}
 
-          {/* ── "See on Vehicles" preview button ── */}
+          {/* ── Vehicle mockup showcase (inline, below variant selector) ── */}
           {activeShowcaseImages.length > 0 && (
-            <button
-              onClick={() => {
-                document.getElementById("showcase-section")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="mt-3 flex items-center gap-3 w-full rounded-lg overflow-hidden transition-all hover:opacity-90"
-              style={{
-                border: "1px solid #1A1A1A",
-                background: "var(--color-surface-2)",
-                padding: "6px 12px 6px 6px",
-              }}
-            >
-              <div
-                className="relative flex-shrink-0 rounded overflow-hidden"
-                style={{ width: "56px", height: "42px" }}
-              >
-                <Image
-                  src={activeShowcaseImages[0].src}
-                  alt={activeShowcaseImages[0].alt}
-                  fill
-                  className="object-cover"
-                  sizes="56px"
-                />
-              </div>
-              <div className="flex-1 text-left">
-                <span className="text-[11px] font-semibold uppercase tracking-widest text-white/80">
-                  See on Vehicles
+            <div id="showcase-section" className="mt-5">
+              <div className="flex items-end justify-between mb-3">
+                <span className="text-[11px] font-semibold uppercase tracking-widest text-white/60">
+                  See It on Your Ride
                 </span>
-                <span className="block text-[10px] text-white/40 mt-0.5">
+                <span className="text-[10px] text-white/30">
                   {activeShowcaseImages.length} preview{activeShowcaseImages.length > 1 ? "s" : ""}
                 </span>
               </div>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white/30 flex-shrink-0">
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
-            </button>
+              <div className="grid grid-cols-2 gap-2">
+                {activeShowcaseImages.map((img, i) => (
+                  <div
+                    key={img.src + i}
+                    className="relative overflow-hidden rounded-lg"
+                    style={{
+                      aspectRatio: "4/3",
+                      border: "1px solid #1A1A1A",
+                      background: "var(--color-surface-2)",
+                    }}
+                  >
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 45vw, 20vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div
+                      className="absolute bottom-1.5 left-1.5 px-1.5 py-0.5 rounded text-[8px] uppercase tracking-widest text-white/60"
+                      style={{ background: "rgba(0,0,0,0.5)" }}
+                    >
+                      {img.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="text-[10px] mt-2" style={{ color: "#444" }}>
+                AI-generated previews · Actual print may vary
+              </p>
+            </div>
           )}
 
           {descriptionHtml ? (
@@ -571,61 +577,6 @@ export default function ProductDetailClient({
           </div>
         </div>
       </div>
-
-      {/* ── "See it on your ride" showcase ── */}
-      {activeShowcaseImages.length > 0 && (
-        <div id="showcase-section" className="max-w-[var(--max-width)] mx-auto px-[var(--container-px)] lg:px-[var(--container-px-lg)] pb-10 lg:pb-16">
-          <div style={{ borderTop: "1px solid #1A1A1A" }} className="pt-8 lg:pt-12">
-            <div className="flex items-end justify-between mb-5 lg:mb-8">
-              <div>
-                <span
-                  className="text-label"
-                  style={{ color: "var(--color-accent)" }}
-                >
-                  Preview
-                </span>
-                <h2 className="text-display-sm text-white mt-1">
-                  See It on Your Ride
-                </h2>
-              </div>
-              <p className="text-body-sm hidden sm:block" style={{ color: "#555" }}>
-                AI-generated previews · Actual print may vary
-              </p>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-4">
-              {activeShowcaseImages.map((img, i) => (
-                <div
-                  key={img.src + i}
-                  className="relative overflow-hidden rounded-lg"
-                  style={{
-                    aspectRatio: "4/3",
-                    border: "1px solid #1A1A1A",
-                    background: "var(--color-surface-2)",
-                  }}
-                >
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div
-                    className="absolute bottom-2 left-2 px-2 py-0.5 rounded text-[9px] uppercase tracking-widest text-white/60"
-                    style={{ background: "rgba(0,0,0,0.5)" }}
-                  >
-                    {img.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <p className="text-body-sm mt-3 sm:hidden" style={{ color: "#555" }}>
-              AI-generated previews · Actual print may vary
-            </p>
-          </div>
-        </div>
-      )}
 
       {/* ── Mobile sticky bottom CTA ── */}
       <div
