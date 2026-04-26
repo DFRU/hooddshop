@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Hood'd — World Cup 2026 Car Hood Covers",
   description: "The story behind Hood'd — premium car hood covers for World Cup 2026.",
+  alternates: {
+    canonical: "https://hooddshop.com/about",
+  },
 };
 
 export default function AboutPage() {

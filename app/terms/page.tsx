@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Hood'd",
+  title: "Terms of Service",
   description:
     "Hood'd terms of service for hooddshop.com purchases and site usage.",
 };

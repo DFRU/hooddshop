@@ -70,20 +70,42 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "Hood'd",
-              url: "https://hooddshop.com",
-              logo: "https://hooddshop.com/favicon.png",
-              description:
-                "Premium stretch-fit car hood covers for World Cup 2026. 48 nations.",
-              contactPoint: {
-                "@type": "ContactPoint",
-                email: "contact@hooddshop.com",
-                contactType: "customer service",
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: "Hood'd",
+                url: "https://hooddshop.com",
+                logo: "https://hooddshop.com/favicon.png",
+                description:
+                  "Premium sublimation-printed stretch-fit car hood covers for FIFA World Cup 2026. 48 nations. Jersey-inspired designs.",
+                contactPoint: {
+                  "@type": "ContactPoint",
+                  email: "contact@hooddshop.com",
+                  contactType: "customer service",
+                },
+                sameAs: [
+                  "https://www.instagram.com/hooddshop",
+                  "https://www.tiktok.com/@hooddshop",
+                ],
               },
-            }),
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "Hood'd",
+                url: "https://hooddshop.com",
+                description:
+                  "Premium car hood covers for FIFA World Cup 2026. 48 nations available.",
+                potentialAction: {
+                  "@type": "SearchAction",
+                  target: {
+                    "@type": "EntryPoint",
+                    urlTemplate: "https://hooddshop.com/shop?q={search_term_string}",
+                  },
+                  "query-input": "required name=search_term_string",
+                },
+              },
+            ]),
           }}
         />
         <Analytics />

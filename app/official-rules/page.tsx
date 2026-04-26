@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Official Sweepstakes Rules | Hood'd",
+  title: "Official Sweepstakes Rules",
   description: "Official rules for the Hood'd Weekly Draw sweepstakes.",
 };
 

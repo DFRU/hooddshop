@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Return & Refund Policy | Hood'd",
+  title: "Return & Refund Policy",
   description:
     "Hood'd return and refund policy for made-to-order car hood covers.",
 };

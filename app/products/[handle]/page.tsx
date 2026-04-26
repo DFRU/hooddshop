@@ -27,7 +27,7 @@ export async function generateMetadata({
 
   if (!product) {
     return {
-      title: `${handle} | Hood'd`,
+      title: handle,
       description:
         "Premium stretch-fit car hood cover with sublimation print for World Cup 2026.",
     };
@@ -40,7 +40,7 @@ export async function generateMetadata({
   const mockupImage = nationCode ? getMockupImage(nationCode) : null;
 
   const seoTitle = nation
-    ? `${nation.name} Car Hood Cover — World Cup 2026 | Hood'd`
+    ? `${nation.name} Car Hood Cover — World Cup 2026`
     : product.title;
 
   const seoDescription = nation
@@ -62,9 +62,13 @@ export async function generateMetadata({
   return {
     title: seoTitle,
     description: seoDescription,
+    alternates: {
+      canonical: `https://hooddshop.com/products/${handle}`,
+    },
     openGraph: {
       title: seoTitle,
       description: seoDescription,
+      url: `https://hooddshop.com/products/${handle}`,
       images: ogImage ? [ogImage] : [],
     },
   };

@@ -69,6 +69,9 @@ export default function Footer() {
               <Link href="/returns" className="block text-sm py-1 touch-active transition-colors" style={{ color: "#666" }}>
                 Return Policy
               </Link>
+              <Link href="/official-rules" className="block text-sm py-1 touch-active transition-colors" style={{ color: "#666" }}>
+                Sweepstakes Rules
+              </Link>
             </div>
           </div>
         </div>
@@ -97,7 +100,7 @@ export default function Footer() {
           <span className="text-xs" style={{ color: "#444" }}>&copy; 2026 Hood&apos;d. All rights reserved.</span>
           <div className="flex items-center gap-5">
             <GoogleTranslate />
-            <span className="text-xs" style={{ color: "#333" }}>@hooddshop</span>
+            <a href="https://www.instagram.com/hooddshop" target="_blank" rel="noopener noreferrer" className="text-xs transition-colors hover:text-white" style={{ color: "#555" }}>@hooddshop</a>
           </div>
         </div>
       </div>

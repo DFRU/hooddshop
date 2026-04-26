@@ -5,9 +5,12 @@ import NationsClient from "./NationsClient";
 import type { ShopifyProduct } from "@/types/shopify";
 
 export const metadata: Metadata = {
-  title: "All 48 World Cup 2026 Car Hood Covers — Find Your Nation | Hood'd",
+  title: "All 48 World Cup 2026 Nations — Car Hood Covers for Every Qualifier",
   description:
     "Browse all 48 qualified nations. Premium stretch-fit car hood covers with full sublimation print. Universal fit for cars, SUVs, and trucks. $49.99 each.",
+  alternates: {
+    canonical: "https://hooddshop.com/nations",
+  },
 };
 
 export default async function NationsPage() {

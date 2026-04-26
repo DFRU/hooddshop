@@ -14,10 +14,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { code } = await params;
   const nation = getNation(code);
   return {
-    title: nation ? `${nation.name} Hood Cover` : "Nation Not Found",
+    title: nation ? `${nation.name} Car Hood Cover — World Cup 2026` : "Nation Not Found",
     description: nation
-      ? `Premium stretch-fit car hood cover featuring ${nation.name} for World Cup 2026.`
+      ? `Shop the ${nation.name} car hood cover by Hood'd. Premium sublimation-printed stretch-fit cover for World Cup 2026. Universal fit for cars, SUVs, trucks. $49.99.`
       : "Nation not found.",
+    alternates: {
+      canonical: nation ? `https://hooddshop.com/nations/${code}` : undefined,
+    },
   };
 }
 

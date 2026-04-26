@@ -707,50 +707,68 @@ export default function ProductDetailClient({
 
       {/* ── Mobile sticky bottom CTA ── */}
       <div
-        className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-between px-4 lg:hidden"
+        className="fixed bottom-0 left-0 right-0 z-50 px-4 lg:hidden"
         style={{
-          height: "80px",
           background: "var(--color-surface)",
           borderTop: "1px solid var(--color-border)",
           paddingBottom: "env(safe-area-inset-bottom)",
         }}
       >
-        <div>
-          <p
-            className="text-body-lg font-semibold"
-            style={{ color: "var(--color-accent)" }}
+        {/* Inline safety checkbox — always visible on mobile */}
+        {!safetyAcknowledged && (
+          <label className="flex items-start gap-2.5 pt-3 pb-2 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={safetyAcknowledged}
+              onChange={(e) => setSafetyAcknowledged(e.target.checked)}
+              className="mt-0.5 flex-shrink-0 w-4 h-4 rounded accent-[var(--color-accent)]"
+            />
+            <span className="text-[10px] leading-snug" style={{ color: "var(--color-text-muted)" }}>
+              I accept the{" "}
+              <a href="/terms" target="_blank" className="underline" style={{ color: "var(--color-accent)" }}>
+                Terms &amp; Safety Disclaimer
+              </a>
+            </span>
+          </label>
+        )}
+        <div className="flex items-center justify-between pb-3" style={{ paddingTop: safetyAcknowledged ? "12px" : "0" }}>
+          <div>
+            <p
+              className="text-body-lg font-semibold"
+              style={{ color: "var(--color-accent)" }}
+            >
+              ${effectivePrice.toFixed(2)}
+            </p>
+            <p
+              className="text-body-sm"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              USD
+            </p>
+          </div>
+          <button
+            onClick={handleAddToCart}
+            disabled={isLoading || !selectedVariant || !safetyAcknowledged}
+            className="text-white font-semibold uppercase tracking-[0.06em] rounded px-8 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{
+              background: addedFeedback
+                ? "var(--color-success)"
+                : safetyAcknowledged
+                ? "var(--color-accent)"
+                : "#333",
+              height: "52px",
+              width: "60%",
+            }}
           >
-            ${effectivePrice.toFixed(2)}
-          </p>
-          <p
-            className="text-body-sm"
-            style={{ color: "var(--color-text-muted)" }}
-          >
-            USD
-          </p>
+            {addedFeedback
+              ? "\u2713 Added"
+              : !safetyAcknowledged
+              ? "Accept Terms"
+              : selectedVariant
+              ? "Add to Cart"
+              : "Coming Soon"}
+          </button>
         </div>
-        <button
-          onClick={handleAddToCart}
-          disabled={isLoading || !selectedVariant || !safetyAcknowledged}
-          className="text-white font-semibold uppercase tracking-[0.06em] rounded px-8 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          style={{
-            background: addedFeedback
-              ? "var(--color-success)"
-              : safetyAcknowledged
-              ? "var(--color-accent)"
-              : "#333",
-            height: "52px",
-            width: "60%",
-          }}
-        >
-          {addedFeedback
-            ? "\u2713 Added"
-            : !safetyAcknowledged
-            ? "Accept Terms"
-            : selectedVariant
-            ? "Add to Cart"
-            : "Coming Soon"}
-        </button>
       </div>
     </>
   );
