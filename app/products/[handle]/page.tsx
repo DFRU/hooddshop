@@ -29,7 +29,7 @@ export async function generateMetadata({
     return {
       title: handle,
       description:
-        "Premium stretch-fit car hood cover with sublimation print for World Cup 2026.",
+        "Stretch hood cover with full-bleed sublimation print on polyester-spandex. Made to order.",
     };
   }
 
@@ -44,8 +44,8 @@ export async function generateMetadata({
     : product.title;
 
   const seoDescription = nation
-    ? `Rep ${nation.name} on the road with Hood'd premium stretch-fit car hood covers. Full sublimation print, universal fit for cars, SUVs, and trucks. $49.99. Made to order for World Cup 2026.`
-    : product.description || "Premium stretch-fit car hood cover with sublimation print for World Cup 2026.";
+    ? `${nation.name} stretch hood cover. Full-bleed sublimation print on polyester-spandex. Universal fit, made to order. From $44.99 USD. Free shipping with code HOODDSHIP. Independent brand — original design.`
+    : product.description || "Stretch hood cover with full-bleed sublimation print. Made to order. Free shipping with code HOODDSHIP.";
 
   // OG image priority: product photo > mockup > AI render > Shopify image
   const productPhotoOG = nationCode ? getProductImage(nationCode) : null;

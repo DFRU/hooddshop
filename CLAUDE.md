@@ -36,13 +36,22 @@ hooddshop.com — Custom sublimation-printed stretch polyester-spandex car hood 
 - **Weekly draw** — `WeeklyDraw.tsx` countdown, admin draw API (create/enter-all/run), winner + runner-up emails, official rules page.
 - **Broadcast system** — `POST /api/admin/broadcast`, dry-run mode, rate-limited sending.
 - **Legal pages** — `/privacy`, `/terms`, `/returns`, `/official-rules`.
+- **Security headers** — CSP, HSTS, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy all configured in `next.config.ts`. CSP covers GA, GTM, Meta Pixel, Shopify Storefront API, flagcdn. Uses `'unsafe-inline'` for script-src (Next.js hydration); nonce-based CSP is a P2 follow-up.
+- **SEO foundations** — Structured data (JSON-LD), meta tags, Open Graph, sitemap.ts, robots.ts all implemented.
+- **Social media content** — 8 nation post images (1080x1080), captions, influencer DM outreach kit (15 targets), TikTok content kit (10 video scripts), YouTube Shorts kit, Facebook kit. All in `social-media-posts/`.
+- **Instagram @hooddshopnow** — Business account, email confirmed, bio + display name set.
+- **YouTube @hooddshopnow** — Brand channel created, description set, "Shop Now" link to hooddshop.com. Channel ID: UCxAcIXTM7F3HIpXRRbaa0Ag.
+- **Facebook Hood'd Shop** — Business Page created, category "Shopping & retail", bio + website set, hours "Always open". Page ID: 61563693766586.
 
 ## What Is NOT Done (Remaining Gaps)
 1. **Upload pipeline B2 (Printkk file delivery)** — remains open. See `UPLOAD-PIPELINE-SPEC.md` (v0.3).
 2. **Shopify two-variant migration** — Admin API script to add Home/Away variants to 48 products. Blocked on Away asset generation.
 3. **Resend setup** — `RESEND_API_KEY` not yet configured. Emails log to console until set.
-4. **Security headers** — CSP, HSTS, etc. not in `next.config.ts`. Needs CEO review.
-5. **P1 sweep** — CartDrawer a11y, dead `reverse` param, a11y labels. Spec pending.
+4. **P1 sweep** — CartDrawer a11y, dead `reverse` param, a11y labels. Spec pending.
+5. **Nonce-based CSP** — Replace `'unsafe-inline'` in script-src with per-request nonces via middleware. P2.
+6. **Meta Pixel setup** — `NEXT_PUBLIC_META_PIXEL_ID` env var not yet set on Vercel. Code is in place (Analytics.tsx).
+7. **Google Analytics setup** — `NEXT_PUBLIC_GA_ID` env var not yet set on Vercel. Code is in place (Analytics.tsx).
+8. **Social media manual actions** — Dan needs to: post 8 IG images from phone, send 15 influencer DMs, create TikTok account, upload profile pics/banners to YouTube + Facebook. YouTube and Facebook accounts already created. See `social-media-posts/PROGRESS.md`.
 
 ## Key Files
 - `SUPPLIER-ENGINE-BUILD-SPEC.md` — Full supplier engine specification (already implemented)

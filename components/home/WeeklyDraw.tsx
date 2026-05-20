@@ -68,12 +68,11 @@ export default function WeeklyDraw() {
               </div>
 
               <h2 className="text-display-md text-white">
-                WIN A FREE<br />
-                <span style={{ color: "var(--color-accent)" }}>HOOD COVER</span>
+                WEEKLY<br />
+                <span style={{ color: "var(--color-accent)" }}>DRAW</span>
               </h2>
               <p className="text-body-sm mt-3 max-w-sm" style={{ color: "#888" }}>
-                Every week we give away a free hood cover to one lucky subscriber.
-                Enter your email for a chance to win. Runners-up get exclusive discount codes.
+                One free hood cover. One winner. Every Sunday. Subscribe to enter. Runners-up get free shipping codes.
                 {" "}
                 <a href="/official-rules" className="underline" style={{ color: "#666" }}>Official rules</a>.
                 {" "}No purchase necessary.

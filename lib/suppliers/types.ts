@@ -7,6 +7,30 @@ export interface SupplierPricing {
   base_unit_cost_usd: number;
   shipping_cost_per_unit?: Record<string, number>; // keyed by ISO country code
   fixed_shipping_cost?: number;                     // fallback flat rate
+  cost_confidence: "confirmed" | "estimated" | "placeholder";
+  // confirmed   = real quote received from supplier
+  // estimated   = educated guess from research (prefix ~$ in brief)
+  // placeholder = no data, using category default
+}
+
+/** Breakdown returned by the dynamic pricing engine */
+export interface PriceBreakdown {
+  /** Product price excluding shipping (what the customer sees as item cost) */
+  product_price_usd: number;
+  /** Shipping portion shown separately */
+  shipping_price_usd: number;
+  /** product + shipping, clamped to floor/ceiling */
+  total_price_usd: number;
+  /** Raw cost before margin (cogs + shipping) — internal only */
+  total_cost_usd: number;
+  /** Effective margin achieved after floor/ceiling clamping */
+  effective_margin: number;
+  /** Which tier drove the margin selection */
+  tier: "standard" | "express" | "rush";
+  /** Whether the price was clamped by floor or ceiling */
+  clamped: "floor" | "ceiling" | null;
+  /** Confidence in the underlying cost data */
+  cost_confidence: "confirmed" | "estimated" | "placeholder";
 }
 
 export interface SupplierShipping {
@@ -55,8 +79,11 @@ export interface FulfillmentOption {
   estimated_days_min: number;
   estimated_days_max: number;
   estimated_days_display: string;
+  /** @deprecated Use price_breakdown.total_price_usd — kept for backward compat */
   price_usd: number;
   price_adjustment_usd: number;  // diff from cheapest
+  /** Product + shipping breakdown (Phase 1 dynamic pricing) */
+  price_breakdown: PriceBreakdown;
   badge: "Best Price" | "Fastest" | "Local" | null;
   is_default: boolean;
   is_local: boolean;

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About Hood'd — World Cup 2026 Car Hood Covers",
-  description: "The story behind Hood'd — premium car hood covers for World Cup 2026.",
+  description: "The story behind Hood'd — independent stretch hood covers for 48 World Cup 2026 nations.",
   alternates: {
     canonical: "https://hooddshop.com/about",
   },
@@ -21,7 +21,7 @@ export default function AboutPage() {
             deserves to rep their nation on the road.
           </p>
           <p className="text-body-md mt-4 leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
-            Hood&apos;d makes premium stretch-fit car hood covers with full-bleed
+            Hood&apos;d makes stretch-fit car hood covers with full-bleed
             sublimation prints. Each cover is made to order using durable
             polyester spandex with elastic sewn-in edges for a universal fit
             on cars, SUVs, and trucks. Elastic bands with built-in clips
@@ -53,7 +53,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 gap-4">
             {[
               { stat: "48", label: "Nations", desc: "Every World Cup 2026 qualifier" },
-              { stat: "$49.99", label: "Per Cover", desc: "Made-to-order pricing" },
+              { stat: "$44.99", label: "Starting Price", desc: "Free shipping with code HOODDSHIP" },
               { stat: "100%", label: "Sublimation", desc: "Edge-to-edge print that won\u2019t crack or peel" },
               { stat: "Universal", label: "Fit", desc: "Elastic edge stretches to fit any hood" },
             ].map((item) => (

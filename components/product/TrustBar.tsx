@@ -18,7 +18,7 @@ export default function TrustBar() {
           <circle cx="17.5" cy="18" r="1.5" />
         </svg>
       ),
-      label: "Free Ship $99+",
+      label: "Free Ship · HOODDSHIP",
     },
     {
       icon: (

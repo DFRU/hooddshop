@@ -1,0 +1,59 @@
+# Exclude working pipeline folders — these are local-only design generation.
+# Without this, Vercel uploads 20+ GB of PNGs that have no role in production.
+production/
+production_v2/
+production_v3/
+pipeline-v6/
+pipeline-v2/
+designs-v3/
+designs-v4/
+designs-v5/
+designs-v6/
+text-ai-test/
+shootout-results/
+mockups-cache/
+
+# Local environment + secrets (use Vercel env vars instead)
+.env
+.env.local
+.env.*.local
+.env.vercel
+
+# Build artifacts (Vercel builds fresh)
+node_modules/
+.next/
+out/
+build/
+dist/
+
+# Dev tooling
+.vscode/
+.idea/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Misc binaries that crept in
+*.psd
+*.ai
+*.fig
+
+# Internal scripts not for production
+_*.py
+_*.txt
+_*.json
+_*.log
+_check_*.py
+_cleanup_*.py
+_run_*.py
+_offline_*.py
+_token_*.py
+_verify_*.py
+_shopify_*.py
+_update_*.py
+_activate_*.py
+
+# OS
+.DS_Store
+Thumbs.db

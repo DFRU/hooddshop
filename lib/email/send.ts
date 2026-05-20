@@ -103,8 +103,8 @@ export async function sendWelcomeEmail(email: string): Promise<boolean> {
         </div>
         <h1 style="font-size: 22px; color: #fff; margin: 0 0 12px;">Welcome to Hood'd</h1>
         <p style="font-size: 15px; line-height: 1.6; color: #999; margin: 0 0 16px;">
-          You're now on the list for weekly draws, flash sales, and first access to new designs
-          for FIFA World Cup 2026.
+          You're now on the list for the weekly draw, free shipping codes, and first access to new designs
+          for World Cup 2026.
         </p>
         <p style="font-size: 15px; line-height: 1.6; color: #999; margin: 0 0 16px;">
           Every week, one subscriber wins a free hood cover — any nation, on us.
@@ -122,7 +122,7 @@ export async function sendWelcomeEmail(email: string): Promise<boolean> {
         </p>
       </div>
     `,
-    text: `Welcome to Hood'd!\n\nYou're on the list for weekly draws, flash sales, and first access to new designs for FIFA World Cup 2026.\n\nEvery week, one subscriber wins a free hood cover. Browse designs: ${SITE_URL}/shop\n\nUnsubscribe: ${unsubscribeUrl(email)}`,
+    text: `Welcome to Hood'd!\n\nYou're on the list for the weekly draw, free shipping codes, and first access to new designs for World Cup 2026.\n\nEvery week, one subscriber wins a free hood cover. Browse designs: ${SITE_URL}/shop\n\nUnsubscribe: ${unsubscribeUrl(email)}`,
   });
 }
 

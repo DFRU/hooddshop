@@ -4,7 +4,7 @@
  */
 export default function TrustStrip() {
   const signals = [
-    { icon: "🚚", text: "Free Shipping $99+" },
+    { icon: "🚚", text: "Free Shipping · Code HOODDSHIP" },
     { icon: "☀️", text: "UV & Weather Resistant" },
     { icon: "🧼", text: "Machine Washable" },
     { icon: "🌍", text: "Ships Worldwide" },

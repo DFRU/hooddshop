@@ -1,12 +1,12 @@
 export default function Ticker() {
 
   const messages = [
-    "WORLD CUP 2026",
+    "USE CODE HOODDSHIP — FREE SHIPPING WORLDWIDE",
     "YOUR RIDE. YOUR FLAG.",
     "48 NATIONS",
-    "FREE SHIPPING $99+",
-    "STRETCH-FIT",
-    "MADE TO ORDER",
+    "STRETCH-FIT POLYESTER-SPANDEX",
+    "MADE TO ORDER · SHIPS 5–10 BUSINESS DAYS",
+    "INDEPENDENT BRAND",
   ];
   const doubled = [...messages, ...messages];
 

@@ -1,6 +1,6 @@
-import type { CustomerLocation, FulfillmentOption, Supplier } from "./types";
+import type { CustomerLocation, FulfillmentOption, PriceBreakdown, Supplier } from "./types";
 import { haversineDistance } from "./geo";
-import { getCustomerPrice, getShippingTier, getTierLabel } from "./pricing";
+import { calculateDynamicPrice, getShippingTier, getTierLabel } from "./pricing";
 import {
   BASE_SUPPLIER_ID,
   MAX_OPTIONS,
@@ -12,6 +12,7 @@ interface ScoredSupplier {
   supplier: Supplier;
   distance: number;
   price: number;
+  priceBreakdown: PriceBreakdown;
   costScore: number;
   speedScore: number;
   reliabilityScore: number;
@@ -40,7 +41,8 @@ export function routeToSuppliers(
     // Return base supplier as fallback even if it doesn't match filters
     const base = suppliers.find((s) => s.id === BASE_SUPPLIER_ID);
     if (base) {
-      return [buildOption(base, location, 0, "Best Price", true)];
+      const bd = calculateDynamicPrice(base, location.country_code);
+      return [buildOption(base, location, 0, "Best Price", true, bd)];
     }
     return [];
   }
@@ -53,12 +55,14 @@ export function routeToSuppliers(
       s.coordinates.lat,
       s.coordinates.lng
     );
-    const price = getCustomerPrice(s);
+    const priceBreakdown = calculateDynamicPrice(s, location.country_code);
+    const price = priceBreakdown.total_price_usd;
 
     return {
       supplier: s,
       distance,
       price,
+      priceBreakdown,
       costScore: 0,
       speedScore: 0,
       reliabilityScore: 0,
@@ -144,7 +148,7 @@ export function routeToSuppliers(
     // Default to the highest-composite option
     const isDefault = idx === 0;
 
-    return buildOption(s.supplier, location, cheapestPrice, badge, isDefault);
+    return buildOption(s.supplier, location, cheapestPrice, badge, isDefault, s.priceBreakdown);
   });
 
   return options;
@@ -155,9 +159,10 @@ function buildOption(
   location: CustomerLocation,
   cheapestPrice: number,
   badge: FulfillmentOption["badge"],
-  isDefault: boolean
+  isDefault: boolean,
+  priceBreakdown: PriceBreakdown
 ): FulfillmentOption {
-  const price = getCustomerPrice(supplier);
+  const price = priceBreakdown.total_price_usd;
   const isLocal = supplier.country_code === location.country_code;
   const daysMin = supplier.shipping.standard_days_min;
   const daysMax = supplier.shipping.standard_days_max;
@@ -183,6 +188,7 @@ function buildOption(
     estimated_days_display: `${daysMin}-${daysMax} days`,
     price_usd: price,
     price_adjustment_usd: parseFloat((price - cheapestPrice).toFixed(2)),
+    price_breakdown: priceBreakdown,
     badge,
     is_default: isDefault,
     is_local: isLocal,

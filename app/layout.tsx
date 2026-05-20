@@ -28,24 +28,24 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: { default: "Hood'd — Car Hood Covers for World Cup 2026 | Your Ride. Your Flag.", template: "%s | Hood'd" },
+  title: { default: "Hood'd — Stretch Hood Covers for Your Car · 48 Nations · World Cup 2026", template: "%s | Hood'd" },
   description:
-    "Premium stretch-fit car hood covers for World Cup 2026. 48 nations, sublimation-printed on polyester spandex. Universal fit for cars, SUVs, and trucks. $49.99. Made to order.",
+    "Stretch-fit car hood covers. 48 nations. Made to order. Full-bleed sublimation print on polyester-spandex. Universal fit for cars, SUVs, and trucks. Independent brand — not licensed by FIFA, federations, or kit makers.",
   metadataBase: new URL("https://hooddshop.com"),
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://hooddshop.com",
     siteName: "Hood'd",
-    title: "Hood'd — Car Hood Covers for World Cup 2026",
-    description: "Premium stretch-fit car hood covers for 48 World Cup 2026 nations. Universal fit for cars, SUVs, and trucks. $49.99.",
-    images: [{ url: "/vehicles/us_product.webp", width: 1200, height: 1200, alt: "USA car hood cover — Hood'd World Cup 2026" }],
+    title: "Hood'd — Your Ride. Your Flag.",
+    description: "Stretch hood covers for cars. 48 World Cup 2026 nations. Slips on in 30 seconds. Slips off in 10. hooddshop.com.",
+    images: [{ url: "/og-hero.jpg", width: 1200, height: 630, alt: "Hood'd — Stretch hood covers for cars · 48 nations · World Cup 2026" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hood'd — Car Hood Covers for World Cup 2026",
-    description: "Premium stretch-fit car hood covers for 48 nations. Universal fit. $49.99.",
-    images: ["/vehicles/us_product.webp"],
+    title: "Hood'd — Your Ride. Your Flag.",
+    description: "Stretch hood covers for cars. 48 nations. From $44.99 USD.",
+    images: ["/og-hero.jpg"],
   },
   icons: {
     icon: "/favicon.png",
@@ -81,15 +81,15 @@ export default function RootLayout({
                 url: "https://hooddshop.com",
                 logo: "https://hooddshop.com/favicon.png",
                 description:
-                  "Premium sublimation-printed stretch-fit car hood covers for FIFA World Cup 2026. 48 nations. Jersey-inspired designs.",
+                  "Stretch-fit car hood covers. 48 World Cup 2026 nations. Full-bleed sublimation print on polyester-spandex. Independent brand.",
                 contactPoint: {
                   "@type": "ContactPoint",
                   email: "contact@hooddshop.com",
                   contactType: "customer service",
                 },
                 sameAs: [
-                  "https://www.instagram.com/hooddshop",
-                  "https://www.tiktok.com/@hooddshop",
+                  "https://www.instagram.com/hooddshopnow",
+                  "https://www.tiktok.com/@hooddshopnow",
                 ],
               },
               {
@@ -98,7 +98,7 @@ export default function RootLayout({
                 name: "Hood'd",
                 url: "https://hooddshop.com",
                 description:
-                  "Premium car hood covers for FIFA World Cup 2026. 48 nations available.",
+                  "Stretch hood covers for cars. 48 World Cup 2026 nations available.",
                 potentialAction: {
                   "@type": "SearchAction",
                   target: {

@@ -12,23 +12,23 @@ import MailingListCTA from "@/components/home/MailingListCTA";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Hood'd — Car Hood Covers for World Cup 2026 | 48 Nations | $49.99",
+    absolute: "Hood'd — Stretch Hood Covers for Your Car · 48 Nations · World Cup 2026",
   },
   description:
-    "Premium sublimation-printed stretch-fit car hood covers for FIFA World Cup 2026. 48 nations available. Universal fit for cars, SUVs, and trucks. Jersey-inspired designs. $49.99 each. Free shipping on orders over $99.",
+    "Stretch-fit car hood covers. 48 nations. Made to order. Full-bleed sublimation print on polyester-spandex. From $44.99 USD. Independent brand — not licensed by FIFA, federations, or kit makers.",
   alternates: {
     canonical: "https://hooddshop.com",
   },
   openGraph: {
-    title: "Hood'd — Car Hood Covers for World Cup 2026",
+    title: "Hood'd — Your Ride. Your Flag.",
     description:
-      "Rep your nation on the road. Premium stretch-fit car hood covers for all 48 World Cup 2026 nations. $49.99.",
+      "Stretch hood covers for cars. 48 World Cup 2026 nations. Slips on in 30 seconds. Slips off in 10. From $44.99.",
     url: "https://hooddshop.com",
   },
   keywords: [
     "car hood cover", "World Cup 2026", "car hood flag",
     "engine cover flag", "car bonnet cover", "soccer car accessories",
-    "football car accessories", "FIFA World Cup merchandise",
+    "football car accessories", "World Cup merchandise",
     "national team car cover", "sublimation car hood cover",
     "stretch fit hood cover", "World Cup car decor",
     "country flag car cover",

@@ -22,7 +22,7 @@ export default function ProductJsonLd({ product }: ProductJsonLdProps) {
     name: product.title,
     description:
       product.description ||
-      `Premium stretch-fit car hood cover for World Cup 2026. Sublimation-printed on polyester spandex. Universal fit.`,
+      `Stretch-fit car hood cover. Full-bleed sublimation print on polyester-spandex. Universal fit. Made to order.`,
     image: allImages.length > 0 ? allImages : image?.url ? [image.url] : [],
     brand: {
       "@type": "Brand",

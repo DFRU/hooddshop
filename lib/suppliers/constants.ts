@@ -12,14 +12,29 @@ export const MIN_QUALITY_SCORE = 7;
 // Maximum number of fulfillment options returned
 export const MAX_OPTIONS = 3;
 
-// Customer-facing price tiers (CAD)
-// Aligned with competitive analysis: market sweet spot $44.99,
-// express premium for faster local/regional fulfillment
-export const PRICE_TIERS = {
-  standard: 44.99,   // Base price — China POD (15-25 days), matches market analysis
-  express: 54.99,    // Regional suppliers (5-10 days), speed premium
-  rush: 64.99,       // Local/same-country (2-5 days), max speed premium
+// ---------------------------------------------------------------------------
+// Dynamic pricing config (Phase 1)
+// Price formula: totalCost / (1 - margin), clamped to [FLOOR, CEILING]
+// ---------------------------------------------------------------------------
+
+/** Target gross-profit margin per shipping tier */
+export const MARGIN_BY_TIER = {
+  standard: 0.60,   // China POD (15-25 days) — low COGS, take more margin
+  express:  0.50,   // Regional (5-10 days)   — moderate COGS
+  rush:     0.40,   // Local (≤5 days)        — high COGS, stay competitive
 } as const;
+
+/** Absolute floor — never sell below this regardless of cost/margin calc */
+export const PRICE_FLOOR_USD = 29.99;
+
+/** Absolute ceiling — never exceed this regardless of cost/margin calc */
+export const PRICE_CEILING_USD = 89.99;
+
+/** Default shipping cost when no per-country or fixed cost is available */
+export const DEFAULT_SHIPPING_COST_USD = 7.00;
+
+// Legacy static tiers (kept for reference during migration, will remove)
+// standard: 44.99, express: 54.99, rush: 64.99
 
 // Pricing phase — controls which pricing strategy is active
 // "launch" = early-bird $39.99 | "standard" = $44.99 | "tournament" = $49.99

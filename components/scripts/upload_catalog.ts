@@ -535,7 +535,7 @@ async function main() {
       const productInput: CreateProductInput = {
         title: `HOOD'D | ${nation.name} ${nation.emoji} Jersey Line`,
         handle,
-        body_html: `<p>Premium sublimation-printed stretch polyester-spandex car hood cover. FIFA World Cup 2026 edition. ${nation.name} design.</p>`,
+        body_html: `<p>Stretch polyester-spandex car hood cover. Full-bleed sublimation print. World Cup 2026 ${nation.name} design. Independent — not licensed by FIFA, federations, or kit makers.</p>`,
         vendor: "Hood'd",
         product_type: "Hood Cover",
         tags: tags.join(", "),

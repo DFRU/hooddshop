@@ -141,13 +141,16 @@ async function handleOrderPaid(order: ShopifyOrder) {
 
   const shipping = order.shipping_address;
 
-  // Default supplier — Printkk for Phase 1A (geo-routing deferred to Phase 3)
-  const supplierId = "printkk";
-
   let created = 0;
   let skipped = 0;
 
   for (const item of order.line_items) {
+    // Resolve supplier from _fulfillment_option cart attribute (set by FulfillmentSelector on PDP).
+    // Falls back to "printkk" if not present (legacy orders / direct Shopify checkout).
+    const fulfillmentProp = item.properties?.find(
+      (p) => p.name === "_fulfillment_option"
+    );
+    const supplierId = fulfillmentProp?.value?.trim() || "printkk";
     // Resolve asset_id from SKU. SKU format: "{CODE}-{VARIANT}" e.g. "CA-HOME"
     // Parse the SKU into nation_code and variant_name, then look up the asset
     // in the assets table.
@@ -206,7 +209,7 @@ async function handleOrderPaid(order: ShopifyOrder) {
   }
 
   console.log(
-    `[webhook] orders/paid ${order.name}: ${created} jobs created, ${skipped} skipped (idempotent), isDrop=${isDrop}`
+    `[webhook] orders/paid ${order.name}: ${created} jobs created, ${skipped} skipped (idempotent), isDrop=${isDrop}, suppliers resolved per-item from _fulfillment_option`
   );
 }
 

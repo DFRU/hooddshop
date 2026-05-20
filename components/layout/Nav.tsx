@@ -16,6 +16,7 @@ export default function Nav() {
     { href: "/", label: "Home" },
     { href: "/shop", label: "Shop" },
     { href: "/nations", label: "Nations" },
+    { href: "/faq", label: "FAQ" },
     { href: "/about", label: "About" },
   ];
 

@@ -14,22 +14,27 @@ const ACCORDION_SECTIONS = [
   {
     title: "What's Included",
     content:
-      "1x custom sublimation-printed stretch car hood cover with elastic sewn-in edge. 2x elastic fastener straps with hooks for extra security at highway speeds.",
+      "1x stretch polyester-spandex hood cover with elastic sewn-in edge. 2x elastic fastener straps with hooks for extra hold.",
   },
   {
     title: "Fit Guide",
     content:
-      'Standard size: 63" × 47" (160 × 120 cm). Fits most sedans, compact SUVs, and coupes. Elastic edge provides 15-25% stretch tolerance. Does not fit micro cars or hoods under 36" wide. Universal fit — no vehicle selection required.',
+      'Standard size: 63" × 47" (160 × 120 cm). Fits most sedans, compact SUVs, and coupes. Elastic edge provides 15–25% stretch tolerance. Does not fit micro cars or hoods under 36" wide. Universal fit — no vehicle selection required. If your hood has unusual geometry, DM us a side photo at @hooddshopnow before ordering.',
   },
   {
     title: "Care Instructions",
     content:
-      "Machine wash cold on gentle cycle. Tumble dry low or hang dry. Do not iron directly on print area. Do not bleach. Store flat or loosely folded. Sublimation ink is permanent — will not crack, peel, or fade like vinyl.",
+      "Machine wash cold on gentle cycle. Hang dry. Do not iron the print. Do not bleach. Store flat or loosely folded. Sublimation ink is permanent — will not crack, peel, or fade.",
   },
   {
     title: "Shipping",
     content:
-      "Made to order via dye sublimation printing. Production takes 3-7 business days depending on fulfillment location. Worldwide delivery available — shipping speed based on your selected fulfillment option above.",
+      "Made to order. Production: 5–10 business days. Ships worldwide. Free shipping with code HOODDSHIP at checkout.",
+  },
+  {
+    title: "About this product",
+    content:
+      "We're independent — not licensed by FIFA, federations, or kit makers. All designs are original, inspired by national flag color palettes. National team names are used for descriptive purposes only. Hood covers are decorative accessories for stationary display (tailgates, watch parties, parking lots). Take the cover off before driving — wind abrasion at speed is the only thing that can damage your paint.",
   },
 ];
 
@@ -198,7 +203,7 @@ export default function ProductDetailClient({
   const descriptionHtml = product?.descriptionHtml ?? null;
   const description =
     product?.description ??
-    "Premium stretch-fit car hood cover with full-bleed sublimation print. 85-90% polyester / 10-15% spandex. Universal fit with elastic sewn-in edge.";
+    "Stretch hood cover with full-bleed sublimation print. 85–90% polyester / 10–15% spandex. Universal fit with elastic sewn-in edge.";
 
   // Effective price shown: fulfillment-adjusted if selected, else variant price
   const effectivePrice = selectedFulfillment
@@ -417,10 +422,20 @@ export default function ProductDetailClient({
           </p>
 
           {/* ── Design variant selector ── */}
-          {variants.length > 1 && (
+          {variants.length > 1 && (() => {
+            // Display label map: Shopify backend uses "Abbrev" and "Jersey";
+            // brand pack uses "Full" and "Jersey-inspired" (per voice guide).
+            // URL slugs and Shopify variant IDs are preserved — only the display changes.
+            const displayLabel = (raw: string): string => {
+              if (raw === "Abbrev") return "Full";
+              if (raw === "Jersey") return "Jersey-inspired";
+              return raw;
+            };
+            const selectedRaw = selectedVariant?.selectedOptions?.find((o) => o.name === "Design")?.value ?? selectedVariant?.title ?? "";
+            return (
             <div className="mt-4">
               <label className="text-[11px] uppercase tracking-widest font-semibold text-white/60 mb-2 block">
-                Design: {selectedVariant?.selectedOptions?.find((o) => o.name === "Design")?.value ?? selectedVariant?.title ?? ""}
+                Design: {displayLabel(selectedRaw)}
               </label>
               <div className="flex flex-wrap gap-2">
                 {variants.map((v) => {
@@ -437,13 +452,14 @@ export default function ProductDetailClient({
                         border: isActive ? "1px solid var(--color-accent)" : "1px solid #333",
                       }}
                     >
-                      {designName}
+                      {displayLabel(designName)}
                     </button>
                   );
                 })}
               </div>
             </div>
-          )}
+            );
+          })()}
 
           {descriptionHtml ? (
             <div
@@ -489,13 +505,12 @@ export default function ProductDetailClient({
               <div className="flex items-start gap-2">
                 <span
                   className="flex-shrink-0 px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase"
-                  style={{ background: "#333", color: "#888" }}
+                  style={{ background: "var(--color-accent)", color: "#fff" }}
                 >
                   XL
                 </span>
                 <span>
-                  68&quot; &times; 55&quot; (172 &times; 140 cm) &mdash; for trucks, full-size SUVs, and larger sedans.{" "}
-                  <span style={{ color: "var(--color-accent)" }}>Coming late April 2026.</span>
+                  68&quot; &times; 55&quot; (172 &times; 140 cm) &mdash; fits trucks, full-size SUVs, and larger sedans.
                 </span>
               </div>
             </div>

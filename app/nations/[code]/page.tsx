@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: nation ? `${nation.name} Car Hood Cover — World Cup 2026` : "Nation Not Found",
     description: nation
-      ? `Shop the ${nation.name} car hood cover by Hood'd. Premium sublimation-printed stretch-fit cover for World Cup 2026. Universal fit for cars, SUVs, trucks. $49.99.`
+      ? `${nation.name} stretch hood cover by Hood'd. Full-bleed sublimation print on polyester-spandex. Universal fit for cars, SUVs, and trucks. From $44.99 USD. Independent brand — original design.`
       : "Nation not found.",
     alternates: {
       canonical: nation ? `https://hooddshop.com/nations/${code}` : undefined,
@@ -114,7 +114,7 @@ export default async function NationDetailPage({ params }: PageProps) {
           <div className="space-y-5 lg:space-y-7 flex flex-col justify-center">
             <div>
               <span className="text-label" style={{ color: "var(--color-accent)" }}>
-                {nation.confederation} · {nation.region}
+                {nation.region}
               </span>
               <h1 className="text-display-lg text-white mt-1">{nation.name}</h1>
               <p className="text-body-sm mt-1" style={{ color: "#888" }}>Car Hood Cover</p>
@@ -131,7 +131,7 @@ export default async function NationDetailPage({ params }: PageProps) {
             </div>
 
             <p className="text-body-sm leading-relaxed" style={{ color: "#888" }}>
-              The {nation.name} premium stretch-fit car hood cover is currently in production.
+              The {nation.name} stretch-fit hood cover is currently in production.
               Sign up to be notified when it drops.
             </p>
 

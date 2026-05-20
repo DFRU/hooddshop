@@ -84,7 +84,7 @@ export default async function FeaturedNations() {
                       {n.name}
                     </span>
                     <span className="block text-[9px] uppercase tracking-[0.12em] mt-0.5" style={{ color: "#555" }}>
-                      {n.confederation}
+                      {n.region}
                     </span>
                   </div>
                 </div>

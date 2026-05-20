@@ -15,7 +15,7 @@ export default async function Hero() {
   const minPrice = products[0]?.priceRange?.minVariantPrice;
   const priceDisplay = minPrice
     ? `$${parseFloat(minPrice.amount).toFixed(2)} ${minPrice.currencyCode}`
-    : "$49.99";
+    : "$44.99 USD";
 
   return (
     <section className="relative overflow-hidden">
@@ -57,7 +57,7 @@ export default async function Hero() {
             </h1>
 
             <p className="text-body-xs lg:text-body-md max-w-md leading-relaxed" style={{ color: "#888" }}>
-              Premium stretch-fit car hood covers for World Cup 2026. 48 nations. Universal fit.
+              Stretch hood covers for cars. 48 nations. Made to order. Slips on in 30 seconds. Free shipping with code HOODDSHIP.
             </p>
 
             <div className="flex gap-2 sm:gap-3">
@@ -121,7 +121,7 @@ export default async function Hero() {
                     <img src={flagUrl("ar", 40)} className="w-6 lg:w-8 h-auto mb-1 rounded shadow-md" alt="Argentina flag" />
                     <div className="text-body-md lg:text-display-sm text-white font-semibold">Argentina</div>
                     <div className="text-[8px] lg:text-[10px] uppercase tracking-[0.12em] text-white/50">
-                      Jersey Line · Hood Cover
+                      Hood Cover · Jersey-inspired
                     </div>
                   </div>
                 </div>

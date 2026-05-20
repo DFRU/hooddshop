@@ -211,12 +211,32 @@ export default function FulfillmentSelector({ onSelect }: FulfillmentSelectorPro
                     )}
                   </div>
                 </div>
-                <span
-                  className="text-body-sm font-semibold"
-                  style={{ color: "var(--color-accent)" }}
-                >
-                  ${option.price_usd.toFixed(2)}
-                </span>
+                <div className="text-right">
+                  <span
+                    className="text-body-sm font-semibold"
+                    style={{ color: "var(--color-accent)" }}
+                  >
+                    ${option.price_breakdown
+                      ? option.price_breakdown.product_price_usd.toFixed(2)
+                      : option.price_usd.toFixed(2)}
+                  </span>
+                  {option.price_breakdown && option.price_breakdown.shipping_price_usd > 0 && (
+                    <span
+                      className="text-[11px] ml-1"
+                      style={{ color: "var(--color-text-muted)" }}
+                    >
+                      + ${option.price_breakdown.shipping_price_usd.toFixed(2)} shipping
+                    </span>
+                  )}
+                  {option.price_breakdown && option.price_breakdown.shipping_price_usd === 0 && (
+                    <span
+                      className="text-[11px] ml-1"
+                      style={{ color: "var(--color-success)" }}
+                    >
+                      Free shipping
+                    </span>
+                  )}
+                </div>
               </div>
               <p
                 className="text-body-sm mt-1 ml-6"

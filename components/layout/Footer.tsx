@@ -21,7 +21,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm leading-relaxed" style={{ color: "#555" }}>
-              Premium car hood covers for World Cup 2026. Your ride. Your flag.
+              Stretch hood covers for cars. 48 World Cup 2026 nations. Your ride. Your flag.
             </p>
           </div>
 
@@ -57,9 +57,15 @@ export default function Footer() {
           <div>
             <h4 className="text-label-md text-white mb-3">Info</h4>
             <div className="space-y-2">
-              <a href="mailto:contact@hooddshop.com" className="block text-sm py-1 touch-active transition-colors" style={{ color: "#666" }}>
+              <Link href="/faq" className="block text-sm py-1 touch-active transition-colors" style={{ color: "#666" }}>
+                FAQ
+              </Link>
+              <Link href="/contact" className="block text-sm py-1 touch-active transition-colors" style={{ color: "#666" }}>
                 Contact
-              </a>
+              </Link>
+              <Link href="/size-guide" className="block text-sm py-1 touch-active transition-colors" style={{ color: "#666" }}>
+                Size Guide
+              </Link>
               <Link href="/privacy" className="block text-sm py-1 touch-active transition-colors" style={{ color: "#666" }}>
                 Privacy Policy
               </Link>
@@ -100,7 +106,7 @@ export default function Footer() {
           <span className="text-xs" style={{ color: "#444" }}>&copy; 2026 Hood&apos;d. All rights reserved.</span>
           <div className="flex items-center gap-5">
             <GoogleTranslate />
-            <a href="https://www.instagram.com/hooddshop" target="_blank" rel="noopener noreferrer" className="text-xs transition-colors hover:text-white" style={{ color: "#555" }}>@hooddshop</a>
+            <a href="https://www.instagram.com/hooddshopnow" target="_blank" rel="noopener noreferrer" className="text-xs transition-colors hover:text-white" style={{ color: "#555" }}>@hooddshopnow</a>
           </div>
         </div>
       </div>

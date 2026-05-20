@@ -31,7 +31,7 @@ export default function HowItWorks() {
     {
       num: "03",
       title: "Rep Your Ride",
-      desc: "Made to order. Ships worldwide in 15–25 business days.",
+      desc: "Made to order. Ships worldwide in 5–10 business days. Free shipping with code HOODDSHIP.",
       href: "/shop",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">

@@ -38,7 +38,7 @@ export default function NationsClient({ nationProductMap }: NationsClientProps) 
       >
         <span className="text-label" style={{ color: "var(--color-accent)" }}>World Cup 2026</span>
         <h1 className="text-display-lg text-white mt-1">All Nations</h1>
-        <p className="text-body-sm mt-2" style={{ color: "#888" }}>48 nations · Premium stretch-fit hood covers</p>
+        <p className="text-body-sm mt-2" style={{ color: "#888" }}>48 nations · Stretch-fit hood covers · Made to order</p>
       </div>
 
       {/* Sticky filters */}
