@@ -1,21 +1,9 @@
 "use client";
 
-/**
- * CRO Redesign — Nav simplified per spec §6
- *
- * Target items (max 4 + cart):
- *   SHOP BY NATION | COMBINER | ABOUT | [Cart icon + count]
- *
- * Removed: Home, Shop (redundant with "SHOP BY NATION"), FAQ
- * Mobile: hamburger → full-screen overlay, Bebas Neue large type
- * Cart icon always visible in mobile header (not inside hamburger)
- */
-
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
-// GoogleTranslate kept — not in the 4 nav items but not explicitly removed by spec
 import GoogleTranslate from "./GoogleTranslate";
 
 const NAV_LINKS = [
@@ -29,7 +17,7 @@ export default function Nav() {
   const pathname = usePathname();
   const itemCount = cart?.totalQuantity ?? 0;
 
-  // Close overlay on route change — setState in effect is intentional here
+  // Close overlay on route change (setState in effect is intentional here)
   // eslint-disable-next-line react-compiler/react-compiler
   useEffect(() => {
     setMenuOpen(false);
@@ -82,9 +70,7 @@ export default function Nav() {
               key={l.href}
               href={l.href}
               className={`px-4 py-2 text-[13px] font-medium tracking-[0.05em] transition-colors ${
-                isActive(l.href)
-                  ? "text-white"
-                  : "text-neutral-500 hover:text-white"
+                isActive(l.href) ? "text-white" : "text-neutral-500 hover:text-white"
               }`}
               style={{ fontFamily: "var(--font-body)" }}
             >
@@ -94,16 +80,16 @@ export default function Nav() {
         </div>
 
         <div className="flex items-center gap-1">
-          {/* Language selector — desktop only */}
+          {/* Language selector - desktop only */}
           <div className="hidden md:block">
             <GoogleTranslate />
           </div>
 
-          {/* Cart — always visible, shows count badge when non-empty */}
+          {/* Cart - always visible, shows count badge when non-empty */}
           <button
             onClick={openCart}
             className="relative p-3 text-neutral-400 hover:text-white transition-colors touch-active"
-            aria-label={itemCount > 0 ? `Cart — ${itemCount} item${itemCount === 1 ? "" : "s"}` : "Cart"}
+            aria-label={itemCount > 0 ? `Cart - ${itemCount} item${itemCount === 1 ? "" : "s"}` : "Cart"}
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
@@ -146,11 +132,11 @@ export default function Nav() {
         </div>
       </nav>
 
-      {/* Mobile full-screen overlay (spec §6: dark bg, large Bebas Neue type) */}
+      {/* Mobile full-screen overlay */}
       {menuOpen && (
         <div
           className="fixed inset-0 z-40 md:hidden flex flex-col"
-          style={{ background: "rgba(10,10,10,0.98)", paddingTop: "56px" /* nav height */ }}
+          style={{ background: "rgba(10,10,10,0.98)", paddingTop: "56px" }}
           aria-modal="true"
           role="dialog"
           aria-label="Mobile navigation"
