@@ -29,7 +29,8 @@ export default function Nav() {
   const pathname = usePathname();
   const itemCount = cart?.totalQuantity ?? 0;
 
-  // Close overlay on route change
+  // Close overlay on route change — setState in effect is intentional here
+  // eslint-disable-next-line react-compiler/react-compiler
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
