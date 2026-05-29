@@ -21,6 +21,7 @@ import {
   getAssetByNationAndVariant,
 } from "@/lib/db/queries";
 import { ulid } from "@/lib/ulid";
+import { parseSizeFromSku } from "@/lib/suppliers/constants";
 
 // Use Node runtime for crypto.subtle compatibility and longer execution time
 export const runtime = "nodejs";
@@ -151,14 +152,18 @@ async function handleOrderPaid(order: ShopifyOrder) {
       (p) => p.name === "_fulfillment_option"
     );
     const supplierId = fulfillmentProp?.value?.trim() || "printkk";
-    // Resolve asset_id from SKU. SKU format: "{CODE}-{VARIANT}" e.g. "CA-HOME"
-    // Parse the SKU into nation_code and variant_name, then look up the asset
-    // in the assets table.
+    // Resolve asset_id and product size from SKU.
+    // SKU format: "{NATION}-{VARIANT}[-XL]" e.g. "CA-HOME" (standard) or "CA-HOME-XL"
+    // - Nation may be multi-part: "GB-ENG-HOME" or "GB-ENG-HOME-XL"
+    // - Size suffix ('-XL') is stripped first; what remains parses into nation+variant
     let assetId: string | null = null;
+    let productSize: "standard" | "xl" = "standard";
 
     if (item.sku) {
-      const skuParts = item.sku.split("-");
-      // SKU may have multi-part codes like "GB-ENG-HOME", so variant is last part
+      const { size: parsedSize, baseSku } = parseSizeFromSku(item.sku);
+      productSize = parsedSize;
+
+      const skuParts = baseSku.split("-");
       const variantName = skuParts.pop()?.toLowerCase(); // "home" or "away"
       const nationCode = skuParts.join("-").toUpperCase(); // "CA" or "GB-ENG"
 
@@ -168,7 +173,7 @@ async function handleOrderPaid(order: ShopifyOrder) {
           assetId = asset.id;
         } else {
           console.warn(
-            `[webhook] No asset found for nation=${nationCode} variant=${variantName} (SKU=${item.sku})`
+            `[webhook] No asset found for nation=${nationCode} variant=${variantName} (SKU=${item.sku}, size=${productSize})`
           );
         }
       }
@@ -188,6 +193,7 @@ async function handleOrderPaid(order: ShopifyOrder) {
       shopifyLineItemId: String(item.id),
       assetId,
       supplierId,
+      productSize,
       isDrop,
       orderedAt,
       eligibleForSubmitAt: eligibleAt,

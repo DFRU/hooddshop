@@ -6,7 +6,12 @@
  * This adapter implements the most common POD API pattern (URL-based print file).
  * Will be revised once Printkk API docs are obtained.
  *
- * Product code: 5K14TS (car hood cover, universal)
+ * Product codes:
+ *   standard: 5K14TS (car hood cover, 63"×47")
+ *   xl:       5K14TS_XL (placeholder — replace with actual PrintKK XL code, 68"×55")
+ *
+ * Size is sourced first from input.productSize, then from input.productCode if it
+ * already matches a known per-size code, then defaults to "standard".
  *
  * Auth: API Key + Secret Key (set in .env.local as PRINTKK_API_KEY, PRINTKK_SECRET_KEY)
  * Base URL: TBD (PRINTKK_API_BASE env var)
@@ -17,6 +22,7 @@ import type {
   PrintJobSubmission,
   PrintJobStatusResponse,
 } from "./types";
+import { PRINTKK_PRODUCT_CODE, DEFAULT_SIZE, type ProductSize } from "../constants";
 
 const API_KEY = process.env.PRINTKK_API_KEY || "";
 const SECRET_KEY = process.env.PRINTKK_SECRET_KEY || "";
@@ -37,11 +43,19 @@ export class PrintkkAdapter implements SupplierAdapter {
       );
     }
 
+    // Resolve the size-specific product code. Priority order:
+    //   1. PRINTKK_PRODUCT_CODE[input.productSize] if size given
+    //   2. input.productCode if caller passed an explicit code
+    //   3. DEFAULT_SIZE (standard) fallback
+    const size: ProductSize = input.productSize ?? DEFAULT_SIZE;
+    const productCode = input.productCode || PRINTKK_PRODUCT_CODE[size];
+
     // NOTE: This request structure is a best-guess based on common POD API patterns.
     // It WILL need revision once Printkk developer docs are obtained (blocker B2).
     const payload = {
       external_id: input.customerReference,
-      product_code: input.productCode,
+      product_code: productCode,
+      product_size: size, // pass through for supplier-side logging/audit
       quantity: input.quantity,
       print_file_url: input.printFileUrl,
       shipping: {

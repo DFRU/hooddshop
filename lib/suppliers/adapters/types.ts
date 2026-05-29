@@ -8,6 +8,7 @@
 export interface PrintJobInput {
   printFileUrl: string;        // Pre-signed asset URL, publicly fetchable for >24h
   productCode: string;         // Supplier SKU, e.g. "5K14TS"
+  productSize?: "standard" | "xl"; // Defaults to "standard" if omitted. Drives product code + dimensions on supplier side.
   quantity: number;
   shippingAddress: ShippingAddress;
   customerReference: string;   // Our print_jobs.id — used as idempotency key on supplier side

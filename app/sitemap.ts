@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getProducts } from "@/lib/shopify";
-import { NATIONS } from "@/lib/nations";
+import { NATIONS, getTitleKeyword } from "@/lib/nations";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://hooddshop.com";
@@ -20,27 +20,57 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/official-rules`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.3 },
   ];
 
-  // Nation detail pages (redirect to product page when available, or show holding page)
-  const nationPages: MetadataRoute.Sitemap = NATIONS.map((nation) => ({
-    url: `${baseUrl}/nations/${nation.code}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.7,
-  }));
-
-  // Product pages from Shopify
+  // Product pages + smart nation pages.
+  // Nations that have a Shopify product redirect to /products/[handle] at runtime.
+  // DO NOT include those /nations/[code] URLs in the sitemap — Google classifies
+  // them as "Page with redirect" and refuses to index them.
+  // Only include /nations/[code] for nations with no product yet (shows "coming soon").
   let productPages: MetadataRoute.Sitemap = [];
+  const nationPages: MetadataRoute.Sitemap = [];
+
   try {
     const { products } = await getProducts({ first: 250 });
+
+    // Build a set of nation codes that have a matching Shopify product
+    const nationCodesWithProduct = new Set();
+    for (const nation of NATIONS) {
+      const keyword = getTitleKeyword(nation.code).toLowerCase();
+      const hasProduct = products.some((p) =>
+        p.title.toLowerCase().includes(keyword)
+      );
+      if (hasProduct) nationCodesWithProduct.add(nation.code);
+    }
+
+    // Product pages — canonical destination for nations with products
     productPages = products.map((product) => ({
       url: `${baseUrl}/products/${product.handle}`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
-      priority: 0.8,
+      priority: 0.9,
     }));
+
+    // Nation "coming soon" pages — only nations WITHOUT a product
+    for (const nation of NATIONS) {
+      if (!nationCodesWithProduct.has(nation.code)) {
+        nationPages.push({
+          url: `${baseUrl}/nations/${nation.code}`,
+          lastModified: new Date(),
+          changeFrequency: "weekly" as const,
+          priority: 0.5,
+        });
+      }
+    }
   } catch {
-    // Shopify unavailable -- skip product pages
+    // Shopify unavailable — fall back to all nation pages (best effort)
+    for (const nation of NATIONS) {
+      nationPages.push({
+        url: `${baseUrl}/nations/${nation.code}`,
+        lastModified: new Date(),
+        changeFrequency: "weekly" as const,
+        priority: 0.5,
+      });
+    }
   }
 
-  return [...staticPages, ...nationPages, ...productPages];
+  return [...staticPages, ...productPages, ...nationPages];
 }

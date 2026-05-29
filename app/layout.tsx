@@ -45,6 +45,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Hood'd — Your Ride. Your Flag.",
     description: "Stretch hood covers for cars. 48 nations. From $44.99 USD.",
+    site: "@hooddshopnow",
+    creator: "@hooddshopnow",
     images: ["/og-hero.jpg"],
   },
   icons: {
@@ -90,6 +92,8 @@ export default function RootLayout({
                 sameAs: [
                   "https://www.instagram.com/hooddshopnow",
                   "https://www.tiktok.com/@hooddshopnow",
+                  "https://www.youtube.com/@hooddshopnow",
+                  "https://www.facebook.com/61563693766586",
                 ],
               },
               {

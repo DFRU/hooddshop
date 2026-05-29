@@ -107,6 +107,8 @@ export async function insertPrintJob(params: {
   shopifyLineItemId: string;
   assetId: string;
   supplierId: string;
+  /** 'standard' (default) or 'xl'. Drives PrintKK product code at submit time. */
+  productSize?: "standard" | "xl";
   isDrop: boolean;
   orderedAt: string;
   eligibleForSubmitAt: string;
@@ -122,17 +124,21 @@ export async function insertPrintJob(params: {
   const sql = getDb();
   const idempotencyKey = `${params.shopifyOrderId}:${params.shopifyLineItemId}`;
   const initialStatus = params.isDrop ? "queued" : "holding";
+  const productSize = params.productSize ?? "standard";
 
   try {
     await sql`
       INSERT INTO print_jobs (
         id, shopify_order_id, shopify_line_item_id, asset_id, supplier_id,
+        product_size,
         status, idempotency_key, is_drop, ordered_at, eligible_for_submit_at,
         shipping_name, shipping_address1, shipping_address2, shipping_city,
         shipping_province, shipping_zip, shipping_country, shipping_phone
       ) VALUES (
         ${params.id}, ${params.shopifyOrderId}, ${params.shopifyLineItemId},
-        ${params.assetId}, ${params.supplierId}, ${initialStatus}, ${idempotencyKey},
+        ${params.assetId}, ${params.supplierId},
+        ${productSize},
+        ${initialStatus}, ${idempotencyKey},
         ${params.isDrop}, ${params.orderedAt}, ${params.eligibleForSubmitAt},
         ${params.shippingName ?? null}, ${params.shippingAddress1 ?? null},
         ${params.shippingAddress2 ?? null}, ${params.shippingCity ?? null},

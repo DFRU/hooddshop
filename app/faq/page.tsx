@@ -17,7 +17,7 @@ const SECTIONS: Section[] = [
     items: [
       { q: "What is a Hood'd cover?", a: "A stretch-fit sleeve that goes over your car's hood. Soft fabric — not a magnet, not a decal, not paint. You pull it on, the elastic edge holds it in place." },
       { q: "What's it made of?", a: "85–90% polyester, 10–15% spandex. Full-bleed sublimation print. Elastic bands and clips are sewn into the edges." },
-      { q: "What sizes are available?", a: "Standard: 63\" × 47\" (160 × 120 cm) — fits most sedans, compact SUVs, and coupes. XL: 68\" × 55\" (172 × 140 cm) — fits trucks, full-size SUVs, and larger sedans." },
+      { q: "What sizes are available?", a: "Standard: 63\" × 47\" (160 × 120 cm) — fits most sedans, compact SUVs, and coupes. From $44.99 USD. XL: 68\" × 55\" (172 × 140 cm) — fits trucks, full-size SUVs, and larger sedans. From $54.99 USD." },
       { q: "Will it fit my car?", a: "Universal fit — sedans, SUVs, trucks. The elastic edge stretches 15–25% to adapt to your hood. If your hood is narrower than 36\" or has unusual geometry (older muscle cars, hood scoops, hood-mounted accessories), DM us a side photo at @hooddshopnow before ordering and we'll confirm fit." },
       { q: "How long does it take to put on?", a: "30 seconds. No tools. No tape. No paint contact." },
       { q: "Can I drive with it on?", a: "No. It's a stationary-display product. Take it off before you drive. Wind abrasion at speed is the only thing that can damage your paint — used as intended, the cover is paint-safe." },

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import FulfillmentSelector from "@/components/product/FulfillmentSelector";
 import TrustBar from "@/components/product/TrustBar";
+import StickyAddToCart from "@/components/product/StickyAddToCart";
 
 import type { FulfillmentOption } from "@/lib/suppliers/types";
 import type { ShopifyProduct, ShopifyVariant } from "@/types/shopify";
@@ -74,6 +75,8 @@ export default function ProductDetailClient({
   const [addedFeedback, setAddedFeedback] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
   const [safetyAcknowledged, setSafetyAcknowledged] = useState(false);
+  // Description expand/collapse — 4-line clamp on mobile (spec §7.2)
+  const [descExpanded, setDescExpanded] = useState(false);
   const [selectedFulfillment, setSelectedFulfillment] =
     useState<FulfillmentOption | null>(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -421,60 +424,144 @@ export default function ProductDetailClient({
             ${effectivePrice.toFixed(2)} USD
           </p>
 
-          {/* ── Design variant selector ── */}
+          {/* ── Design + Size variant selectors ── */}
           {variants.length > 1 && (() => {
             // Display label map: Shopify backend uses "Abbrev" and "Jersey";
             // brand pack uses "Full" and "Jersey-inspired" (per voice guide).
             // URL slugs and Shopify variant IDs are preserved — only the display changes.
-            const displayLabel = (raw: string): string => {
+            const displayDesignLabel = (raw: string): string => {
               if (raw === "Abbrev") return "Full";
               if (raw === "Jersey") return "Jersey-inspired";
               return raw;
             };
-            const selectedRaw = selectedVariant?.selectedOptions?.find((o) => o.name === "Design")?.value ?? selectedVariant?.title ?? "";
+
+            // Pull the option axes the product actually has. Most products have at
+            // minimum "Design"; XL rollout adds "Size" as a second axis.
+            const getOpt = (v: typeof variants[number], name: string) =>
+              v.selectedOptions?.find((o) => o.name === name)?.value;
+
+            const designValues = Array.from(
+              new Set(variants.map((v) => getOpt(v, "Design")).filter((x): x is string => !!x))
+            );
+            const sizeValues = Array.from(
+              new Set(variants.map((v) => getOpt(v, "Size")).filter((x): x is string => !!x))
+            );
+
+            const selectedDesign = getOpt(selectedVariant!, "Design") ?? selectedVariant?.title ?? "";
+            const selectedSize = getOpt(selectedVariant!, "Size") ?? (sizeValues[0] ?? "Standard");
+
+            // Find the variant matching a (design, size) combo.
+            const findVariant = (design: string, size: string) =>
+              variants.find(
+                (v) =>
+                  (getOpt(v, "Design") ?? v.title) === design &&
+                  (getOpt(v, "Size") ?? "Standard") === size
+              ) ?? null;
+
+            const selectDesign = (design: string) => {
+              const match = findVariant(design, selectedSize) ?? findVariant(design, sizeValues[0] ?? "Standard");
+              if (match) setSelectedVariantId(match.id);
+            };
+            const selectSize = (size: string) => {
+              const match = findVariant(selectedDesign, size);
+              if (match) setSelectedVariantId(match.id);
+            };
+
             return (
-            <div className="mt-4">
-              <label className="text-[11px] uppercase tracking-widest font-semibold text-white/60 mb-2 block">
-                Design: {displayLabel(selectedRaw)}
-              </label>
-              <div className="flex flex-wrap gap-2">
-                {variants.map((v) => {
-                  const designName = v.selectedOptions?.find((o) => o.name === "Design")?.value ?? v.title;
-                  const isActive = v.id === selectedVariantId;
-                  return (
-                    <button
-                      key={v.id}
-                      onClick={() => setSelectedVariantId(v.id)}
-                      className="px-3 py-2 rounded text-[12px] font-medium transition-all"
-                      style={{
-                        background: isActive ? "var(--color-accent)" : "var(--color-surface-2)",
-                        color: isActive ? "#fff" : "rgba(255,255,255,0.7)",
-                        border: isActive ? "1px solid var(--color-accent)" : "1px solid #333",
-                      }}
-                    >
-                      {displayLabel(designName)}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+              <>
+                {/* Design axis */}
+                {designValues.length > 1 && (
+                  <div className="mt-4">
+                    <label className="text-[11px] uppercase tracking-widest font-semibold text-white/60 mb-2 block">
+                      Design: {displayDesignLabel(selectedDesign)}
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {designValues.map((design) => {
+                        const isActive = design === selectedDesign;
+                        return (
+                          <button
+                            key={design}
+                            onClick={() => selectDesign(design)}
+                            className="px-3 py-2 rounded text-[12px] font-medium transition-all"
+                            style={{
+                              background: isActive ? "var(--color-accent)" : "var(--color-surface-2)",
+                              color: isActive ? "#fff" : "rgba(255,255,255,0.7)",
+                              border: isActive ? "1px solid var(--color-accent)" : "1px solid #333",
+                            }}
+                          >
+                            {displayDesignLabel(design)}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* Size axis — only renders if the product has 2+ sizes */}
+                {sizeValues.length > 1 && (
+                  <div className="mt-4">
+                    <label className="text-[11px] uppercase tracking-widest font-semibold text-white/60 mb-2 block">
+                      Size: {selectedSize}
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {sizeValues.map((size) => {
+                        const isActive = size === selectedSize;
+                        const sizeDims =
+                          size === "XL"
+                            ? '68" × 55"'
+                            : size === "Standard"
+                              ? '63" × 47"'
+                              : "";
+                        return (
+                          <button
+                            key={size}
+                            onClick={() => selectSize(size)}
+                            className="px-3 py-2 rounded text-[12px] font-medium transition-all flex flex-col items-start"
+                            style={{
+                              background: isActive ? "var(--color-accent)" : "var(--color-surface-2)",
+                              color: isActive ? "#fff" : "rgba(255,255,255,0.7)",
+                              border: isActive ? "1px solid var(--color-accent)" : "1px solid #333",
+                            }}
+                          >
+                            <span>{size}</span>
+                            {sizeDims && (
+                              <span className="text-[10px] opacity-70 mt-0.5">{sizeDims}</span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </>
             );
           })()}
 
-          {descriptionHtml ? (
+          {/* Product description — 4-line clamp on mobile, full on desktop (spec §7.2) */}
+          {/* .desc-clamp applies -webkit-line-clamp:4 on mobile; disabled on md+ via globals.css */}
+          <div className="mt-4">
             <div
-              className="text-body-md mt-4 product-description"
-              style={{ color: "var(--color-text-muted)" }}
-              dangerouslySetInnerHTML={{ __html: descriptionHtml }}
-            />
-          ) : (
-            <p
-              className="text-body-md mt-4"
+              className={`product-description text-body-md${!descExpanded ? " desc-clamp" : ""}`}
               style={{ color: "var(--color-text-muted)" }}
             >
-              {description}
-            </p>
-          )}
+              {descriptionHtml ? (
+                <span dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
+              ) : (
+                description
+              )}
+            </div>
+            {/* "Read more" — mobile only (md:hidden), disappears once expanded */}
+            {!descExpanded && (
+              <button
+                className="mt-1 text-[13px] font-medium md:hidden touch-active"
+                style={{ color: "var(--color-accent)", fontFamily: "var(--font-body)" }}
+                onClick={() => setDescExpanded(true)}
+                aria-label="Expand product description"
+              >
+                Read more
+              </button>
+            )}
+          </div>
 
           {/* Size info */}
           <div
@@ -538,8 +625,9 @@ export default function ProductDetailClient({
             </span>
           </label>
 
-          {/* Desktop add to cart */}
+          {/* Inline add to cart \u2014 id required for StickyAddToCart IntersectionObserver */}
           <button
+            id="atc-button-inline"
             onClick={handleAddToCart}
             disabled={isLoading || !selectedVariant || !safetyAcknowledged}
             className="mt-3 w-full text-white font-semibold uppercase tracking-[0.06em] rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -560,6 +648,15 @@ export default function ProductDetailClient({
               ? "Add to Cart"
               : "Coming Soon"}
           </button>
+
+          {/* Sticky mobile ATC bar \u2014 appears when inline button scrolls out of view (spec \u00a77.1) */}
+          <StickyAddToCart
+            price={effectivePrice}
+            onAddToCart={handleAddToCart}
+            isLoading={isLoading}
+            disabled={!selectedVariant || !safetyAcknowledged}
+            addedFeedback={addedFeedback}
+          />
 
           {/* Share — prominent inline button */}
           <button
@@ -720,71 +817,6 @@ export default function ProductDetailClient({
         )}
       </button>
 
-      {/* ── Mobile sticky bottom CTA ── */}
-      <div
-        className="fixed bottom-0 left-0 right-0 z-50 px-4 lg:hidden"
-        style={{
-          background: "var(--color-surface)",
-          borderTop: "1px solid var(--color-border)",
-          paddingBottom: "env(safe-area-inset-bottom)",
-        }}
-      >
-        {/* Inline safety checkbox — always visible on mobile */}
-        {!safetyAcknowledged && (
-          <label className="flex items-start gap-2.5 pt-3 pb-2 cursor-pointer select-none">
-            <input
-              type="checkbox"
-              checked={safetyAcknowledged}
-              onChange={(e) => setSafetyAcknowledged(e.target.checked)}
-              className="mt-0.5 flex-shrink-0 w-4 h-4 rounded accent-[var(--color-accent)]"
-            />
-            <span className="text-[10px] leading-snug" style={{ color: "var(--color-text-muted)" }}>
-              I accept the{" "}
-              <a href="/terms" target="_blank" className="underline" style={{ color: "var(--color-accent)" }}>
-                Terms &amp; Safety Disclaimer
-              </a>
-            </span>
-          </label>
-        )}
-        <div className="flex items-center justify-between pb-3" style={{ paddingTop: safetyAcknowledged ? "12px" : "0" }}>
-          <div>
-            <p
-              className="text-body-lg font-semibold"
-              style={{ color: "var(--color-accent)" }}
-            >
-              ${effectivePrice.toFixed(2)}
-            </p>
-            <p
-              className="text-body-sm"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              USD
-            </p>
-          </div>
-          <button
-            onClick={handleAddToCart}
-            disabled={isLoading || !selectedVariant || !safetyAcknowledged}
-            className="text-white font-semibold uppercase tracking-[0.06em] rounded px-8 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            style={{
-              background: addedFeedback
-                ? "var(--color-success)"
-                : safetyAcknowledged
-                ? "var(--color-accent)"
-                : "#333",
-              height: "52px",
-              width: "60%",
-            }}
-          >
-            {addedFeedback
-              ? "\u2713 Added"
-              : !safetyAcknowledged
-              ? "Accept Terms"
-              : selectedVariant
-              ? "Add to Cart"
-              : "Coming Soon"}
-          </button>
-        </div>
-      </div>
     </>
   );
 }

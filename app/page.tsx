@@ -1,14 +1,21 @@
 import type { Metadata } from "next";
-import Hero from "@/components/home/Hero";
-import Ticker from "@/components/home/Ticker";
-import TrustStrip from "@/components/home/TrustStrip";
-import FeaturedNations from "@/components/home/CollectionRow";
-import TrendingProducts from "@/components/home/TrendingProducts";
-import HowItWorks from "@/components/home/HowItWorks";
-import ConceptShowcase from "@/components/home/ConceptShowcase";
-import WeeklyDraw from "@/components/home/WeeklyDraw";
-import CtaBanner from "@/components/home/CtaBanner";
-import MailingListCTA from "@/components/home/MailingListCTA";
+// ── CRO Redesign — new section stack (spec §4) ──────────────────────────────
+import HeroSection from "@/components/home/HeroSection";
+import TrustBar from "@/components/home/TrustBar";
+import FeaturedNationsGrid from "@/components/home/FeaturedNationsGrid";
+// import NationCombinerCallout from "@/components/home/NationCombinerCallout"; // removed: no Nation Combiner product exists yet
+import SocialProofSection from "@/components/home/SocialProofSection";
+// ── Commented-out (not in CRO spec §4 — preserved for future reference) ─────
+// import Hero from "@/components/home/Hero";            // replaced by HeroSection
+// import Ticker from "@/components/home/Ticker";        // removed: not in target stack
+// import TrustStrip from "@/components/home/TrustStrip"; // replaced by TrustBar
+// import FeaturedNations from "@/components/home/CollectionRow"; // replaced by FeaturedNationsGrid
+// import TrendingProducts from "@/components/home/TrendingProducts"; // removed: not in target stack
+// import HowItWorks from "@/components/home/HowItWorks"; // removed: not in target stack
+// import ConceptShowcase from "@/components/home/ConceptShowcase"; // removed: not in target stack
+// import WeeklyDraw from "@/components/home/WeeklyDraw"; // removed: not in target stack
+// import CtaBanner from "@/components/home/CtaBanner";   // removed: not in target stack
+// import MailingListCTA from "@/components/home/MailingListCTA"; // removed: not in target stack
 
 export const metadata: Metadata = {
   title: {
@@ -38,35 +45,19 @@ export const metadata: Metadata = {
 export default async function Home() {
   return (
     <>
-      {/* 1. Ticker — top banner */}
-      <Ticker />
+      {/* 1. Hero — full-viewport, single CTA, product image */}
+      <HeroSection />
 
-      {/* 2. Hero — World Cup countdown + Argentina truck + Shop Now CTA */}
-      <Hero />
+      {/* 2. Trust bar — Universal Fit | Vibrant AOP Print | Delivered in 7–15 Days */}
+      <TrustBar />
 
-      {/* 3. "New Designs Coming Soon" — concept car showcase */}
-      <ConceptShowcase />
+      {/* 3. Featured nations grid — 8 nations, 4-col desktop / 2-col mobile */}
+      <FeaturedNationsGrid />
 
-      {/* 4. Mailing list CTA — prizes, discounts, drops, freebies */}
-      <MailingListCTA />
+      {/* 4. Social proof — UGC placeholder until reviews exist */}
+      <SocialProofSection />
 
-      {/* 5. Trust signals */}
-      <TrustStrip />
-
-      {/* 6. Most popular products */}
-      <TrendingProducts />
-
-      {/* 7. Featured nations row */}
-      <FeaturedNations />
-
-      {/* 8. How it works */}
-      <HowItWorks />
-
-      {/* 9. Weekly draw */}
-      <WeeklyDraw />
-
-      {/* 10. Final CTA */}
-      <CtaBanner />
+      {/* Footer is rendered by the layout — no import needed here */}
     </>
   );
 }

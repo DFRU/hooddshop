@@ -118,6 +118,22 @@ body {
 /* Touch feedback */
 .touch-active:active { opacity: 0.85; transform: scale(0.98); }
 
+/* Product description 4-line clamp on mobile — "Read more" expander (spec §7.2) */
+.desc-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  /* Desktop: always show full description regardless of collapsed state */
+  .desc-clamp {
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
+}
+
 /* Safe area for notched phones */
 .safe-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
 

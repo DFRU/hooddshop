@@ -1,29 +1,50 @@
 "use client";
 
-import { useState } from "react";
+/**
+ * CRO Redesign — Nav simplified per spec §6
+ *
+ * Target items (max 4 + cart):
+ *   SHOP BY NATION | COMBINER | ABOUT | [Cart icon + count]
+ *
+ * Removed: Home, Shop (redundant with "SHOP BY NATION"), FAQ
+ * Mobile: hamburger → full-screen overlay, Bebas Neue large type
+ * Cart icon always visible in mobile header (not inside hamburger)
+ */
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
+// GoogleTranslate kept — not in the 4 nav items but not explicitly removed by spec
 import GoogleTranslate from "./GoogleTranslate";
+
+const NAV_LINKS = [
+  { href: "/nations", label: "SHOP BY NATION" },
+  { href: "/about", label: "ABOUT" },
+] as const;
 
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { cart, openCart } = useCart();
   const pathname = usePathname();
-  const itemCount = cart?.totalQuantity || 0;
+  const itemCount = cart?.totalQuantity ?? 0;
 
-  const links = [
-    { href: "/", label: "Home" },
-    { href: "/shop", label: "Shop" },
-    { href: "/nations", label: "Nations" },
-    { href: "/faq", label: "FAQ" },
-    { href: "/about", label: "About" },
-  ];
+  // Close overlay on route change
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
-  const isActive = (href: string) => {
-    if (href === "/") return pathname === "/";
-    return pathname.startsWith(href);
-  };
+  // Prevent body scroll when overlay is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
+  const isActive = (href: string) => pathname.startsWith(href);
 
   return (
     <>
@@ -38,10 +59,10 @@ export default function Nav() {
         }}
       >
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 touch-active">
+        <Link href="/" className="flex items-center gap-2 touch-active" onClick={() => setMenuOpen(false)}>
           <div
-            className="w-8 h-8 rounded flex items-center justify-center text-white text-lg leading-none"
-            style={{ background: "var(--color-accent)", fontFamily: "var(--font-display)" }}
+            className="w-8 h-8 flex items-center justify-center text-white text-lg leading-none"
+            style={{ background: "var(--color-accent)", borderRadius: "2px", fontFamily: "var(--font-display)" }}
           >
             H
           </div>
@@ -55,15 +76,16 @@ export default function Nav() {
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-1">
-          {links.map((l) => (
+          {NAV_LINKS.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={`px-4 py-2 text-[13px] font-medium transition-colors rounded-md ${
+              className={`px-4 py-2 text-[13px] font-medium tracking-[0.05em] transition-colors ${
                 isActive(l.href)
-                  ? "text-white bg-white/10"
-                  : "text-neutral-500 hover:text-white hover:bg-white/5"
+                  ? "text-white"
+                  : "text-neutral-500 hover:text-white"
               }`}
+              style={{ fontFamily: "var(--font-body)" }}
             >
               {l.label}
             </Link>
@@ -71,15 +93,16 @@ export default function Nav() {
         </div>
 
         <div className="flex items-center gap-1">
-          {/* Language selector */}
+          {/* Language selector — desktop only */}
           <div className="hidden md:block">
             <GoogleTranslate />
           </div>
-          {/* Cart — large touch target */}
+
+          {/* Cart — always visible, shows count badge when non-empty */}
           <button
             onClick={openCart}
             className="relative p-3 text-neutral-400 hover:text-white transition-colors touch-active"
-            aria-label="Cart"
+            aria-label={itemCount > 0 ? `Cart — ${itemCount} item${itemCount === 1 ? "" : "s"}` : "Cart"}
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
@@ -90,6 +113,7 @@ export default function Nav() {
               <span
                 className="absolute top-1 right-1 w-[18px] h-[18px] text-white text-[10px] font-bold rounded-full flex items-center justify-center"
                 style={{ background: "var(--color-accent)" }}
+                aria-hidden="true"
               >
                 {itemCount}
               </span>
@@ -98,9 +122,10 @@ export default function Nav() {
 
           {/* Mobile hamburger */}
           <button
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={() => setMenuOpen((v) => !v)}
             className="md:hidden p-3 text-neutral-400 hover:text-white touch-active"
-            aria-label="Menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               {menuOpen ? (
@@ -120,30 +145,35 @@ export default function Nav() {
         </div>
       </nav>
 
-      {/* Mobile dropdown menu */}
+      {/* Mobile full-screen overlay (spec §6: dark bg, large Bebas Neue type) */}
       {menuOpen && (
         <div
-          className="fixed top-14 left-0 right-0 z-40 md:hidden"
-          style={{
-            borderTop: "1px solid #1A1A1A",
-            background: "rgba(10,10,10,0.97)",
-            backdropFilter: "blur(20px)",
-            WebkitBackdropFilter: "blur(20px)",
-          }}
+          className="fixed inset-0 z-40 md:hidden flex flex-col"
+          style={{ background: "rgba(10,10,10,0.98)", paddingTop: "56px" /* nav height */ }}
+          aria-modal="true"
+          role="dialog"
+          aria-label="Mobile navigation"
         >
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              onClick={() => setMenuOpen(false)}
-              className={`block w-full text-left px-6 py-5 text-base font-medium touch-active ${
-                isActive(l.href) ? "text-white bg-white/5" : "text-neutral-400"
-              }`}
-              style={{ borderBottom: "1px solid #141414" }}
-            >
-              {l.label}
-            </Link>
-          ))}
+          <nav className="flex flex-col justify-center flex-1 px-8 gap-2">
+            {NAV_LINKS.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={() => setMenuOpen(false)}
+                className="block py-5 touch-active"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "clamp(2rem, 10vw, 3.5rem)",
+                  letterSpacing: "0.04em",
+                  color: isActive(l.href) ? "#FF4D00" : "#FFFFFF",
+                  borderBottom: "1px solid #1A1A1A",
+                  lineHeight: 1,
+                }}
+              >
+                {l.label}
+              </Link>
+            ))}
+          </nav>
         </div>
       )}
     </>

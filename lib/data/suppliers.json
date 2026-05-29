@@ -11,6 +11,10 @@
     "capabilities": ["sublimation", "custom_design", "elastic_edge", "shopify_auto_fulfill"],
     "pricing": {
       "base_unit_cost_usd": 7.31,
+      "size_unit_cost_usd": {
+        "standard": 7.31,
+        "xl": null
+      },
       "shipping_cost_per_unit": { "US": 3.50, "CA": 4.00, "GB": 5.00, "AU": 5.50 },
       "fixed_shipping_cost": 5.00,
       "cost_confidence": "confirmed"
@@ -23,7 +27,7 @@
     "fulfillment_model": "pod",
     "integrations": ["shopify"],
     "moq": 0,
-    "notes": "Primary POD supplier. Sample ordered, not yet received as of April 9."
+    "notes": "Primary POD supplier. Sample ordered, not yet received as of April 9. XL (68\"×55\") unit cost TBD — set size_unit_cost_usd.xl when confirmed."
   },
   {
     "id": "haoerxin_textile",

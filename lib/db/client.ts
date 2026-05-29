@@ -90,6 +90,10 @@ export async function runMigrations() {
   await sql`CREATE INDEX IF NOT EXISTS idx_print_jobs_order ON print_jobs(shopify_order_id)`;
   await sql`CREATE INDEX IF NOT EXISTS idx_print_jobs_ready ON print_jobs(eligible_for_submit_at) WHERE status IN ('queued','holding')`;
 
+  // 2026-05-16: Add product_size for XL rollout (idempotent).
+  // Existing rows default to 'standard'. New rows MUST specify a valid size.
+  await sql`ALTER TABLE print_jobs ADD COLUMN IF NOT EXISTS product_size TEXT NOT NULL DEFAULT 'standard'`;
+
   await sql`
     CREATE TABLE IF NOT EXISTS webhook_events (
       id              TEXT PRIMARY KEY,

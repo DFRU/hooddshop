@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getNation, getTitleKeyword } from "@/lib/nations";
@@ -61,7 +61,7 @@ export default async function NationDetailPage({ params }: PageProps) {
 
   // If we found the Shopify product, redirect to the real product page
   if (match) {
-    redirect(`/products/${match.handle}`);
+    permanentRedirect(`/products/${match.handle}`);
   }
 
   // No Shopify product yet — show a "coming soon" holding page
