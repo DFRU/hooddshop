@@ -27,9 +27,9 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
-  // Pre-existing ESLint issues in codebase (react-compiler, img elements) were
-  // causing build failures on this branch since May 20. Bypassing ESLint during
-  // build until issues are addressed in a dedicated cleanup commit.
+  // Pre-existing ESLint issues (react-compiler, img elements) blocked builds on
+  // this branch since May 20. Bypassing ESLint during build until a dedicated
+  // cleanup commit addresses them.
   eslint: {
     ignoreDuringBuilds: true,
   },
