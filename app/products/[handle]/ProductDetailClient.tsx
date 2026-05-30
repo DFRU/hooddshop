@@ -452,8 +452,8 @@ export default function ProductDetailClient({
             ${effectivePrice.toFixed(2)} USD
           </p>
 
-          {/* Order cutoff urgency — shows while June 4 cutoff is active */}
-          {new Date() < new Date("2026-06-04T23:59:59-04:00") && (
+          {/* World Cup urgency — honest delivery messaging */}
+          {new Date() < new Date("2026-06-11T17:00:00Z") && (
             <div
               className="mt-2 inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded"
               style={{ background: "rgba(255,77,0,0.08)", border: "1px solid rgba(255,77,0,0.2)" }}
@@ -467,7 +467,7 @@ export default function ProductDetailClient({
                   fontWeight: 500,
                 }}
               >
-                Order by June 4 — arrives before the June 11 opener
+                World Cup 2026 starts June 11 — order now · typical delivery 10–12 days
               </span>
             </div>
           )}
@@ -726,11 +726,12 @@ export default function ProductDetailClient({
           {/* ── Trust + urgency block ── */}
           {(() => {
             // Compute estimated delivery window from today
+            // Use real order data: 10-12 days typical, up to 15 max
             const today = new Date();
-            const minDate = new Date(today); minDate.setDate(today.getDate() + 7);
-            const maxDate = new Date(today); maxDate.setDate(today.getDate() + 15);
+            const typMin = new Date(today); typMin.setDate(today.getDate() + 10);
+            const typMax = new Date(today); typMax.setDate(today.getDate() + 14);
             const fmt = (d: Date) => d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-            const deliveryRange = `${fmt(minDate)} – ${fmt(maxDate)}`;
+            const deliveryRange = `${fmt(typMin)} – ${fmt(typMax)}`;
             return (
               <div className="mt-4 space-y-3">
                 {/* Delivery window */}

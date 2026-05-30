@@ -1,15 +1,15 @@
 /**
- * Homepage TrustBar — answers the 3 first-visit questions.
- * Third item is deadline-aware: while the World Cup cutoff window is open
- * it shows "Arrives before June 11" urgency copy instead of generic "7-15 Days".
+ * Homepage TrustBar.
+ * Third item is World Cup deadline-aware while the tournament is upcoming,
+ * reverts to generic shipping copy after June 11.
+ * IMPORTANT: Uses real delivery data — 10-12 days typical door-to-door.
  */
 
-// Order cutoff: June 4. After that, revert to generic shipping copy.
-const ORDER_CUTOFF_DATE = new Date("2026-06-04T23:59:59-04:00");
+const TOURNAMENT_START = new Date("2026-06-11T17:00:00Z");
 
 function getDeliveryItem() {
   const now = new Date();
-  const inCutoffWindow = now < ORDER_CUTOFF_DATE;
+  const inTournamentWindow = now < TOURNAMENT_START;
 
   const icon = (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF4D00" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -19,11 +19,11 @@ function getDeliveryItem() {
     </svg>
   );
 
-  if (inCutoffWindow) {
+  if (inTournamentWindow) {
     return {
       icon,
-      label: "Arrives Before June 11",
-      sub: "Order by June 4 · printed on demand",
+      label: "Typical Delivery 10–12 Days",
+      sub: "Order now for World Cup 2026",
     };
   }
 
@@ -85,26 +85,10 @@ export default function TrustBar() {
             >
               <div className="flex-shrink-0">{item.icon}</div>
               <div>
-                <p
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontSize: "14px",
-                    fontWeight: 500,
-                    color: "#FFFFFF",
-                    lineHeight: 1.3,
-                  }}
-                >
+                <p style={{ fontFamily: "var(--font-body)", fontSize: "14px", fontWeight: 500, color: "#FFFFFF", lineHeight: 1.3 }}>
                   {item.label}
                 </p>
-                <p
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontSize: "12px",
-                    fontWeight: 400,
-                    color: "#999999",
-                    lineHeight: 1.4,
-                  }}
-                >
+                <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", fontWeight: 400, color: "#999999", lineHeight: 1.4 }}>
                   {item.sub}
                 </p>
               </div>
