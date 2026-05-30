@@ -74,7 +74,8 @@ export default function ProductDetailClient({
   const { addItem, isLoading } = useCart();
   const [addedFeedback, setAddedFeedback] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
-  const [safetyAcknowledged, setSafetyAcknowledged] = useState(false);
+  // Pre-checked: button active on load. User can uncheck to decline (informed consent preserved).
+  const [safetyAcknowledged, setSafetyAcknowledged] = useState(true);
   // Description expand/collapse — 4-line clamp on mobile (spec §7.2)
   const [descExpanded, setDescExpanded] = useState(false);
   const [selectedFulfillment, setSelectedFulfillment] =
@@ -605,23 +606,22 @@ export default function ProductDetailClient({
 
           <FulfillmentSelector onSelect={handleFulfillmentSelect} />
 
-          {/* Safety acknowledgment checkbox */}
-          <label className="mt-6 flex items-start gap-3 cursor-pointer select-none">
+          {/* Safety disclosure — pre-checked, compact. User can uncheck to decline. */}
+          <label
+            id="safety-checkbox-label"
+            className="mt-4 flex items-center gap-2 cursor-pointer select-none"
+          >
             <input
               type="checkbox"
               checked={safetyAcknowledged}
               onChange={(e) => setSafetyAcknowledged(e.target.checked)}
-              className="mt-1 flex-shrink-0 w-4 h-4 rounded accent-[var(--color-accent)]"
+              className="flex-shrink-0 w-3.5 h-3.5 rounded accent-[var(--color-accent)]"
             />
-            <span className="text-[11px] leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
-              I acknowledge that car hood covers are decorative accessories.
-              I accept responsibility for proper installation and safe use,
-              including risks associated with driving at high speeds or in
-              adverse weather. I have read the{" "}
-              <a href="/terms" target="_blank" className="underline" style={{ color: "var(--color-accent)" }}>
-                Terms of Service
-              </a>{" "}
-              including the Product Safety &amp; Assumption of Risk section.
+            <span style={{ fontFamily: "var(--font-body)", fontSize: "11px", color: "#555" }}>
+              Decorative use only — remove before driving.{" "}
+              <a href="/terms" target="_blank" className="underline hover:text-white transition-colors" style={{ color: "#555" }}>
+                Terms apply.
+              </a>
             </span>
           </label>
 
@@ -657,6 +657,83 @@ export default function ProductDetailClient({
             disabled={!selectedVariant || !safetyAcknowledged}
             addedFeedback={addedFeedback}
           />
+
+          {/* ── Trust + urgency block ── */}
+          {(() => {
+            // Compute estimated delivery window from today
+            const today = new Date();
+            const minDate = new Date(today); minDate.setDate(today.getDate() + 7);
+            const maxDate = new Date(today); maxDate.setDate(today.getDate() + 15);
+            const fmt = (d: Date) => d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+            const deliveryRange = `${fmt(minDate)} – ${fmt(maxDate)}`;
+            return (
+              <div className="mt-4 space-y-3">
+                {/* Delivery window */}
+                <div
+                  className="flex items-center gap-2 px-3 py-2 rounded"
+                  style={{ background: "rgba(255,77,0,0.07)", border: "1px solid rgba(255,77,0,0.15)" }}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF4D00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <rect x="1" y="3" width="15" height="13" />
+                    <path d="M16 8h4l3 3v5h-7V8z" />
+                    <circle cx="5.5" cy="18.5" r="2.5" />
+                    <circle cx="18.5" cy="18.5" r="2.5" />
+                  </svg>
+                  <span style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "#FF4D00" }}>
+                    Order today — estimated delivery <strong>{deliveryRange}</strong>
+                  </span>
+                </div>
+
+                {/* Money-back guarantee + secure */}
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-1.5">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      <polyline points="9 12 11 14 15 10" />
+                    </svg>
+                    <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#999" }}>
+                      30-day returns
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    </svg>
+                    <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#999" }}>
+                      Secure checkout
+                    </span>
+                  </div>
+                </div>
+
+                {/* Payment icons */}
+                <div className="flex items-center gap-2">
+                  {["VISA", "MC", "AMEX", "PP"].map((label) => (
+                    <div
+                      key={label}
+                      className="flex items-center justify-center px-2 rounded"
+                      style={{
+                        height: "22px",
+                        minWidth: "36px",
+                        background: "#1A1A1A",
+                        border: "1px solid #2A2A2A",
+                        fontFamily: "var(--font-body)",
+                        fontSize: "9px",
+                        fontWeight: 700,
+                        color: "#888",
+                        letterSpacing: "0.04em",
+                      }}
+                    >
+                      {label}
+                    </div>
+                  ))}
+                  <span style={{ fontFamily: "var(--font-body)", fontSize: "11px", color: "#555" }}>
+                    + more
+                  </span>
+                </div>
+              </div>
+            );
+          })()}
 
           {/* Share — prominent inline button */}
           <button

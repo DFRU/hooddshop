@@ -1,44 +1,49 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getProducts } from "@/lib/shopify";
 import { getVehicleImages } from "@/lib/vehicles";
+import { getProducts } from "@/lib/shopify";
 import WorldCupCountdown from "./WorldCupCountdown";
 
 export default async function HeroSection() {
-  // Source hero image from Shopify CDN at build time (spec §5.1)
-  // Argentina is the hero nation — best on-vehicle renders available
+  // PRIMARY: local on-car vehicle render — shows the product in context on a real car.
+  // This converts better than a flat design image because visitors instantly
+  // understand what the product IS and HOW it looks on a vehicle.
+  // FALLBACK: Shopify product image → wordmark
   let heroImageUrl: string | null = null;
-  let heroImageAlt = "Hood'd car hood cover";
+  let heroImageAlt = "Hood'd Argentina car hood cover on a truck";
 
-  try {
-    const { products } = await getProducts({
-      first: 1,
-      query: "title:Argentina",
-      sortKey: "BEST_SELLING",
-    });
-    const shopifyImgUrl = products[0]?.images?.edges?.[0]?.node?.url ?? null;
-    if (shopifyImgUrl) {
-      heroImageUrl = shopifyImgUrl.includes("?")
-        ? `${shopifyImgUrl}&width=1440&format=webp`
-        : `${shopifyImgUrl}?width=1440&format=webp`;
-      heroImageAlt = products[0]?.title
-        ? `${products[0].title} car hood cover`
-        : heroImageAlt;
-    }
-  } catch {
-    // fall through to vehicle render fallback
+  // 1. Vehicle render first (shows product on actual car)
+  const vehicleImages = getVehicleImages("ar");
+  const heroVehicle =
+    vehicleImages.find((v) => v.vehicleType === "truck") ??
+    vehicleImages.find((v) => v.vehicleType === "suv") ??
+    vehicleImages[0] ??
+    null;
+
+  if (heroVehicle) {
+    heroImageUrl = heroVehicle.src;
+    heroImageAlt = heroVehicle.alt ?? heroImageAlt;
   }
 
-  // Fallback: local on-car vehicle render (highest-quality available)
+  // 2. Fallback: Shopify product image if no vehicle render available
   if (!heroImageUrl) {
-    const vehicleImages = getVehicleImages("ar");
-    const heroVehicle =
-      vehicleImages.find((v) => v.vehicleType === "truck") ??
-      vehicleImages[0] ??
-      null;
-    if (heroVehicle) {
-      heroImageUrl = heroVehicle.src;
-      heroImageAlt = heroVehicle.alt;
+    try {
+      const { products } = await getProducts({
+        first: 1,
+        query: "title:Argentina",
+        sortKey: "BEST_SELLING",
+      });
+      const shopifyImgUrl = products[0]?.images?.edges?.[0]?.node?.url ?? null;
+      if (shopifyImgUrl) {
+        heroImageUrl = shopifyImgUrl.includes("?")
+          ? `${shopifyImgUrl}&width=1440&format=webp`
+          : `${shopifyImgUrl}?width=1440&format=webp`;
+        heroImageAlt = products[0]?.title
+          ? `${products[0].title} car hood cover`
+          : heroImageAlt;
+      }
+    } catch {
+      // fall through to wordmark
     }
   }
 
@@ -47,7 +52,7 @@ export default async function HeroSection() {
       className="relative overflow-hidden flex items-end"
       style={{ minHeight: "100svh", background: "#0A0A0A" }}
     >
-      {/* Full-bleed product image */}
+      {/* Full-bleed on-car image */}
       {heroImageUrl && (
         <>
           <Image
@@ -58,18 +63,18 @@ export default async function HeroSection() {
             sizes="100vw"
             priority
           />
-          {/* Gradient overlay — dark at bottom where text lives, lighter toward top */}
+          {/* Gradient overlay — dark at bottom where text lives */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.55) 45%, rgba(10,10,10,0.2) 100%)",
+                "linear-gradient(to top, rgba(10,10,10,0.97) 0%, rgba(10,10,10,0.6) 40%, rgba(10,10,10,0.15) 100%)",
             }}
           />
         </>
       )}
 
-      {/* Fallback wordmark (no image) */}
+      {/* Fallback wordmark */}
       {!heroImageUrl && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <span
@@ -86,10 +91,10 @@ export default async function HeroSection() {
         </div>
       )}
 
-      {/* Bottom-anchored text block — occupies bottom ~30% on mobile */}
+      {/* Bottom-anchored text block */}
       <div className="relative w-full max-w-[1280px] mx-auto px-[var(--container-px)] lg:px-[var(--container-px-lg)] pb-12 lg:pb-16">
 
-        {/* Countdown — urgency signal above headline */}
+        {/* Countdown — urgency signal */}
         <div className="mb-4 flex items-center gap-3">
           <span
             className="text-[10px] uppercase tracking-[0.2em] font-semibold"
@@ -124,22 +129,32 @@ export default async function HeroSection() {
           Your Ride. Your Nation. World Cup 2026.
         </p>
 
-        {/* CTA — full-width mobile, auto-width desktop */}
-        {/* py-4 = 16px, px-6 = 24px mobile, md:px-10 = 40px desktop */}
-        <Link
-          href="/nations"
-          className="block md:inline-block text-center py-4 px-6 md:px-10 touch-active"
-          style={{
-            background: "#FF4D00",
-            color: "#000000",
-            fontFamily: "var(--font-display)",
-            fontSize: "1.125rem",
-            letterSpacing: "0.08em",
-            borderRadius: "2px",
-          }}
-        >
-          SHOP BY NATION
-        </Link>
+        {/* CTA + price anchor */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+          <Link
+            href="/nations"
+            className="block sm:inline-block text-center py-4 px-6 md:px-10 touch-active"
+            style={{
+              background: "#FF4D00",
+              color: "#000000",
+              fontFamily: "var(--font-display)",
+              fontSize: "1.125rem",
+              letterSpacing: "0.08em",
+              borderRadius: "2px",
+            }}
+          >
+            SHOP BY NATION
+          </Link>
+          <span
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: "0.875rem",
+              color: "#666666",
+            }}
+          >
+            From $29.99 · Ships worldwide
+          </span>
+        </div>
       </div>
     </section>
   );
