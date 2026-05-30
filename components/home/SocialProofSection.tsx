@@ -14,17 +14,17 @@ import Image from "next/image";
 // Supported formats: .jpg .jpeg .webp .png
 const UGC_PHOTOS = [
   {
-    src: "/ugc/canada.jpg",
+    src: "/ugc/canada.jpg.jpeg",
     alt: "Canada hood cover on a Mazda CX-9 — @hooddshopnow",
     nation: "CANADA",
   },
   {
-    src: "/ugc/france.jpg",
+    src: "/ugc/france.jpg.jpeg",
     alt: "France hood cover on a Honda — @hooddshopnow",
     nation: "FRANCE",
   },
   {
-    src: "/ugc/bosnia.jpg",
+    src: "/ugc/bosnia.jpg.jpeg",
     alt: "Bosnia hood cover on a Mazda CX-9 — @hooddshopnow",
     nation: "BOSNIA",
   },
