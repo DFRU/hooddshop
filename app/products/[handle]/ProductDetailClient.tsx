@@ -452,25 +452,16 @@ export default function ProductDetailClient({
             ${effectivePrice.toFixed(2)} USD
           </p>
 
-          {/* World Cup urgency — honest delivery messaging */}
-          {new Date() < new Date("2026-06-11T17:00:00Z") && (
-            <div
-              className="mt-2 inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded"
-              style={{ background: "rgba(255,77,0,0.08)", border: "1px solid rgba(255,77,0,0.2)" }}
-            >
-              <span style={{ fontSize: "14px" }}>⚡</span>
-              <span
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: "12px",
-                  color: "#FF4D00",
-                  fontWeight: 500,
-                }}
-              >
-                World Cup 2026 starts June 11 — order now · typical delivery 10–12 days
-              </span>
-            </div>
-          )}
+          {/* Delivery info — honest, no false urgency claims */}
+          <div
+            className="mt-2 inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded"
+            style={{ background: "rgba(255,77,0,0.08)", border: "1px solid rgba(255,77,0,0.2)" }}
+          >
+            <span style={{ fontSize: "14px" }}>🚚</span>
+            <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#FF4D00", fontWeight: 500 }}>
+              Made to order · typical delivery 10–12 days from order date
+            </span>
+          </div>
 
           {/* ── Design + Size variant selectors ── */}
           {variants.length > 1 && (() => {

@@ -40,16 +40,16 @@ export default function AnnouncementBar() {
           lineHeight: 1.4,
         }}
       >
-        ⚡ World Cup 2026 starts in{" "}
+        🌍 World Cup 2026{" "}
         {mounted && daysLeft > 0 ? (
           <span
             className="mx-1 px-2 py-0.5 rounded font-bold"
             style={{ background: "rgba(0,0,0,0.15)", fontFamily: "var(--font-display)", letterSpacing: "0.04em" }}
           >
-            {daysLeft} days
+            {daysLeft} days to go
           </span>
         ) : null}
-        — Order now · Typical delivery 10–12 days
+        · Made to order · 10–12 day delivery
       </p>
       <button
         onClick={() => setDismissed(true)}
