@@ -118,12 +118,23 @@ export default async function FeaturedNationsGrid() {
                   >
                     {nation.name}
                   </span>
-                  <span
-                    className="text-[12px] font-medium transition-colors group-hover:opacity-100 opacity-60"
-                    style={{ color: "#FF4D00", fontFamily: "var(--font-body)" }}
-                  >
-                    Shop →
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span
+                      style={{
+                        fontFamily: "var(--font-body)",
+                        fontSize: "11px",
+                        color: "#666",
+                      }}
+                    >
+                      $44.99 USD
+                    </span>
+                    <span
+                      className="text-[12px] font-medium transition-colors group-hover:opacity-100 opacity-60"
+                      style={{ color: "#FF4D00", fontFamily: "var(--font-body)" }}
+                    >
+                      Shop →
+                    </span>
+                  </div>
                 </div>
               </Link>
             );

@@ -1,9 +1,40 @@
 /**
- * Homepage TrustBar — answers the 3 first-visit questions (spec §5.2)
- * Distinct from components/product/TrustBar.tsx (product-page variant)
+ * Homepage TrustBar — answers the 3 first-visit questions.
+ * Third item is deadline-aware: while the World Cup cutoff window is open
+ * it shows "Arrives before June 11" urgency copy instead of generic "7-15 Days".
  */
 
-const TRUST_ITEMS = [
+// Order cutoff: June 4. After that, revert to generic shipping copy.
+const ORDER_CUTOFF_DATE = new Date("2026-06-04T23:59:59-04:00");
+
+function getDeliveryItem() {
+  const now = new Date();
+  const inCutoffWindow = now < ORDER_CUTOFF_DATE;
+
+  const icon = (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF4D00" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M21 10V6a2 2 0 00-2-2H5a2 2 0 00-2 2v4" />
+      <path d="M1 10h22v9a2 2 0 01-2 2H3a2 2 0 01-2-2v-9z" />
+      <path d="M12 10v11M8 10v3M16 10v3" />
+    </svg>
+  );
+
+  if (inCutoffWindow) {
+    return {
+      icon,
+      label: "Arrives Before June 11",
+      sub: "Order by June 4 · printed on demand",
+    };
+  }
+
+  return {
+    icon,
+    label: "Delivered in 7–15 Days",
+    sub: "Printed on demand · ships worldwide",
+  };
+}
+
+const BASE_TRUST_ITEMS = [
   {
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF4D00" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -29,20 +60,12 @@ const TRUST_ITEMS = [
     label: "Vibrant AOP Print",
     sub: "Sublimation quality",
   },
-  {
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF4D00" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M21 10V6a2 2 0 00-2-2H5a2 2 0 00-2 2v4" />
-        <path d="M1 10h22v9a2 2 0 01-2 2H3a2 2 0 01-2-2v-9z" />
-        <path d="M12 10v11M8 10v3M16 10v3" />
-      </svg>
-    ),
-    label: "Delivered in 7–15 Days",
-    sub: "Printed on demand",
-  },
 ];
 
 export default function TrustBar() {
+  const deliveryItem = getDeliveryItem();
+  const trustItems = [...BASE_TRUST_ITEMS, deliveryItem];
+
   return (
     <section
       aria-label="Key product benefits"
@@ -55,7 +78,7 @@ export default function TrustBar() {
     >
       <div className="max-w-[1280px] mx-auto px-[var(--container-px)] lg:px-[var(--container-px-lg)]">
         <div className="flex flex-col gap-6 sm:flex-row sm:justify-around">
-          {TRUST_ITEMS.map((item) => (
+          {trustItems.map((item) => (
             <div
               key={item.label}
               className="flex items-center gap-3 sm:flex-col sm:items-center sm:text-center sm:gap-2"

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Bebas_Neue, DM_Sans } from "next/font/google";
 import { CartProvider } from "@/context/CartContext";
 import Nav from "@/components/layout/Nav";
+import AnnouncementBar from "@/components/layout/AnnouncementBar";
 import Footer from "@/components/layout/Footer";
 import CartDrawer from "@/components/layout/CartDrawer";
 import Analytics from "@/components/layout/Analytics";
@@ -118,6 +119,7 @@ export default function RootLayout({
         <Analytics />
         <CartProvider>
           <ToastProvider>
+            <AnnouncementBar />
             <Nav />
             <main className="flex-1">{children}</main>
             <Footer />

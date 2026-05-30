@@ -152,7 +152,7 @@ export default async function HeroSection() {
               color: "#666666",
             }}
           >
-            From $29.99 · Ships worldwide
+            From $44.99 USD · Ships worldwide
           </span>
         </div>
       </div>

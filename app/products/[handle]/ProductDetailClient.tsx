@@ -71,7 +71,7 @@ export default function ProductDetailClient({
   showcaseMap = {},
   initialVariantId,
 }: ProductDetailClientProps) {
-  const { addItem, isLoading } = useCart();
+  const { addItem, isLoading, cart } = useCart();
   const [addedFeedback, setAddedFeedback] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
   // Pre-checked: button active on load. User can uncheck to decline (informed consent preserved).
@@ -235,6 +235,33 @@ export default function ProductDetailClient({
     await addItem(selectedVariant.id, 1, attributes);
     setAddedFeedback(true);
     setTimeout(() => setAddedFeedback(false), 1000);
+  };
+
+  // Buy Now — add to cart then redirect directly to Shopify checkout
+  const handleBuyNow = async () => {
+    if (!selectedVariant) return;
+    const attributes: { key: string; value: string }[] = [];
+    if (selectedFulfillment) {
+      attributes.push({
+        key: "_fulfillment_option",
+        value: JSON.stringify({
+          supplier_id: selectedFulfillment.supplier_id,
+          supplier_region: selectedFulfillment.supplier_region,
+          label: selectedFulfillment.label,
+          estimated_days: selectedFulfillment.estimated_days_display,
+          price: selectedFulfillment.price_usd,
+        }),
+      });
+    }
+    await addItem(selectedVariant.id, 1, attributes);
+    // Redirect to Shopify checkout — cart.checkoutUrl is always current after addItem
+    // Use a small delay to allow cart state to propagate
+    setTimeout(() => {
+      const checkoutUrl = cart?.checkoutUrl;
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+      }
+    }, 200);
   };
 
   const activeImage = galleryImages[activeImageIndex] ?? galleryImages[0];
@@ -424,6 +451,26 @@ export default function ProductDetailClient({
           >
             ${effectivePrice.toFixed(2)} USD
           </p>
+
+          {/* Order cutoff urgency — shows while June 4 cutoff is active */}
+          {new Date() < new Date("2026-06-04T23:59:59-04:00") && (
+            <div
+              className="mt-2 inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded"
+              style={{ background: "rgba(255,77,0,0.08)", border: "1px solid rgba(255,77,0,0.2)" }}
+            >
+              <span style={{ fontSize: "14px" }}>⚡</span>
+              <span
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: "12px",
+                  color: "#FF4D00",
+                  fontWeight: 500,
+                }}
+              >
+                Order by June 4 — arrives before the June 11 opener
+              </span>
+            </div>
+          )}
 
           {/* ── Design + Size variant selectors ── */}
           {variants.length > 1 && (() => {
@@ -624,6 +671,24 @@ export default function ProductDetailClient({
               </a>
             </span>
           </label>
+
+          {/* Buy Now — skips cart, straight to Shopify checkout */}
+          <button
+            onClick={handleBuyNow}
+            disabled={isLoading || !selectedVariant}
+            className="mt-3 w-full font-semibold uppercase tracking-[0.06em] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{
+              background: "#FFFFFF",
+              color: "#000000",
+              height: "52px",
+              fontFamily: "var(--font-display)",
+              fontSize: "1rem",
+              letterSpacing: "0.08em",
+              borderRadius: "2px",
+            }}
+          >
+            BUY NOW
+          </button>
 
           {/* Inline add to cart \u2014 id required for StickyAddToCart IntersectionObserver */}
           <button
