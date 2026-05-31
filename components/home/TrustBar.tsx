@@ -22,7 +22,7 @@ function getDeliveryItem() {
   if (inTournamentWindow) {
     return {
       icon,
-      label: "Typical Delivery 10–12 Days",
+      label: "Typical Delivery 7–15 Days",
       sub: "Order now for World Cup 2026",
     };
   }
