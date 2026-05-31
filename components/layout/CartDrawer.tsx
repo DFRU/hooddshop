@@ -8,6 +8,20 @@ export default function CartDrawer() {
   const drawerRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
+  const handleCheckout = () => {
+    try {
+      if (typeof window !== "undefined" && (window as any).fbq) {
+        (window as any).fbq("track", "InitiateCheckout", {
+          value: parseFloat(cart?.cost?.subtotalAmount?.amount || "0"),
+          currency: cart?.cost?.subtotalAmount?.currencyCode || "USD",
+          num_items: cart?.totalQuantity || 0,
+        });
+      }
+    } catch (err) {
+      console.error("InitiateCheckout tracking failed:", err);
+    }
+  };
+
   // Escape key handler + focus management
   useEffect(() => {
     if (!isOpen) return;
@@ -201,6 +215,7 @@ export default function CartDrawer() {
             </div>
             <a
               href={cart?.checkoutUrl || "#"}
+              onClick={handleCheckout}
               className="flex items-center justify-center w-full text-white font-semibold text-[13px] uppercase tracking-[0.08em] rounded transition-all touch-active"
               style={{ background: "var(--color-accent)", minHeight: "52px" }}
             >

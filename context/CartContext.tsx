@@ -61,6 +61,25 @@ export function CartProvider({ children }: { children: ReactNode }) {
         if (updatedCart) {
           setCart(updatedCart);
           setIsOpen(true);
+
+          try {
+            const addedLine = updatedCart.lines.edges.find(
+              (edge) => edge.node.merchandise.id === variantId
+            );
+            if (addedLine) {
+              const merchandise = addedLine.node.merchandise;
+              if (typeof window !== "undefined" && (window as any).fbq) {
+                (window as any).fbq("track", "AddToCart", {
+                  content_ids: [variantId],
+                  content_name: merchandise.product.title,
+                  value: parseFloat(merchandise.price.amount),
+                  currency: merchandise.price.currencyCode || "USD",
+                });
+              }
+            }
+          } catch (e) {
+            console.error("AddToCart tracking failed:", e);
+          }
         }
       } finally {
         setIsLoading(false);
