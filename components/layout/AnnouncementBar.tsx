@@ -49,7 +49,7 @@ export default function AnnouncementBar() {
             {daysLeft} days to go
           </span>
         ) : null}
-        · Made to order · 10–12 day delivery
+        · Made to order · Ships worldwide
       </p>
       <button
         onClick={() => setDismissed(true)}

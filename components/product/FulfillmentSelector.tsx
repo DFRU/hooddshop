@@ -212,28 +212,28 @@ export default function FulfillmentSelector({ onSelect }: FulfillmentSelectorPro
                   </div>
                 </div>
                 <div className="text-right">
-                  <span
-                    className="text-body-sm font-semibold"
-                    style={{ color: "var(--color-accent)" }}
-                  >
-                    ${option.price_breakdown
-                      ? option.price_breakdown.product_price_usd.toFixed(2)
-                      : option.price_usd.toFixed(2)}
-                  </span>
-                  {option.price_breakdown && option.price_breakdown.shipping_price_usd > 0 && (
+                  {option.price_breakdown ? (
+                    option.price_breakdown.shipping_price_usd === 0 ? (
+                      <span
+                        className="text-body-sm font-semibold"
+                        style={{ color: "var(--color-success)" }}
+                      >
+                        Free
+                      </span>
+                    ) : (
+                      <span
+                        className="text-body-sm font-semibold"
+                        style={{ color: "var(--color-accent)" }}
+                      >
+                        +${option.price_breakdown.shipping_price_usd.toFixed(2)}
+                      </span>
+                    )
+                  ) : (
                     <span
-                      className="text-[11px] ml-1"
-                      style={{ color: "var(--color-text-muted)" }}
+                      className="text-body-sm font-semibold"
+                      style={{ color: "var(--color-accent)" }}
                     >
-                      + ${option.price_breakdown.shipping_price_usd.toFixed(2)} shipping
-                    </span>
-                  )}
-                  {option.price_breakdown && option.price_breakdown.shipping_price_usd === 0 && (
-                    <span
-                      className="text-[11px] ml-1"
-                      style={{ color: "var(--color-success)" }}
-                    >
-                      Free shipping
+                      +${option.price_usd.toFixed(2)}
                     </span>
                   )}
                 </div>
