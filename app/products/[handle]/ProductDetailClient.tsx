@@ -209,10 +209,6 @@ export default function ProductDetailClient({
     product?.description ??
     "Stretch hood cover with full-bleed sublimation print. 85–90% polyester / 10–15% spandex. Universal fit with elastic sewn-in edge.";
 
-  // Effective price shown: fulfillment-adjusted if selected, else variant price
-  const effectivePrice = selectedFulfillment
-    ? selectedFulfillment.price_usd
-    : displayPrice;
 
   // ── Add to cart handler ───────────────────────────────────
   const handleAddToCart = async () => {
@@ -449,7 +445,7 @@ export default function ProductDetailClient({
             className="text-body-lg font-semibold mt-2"
             style={{ color: "var(--color-accent)" }}
           >
-            ${effectivePrice.toFixed(2)} USD
+            ${displayPrice.toFixed(2)} USD
           </p>
 
           {/* Delivery info — honest, no false urgency claims */}
@@ -707,7 +703,7 @@ export default function ProductDetailClient({
 
           {/* Sticky mobile ATC bar \u2014 appears when inline button scrolls out of view (spec \u00a77.1) */}
           <StickyAddToCart
-            price={effectivePrice}
+            price={displayPrice}
             onAddToCart={handleAddToCart}
             isLoading={isLoading}
             disabled={!selectedVariant || !safetyAcknowledged}
