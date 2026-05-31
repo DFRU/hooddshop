@@ -141,7 +141,7 @@ function backfillStandardOption2(v: FullProductVariant): Record<string, unknown>
 async function listAllHoodCovers(): Promise<FullProduct[]> {
   // Fetch up to 250 (current catalog = 48). Add pagination later if needed.
   const data = await shopifyAdminFetch<{ products: FullProduct[] }>(
-    "/products.json?limit=250&product_type=Hood Cover&status=active,draft"
+    "/products.json?limit=250&product_type=Car Hood Cover&status=active,draft"
   );
   return data.products;
 }

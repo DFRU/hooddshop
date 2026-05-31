@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Hood'd — Your Ride. Your Flag.",
-    description: "Stretch hood covers for cars. 48 nations. From $44.99 USD.",
+    description: "Stretch hood covers for cars. 48 nations. From $34.99 USD.",
     site: "@hooddshopnow",
     creator: "@hooddshopnow",
     images: ["/og-hero.jpg"],

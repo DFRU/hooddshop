@@ -53,7 +53,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 gap-4">
             {[
               { stat: "48", label: "Nations", desc: "Every World Cup 2026 qualifier" },
-              { stat: "$44.99", label: "Starting Price", desc: "Free shipping with code HOODDSHIP" },
+              { stat: "$34.99", label: "Starting Price", desc: "Free standard shipping storewide" },
               { stat: "100%", label: "Sublimation", desc: "Edge-to-edge print that won\u2019t crack or peel" },
               { stat: "Universal", label: "Fit", desc: "Elastic edge stretches to fit any hood" },
             ].map((item) => (

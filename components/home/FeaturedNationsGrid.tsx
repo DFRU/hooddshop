@@ -126,7 +126,7 @@ export default async function FeaturedNationsGrid() {
                         color: "#666",
                       }}
                     >
-                      $44.99 USD
+                      $34.99 USD
                     </span>
                     <span
                       className="text-[12px] font-medium transition-colors group-hover:opacity-100 opacity-60"

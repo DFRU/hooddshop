@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: nation ? `${nation.name} Car Hood Cover — World Cup 2026` : "Nation Not Found",
     description: nation
-      ? `${nation.name} stretch hood cover by Hood'd. Full-bleed sublimation print on polyester-spandex. Universal fit for cars, SUVs, and trucks. From $44.99 USD. Independent brand — original design.`
+      ? `${nation.name} stretch hood cover by Hood'd. Full-bleed sublimation print on polyester-spandex. Universal fit for cars, SUVs, and trucks. From $34.99 USD. Independent brand — original design.`
       : "Nation not found.",
     alternates: {
       canonical: nation ? `https://hooddshop.com/nations/${code}` : undefined,

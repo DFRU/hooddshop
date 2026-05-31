@@ -10,13 +10,6 @@
  * Shopify Basic plan: 2 req/sec REST, 50 pts/sec GraphQL (§12.2 B3).
  */
 
-const DOMAIN =
-  process.env.SHOPIFY_STORE_DOMAIN || "hoodd-shop-2.myshopify.com";
-const ADMIN_TOKEN = process.env.SHOPIFY_ADMIN_ACCESS_TOKEN || "";
-const API_VERSION = "2025-01";
-
-const BASE_URL = `https://${DOMAIN}/admin/api/${API_VERSION}`;
-
 // Simple token-bucket rate limiter: 2 req/sec for Shopify Basic
 let lastRequestTime = 0;
 const MIN_INTERVAL_MS = 550; // ~1.8 req/sec, leaves headroom
@@ -40,7 +33,12 @@ export async function shopifyAdminFetch<T>(
     body?: unknown;
   } = {}
 ): Promise<T> {
-  if (!ADMIN_TOKEN) {
+  const domain = process.env.SHOPIFY_STORE_DOMAIN || "hoodd-shop-2.myshopify.com";
+  const adminToken = process.env.SHOPIFY_ADMIN_ACCESS_TOKEN || "";
+  const apiVersion = "2025-01";
+  const baseUrl = `https://${domain}/admin/api/${apiVersion}`;
+
+  if (!adminToken) {
     throw new Error(
       "[shopify-admin] SHOPIFY_ADMIN_ACCESS_TOKEN is not set"
     );
@@ -48,12 +46,12 @@ export async function shopifyAdminFetch<T>(
 
   await rateLimitDelay();
 
-  const url = `${BASE_URL}${path}`;
+  const url = `${baseUrl}${path}`;
   const res = await fetch(url, {
     method: options.method || "GET",
     headers: {
       "Content-Type": "application/json",
-      "X-Shopify-Access-Token": ADMIN_TOKEN,
+      "X-Shopify-Access-Token": adminToken,
     },
     body: options.body ? JSON.stringify(options.body) : undefined,
   });

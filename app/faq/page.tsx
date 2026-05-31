@@ -17,7 +17,7 @@ const SECTIONS: Section[] = [
     items: [
       { q: "What is a Hood'd cover?", a: "A stretch-fit sleeve that goes over your car's hood. Soft fabric — not a magnet, not a decal, not paint. You pull it on, the elastic edge holds it in place." },
       { q: "What's it made of?", a: "85–90% polyester, 10–15% spandex. Full-bleed sublimation print. Elastic bands and clips are sewn into the edges." },
-      { q: "What sizes are available?", a: "Standard: 63\" × 47\" (160 × 120 cm) — fits most sedans, compact SUVs, and coupes. From $44.99 USD. XL: 68\" × 55\" (172 × 140 cm) — fits trucks, full-size SUVs, and larger sedans. From $54.99 USD." },
+      { q: "What sizes are available?", a: "Standard: 63\" × 47\" (160 × 120 cm) — fits most sedans, compact SUVs, and coupes. From $34.99 USD. XL: 68\" × 55\" (172 × 140 cm) — fits trucks, full-size SUVs, and larger sedans. From $44.99 USD." },
       { q: "Will it fit my car?", a: "Universal fit — sedans, SUVs, trucks. The elastic edge stretches 15–25% to adapt to your hood. If your hood is narrower than 36\" or has unusual geometry (older muscle cars, hood scoops, hood-mounted accessories), DM us a side photo at @hooddshopnow before ordering and we'll confirm fit." },
       { q: "How long does it take to put on?", a: "30 seconds. No tools. No tape. No paint contact." },
       { q: "Can I drive with it on?", a: "No. It's a stationary-display product. Take it off before you drive. Wind abrasion at speed is the only thing that can damage your paint — used as intended, the cover is paint-safe." },
@@ -40,7 +40,7 @@ const SECTIONS: Section[] = [
     heading: "Orders & shipping",
     items: [
       { q: "How long does it take?", a: "Made to order. Production: 5–10 business days. Shipping time depends on your country." },
-      { q: "How much is shipping?", a: "Free with code HOODDSHIP at checkout. Worldwide." },
+      { q: "How much is shipping?", a: "Free standard shipping worldwide. No code required." },
       { q: "Where do you ship?", a: "Worldwide." },
       { q: "Can I cancel?", a: "Yes, if production hasn't started. Orders typically enter production within 2 hours of payment. After that, cancellation isn't possible." },
       { q: "Can I return it?", a: "Made-to-order means no returns for buyer's remorse or wrong-nation selection. We do issue refunds or replacements for defects, damage, or wrong items — email contact@hooddshop.com within 14 days of delivery with your order number and photos." },
@@ -81,7 +81,7 @@ export default function FaqPage() {
         <article className="max-w-3xl mx-auto">
           <h1 className="text-display-lg text-white">FAQ</h1>
           <p className="text-body-sm mt-2 mb-10" style={{ color: "#555" }}>
-            Stretch hood covers for 48 nations. Free shipping with code HOODDSHIP.
+            Stretch hood covers for 48 nations. Free standard shipping storewide.
           </p>
 
           <div className="space-y-10">

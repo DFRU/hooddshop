@@ -44,8 +44,8 @@ export async function generateMetadata({
     : product.title;
 
   const seoDescription = nation
-    ? `${nation.name} stretch hood cover. Full-bleed sublimation print on polyester-spandex. Universal fit, made to order. From $44.99 USD. Free shipping with code HOODDSHIP. Independent brand — original design.`
-    : product.description || "Stretch hood cover with full-bleed sublimation print. Made to order. Free shipping with code HOODDSHIP.";
+    ? `${nation.name} stretch hood cover. Full-bleed sublimation print on polyester-spandex. Universal fit, made to order. From $34.99 USD. Free standard shipping storewide. Independent brand — original design.`
+    : product.description || "Stretch hood cover with full-bleed sublimation print. Made to order. Free standard shipping storewide.";
 
   // OG image priority: product photo > mockup > AI render > Shopify image
   const productPhotoOG = nationCode ? getProductImage(nationCode) : null;

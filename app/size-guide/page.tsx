@@ -29,7 +29,7 @@ export default function SizeGuidePage() {
                 Standard
               </span>
               <span className="text-white font-semibold">63&quot; &times; 47&quot; (160 &times; 120 cm)</span>
-              <span className="ml-auto text-body-sm" style={{ color: "var(--color-accent)" }}>From $44.99 USD</span>
+              <span className="ml-auto text-body-sm" style={{ color: "var(--color-accent)" }}>From $34.99 USD</span>
             </div>
             <p>
               Fits most sedans, compact SUVs, and coupes.
@@ -51,7 +51,7 @@ export default function SizeGuidePage() {
                 XL
               </span>
               <span className="text-white font-semibold">68&quot; &times; 55&quot; (172 &times; 140 cm)</span>
-              <span className="ml-auto text-body-sm" style={{ color: "var(--color-accent)" }}>From $54.99 USD</span>
+              <span className="ml-auto text-body-sm" style={{ color: "var(--color-accent)" }}>From $44.99 USD</span>
             </div>
             <p>
               Fits trucks, full-size SUVs, and larger sedans.
