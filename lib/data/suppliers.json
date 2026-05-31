@@ -20,8 +20,8 @@
       "cost_confidence": "confirmed"
     },
     "shipping": {
-      "standard_days_min": 15,
-      "standard_days_max": 25,
+      "standard_days_min": 7,
+      "standard_days_max": 15,
       "regions_served": ["US", "CA", "GB", "AU", "NZ", "DE", "FR", "ES", "IT", "NL", "BR", "MX"]
     },
     "fulfillment_model": "pod",

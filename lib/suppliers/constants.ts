@@ -19,7 +19,7 @@ export const MAX_OPTIONS = 3;
 
 /** Target gross-profit margin per shipping tier */
 export const MARGIN_BY_TIER = {
-  standard: 0.60,   // China POD (15-25 days) — low COGS, take more margin
+  standard: 0.60,   // China POD (7-15 days) — low COGS, take more margin
   express:  0.50,   // Regional (5-10 days)   — moderate COGS
   rush:     0.40,   // Local (≤5 days)        — high COGS, stay competitive
 } as const;

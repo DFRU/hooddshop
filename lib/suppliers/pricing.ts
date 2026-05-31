@@ -130,7 +130,7 @@ export function getTierLabel(tier: PriceTier): string {
     case "express":
       return "Express (5–10 days)";
     case "standard":
-      return "Standard (15–25 days)";
+      return "Standard (7–15 days)";
   }
 }
 

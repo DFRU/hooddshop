@@ -455,7 +455,7 @@ export default function ProductDetailClient({
           >
             <span style={{ fontSize: "14px" }}>🚚</span>
             <span style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#FF4D00", fontWeight: 500 }}>
-              Made to order · typical delivery {selectedFulfillment ? selectedFulfillment.estimated_days_display : "15-25 days"} from order date
+              Made to order · typical delivery {selectedFulfillment ? selectedFulfillment.estimated_days_display : "7-15 days"} from order date
             </span>
           </div>
 
@@ -713,8 +713,8 @@ export default function ProductDetailClient({
           {/* ── Trust + urgency block ── */}
           {(() => {
             // Compute estimated delivery window from today based on selected fulfillment option
-            const minDays = selectedFulfillment?.estimated_days_min ?? 15;
-            const maxDays = selectedFulfillment?.estimated_days_max ?? 25;
+            const minDays = selectedFulfillment?.estimated_days_min ?? 7;
+            const maxDays = selectedFulfillment?.estimated_days_max ?? 15;
             const today = new Date();
             const typMin = new Date(today); typMin.setDate(today.getDate() + minDays);
             const typMax = new Date(today); typMax.setDate(today.getDate() + maxDays);
