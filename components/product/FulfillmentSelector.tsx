@@ -242,7 +242,7 @@ export default function FulfillmentSelector({ onSelect }: FulfillmentSelectorPro
                 className="text-body-sm mt-1 ml-6"
                 style={{ color: "var(--color-text-muted)" }}
               >
-                {option.description} &middot; {option.estimated_days_display}
+                {option.description}
               </p>
             </button>
           );

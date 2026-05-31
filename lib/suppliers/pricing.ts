@@ -99,8 +99,9 @@ export function calculateDynamicPrice(
   totalPrice = round2(totalPrice);
 
   // --- Split into product + shipping for customer display ---
-  // Shipping shown at-cost to the customer; product price absorbs margin
-  const shippingDisplay = round2(shippingCost);
+  // Shipping shown at-cost to the customer; product price absorbs margin.
+  // Standard shipping (Base China POD / PrintKK) is promotional (Free worldwide) via HOODDSHIP.
+  const shippingDisplay = tier === "standard" ? 0 : round2(shippingCost);
   const productPrice = round2(totalPrice - shippingDisplay);
 
   // --- Effective margin after clamping ---
