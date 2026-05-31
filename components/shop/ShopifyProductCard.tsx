@@ -47,7 +47,7 @@ export default function ShopifyProductCard({ product }: ShopifyProductCardProps)
       >
         <div
           className="relative overflow-hidden rounded-lg"
-          style={{ aspectRatio: "4/3", border: "1px solid #181818", background: "var(--color-surface-2)" }}
+          style={{ aspectRatio: "1/1", border: "1px solid #181818", background: "var(--color-surface-2)" }}
         >
           {primarySrc ? (
             <>

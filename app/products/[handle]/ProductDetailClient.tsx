@@ -281,7 +281,7 @@ export default function ProductDetailClient({
           <button
             onClick={() => activeImage && setLightboxSrc(activeImage.src)}
             className="relative w-full overflow-hidden rounded-lg cursor-zoom-in"
-            style={{ aspectRatio: "4/3", border: "1px solid #1A1A1A", background: "var(--color-surface-2)" }}
+            style={{ aspectRatio: "1/1", border: "1px solid #1A1A1A", background: "var(--color-surface-2)" }}
           >
             {activeImage ? (
               <Image
@@ -400,7 +400,7 @@ export default function ProductDetailClient({
                     onClick={() => setLightboxSrc(img.src)}
                     className="relative overflow-hidden rounded-lg cursor-zoom-in group"
                     style={{
-                      aspectRatio: "4/3",
+                      aspectRatio: "1/1",
                       border: "1px solid #1A1A1A",
                       background: "var(--color-surface-2)",
                     }}
@@ -662,7 +662,7 @@ export default function ProductDetailClient({
           {/* Buy Now — skips cart, straight to Shopify checkout */}
           <button
             onClick={handleBuyNow}
-            disabled={isLoading || !selectedVariant}
+            disabled={isLoading || !selectedVariant || !safetyAcknowledged}
             className="mt-3 w-full font-semibold uppercase tracking-[0.06em] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             style={{
               background: "#FFFFFF",

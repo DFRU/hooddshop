@@ -87,7 +87,7 @@ export default async function NationDetailPage({ params }: PageProps) {
             return (
               <div
                 className="relative overflow-hidden rounded-lg"
-                style={{ aspectRatio: "4/3", border: "1px solid #1A1A1A", background: "#111" }}
+                style={{ aspectRatio: "1/1", border: "1px solid #1A1A1A", background: "#111" }}
               >
                 {productPhoto ? (
                   <img

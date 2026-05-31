@@ -17,7 +17,7 @@ export default function ProductCard({ nation, design }: ProductCardProps) {
       >
         <div
           className="relative overflow-hidden rounded-lg"
-          style={{ aspectRatio: "4/3", border: "1px solid #181818" }}
+          style={{ aspectRatio: "1/1", border: "1px solid #181818" }}
         >
           <div className={`absolute inset-0 ${DESIGN_CSS_CLASS[design]} opacity-55 group-hover:opacity-80 transition-opacity duration-300`} />
           <img
