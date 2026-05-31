@@ -151,7 +151,23 @@ async function handleOrderPaid(order: ShopifyOrder) {
     const fulfillmentProp = item.properties?.find(
       (p) => p.name === "_fulfillment_option"
     );
-    const supplierId = fulfillmentProp?.value?.trim() || "printkk";
+    let supplierId = "printkk";
+    if (fulfillmentProp?.value) {
+      const val = fulfillmentProp.value.trim();
+      if (val.startsWith("{")) {
+        try {
+          const parsed = JSON.parse(val);
+          if (parsed && parsed.supplier_id) {
+            supplierId = parsed.supplier_id;
+          }
+        } catch (e) {
+          console.error("[webhook] Failed to parse _fulfillment_option JSON:", e);
+          supplierId = val;
+        }
+      } else {
+        supplierId = val;
+      }
+    }
     // Resolve asset_id and product size from SKU.
     // SKU format: "{NATION}-{VARIANT}[-XL]" e.g. "CA-HOME" (standard) or "CA-HOME-XL"
     // - Nation may be multi-part: "GB-ENG-HOME" or "GB-ENG-HOME-XL"
