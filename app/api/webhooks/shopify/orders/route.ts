@@ -116,9 +116,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ status: "ok" }, { status: 200 });
   } catch (err) {
     console.error("[webhook] Processing error:", err);
-    // Still return 200 to prevent Shopify retries on our bug.
-    // The webhook_events row stays as 'received' — reconciliation cron will catch it.
-    return NextResponse.json({ status: "error_logged" }, { status: 200 });
+    // Return 500 to let Shopify retry the webhook, preventing order loss during transient database outages or quota limits.
+    return NextResponse.json({ error: "Webhook processing failed" }, { status: 500 });
   }
 }
 
